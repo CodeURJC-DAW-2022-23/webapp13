@@ -4,11 +4,11 @@ red social...
 
 
 # Integrantes
-Oskar Denis Siodmok, 
-Stefano Tomasini Hoefner, s.tomasini.2019@alumnos.urjc.es, Dariagan
-Alberto Jesús García Guerra, aj.garciag.2019@alumnos.urjc.es, tomy014
-Carlos Solsona Álvarez, c.solsona.2020@alumnos.urjc.es, azu173
-Álvaro Pindado Castiñeira, a.pindado.2019@alumnos.urjc.es, Alvaropin17
+Oskar Denis Siodmok,  
+Stefano Tomasini Hoefner, s.tomasini.2019@alumnos.urjc.es, Dariagan  
+Alberto Jesús García Guerra, aj.garciag.2019@alumnos.urjc.es, tomy014  
+Carlos Solsona Álvarez, c.solsona.2020@alumnos.urjc.es, azu173  
+Álvaro Pindado Castiñeira, a.pindado.2019@alumnos.urjc.es, Alvaropin17  
 
 
 # Reparto de tareas
