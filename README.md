@@ -4,7 +4,7 @@ Es una red social algo similar a twitter, pero con diferente implementación, al
 
 
 # Integrantes
-Oskar Denis Siodmok, DenisUrjc@proton.me, DenisUrjc
+Oskar Denis Siodmok, DenisUrjc@proton.me, DenisUrjc  
 Stefano Tomasini Hoefner, s.tomasini.2019@alumnos.urjc.es, Dariagan  
 Alberto Jesús García Guerra, aj.garciag.2019@alumnos.urjc.es, tomy014  
 Carlos Solsona Álvarez, c.solsona.2020@alumnos.urjc.es, azu173  
