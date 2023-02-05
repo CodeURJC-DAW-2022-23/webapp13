@@ -1,44 +1,50 @@
 # **Nexus**
 
-Es una red social algo similar a twitter, pero con diferente implementación, al utilizar elementos de la Web3.
+Es una red social similar a twitter, pero con diferente implementación, al utilizar elementos de la Web3. La interfaz será algo más parecida a la ya conocida aplicación "Discord".
 
 
 ## Integrantes
-* Oskar Denis Siodmok, DenisUrjc@proton.me, DenisUrjc  
-* Stefano Tomasini Hoefner, s.tomasini.2019@alumnos.urjc.es, Dariagan  
-* Alberto Jesús García Guerra, aj.garciag.2019@alumnos.urjc.es, tomy014  
-* Carlos Solsona Álvarez, c.solsona.2020@alumnos.urjc.es, azu173  
-* Álvaro Pindado Castiñeira, a.pindado.2019@alumnos.urjc.es, Alvaropin17  
+| Nombre y apellidos | Correo electrónico | Usuario GIT |
+| ------ | ------ | ------ |
+| Oskar Denis Siodmok | DenisUrjc@proton.me | DenisUrjc |  
+| Stefano Tomasini Hoefner | s.tomasini.2019@alumnos.urjc.es | Dariagan |    
+| Alberto Jesús García Guerra | aj.garciag.2019@alumnos.urjc.es | tomy014 |  
+| Carlos Solsona Álvarez | c.solsona.2020@alumnos.urjc.es | azu173 |  
+| Álvaro Pindado Castiñeira | a.pindado.2019@alumnos.urjc.es | Alvaropin17 |  
 
 
 ## Entidades
 * Usuarios registrados
 * Usuarios anónimos
 * Usuarios administradores
-* Posts
+* Publicaciones
+* Etiquetas
 * Mensajería
 * Tablones
 
 
 ## Funcionalidades
-* Postear algo equivalente a un "tweet", con opcional imagen o video adjunto.
-* Seguir a otro usuario.
-* Bloquear a otro usuario.
-* Dar "me gusta" a un post o algo equivalente.
-* Personalizar tu perfil.
-* Búsqueda de perfiles o posts.
+* Registro e inicio de sesión: el usuario debe poder registrarse con un correo y una contraseña y poder acceder a su cuenta con esas credenciales.
+* Ingreso y modificación de información personal: el usuario debe poder añadir la información personal que considere necesaria y modificarla cuando quiera.
+* Cambio y recuperación de contraseña: el usuario debe poder cambiar la contraseña y, en caso de haberla olvidado, solicitar un método de recuperación.
+* Creación y publicación de publicaciones: el usuario debe poder publicar textos, imagenes o vídeos y etiquetarlos para facilitar el descubrimiiento y seguimiento del contenido por parte de otros usuarios.
+* Seguimiento de contenido afín: el usuario debe poder seguir a otros usuarios y etiquetas.
+* Bloqueo y silinciación de contenido: el usuario debe poder bloquear etiquetas y usuarios que no le gusten.
+* "Me gusta" y guardado de publicaciones: el usuario debe poder dar "me gusta" y guardar publicaciones para la posteridad.
+* Personalización del perfil: el usuario debe poder personalizar su perfil.
+* Búsqueda de perfiles o publicaciones: el usuario debe poder realizar búsquedas de otros perfiles, publicaciones o etiquetas.
 
 
 ## Permisos de los usuarios
-* Usuario registrado: posts, mensajes, tablones
-* Usuario no registrado: posts, tablones
-* Administrador: posts, mensajes, tablones
+* Usuario registrado: publicaciones, mensajes, tablones
+* Usuario no registrado: publicaciones, tablones
+* Administrador: publicaciones, mensajes, tablones
 
 
 ## Imágenes
 * Avatares
-* Posts de usuario con imagen 
-* Banner
+* Publicaciones de usuario con imagenes 
+* Bandera/Pancarta (también conocido como "banner")
 * Adjuntar imagen en mensaje privado
 
 
@@ -48,7 +54,6 @@ Se utilizarán gráficos para representar:
 
 * Interacciones del usuario.
 * Tiempo de uso de la aplicación
-* Alguna otra métrica que se nos ocurra
 
 
 ## Tecnología complementaria
@@ -58,5 +63,5 @@ Se utilizarán gráficos para representar:
 
 ## Algoritmo o consulta avanzada
 
-Mostrar post relacionados con los gustos y preferencias del usuario
+Mostrar publicaciones relacionadas con los gustos y preferencias del usuario. Se tendrá en cuenta las publicaciones a las que el usuario ha reaccionado de manera positiva y las etiquetas que sigue.
 
