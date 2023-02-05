@@ -1,6 +1,6 @@
 # Nexus
 
-red social web3
+Es una red social algo similar a twitter, pero con diferente implementación, al utilizar elementos de web3
 
 
 # Integrantes
@@ -24,14 +24,18 @@ usuarios, posts, mensajería, tablones
 -administrador: posts, mensajes, tablones
 
 # Imágenes
-avatares, posts de los usuarios, banner, enviar imágenes en mensajería
+* avatares
+* posts de usuario con imagen 
+* banner
+* adjuntar imagen en mensaje privado
 
 # Gráficos
-representar interacciones del usuario, tiempo de uso de la aplicación
+* representar interacciones del usuario, tiempo de uso de la aplicación
 
 # Tecnología complementaria
-blockchain, notificaciones al usuario de las interacciones
+* blockchain
+* notificaciones al usuario de las interacciones
 
 # Algoritmo o consulta avanzada
-mostrar post relacionados con los gustos y preferencias del usuario
+- mostrar post relacionados con los gustos y preferencias del usuario
 
