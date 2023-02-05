@@ -1,6 +1,6 @@
 # Nexus
 
-red social...
+red social web3
 
 
 # Integrantes
