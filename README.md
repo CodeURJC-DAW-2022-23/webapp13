@@ -19,9 +19,9 @@ usuarios, posts, mensajería, tablones
 
 
 # Permisos de los usuarios
--Usuario registrado: posts, mensajes, tablones
--Usuario no registrado: posts, tablones
--administrador: posts, mensajes, tablones
+* Usuario registrado: posts, mensajes, tablones
+* Usuario no registrado: posts, tablones
+* administrador: posts, mensajes, tablones
 
 # Imágenes
 * avatares
@@ -30,7 +30,10 @@ usuarios, posts, mensajería, tablones
 * adjuntar imagen en mensaje privado
 
 # Gráficos
-* representar interacciones del usuario, tiempo de uso de la aplicación
+representar:
+* interacciones del usuario
+* tiempo de uso de la aplicación
+* alguna otra métrica que se nos ocurra
 
 # Tecnología complementaria
 * blockchain
