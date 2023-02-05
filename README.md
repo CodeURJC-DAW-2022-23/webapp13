@@ -4,12 +4,11 @@ Es una red social algo similar a twitter, pero con diferente implementación, al
 
 
 # Integrantes
-Oskar Denis Siodmok,  
+Oskar Denis Siodmok, DenisUrjc@proton.me, DenisUrjc
 Stefano Tomasini Hoefner, s.tomasini.2019@alumnos.urjc.es, Dariagan  
 Alberto Jesús García Guerra, aj.garciag.2019@alumnos.urjc.es, tomy014  
 Carlos Solsona Álvarez, c.solsona.2020@alumnos.urjc.es, azu173  
 Álvaro Pindado Castiñeira, a.pindado.2019@alumnos.urjc.es, Alvaropin17  
-
 
 # Reparto de tareas
 
@@ -17,6 +16,13 @@ Carlos Solsona Álvarez, c.solsona.2020@alumnos.urjc.es, azu173
 # Entidades
 usuarios, posts, mensajería, tablones
 
+# Funcionalidades
+* postear algo equivalente a un "tweet", con opcional imagen o video adjunto
+* seguir a alguien
+* bloquear a alguien
+* dar "me gusta" a un post o algo equivalente
+* personalizar tu perfil
+* búsqueda de perfiles o posts
 
 # Permisos de los usuarios
 * Usuario registrado: posts, mensajes, tablones
