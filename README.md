@@ -14,9 +14,7 @@ Es una red social similar a twitter, pero con diferente implementación, al util
 
 
 ## Entidades
-* Usuarios registrados
-* Usuarios anónimos
-* Usuarios administradores
+* Usuarios
 * Publicaciones
 * Etiquetas
 * Mensajería
