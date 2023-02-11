@@ -57,7 +57,7 @@
   border-radius: 100px;
   margin-bottom: 46px;
   justify-content: center;
-  background: radial-gradient(ellipse at center, #383065 5%, transparent 70%);
+  background: radial-gradient(ellipse at center, #383065 5%, transparent 60%);
 }
 
 .signup-button {
