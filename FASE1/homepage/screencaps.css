@@ -1,0 +1,185 @@
+
+.homepage-i-m-a-g-e3dscreenshot3 {
+  top: 561px;
+  left: calc(43% + 323px - 250px);
+  width: 471px;
+  height: 1117px;
+  position: absolute;
+  border-color: transparent;
+}
+.homepage-i-m-a-g-e3dscreenshot2 {
+  top: 481px;
+  left: calc(43% + 163px - 250px);
+  width: 471px;
+  height: 1117px;
+  position: absolute;
+  border-color: transparent;
+}
+.homepage-i-m-a-g-e3dscreenshot1 {
+  top: 401px;
+  left: calc(43% - 250px);
+  width: 474px;
+  height: 1126px;
+  position: absolute;
+  border-color: transparent;
+}
+.homepage-withcustomization {
+  top: 249px;
+  left: calc(43% - 250px);
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  position: absolute;
+  font-size: 80px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Ubuntu;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.homepage-in {
+  top: 325px;
+  left: calc(43% - 250px);
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  position: absolute;
+  font-size: 80px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Ubuntu;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.homepage-mind {
+  top: 325px;
+  left: calc(43% + 671px - 250px);
+  background: -webkit-linear-gradient(0deg, #534C86, #D7263D);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  height: auto;
+  position: absolute;
+  font-size: 80px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Ubuntu;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+
+
+@media only screen and (max-width: 1287px) { 
+
+	.homepage-i-m-a-g-e3dscreenshot3 {
+	  top: 650px;
+	  left: calc(43% + 323px - 200px);
+	  width: 400px;
+	  height: auto;
+	  position: absolute;
+	  border-color: transparent;
+	}
+	.homepage-i-m-a-g-e3dscreenshot2 {
+	  top: 600px;
+	  left: calc(43% + 163px - 200px);
+	  width: 400px;
+	  height: auto;
+	  position: absolute;
+	  border-color: transparent;
+	}
+	.homepage-i-m-a-g-e3dscreenshot1 {
+	  top: 550px;
+	  left: calc(43% - 200px);
+	  width: 400px;
+	  height: auto;
+	  position: absolute;
+	  border-color: transparent;
+	}
+	.homepage-withcustomization {
+	  top: 349px;
+	  left: calc(43% - 250px);
+	  color: rgba(0, 0, 0, 1);
+	  height: auto;
+	  position: absolute;
+	  font-size: 60px;
+	  align-self: auto;
+	  font-style: Bold;
+	  text-align: left;
+	  font-family: Ubuntu;
+	  font-weight: 700;
+	  line-height: normal;
+	  font-stretch: normal;
+	  margin-right: 0;
+	  margin-bottom: 0;
+	  text-decoration: none;
+	}
+	.homepage-in {
+	  top: 425px;
+	  left: calc(43% - 250px);
+	  color: rgba(0, 0, 0, 1);
+	  height: auto;
+	  position: absolute;
+	  font-size: 60px;
+	  align-self: auto;
+	  font-style: Bold;
+	  text-align: left;
+	  font-family: Ubuntu;
+	  font-weight: 700;
+	  line-height: normal;
+	  font-stretch: normal;
+	  margin-right: 0;
+	  margin-bottom: 0;
+	  text-decoration: none;
+	}
+	.homepage-mind {
+	  top: 425px;
+	  left: calc(43% + 671px - 250px - 167px);
+	  background: -webkit-linear-gradient(0deg, #534C86, #D7263D);
+	  -webkit-background-clip: text;
+	  -webkit-text-fill-color: transparent;
+	  height: auto;
+	  position: absolute;
+	  font-size: 60px;
+	  align-self: auto;
+	  font-style: Bold;
+	  text-align: left;
+	  font-family: Ubuntu;
+	  font-weight: 700;
+	  line-height: normal;
+	  font-stretch: normal;
+	  margin-right: 0;
+	  margin-bottom: 0;
+	  text-decoration: none;
+	}
+	.homepage-text03 {
+	  color: rgba(30, 26, 59, 1);
+	  height: auto;
+	  position: absolute;
+	  font-size: 80px;
+	  align-self: auto;
+	  font-style: Bold;
+	  text-align: left;
+	  font-family: Ubuntu;
+	  font-weight: 700;
+	  line-height: normal;
+	  font-stretch: normal;
+	  margin-right: 0;
+	  margin-bottom: 0;
+	  text-decoration: none;
+	}
+	.homepage-logo, .homepage-rectangle4, .homepage-rectangle5 {
+		visibility: hidden;
+	}
+}
