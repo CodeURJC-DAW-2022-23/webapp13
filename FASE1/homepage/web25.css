@@ -1,0 +1,128 @@
+
+.svg-and-web25 {
+	width: 100%;
+	height: 100%;
+}
+
+.web25-svg {
+  top: 164px;
+  /* left: calc(51% - 700px); */
+  left: calc(20%);
+  width: 427.9999694824219px;
+  height: 459.0000305175781px;
+  display: flex;
+  padding: 0;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: center;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: center;
+  background-color: transparent;
+  position: absolute;
+  top: 50%;
+  left: 30%;
+    -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.web25-main {
+  top: 1116px;
+  left: 0px;
+  width: 100%;
+  height: 788px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  background-image: url("public/playground_assets/background6520-vaw.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.web25-description {
+	height: 100%;
+	width: 50%;
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: table;
+	padding-right: 10%;
+}
+.aux {
+	display: table-cell;
+	vertical-align: middle;
+
+}
+.web25-header {
+  top: 283px;
+  left: calc(51%);
+  color: rgba(224, 211, 222, 1);
+  height: auto;
+  font-size: 64px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: center;
+  font-family: Ubuntu;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.web25-description-content {
+  top: 357px;
+  left: calc(51%);
+  color: rgba(255, 255, 255, 1);
+  width: 586px;
+  height: auto;
+  font-size: 32px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: left;
+  font-family: Ubuntu;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+
+.isologo {
+	position: absolute;
+	width: 1179px;
+	height: auto;
+  	top: 184px;
+  	left: calc(30px + 3vw);
+}
+
+@media only screen and (max-width: 1287px) {
+	.web25-description {
+		height: 100%;
+		width: 45%;
+		position: absolute;
+		right: 0;
+		top: 0;
+		display: table;
+		padding-right: 10%;
+	}
+	.web25-description-content {
+		font-size: 24px;
+	}
+	.isologo {
+		position: absolute;
+		width: 800px;
+		height: auto;
+		top: 259px;
+		left: calc(30px + 3vw);
+	}
+}
+

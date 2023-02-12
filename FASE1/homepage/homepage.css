@@ -26,91 +26,11 @@
   border-color: transparent;
   background-color: rgba(224, 211, 222, 1);
 }
-.homepage-i-m-a-g-e3dscreenshot3 {
-  top: 561px;
-  left: calc(43% + 323px);
-  width: 471px;
-  height: 1117px;
-  position: absolute;
-  border-color: transparent;
-}
-.homepage-i-m-a-g-e3dscreenshot2 {
-  top: 481px;
-  left: calc(43% + 163px);
-  width: 471px;
-  height: 1117px;
-  position: absolute;
-  border-color: transparent;
-}
-.homepage-i-m-a-g-e3dscreenshot1 {
-  top: 401px;
-  left: 43%;
-  width: 474px;
-  height: 1126px;
-  position: absolute;
-  border-color: transparent;
-}
 
-.homepage-withcustomization {
-  top: 249px;
-  left: calc(43%);
-  color: rgba(0, 0, 0, 1);
-  height: auto;
-  position: absolute;
-  font-size: 80px;
-  align-self: auto;
-  font-style: Bold;
-  text-align: left;
-  font-family: Ubuntu;
-  font-weight: 700;
-  line-height: normal;
-  font-stretch: normal;
-  margin-right: 0;
-  margin-bottom: 0;
-  text-decoration: none;
-}
-.homepage-in {
-  top: 325px;
-  left: 43%;
-  color: rgba(0, 0, 0, 1);
-  height: auto;
-  position: absolute;
-  font-size: 80px;
-  align-self: auto;
-  font-style: Bold;
-  text-align: left;
-  font-family: Ubuntu;
-  font-weight: 700;
-  line-height: normal;
-  font-stretch: normal;
-  margin-right: 0;
-  margin-bottom: 0;
-  text-decoration: none;
-}
-.homepage-mind {
-  top: 325px;
-  left: calc(43% + 671px);
-  background: -webkit-linear-gradient(0deg, #534C86, #D7263D);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  height: auto;
-  position: absolute;
-  font-size: 80px;
-  align-self: auto;
-  font-style: Bold;
-  text-align: left;
-  font-family: Ubuntu;
-  font-weight: 700;
-  line-height: normal;
-  font-stretch: normal;
-  margin-right: 0;
-  margin-bottom: 0;
-  text-decoration: none;
-}
 .homepage-tryoutglass {
   top: 1117px;
   left: 0px;
-  width: 1728px;
+  width: 100%;
   height: 561px;
   display: flex;
   overflow: hidden;
@@ -318,22 +238,6 @@
   margin-bottom: 0;
   text-decoration: none;
 }
-.homepage-web25 {
-  top: 1116px;
-  left: 0px;
-  width: 100%;
-  height: 788px;
-  display: flex;
-  overflow: hidden;
-  position: absolute;
-  align-items: flex-start;
-  flex-shrink: 0;
-  border-color: transparent;
-  background-image: url("public/playground_assets/background6520-vaw.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-
-}
 .homepage-background {
   top: 788px;
   left: 0px;
@@ -341,28 +245,6 @@
   height: 788px;
   position: absolute;
   box-shadow: 0px 112px 4px 0px rgba(0, 0, 0, 0.25) ;
-}
-.homepage-web25svg {
-  top: 164px;
-  left: calc(51% - 700px);
-  width: 427.9999694824219px;
-  height: 459.0000305175781px;
-  display: flex;
-  padding: 0;
-  position: absolute;
-  align-self: auto;
-  box-sizing: border-box;
-  align-items: flex-start;
-  flex-shrink: 1;
-  border-color: transparent;
-  border-style: none;
-  border-width: 0;
-  margin-right: 0;
-  border-radius: 0px 0px 0px 0px;
-  margin-bottom: 0;
-  flex-direction: row;
-  justify-content: flex-start;
-  background-color: transparent;
 }
 .homepage-path75891 {
   top: 57.36825180053711px;
@@ -536,43 +418,6 @@
   height: 88px;
   position: absolute;
 }
-.homepage-web251 {
-  top: 283px;
-  left: calc(51%);
-  color: rgba(224, 211, 222, 1);
-  height: auto;
-  position: absolute;
-  font-size: 64px;
-  align-self: auto;
-  font-style: Bold;
-  text-align: center;
-  font-family: Ubuntu;
-  font-weight: 700;
-  line-height: normal;
-  font-stretch: normal;
-  margin-right: 0;
-  margin-bottom: 0;
-  text-decoration: none;
-}
-.homepage-weuse {
-  top: 357px;
-  left: calc(51%);
-  color: rgba(255, 255, 255, 1);
-  width: 586px;
-  height: auto;
-  position: absolute;
-  font-size: 32px;
-  align-self: auto;
-  font-style: Medium;
-  text-align: left;
-  font-family: Ubuntu;
-  font-weight: 500;
-  line-height: normal;
-  font-stretch: normal;
-  margin-right: 0;
-  margin-bottom: 0;
-  text-decoration: none;
-}
 .homepage-mainscreen {
   top: 0px;
   left: 0px;
@@ -588,10 +433,11 @@
 }
 .homepage-blurryscreenshot {
   top: calc(326px - 9vh);
-  left: calc(38.1%);
+  left: calc(20%);
+  /*height: calc(1200px );*/
   width: 1500px;
-  height: calc(1200px );
-  min-height: 1000px;
+  height: auto;
+  /*min-height: 1000px;*/
   position: absolute;
   border-color: rgba(83, 76, 134, 0.5);
   border-style: solid;
@@ -632,7 +478,7 @@
   flex-shrink: 0;
   border-color: rgba(83, 76, 134, 1);
   border-style: solid;
-  border-width: Symbol(figma.mixed)px;
+  border-width: 2px;
   border-radius: 100px;
   justify-content: center;
   background-color: rgba(51, 46, 89, 1);
@@ -705,7 +551,7 @@
   top: 0.0059922728687524796px;
   left: 5.599895547270251e-13px;
   width: 1179.4544677734375px;
-  height: 235.99400329589844px;
+  height: auto;
   display: flex;
   padding: 0;
   position: absolute;
@@ -743,10 +589,13 @@
   flex-shrink: 0;
   border-color: rgba(215, 38, 61, 1);
   border-style: solid;
-  border-width: Symbol(figma.mixed)px;
+  border-width: 4px;
   border-radius: 93px;
   background-color: rgba(224, 211, 222, 1);
 }
+.homepage-mainlaunchbutton:hover {
+}
+
 .homepage-text18 {
   top: 12px;
   left: 31px;
@@ -774,7 +623,7 @@
   position: absolute;
   font-size: 64px;
   align-self: auto;
-  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25) ;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25) ;
   font-style: Bold;
   text-align: left;
   font-family: Ubuntu;
@@ -793,7 +642,7 @@
   position: absolute;
   font-size: 32px;
   align-self: auto;
-  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25) ;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25) ;
   font-style: Bold;
   text-align: left;
   font-family: Ubuntu;
@@ -840,7 +689,7 @@
   width: 81px;
   height: 44px;
   position: absolute;
-  box-shadow: 0px 7px 7px 0px rgba(0, 0, 0, 0.25) ;
+  /*box-shadow: 0px 7px 7px 0px rgba(0, 0, 0, 0.25) ;*/
   box-sizing: content-box;
 }
 .homepage-divider {
