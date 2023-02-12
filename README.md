@@ -1,6 +1,6 @@
 # **Nexus**
 
-Es una red social similar a twitter, pero con diferente implementación, al utilizar elementos de la Web3. La interfaz será algo más parecida a la ya conocida aplicación "Discord".
+Es una red social similar a Twitter, pero con diferente implementación, al utilizar elementos de la Web3. La interfaz gráficamente será levemente similar a la de Discord.
 
 
 ## Integrantes
