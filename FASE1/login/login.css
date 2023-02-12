@@ -62,7 +62,7 @@
 
 .login-frame28 {
   width: 165px;
-  height: 38px;
+  height: 30px;
   display: flex;
   overflow: hidden;
   position: relative;
@@ -72,7 +72,7 @@
   margin-bottom: 29px;
 }
 .forgot-pass-text {
-  top: 12px;
+  top: 4px;
   left: 19px;
   color: rgba(255, 255, 255, 1);
   height: auto;
@@ -90,3 +90,21 @@
   text-decoration: none;
 }
 
+.no-acc-text1 {
+  top: 0px;
+  left: 0px;
+  color: rgba(255, 255, 255, 1);
+  height: auto;
+  position: absolute;
+  font-size: 12px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
