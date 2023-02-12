@@ -28,7 +28,7 @@
 }
 .homepage-i-m-a-g-e3dscreenshot3 {
   top: 561px;
-  left: calc(42% + 323px);
+  left: calc(43% + 323px);
   width: 471px;
   height: 1117px;
   position: absolute;
@@ -36,7 +36,7 @@
 }
 .homepage-i-m-a-g-e3dscreenshot2 {
   top: 481px;
-  left: calc(42% + 163px);
+  left: calc(43% + 163px);
   width: 471px;
   height: 1117px;
   position: absolute;
@@ -44,35 +44,16 @@
 }
 .homepage-i-m-a-g-e3dscreenshot1 {
   top: 401px;
-  left: 42%;
+  left: 43%;
   width: 474px;
   height: 1126px;
   position: absolute;
   border-color: transparent;
 }
-.homepage-mind {
-  top: 325px;
-  left: calc(42% + 671px);
-  background: -webkit-linear-gradient(0deg, #534C86, #D7263D);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  height: auto;
-  position: absolute;
-  font-size: 80px;
-  align-self: auto;
-  font-style: Bold;
-  text-align: left;
-  font-family: Ubuntu;
-  font-weight: 700;
-  line-height: normal;
-  font-stretch: normal;
-  margin-right: 0;
-  margin-bottom: 0;
-  text-decoration: none;
-}
+
 .homepage-withcustomization {
   top: 249px;
-  left: calc(42%);
+  left: calc(43%);
   color: rgba(0, 0, 0, 1);
   height: auto;
   position: absolute;
@@ -90,8 +71,28 @@
 }
 .homepage-in {
   top: 325px;
-  left: 42%;
+  left: 43%;
   color: rgba(0, 0, 0, 1);
+  height: auto;
+  position: absolute;
+  font-size: 80px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Ubuntu;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.homepage-mind {
+  top: 325px;
+  left: calc(43% + 671px);
+  background: -webkit-linear-gradient(0deg, #534C86, #D7263D);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   height: auto;
   position: absolute;
   font-size: 80px;
@@ -343,7 +344,7 @@
 }
 .homepage-web25svg {
   top: 164px;
-  left: calc(50% - 700px);
+  left: calc(51% - 700px);
   width: 427.9999694824219px;
   height: 459.0000305175781px;
   display: flex;
@@ -537,7 +538,7 @@
 }
 .homepage-web251 {
   top: 283px;
-  left: calc(48%);
+  left: calc(51%);
   color: rgba(224, 211, 222, 1);
   height: auto;
   position: absolute;
@@ -555,7 +556,7 @@
 }
 .homepage-weuse {
   top: 357px;
-  left: calc(48%);
+  left: calc(51%);
   color: rgba(255, 255, 255, 1);
   width: 586px;
   height: auto;
@@ -587,7 +588,7 @@
 }
 .homepage-blurryscreenshot {
   top: calc(326px - 9vh);
-  left: calc(30%);
+  left: calc(38.1%);
   width: 1500px;
   height: calc(1200px );
   min-height: 1000px;
