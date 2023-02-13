@@ -1,0 +1,42 @@
+.feedanon-nav {
+  top: 0px;
+  left: -0.07169532775878906px;
+  width: 100%;
+  /* display: flex; */
+  padding: 8px 13px;
+  overflow: hidden;
+  /* align-items: flex-start;*/
+  border-color: rgba(83, 76, 134, 1);
+  border-style: solid;
+  border-width: 0 0 2px 0 ;
+  /* justify-content: center;*/
+  background-color: rgba(30, 26, 59, 1);
+}
+
+.feedanon-button6 {
+  width: 113px;
+  height: 33px;
+  display: flex;
+  padding: 10px;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: rgba(83, 76, 134, 1);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 100px;
+  justify-content: center;
+  background-color: rgba(51, 46, 89, 1);
+}
+
+#loginButton { 
+	float: right;
+}
+.feedanon-chi {
+	float: left;
+	width: auto;
+	width: 23px;
+	height: 26px;
+	position: relative;
+}
