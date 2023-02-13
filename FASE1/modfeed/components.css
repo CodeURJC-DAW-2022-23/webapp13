@@ -1,0 +1,117 @@
+:root {
+	--thread: 307px;
+	--left: 178px;
+	--dist: 50px;
+	--right: 189px;
+	--mod: 173px;
+}
+
+.feedanon-twits {
+  top: 167px;
+  left: 300px;
+  width: 615px;
+  left: calc(50% - var(--thread));
+  display: flex;
+  padding: 0 24px;
+  overflow: hidden;
+  position: absolute;
+  align-items: center;
+  border-color: rgba(83, 76, 134, 1);
+  border-style: dashed;
+  border-width: 2px;
+  border-radius: 50px;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(30, 26, 59, 1);
+  padding-bottom: 40px;
+}
+
+/* both left components */
+.feedanon-frame30 {
+  top: 167px;
+  left: calc(50% - var(--thread) - var(--left)*2 - var(--dist));
+  width: 357px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  border-color: transparent;
+  flex-direction: column;
+}
+
+/* right component */
+.feedanon-trending {
+  top: 167px;
+  left: calc(50% + var(--thread) + var(--dist));
+  width: 379px;
+  height: 379px;
+  display: flex;
+  padding: 20px 20px 20px 29px;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-end;
+  flex-shrink: 0;
+  border-color: rgba(83, 76, 134, 1);
+  border-style: solid;
+  border-width: 0 0 2px 0;
+  border-radius: 25px;
+  flex-direction: column;
+  background-color: rgba(30, 26, 59, 1);
+}
+
+.feedanon-related {
+  width: 357px;
+  height: 437px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: rgba(83, 76, 134, 1);
+  border-style: solid;
+  border-width: 0 0 2px 0;
+  border-radius: 25px;
+  background-color: rgba(30, 26, 59, 1);
+}
+
+#mod {
+  height: auto;
+}
+
+#trend {
+	top: calc(var(--mod)*2 + var(--dist));
+}
+
+@media only screen and (max-width: 1440px) {
+	.feedanon-twits {
+		transform: scale(0.8);
+  		top: 50px;
+	}
+	#trend {
+		transform: scale(0.8) translate(-140px, -90px);
+	}
+	#mod {
+		transform: scale(0.8) translate(-140px, 0);
+	}
+	.feedanon-frame30 {
+		transform: scale(0.8) translate(140px, 50px);
+	}
+}
+@media only screen and (max-width: 1135px) {
+	.feedanon-twits {
+		transform: scale(0.75);
+  		top: 50px;
+	}
+	#trend {
+		transform: scale(0.75) translate(-210px, -90px);
+	}
+	#mod {
+		transform: scale(0.75) translate(-210px, 50px);
+	}
+	.feedanon-frame30 {
+		transform: scale(0.75) translate(210px, 50px);
+	}
+}
+
+.tag {
+	margin-left: 8px;
+}
