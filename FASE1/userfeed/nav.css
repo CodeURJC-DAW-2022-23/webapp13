@@ -33,6 +33,10 @@
 #loginButton { 
 	float: right;
 }
+#loginButton2 { 
+	float: right;
+	margin-right: 10px;
+}
 .feedanon-chi {
 	float: left;
 	width: auto;
