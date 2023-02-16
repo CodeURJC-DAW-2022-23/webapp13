@@ -1,5 +1,7 @@
 package es.codeurjc.Nexus.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +23,7 @@ public class LoginController {
    
     @PostMapping("/login")
     public String processLoginForm(@RequestParam String username, @RequestParam String password, Model model) {
-        User user = userService.getUserByUsername(username);
+        Optional<User> user = userService.getUserByUsername(username);
         if (user == null || !user.getEncodedPassword().equals(password)) {
             model.addAttribute("error", "Nombre de usuario o contraseña incorrectos");
             return "login";
