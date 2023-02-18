@@ -24,15 +24,20 @@ public class LoginController {
     @PostMapping("/login")
     public String processLoginForm(@RequestParam String username, @RequestParam String password, Model model) {
         Optional<User> user = userService.getUserByUsername(username);
-        if (user == null || !user.getEncodedPassword().equals(password)) {
-            model.addAttribute("error", "Nombre de usuario o contraseña incorrectos");
+
+        if (user.isEmpty()) {
+            model.addAttribute("error", "Username does not exist");
             return "login";
-        } else {
+        } 
+        else if (!user.get().getEncodedPassword().equals(password)) {
+            model.addAttribute("error", "Password is incorrect");
+            return "login";
+        } 
+        else {
             model.addAttribute("username", username);
             return "redirect:/home";
         }
     }
 
-}
 
 }
