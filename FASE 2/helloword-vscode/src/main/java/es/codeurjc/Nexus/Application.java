@@ -2,9 +2,12 @@ package es.codeurjc.Nexus;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 //Hola mundo predeterminado al crear el proyecto, borrar al comprobar que todo funcione correctamente.
 
+
+@ComponentScan("es.codeurjc.NexusApplication.repository.UserRepository")
 @SpringBootApplication
 public class Application {
 

@@ -13,7 +13,7 @@
 	<artifactId>helloword-vscode</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>helloword-vscode</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Nexus social network project</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

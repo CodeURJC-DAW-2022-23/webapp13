@@ -6,9 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+
+import org.springframework.web.context.annotation.SessionScope;
+
 import javax.persistence.GenerationType;
 
 @Entity(name = "UserTable")
+@SessionScope
 public class User {
     
     @Id
