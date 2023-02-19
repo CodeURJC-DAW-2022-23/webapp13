@@ -1060,7 +1060,7 @@
   align-items: center;
   border-color: rgba(83, 76, 134, 1);
   border-style: solid;
-  border-width: Symbol(figma.mixed)px;
+  border-width: 1px;
   flex-direction: column;
 }
 .feedanon-singletrending {
@@ -1551,7 +1551,7 @@
   flex-shrink: 0;
   border-color: rgba(83, 76, 134, 1);
   border-style: solid;
-  border-width: Symbol(figma.mixed)px;
+  border-width: 1px;
   border-radius: 25px;
   background-color: rgba(30, 26, 59, 1);
 }
@@ -1639,7 +1639,7 @@
   flex-shrink: 0;
   border-color: rgba(83, 76, 134, 1);
   border-style: solid;
-  border-width: Symbol(figma.mixed)px;
+  border-width: 1px;
   border-radius: 100px;
   justify-content: center;
   background-color: rgba(51, 46, 89, 1);
@@ -1716,7 +1716,7 @@
   flex-shrink: 0;
   border-color: rgba(83, 76, 134, 1);
   border-style: solid;
-  border-width: Symbol(figma.mixed)px;
+  border-width: 1px;
   border-radius: 100px;
   justify-content: center;
   background-color: rgba(51, 46, 89, 1);
@@ -1793,7 +1793,7 @@
   flex-shrink: 0;
   border-color: rgba(83, 76, 134, 1);
   border-style: solid;
-  border-width: Symbol(figma.mixed)px;
+  border-width: 1px;
   border-radius: 100px;
   justify-content: center;
   background-color: rgba(51, 46, 89, 1);
@@ -1870,7 +1870,7 @@
   flex-shrink: 0;
   border-color: rgba(83, 76, 134, 1);
   border-style: solid;
-  border-width: Symbol(figma.mixed)px;
+  border-width: 1px;
   border-radius: 100px;
   justify-content: center;
   background-color: rgba(51, 46, 89, 1);
@@ -1947,7 +1947,7 @@
   flex-shrink: 0;
   border-color: rgba(83, 76, 134, 1);
   border-style: solid;
-  border-width: Symbol(figma.mixed)px;
+  border-width: 1px;
   border-radius: 100px;
   justify-content: center;
   background-color: rgba(51, 46, 89, 1);
@@ -2023,7 +2023,7 @@
   flex-shrink: 0;
   border-color: rgba(83, 76, 134, 1);
   border-style: solid;
-  border-width: Symbol(figma.mixed)px;
+  border-width: 1px;
   border-radius: 100px;
   justify-content: center;
   background-color: rgba(51, 46, 89, 1);
