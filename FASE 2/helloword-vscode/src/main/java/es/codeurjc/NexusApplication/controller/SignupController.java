@@ -23,22 +23,27 @@ public class SignupController {
         return "signup/loginpage";
     }
    
-    /* 
+    
     @PostMapping("/signup")
-    public String processSignupForm(@RequestParam String username, @RequestParam String password, Model model) {
-        Optional<User> user = userService.getUserByUsername(username);
-
-        if (user.isEmpty()) {
-            model.addAttribute("error", "Username does not exist"); 
-            return "login/loginpage";
-        } 
-        else if (!user.get().getEncodedPassword().equals(password)) {
-            model.addAttribute("error", "Password is incorrect");
-            return "login/loginpage";
-        } 
-        else {
-            model.addAttribute("username", username);
-            return "login/loginpage";
+    public String processSignupForm(@RequestParam String email, @RequestParam String username, @RequestParam String password, Model model) {
+        
+        
+        if (!email.matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")){
+            model.addAttribute("fail", "E-mail format not adequate.");
+            return "signup/loginpage";
+        }else if(userService.isEmailTaken(email)){
+            model.addAttribute("fail", "E-mail address already in use.");
+            return "signup/loginpage";
         }
-    }*/
+        else if (userService.isUsernameTaken(username)){
+            model.addAttribute("fail", "Username is taken.");
+            return "signup/loginpage";
+        }
+        else if (password.length() <= 6){
+            model.addAttribute("fail", "Password is too short (min 6 characters).");
+            return "signup/loginpage";
+        }
+
+        return null;
+    }
 }

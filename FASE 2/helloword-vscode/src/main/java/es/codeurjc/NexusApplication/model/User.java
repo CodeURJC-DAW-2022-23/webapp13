@@ -21,30 +21,41 @@ public class User {
 
     private String name;
 
-    private String userName;
+    private String username;
+
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     private String encodedPassword;
 
-    private boolean isAdmin;
+    private boolean admin;
 
     private int followersNumber;
 
-    private boolean isBanned;
+    private boolean banned;
     
     @Lob
     private Blob profilePicture;
 
     public User(){
-
+        
     }
 
-    public User(String name, String userName, String encodedPassword, boolean isAdmin, int followersNumber, boolean isBanned, Blob profilePicture){
+    //TODO (Stefano): create a builder
+    public User(String name, String username, String encodedPassword, boolean isAdmin, int followersNumber, boolean isBanned, Blob profilePicture){
         this.name = name;
-        this.userName = userName;
+        this.username = username;
         this.encodedPassword = encodedPassword;
-        this.isAdmin = isAdmin;
+        this.admin = isAdmin;
         this.followersNumber = followersNumber;
-        this.isBanned = isBanned;
+        this.banned = isBanned;
         this.profilePicture = profilePicture;
 
     }
@@ -65,12 +76,12 @@ public class User {
         this.name = name;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String userName) {
+        this.username = userName;
     }
 
     public String getEncodedPassword() {
@@ -82,11 +93,11 @@ public class User {
     }
 
     public boolean isAdmin() {
-        return isAdmin;
+        return admin;
     }
 
     public void setAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
+        this.admin = isAdmin;
     }
 
     public int getFollowersNumber() {
@@ -98,12 +109,16 @@ public class User {
     }
 
     public boolean isBanned() {
-        return isBanned;
+        return banned;
     }
 
-    public void setBanned(boolean isBanned) {
-        this.isBanned = isBanned;
+    public void ban() {
+        this.banned = true;
     }
+    public void unban(){
+        this.banned = false;
+    }
+
 
     public Blob getProfilePicture() {
         return profilePicture;

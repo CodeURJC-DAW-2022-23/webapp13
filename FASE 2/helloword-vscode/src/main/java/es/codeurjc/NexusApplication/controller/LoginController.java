@@ -28,11 +28,11 @@ public class LoginController {
         Optional<User> user = userService.getUserByUsername(username);
 
         if (user.isEmpty()) {
-            model.addAttribute("error", "Username does not exist");
+            model.addAttribute("fail", "Username does not exist");
             return "login/loginpage";
         } 
         else if (!user.get().getEncodedPassword().equals(password)) {
-            model.addAttribute("error", "Password is incorrect");
+            model.addAttribute("fail", "Password is incorrect");
             return "login/loginpage";
         } 
         else {

@@ -14,6 +14,15 @@ public class UserService {
     private UserRepository userRepository;
 
     public Optional<User> getUserByUsername(String username) {
-        return userRepository.findByName(username);
+        return userRepository.findByUsername(username);
+    }
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+    public boolean isEmailTaken(String email){
+        return userRepository.findByEmail(email).isPresent();
+    }
+    public boolean isUsernameTaken(String username){
+        return userRepository.findByUsername(username).isPresent();
     }
 }
