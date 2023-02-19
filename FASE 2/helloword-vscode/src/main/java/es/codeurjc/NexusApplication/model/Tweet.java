@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
-@Entity
+@Entity(name = "TweetTable")
 public class Tweet {
     
     @Id

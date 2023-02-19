@@ -1,0 +1,398 @@
+.loginpage-container {
+  min-height: 100vh;
+}
+.loginpage-loginpage {
+  width: 100%;
+  height: 1117px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  background-image: linear-gradient(149deg, rgba(30, 26, 59, 1) 0%, rgba(51, 46, 89, 1) 100%);
+}
+.loginpage-logo {
+  top: 16px;
+  left: 16px;
+  width: 23.143390655517578px;
+  height: 26px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.loginpage-group {
+  top: 0px;
+  left: 0px;
+  width: 23.143390655517578px;
+  height: 26px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  border-radius: 0px 0px 0px 0px;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.loginpage-vector {
+  top: 0px;
+  left: 0px;
+  width: 23px;
+  height: 26px;
+  position: absolute;
+}
+.loginpage-btn {
+  top: 11px;
+  left: 1551px;
+  width: 164px;
+  height: 33px;
+  display: flex;
+  padding: 10px;
+  overflow: hidden;
+  position: absolute;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: rgba(83, 76, 134, 1);
+  border-style: solid;
+  border-width: 1 px;
+  border-radius: 100px;
+  justify-content: center;
+  background-color: rgba(51, 46, 89, 1);
+}
+.loginpage-text {
+  color: rgba(224, 211, 222, 1);
+  width: 121px;
+  height: auto;
+  font-size: 16px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: center;
+  font-family: Ubuntu;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.loginpage-content {
+  top: calc(50% - 300px);
+  left: calc(50% - 211px);
+  width: 423px;
+  height: 469px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.loginpage-login {
+  top: 144px;
+  left: 1px;
+  width: 423px;
+  display: flex;
+  padding: 19px 0;
+  overflow: hidden;
+  position: absolute;
+  align-items: center;
+  border-color: transparent;
+  flex-direction: column;
+}
+.loginpage-emailinput {
+  color: rgba(83, 76, 134, 1);
+  width: 268px;
+  height: 41px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  font-size: 16px;
+  text-align: center;
+  align-items: flex-start;
+  flex-shrink: 0;
+  font-family: Ubuntu;
+  font-weight: 400;
+  border-color: rgba(83, 76, 134, 1);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  background-color: rgba(30, 26, 59, 1);
+}
+.loginpage-paswdinput {
+  color: rgba(83, 76, 134, 1);
+  width: 268px;
+  height: 41px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  font-size: 16px;
+  text-align: center;
+  align-items: flex-start;
+  flex-shrink: 0;
+  font-family: Ubuntu;
+  font-weight: 400;
+  border-color: rgba(83, 76, 134, 1);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  background-color: rgba(30, 26, 59, 1);
+}
+.loginpage-loginbutton {
+  width: 164px;
+  height: 41px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: rgba(83, 76, 134, 1);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 60px;
+  margin-bottom: 25px;
+  background-color: rgba(224, 211, 222, 1);
+}
+.loginpage-text02 {
+  top: 11px;
+  left: 59px;
+  color: rgba(30, 26, 59, 1);
+  height: auto;
+  position: absolute;
+  font-size: 16px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: center;
+  font-family: Ubuntu;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.loginpage-divisor {
+  width: 423px;
+  height: 43px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  margin-bottom: 25px;
+}
+.loginpage-text04 {
+  top: 13px;
+  left: 201px;
+  color: rgba(83, 76, 134, 1);
+  height: auto;
+  position: absolute;
+  font-size: 16px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: center;
+  font-family: Ubuntu;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.loginpage-line1 {
+  top: 23px;
+  left: 3px;
+  width: 169px;
+  height: 0px;
+  position: absolute;
+  border-color: #534c86;
+  border-width: 1px;
+}
+.loginpage-line2 {
+  top: 24px;
+  left: 250px;
+  width: 173px;
+  height: 0px;
+  position: absolute;
+  border-color: #534c86;
+  border-width: 1px;
+}
+.loginpage-connectbutton {
+  width: 164px;
+  height: 41px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: rgba(83, 76, 134, 1);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 84px;
+  background-color: rgba(224, 211, 222, 1);
+}
+.loginpage-text06 {
+  top: 11px;
+  left: 29px;
+  color: rgba(30, 26, 59, 1);
+  width: 107px;
+  height: auto;
+  position: absolute;
+  font-size: 16px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: center;
+  font-family: Ubuntu;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.loginpage-select {
+  top: 77px;
+  left: 0px;
+  width: 425px;
+  display: flex;
+  padding: 10px 90px;
+  overflow: hidden;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  border-width: 0 0 2px 0;
+  border-style: solid;
+  border-color: #534C86;
+}
+.loginpage-text08 {
+  color: rgba(224, 211, 222, 1);
+  height: auto;
+  font-size: 16px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: center;
+  font-family: Ubuntu;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 120px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.loginpage-text10 {
+  color: rgba(116, 179, 206, 1);
+  height: auto;
+  font-size: 16px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: center;
+  font-family: Ubuntu;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.loginpage-logo1 {
+  top: 0px;
+  left: 90px;
+  width: 243px;
+  height: 48px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.loginpage-chi {
+  top: 0px;
+  left: 104.88163757324219px;
+  width: 40.85154342651367px;
+  height: 48px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.loginpage-chi2 {
+  top: 0px;
+  left: 0px;
+  width: 41px;
+  height: 48px;
+  position: absolute;
+}
+.loginpage-chi1 {
+  top: 0.10007081925868988px;
+  left: 0.04601544514298439px;
+  width: 41px;
+  height: 48px;
+  position: absolute;
+}
+.loginpage-nexus {
+  top: 0.001220703125px;
+  left: 0px;
+  width: 243px;
+  height: 47.998779296875px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.loginpage-nexuspath {
+  top: 0px;
+  left: 0px;
+  width: 243px;
+  height: 48px;
+  position: absolute;
+}
+html, body {
+	margin: 0; height: 100%; overflow: hidden;
+}

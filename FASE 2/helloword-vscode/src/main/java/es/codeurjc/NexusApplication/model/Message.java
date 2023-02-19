@@ -5,7 +5,8 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-@Entity
+/* 
+@Entity(name = "MessageTable")
 public class Message {
 
     private Date date;
@@ -59,7 +60,5 @@ public class Message {
     public void setMessage(String message) {
         this.message = message;
     }
-
-    
-
 }
+*/

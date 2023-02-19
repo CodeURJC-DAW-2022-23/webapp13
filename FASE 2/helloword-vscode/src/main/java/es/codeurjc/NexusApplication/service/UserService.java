@@ -1,4 +1,4 @@
-package es.codeurjc.Nexus.service;
+package es.codeurjc.NexusApplication.service;
 
 import java.util.Optional;
 
