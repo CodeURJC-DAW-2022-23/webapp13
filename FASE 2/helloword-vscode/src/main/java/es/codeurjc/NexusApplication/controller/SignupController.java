@@ -20,30 +20,45 @@ public class SignupController {
     @GetMapping("/signup")
     public String showSignupForm() {
 
-        return "signup/loginpage";
+        return "signup/signuppage";
     }
    
-    
     @PostMapping("/signup")
     public String processSignupForm(@RequestParam String email, @RequestParam String username, @RequestParam String password, Model model) {
         
         
-        if (!email.matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")){
+        if (!userService.isEmail(email)){
+
             model.addAttribute("fail", "E-mail format not adequate.");
-            return "signup/loginpage";
-        }else if(userService.isEmailTaken(email)){
+            return "signup/signuppage";
+        }
+        else if(userService.isEmailTaken(email)){
+
             model.addAttribute("fail", "E-mail address already in use.");
-            return "signup/loginpage";
+            return "signup/signuppage";
         }
         else if (userService.isUsernameTaken(username)){
+
             model.addAttribute("fail", "Username is taken.");
-            return "signup/loginpage";
+            return "signup/signuppage";
         }
-        else if (password.length() <= 6){
-            model.addAttribute("fail", "Password is too short (min 6 characters).");
-            return "signup/loginpage";
+        else if (password.length() <= 8){
+
+            model.addAttribute("fail", "Password is too short (min 8 characters).");
+            return "signup/signuppage";
         }
 
-        return null;
+        User.Builder builder = new User.Builder();
+
+        builder.setUsername(username);
+        builder.setEmail(email);
+        //TODO: https://www.baeldung.com/java-password-hashing
+        builder.setPasswordDigest(password);
+
+        User newUser = builder.build();
+
+        userService.createUser(newUser);
+
+        return "userfeed/feedanon";
     }
 }

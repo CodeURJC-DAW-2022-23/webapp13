@@ -24,19 +24,36 @@ public class LoginController {
     }
    
     @PostMapping("/login")
-    public String processLoginForm(@RequestParam String username, @RequestParam String password, Model model) {
-        Optional<User> user = userService.getUserByUsername(username);
+    public String processLoginForm(@RequestParam String topInput, @RequestParam String password, Model model) {
+                
+        Optional<User> user;
+
+        boolean emailInput;
+
+        if (userService.isEmail(topInput)){
+            user = userService.getUserByEmail(topInput);
+            emailInput = true;
+        }
+        else{
+            user = userService.getUserByUsername(topInput);
+            emailInput = false;
+        }
 
         if (user.isEmpty()) {
-            model.addAttribute("fail", "Username does not exist");
+            if (emailInput){
+                model.addAttribute("fail", "E-mail not registered.");
+            }
+            else {
+                model.addAttribute("fail", "Username does not exist.");
+            }
             return "login/loginpage";
         } 
-        else if (!user.get().getEncodedPassword().equals(password)) {
-            model.addAttribute("fail", "Password is incorrect");
+        else if (!user.get().getPasswordDigest().equals(password)) {//TODO hash input password in order to compare it.
+            model.addAttribute("fail", "Password is incorrect.");
             return "login/loginpage";
         } 
         else {
-            model.addAttribute("username", username);
+            model.addAttribute("username", topInput);
             return "login/loginpage";
         }
     }

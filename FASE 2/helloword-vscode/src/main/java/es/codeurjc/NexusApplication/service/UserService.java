@@ -25,4 +25,10 @@ public class UserService {
     public boolean isUsernameTaken(String username){
         return userRepository.findByUsername(username).isPresent();
     }
+    public void createUser(User user){
+        userRepository.save(user);
+    }
+    public boolean isEmail(String input){
+        return input.matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
+    }
 }
