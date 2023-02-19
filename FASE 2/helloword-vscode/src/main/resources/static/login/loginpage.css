@@ -119,27 +119,7 @@
   border-color: transparent;
   flex-direction: column;
 }
-.loginpage-emailinput {
-  color: rgba(83, 76, 134, 1);
-  width: 268px;
-  height: 41px;
-  display: flex;
-  overflow: hidden;
-  position: relative;
-  font-size: 16px;
-  text-align: center;
-  align-items: flex-start;
-  flex-shrink: 0;
-  font-family: Ubuntu;
-  font-weight: 400;
-  border-color: rgba(83, 76, 134, 1);
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 10px;
-  margin-bottom: 25px;
-  background-color: rgba(30, 26, 59, 1);
-}
-.loginpage-paswdinput {
+.loginpage-input {
   color: rgba(83, 76, 134, 1);
   width: 268px;
   height: 41px;

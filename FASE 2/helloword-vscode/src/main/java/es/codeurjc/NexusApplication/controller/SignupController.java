@@ -24,8 +24,8 @@ public class SignupController {
     }
    
     /* 
-    @PostMapping("/login")
-    public String processLoginForm(@RequestParam String username, @RequestParam String password, Model model) {
+    @PostMapping("/signup")
+    public String processSignupForm(@RequestParam String username, @RequestParam String password, Model model) {
         Optional<User> user = userService.getUserByUsername(username);
 
         if (user.isEmpty()) {
