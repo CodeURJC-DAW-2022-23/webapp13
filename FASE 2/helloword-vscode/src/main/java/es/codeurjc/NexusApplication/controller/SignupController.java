@@ -52,12 +52,12 @@ public class SignupController {
 
         builder.setUsername(username);
         builder.setEmail(email);
-        //TODO: https://www.baeldung.com/java-password-hashing
-        builder.setPasswordDigest(password);
+        
+        builder.setPassword(password);
 
         User newUser = builder.build();
 
-        userService.createUser(newUser);
+        userService.registerUser(newUser);
 
         return "userfeed/feedanon";
     }

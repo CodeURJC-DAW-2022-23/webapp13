@@ -48,7 +48,7 @@ public class LoginController {
             }
             return "login/loginpage";
         } 
-        else if (!user.get().getPasswordDigest().equals(password)) {//TODO hash input password in order to compare it.
+        else if (!user.get().getPassword().equals(password)) {//TODO hash input password in order to compare it.
             model.addAttribute("fail", "Password is incorrect.");
             return "login/loginpage";
         } 

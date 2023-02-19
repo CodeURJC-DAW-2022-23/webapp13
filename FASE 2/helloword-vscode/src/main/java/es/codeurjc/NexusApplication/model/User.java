@@ -2,12 +2,14 @@ package es.codeurjc.NexusApplication.model;
 
 import java.sql.Blob;
 
+import javax.management.RuntimeErrorException;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
 import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Build;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.context.annotation.SessionScope;
 
 import javax.persistence.GenerationType;
@@ -34,13 +36,15 @@ public class User {
         this.email = email;
     }
 
-    private String passwordDigest;
+    private String password;
 
     private boolean admin;
 
     private int followers;
 
     private boolean banned;
+
+    private boolean passwordEncoded = false;
     
     @Lob
     private Blob profilePicture;
@@ -48,7 +52,7 @@ public class User {
     public static class Builder {
         private String username;
         private String email;
-        private String passwordDigest;
+        private String password;
         private boolean admin = false;
 
         public Builder setUsername(String username){
@@ -59,8 +63,8 @@ public class User {
             this.email = email;
             return this;
         }
-        public Builder setPasswordDigest(String digest){
-            this.passwordDigest = digest;
+        public Builder setPassword(String password){
+            this.password = password;
             return this;
         }
         public Builder setAdmin(){
@@ -75,20 +79,20 @@ public class User {
     private User(User.Builder builder){
         this.username = builder.username;
         this.email = builder.email;
-        this.passwordDigest = builder.passwordDigest;
+        this.password = builder.password;
         this.admin = builder.admin;       
     }
 
-    public User(String username, String email, String passwordDigest, boolean admin){
+    public User(String username, String email, String password, boolean admin){
         this.username = username;
         this.email = email;
-        this.passwordDigest = passwordDigest;
+        this.password = password;
         this.admin = admin;
     }
-    public User(String username, String email, String passwordDigest, boolean admin, Blob profilePicture){
+    public User(String username, String email, String password, boolean admin, Blob profilePicture){
         this.username = username;
         this.email = email;
-        this.passwordDigest = passwordDigest;
+        this.password = password;
         this.admin = admin;
         this.profilePicture = profilePicture;
     }
@@ -117,12 +121,23 @@ public class User {
         this.username = username;
     }
 
-    public String getPasswordDigest() {
-        return passwordDigest;
+    public void setPassword(String password, PasswordEncoder passwordEncoder) {
+        this.password = password;
+        passwordEncoded = false;
+        encodePassword(passwordEncoder);
     }
 
-    public void setPasswordDigest(String encodedPassword) {
-        this.passwordDigest = encodedPassword;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void encodePassword(PasswordEncoder passwordEncoder) {
+        if (!this.passwordEncoded){
+            this.password = passwordEncoder.encode(this.password);
+            this.passwordEncoded = true;
+        }
+        else throw new RuntimeException("Password already encoded");
     }
 
     public boolean isAdmin() {
