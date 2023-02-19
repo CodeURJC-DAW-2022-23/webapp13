@@ -59,22 +59,27 @@
 			<button id="loginButton">
 				login
 			</button>
-          </div>
+          
           <div class="loginpage-content">
-            <div class="loginpage-login">
+            <form class="loginpage-login" action="login">
               <input
-                type="email"
-                placeholder="e-mail"
+                type="text"
+                placeholder="Username"
                 class="loginpage-input"
               />
               <input
                 type="password"
-                placeholder="password"
+                placeholder="Password"
                 class="loginpage-input"
               />
-              <button class="loginpage-loginbutton" onclick="location.href='../profileuser/profileanon.html'">
-                <span class="loginpage-text02"><span>Log In</span></span>
-              </button>
+              <input
+                type="submit"
+                value="Log in"
+                class="loginpage-mainbutton"
+              />
+            </form>
+          
+            <div class="loginpage-keplr">
               <div class="loginpage-divisor">
                 <span class="loginpage-text04"><span>or</span></span>
                 <img
@@ -89,13 +94,13 @@
                   class="loginpage-line2"
                 />
               </div>
-              <button class="loginpage-connectbutton" onclick="location.href='../profilemod/profileanon.html'">
+              <button class="loginpage-mainbutton" onclick="location.href='../profilemod/profileanon.html'">
                 <span class="loginpage-text06"><span>Connect Keplr</span></span>
               </button>
             </div>
             <div class="loginpage-select">
               <span class="loginpage-text08"><span>LOG IN</span></span>
-              <span class="loginpage-text10"><a href="../signup">REGISTER</span></span>
+              <span class="loginpage-text10"><a href="../signup">REGISTER</a></span>
             </div>
             <div class="loginpage-logo1">
               <div class="loginpage-chi">

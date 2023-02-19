@@ -29,7 +29,7 @@ public class SignupController {
         Optional<User> user = userService.getUserByUsername(username);
 
         if (user.isEmpty()) {
-            model.addAttribute("error", "Username does not exist");
+            model.addAttribute("error", "Username does not exist"); 
             return "login/loginpage";
         } 
         else if (!user.get().getEncodedPassword().equals(password)) {
