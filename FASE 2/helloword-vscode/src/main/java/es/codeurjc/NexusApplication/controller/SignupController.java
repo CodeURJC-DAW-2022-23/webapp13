@@ -53,7 +53,7 @@ public class SignupController {
         builder.setUsername(username);
         builder.setEmail(email);
         
-        builder.setPassword(password);
+        //builder.setPassword(password);
 
         User newUser = builder.build();
 

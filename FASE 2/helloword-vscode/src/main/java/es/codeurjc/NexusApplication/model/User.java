@@ -83,13 +83,13 @@ public class User {
         this.admin = builder.admin;       
     }
 
-    public User(String username, String email, String password, boolean admin){
+    public User(String username, String email, String password, boolean admin) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.admin = admin;
     }
-    public User(String username, String email, String password, boolean admin, Blob profilePicture){
+    public User(String username, String email, String password, boolean admin, Blob profilePicture) {
         this.username = username;
         this.email = email;
         this.password = password;

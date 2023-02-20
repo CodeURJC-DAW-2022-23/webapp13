@@ -14,8 +14,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    
+    //private PasswordEncoder passwordEncoder;
 
     public Optional<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
@@ -30,7 +30,7 @@ public class UserService {
         return userRepository.findByUsername(username).isPresent();
     }
     public void registerUser(User user){
-        user.encodePassword(passwordEncoder);
+        
         userRepository.save(user);
     }
     public boolean isEmail(String input){

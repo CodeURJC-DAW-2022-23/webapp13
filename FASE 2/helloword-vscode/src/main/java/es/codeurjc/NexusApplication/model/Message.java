@@ -4,10 +4,16 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-/* 
-@Entity(name = "MessageTable")
+@Entity
 public class Message {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
     private Date date;
 
@@ -61,4 +67,3 @@ public class Message {
         this.message = message;
     }
 }
-*/

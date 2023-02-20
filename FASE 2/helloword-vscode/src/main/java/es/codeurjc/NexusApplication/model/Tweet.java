@@ -1,7 +1,7 @@
 package es.codeurjc.NexusApplication.model;
 
 import java.sql.Blob;
-import java.sql.Date;
+import java.sql.Date;git config --global user.name 
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
-@Entity(name = "TweetTable")
+@Entity(name = "Tweet")
 public class Tweet {
     
     @Id

@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import es.codeurjc.NexusApplication.service.UserService;
 
-public class SecurityConfiguration extends WebSecurityConfiguration{
+/*public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     
     @Autowired
     public UserService userService;
@@ -25,6 +25,6 @@ public class SecurityConfiguration extends WebSecurityConfiguration{
     //TODO hay algo mal porque la clase que quería extender el profesor en las diapositivas 
     //está deprecada así que hay que preguntarle qué hacer al respecto
     protected void configure(AuthenticationManagerBuilder auth){
-
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
-}
+}*/
