@@ -1,6 +1,7 @@
 package es.codeurjc.NexusApplication.model;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 
 import javax.management.RuntimeErrorException;
 import javax.persistence.Entity;
@@ -36,9 +37,9 @@ public class User {
         this.email = email;
     }
 
-    private String password;
+    private String encodedPassword;
 
-    private boolean admin;
+    private ArrayList<String> roles;
 
     private int followers;
 
@@ -53,7 +54,7 @@ public class User {
         private String username;
         private String email;
         private String password;
-        private boolean admin = false;
+        private ArrayList<String> roles = new ArrayList<String>();
 
         public Builder setUsername(String username){
             this.username = username;
@@ -68,10 +69,11 @@ public class User {
             return this;
         }
         public Builder setAdmin(){
-            this.admin = true;
+            this.roles.add("ADMIN");;
             return this;
         }
         public User build(){
+            this.roles.add("USER");
             return new User(this);
         }
     }
@@ -79,21 +81,25 @@ public class User {
     private User(User.Builder builder){
         this.username = builder.username;
         this.email = builder.email;
-        this.password = builder.password;
-        this.admin = builder.admin;       
+        this.encodedPassword = builder.password;
+        this.roles = builder.roles;       
     }
 
     public User(String username, String email, String password, boolean admin) {
         this.username = username;
         this.email = email;
-        this.password = password;
-        this.admin = admin;
+        this.encodedPassword = password;
+        if (admin){
+            this.roles.add("ADMIN");
+        }
     }
     public User(String username, String email, String password, boolean admin, Blob profilePicture) {
         this.username = username;
         this.email = email;
-        this.password = password;
-        this.admin = admin;
+        this.encodedPassword = password;
+        if (admin){
+            this.roles.add("ADMIN");
+        }
         this.profilePicture = profilePicture;
     }
 
@@ -122,30 +128,39 @@ public class User {
     }
 
     public void setPassword(String password, PasswordEncoder passwordEncoder) {
-        this.password = password;
+        this.encodedPassword = password;
         passwordEncoded = false;
         encodePassword(passwordEncoder);
     }
 
 
-    public String getPassword() {
-        return password;
+    public String getEncodedPassword() {
+        return encodedPassword;
     }
 
     public void encodePassword(PasswordEncoder passwordEncoder) {
         if (!this.passwordEncoded){
-            this.password = passwordEncoder.encode(this.password);
+            this.encodedPassword = passwordEncoder.encode(this.encodedPassword);
             this.passwordEncoded = true;
         }
         else throw new RuntimeException("Password already encoded");
     }
 
     public boolean isAdmin() {
-        return admin;
+        if(roles.contains("ADMIN")){
+            return true;
+        }
+        return false;
     }
 
-    public void setAdmin(boolean isAdmin) {
-        this.admin = isAdmin;
+    public void setAdmin() {
+        this.roles.add("ADMIN");
+        return;
+    }
+
+    public void removeAdmin(){
+        this.roles.remove("ADMIN");
+        return;
     }
 
     public int getFollowers() {
@@ -173,6 +188,10 @@ public class User {
 
     public void setProfilePicture(Blob profilePicture) {
         this.profilePicture = profilePicture;
+    }
+
+    public ArrayList getRoles(){
+        return this.roles;
     }
 
     
