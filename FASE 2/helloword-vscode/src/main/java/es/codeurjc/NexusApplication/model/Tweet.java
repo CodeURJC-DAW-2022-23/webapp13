@@ -1,7 +1,7 @@
 package es.codeurjc.NexusApplication.model;
 
 import java.sql.Blob;
-import java.sql.Date;git config --global user.name 
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
