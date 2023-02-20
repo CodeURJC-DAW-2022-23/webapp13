@@ -39,6 +39,7 @@ public class LoginController {
             emailInput = false;
         }
 
+        //TODO quitar toda esta lógica y hacerla donde se debe (como dijo el profesor)
         if (user.isEmpty()) {
             if (emailInput){
                 model.addAttribute("fail", "E-mail not registered.");
