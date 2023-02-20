@@ -190,7 +190,7 @@ public class User {
         this.profilePicture = profilePicture;
     }
 
-    public ArrayList getRoles(){
+    public ArrayList<String> getRoles(){
         return this.roles;
     }
 
