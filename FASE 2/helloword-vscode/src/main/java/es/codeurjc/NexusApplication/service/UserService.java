@@ -20,10 +20,10 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
     public boolean isEmailTaken(String email){
-        return userRepository.findByEmail(email).isPresent();
+        return userRepository.existsByEmail(email);
     }
     public boolean isUsernameTaken(String username){
-        return userRepository.findByUsername(username).isPresent();
+        return userRepository.existsByUsername(username);
     }
     public void registerUser(User user){
         
