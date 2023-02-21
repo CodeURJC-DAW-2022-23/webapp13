@@ -2,13 +2,14 @@ package es.codeurjc.NexusApplication;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
 //Hola mundo predeterminado al crear el proyecto, borrar al comprobar que todo funcione correctamente.
 
 
 @ComponentScan
-@SpringBootApplication
+@SpringBootApplication (exclude ={SecurityAutoConfiguration.class})
 public class Application {
 
 	public static void main(String[] args) {

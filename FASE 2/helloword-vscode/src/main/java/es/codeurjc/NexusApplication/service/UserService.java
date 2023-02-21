@@ -3,7 +3,6 @@ package es.codeurjc.NexusApplication.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import es.codeurjc.NexusApplication.model.User;
@@ -14,9 +13,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    
-    //private PasswordEncoder passwordEncoder;
-
     public Optional<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
@@ -24,10 +20,10 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
     public boolean isEmailTaken(String email){
-        return userRepository.findByEmail(email).isPresent();
+        return userRepository.existsByEmail(email);
     }
     public boolean isUsernameTaken(String username){
-        return userRepository.findByUsername(username).isPresent();
+        return userRepository.existsByUsername(username);
     }
     public void registerUser(User user){
         
