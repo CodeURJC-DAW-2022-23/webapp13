@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/newbook").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/editbook/*").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/removebook/*").hasAnyRole("ADMIN");
-
+        */
         // Login form
         http.formLogin().loginPage("/login");
         http.formLogin().usernameParameter("username");
@@ -51,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Logout
         http.logout().logoutUrl("/logout");
-        http.logout().logoutSuccessUrl("/");
-        */
+        http.logout().logoutSuccessUrl("/home");
+        
     }
 }

@@ -35,4 +35,20 @@ public class RepositoryUserDetailsService implements UserDetailsService {
 				user.getEncodedPassword(), roles);
 
 	}
+
+	
+	public UserDetails loadUserByEmail(String email) throws UsernameNotFoundException {
+
+		User user = userRepository.findByEmail(email)
+				.orElseThrow(() -> new UsernameNotFoundException("Email not found"));
+
+		List<GrantedAuthority> roles = new ArrayList<>();
+		for (String role : user.getRoles()) {
+			roles.add(new SimpleGrantedAuthority("ROLE_" + role));
+		}
+
+		return new org.springframework.security.core.userdetails.User(user.getName(), 
+				user.getEncodedPassword(), roles);
+
+	}
 }
