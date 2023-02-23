@@ -10,7 +10,7 @@ import es.codeurjc.NexusApplication.model.Tweet;
 public interface TweetRepository extends JpaRepository<Tweet, Long>{
 
     Optional<Tweet> findById(Long id);
-    List<Tweet> findByUserId(Long userId);
+    //List<Tweet> findByUserId(Long userId);
     List<Tweet> findByTag(String tag);
     
 }

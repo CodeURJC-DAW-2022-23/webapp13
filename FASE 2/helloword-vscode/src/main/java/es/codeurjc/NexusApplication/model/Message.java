@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Message {
@@ -17,9 +20,11 @@ public class Message {
 
     private Date date;
 
-    private long idReceptor;
+    @ManyToOne
+    private User receptor;
 
-    private long idEmisor;
+    @ManyToOne
+    private User emisor;
 
     @Column(columnDefinition = "TEXT")
     private String message;
@@ -28,12 +33,14 @@ public class Message {
 
     }
 
-    public Message(Date date, long idReceptor, long idEmisor, String message) {
+    public Message(long id, Date date, User receptor, User emisor, String message) {
+        this.id = id;
         this.date = date;
-        this.idReceptor = idReceptor;
-        this.idEmisor = idEmisor;
+        this.receptor = receptor;
+        this.emisor = emisor;
         this.message = message;
     }
+
 
     public Date getDate() {
         return date;
@@ -43,20 +50,20 @@ public class Message {
         this.date = date;
     }
 
-    public long getIdReceptor() {
-        return idReceptor;
+    public User getReceptor() {
+        return receptor;
     }
 
-    public void setIdReceptor(long idReceptor) {
-        this.idReceptor = idReceptor;
+    public void setReceptor(User receptor) {
+        this.receptor = receptor;
     }
 
-    public long getIdEmisor() {
-        return idEmisor;
+    public User getEmisor() {
+        return emisor;
     }
 
-    public void setIdEmisor(long idEmisor) {
-        this.idEmisor = idEmisor;
+    public void setEmisor(User emisor) {
+        this.emisor = emisor;
     }
 
     public String getMessage() {
@@ -65,5 +72,13 @@ public class Message {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

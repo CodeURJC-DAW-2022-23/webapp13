@@ -1,15 +1,18 @@
 package es.codeurjc.NexusApplication.model;
 
 import java.sql.Blob;
+import java.util.List;
 import java.util.ArrayList;
 
-import javax.management.RuntimeErrorException;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
-import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Build;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -41,7 +44,7 @@ public class User {
 
     private ArrayList<String> roles;
 
-    private int followers;
+    private int followersNumber;
 
     private boolean banned;
 
@@ -49,6 +52,20 @@ public class User {
     
     @Lob
     private Blob profilePicture;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Tweet> tweets;
+
+    @ManyToMany
+    private List<User> follows;
+
+    @ManyToMany
+    private List<User> followers;
+
+    @OneToMany(mappedBy = "user")
+    private List<Block> blockedUserList;
+
+
 
     public static class Builder {
         private String username;
@@ -69,7 +86,7 @@ public class User {
             return this;
         }
         public Builder setAdmin(){
-            this.roles.add("ADMIN");;
+            this.roles.add("ADMIN");
             return this;
         }
         public User build(){
@@ -163,12 +180,12 @@ public class User {
         return;
     }
 
-    public int getFollowers() {
-        return followers;
+    public int getFollowersNumber() {
+        return followersNumber;
     }
 
-    public void setFollowers(int followersNumber) {
-        this.followers = followersNumber;
+    public void setFollowersNumber(int followersNumber) {
+        this.followersNumber = followersNumber;
     }
 
     public boolean isBanned() {
@@ -190,6 +207,15 @@ public class User {
         this.profilePicture = profilePicture;
     }
 
+    public List<Tweet> getTweets() {
+        return tweets;
+    }
+
+    public void setTweets(List<Tweet> tweets) {
+        this.tweets = tweets;
+    }
+
+    
     public ArrayList<String> getRoles(){
         return this.roles;
     }

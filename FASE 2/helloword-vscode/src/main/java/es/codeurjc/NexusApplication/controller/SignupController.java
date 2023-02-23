@@ -17,8 +17,8 @@ public class SignupController {
     private UserService userService;
     
     @GetMapping("/signup")
-    public String showSignupForm() {
-
+    public String showSignupForm(Model model) {
+        model.addAttribute("fail", "test");
         return "signup/signuppage";
     }
    

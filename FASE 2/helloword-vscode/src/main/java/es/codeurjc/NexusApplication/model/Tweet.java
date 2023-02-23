@@ -2,6 +2,7 @@ package es.codeurjc.NexusApplication.model;
 
 import java.sql.Blob;
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import org.springframework.lang.Nullable;
 
 @Entity(name = "Tweet")
 public class Tweet {
@@ -17,7 +23,8 @@ public class Tweet {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private long userId;
+    @ManyToOne
+    private User owner;
 
     private Date date;
 
@@ -28,22 +35,27 @@ public class Tweet {
 
     private String tag;
 
-    private long replyId;
+    @Nullable
+    @OneToOne
+    private Tweet replyTo;
 
     @Lob
     private Blob media;
+
+    @OneToMany(mappedBy = "tweet")
+    private List<Like> likes;
 
     public Tweet(){
 
     }
 
-    public Tweet(long userId, Date date, String text, int likesNumber, String tag, long replyId, Blob media) {
-        this.userId = userId;
+    public Tweet(User owner, Date date, String text, int likesNumber, String tag, Tweet replyTo, Blob media) {
+        this.owner = owner;
         this.date = date;
         this.text = text;
         this.likesNumber = likesNumber;
         this.tag = tag;
-        this.replyId = replyId;
+        this.replyTo = replyTo;
         this.media = media;
     }
 
@@ -55,12 +67,12 @@ public class Tweet {
         this.id = id;
     }
 
-    public long getUserId() {
-        return userId;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public Date getDate() {
@@ -95,12 +107,12 @@ public class Tweet {
         this.tag = tag;
     }
 
-    public long getReplyId() {
-        return replyId;
+    public Tweet getReplyTo() {
+        return replyTo;
     }
 
-    public void setReplyId(long replyId) {
-        this.replyId = replyId;
+    public void setReplyTo(Tweet replyTo) {
+        this.replyTo = replyTo;
     }
 
     public Blob getMedia() {
