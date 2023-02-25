@@ -17,14 +17,12 @@ public class SignupController {
     private UserService userService;
     
     @GetMapping("/signup")
-    public String showSignupForm(Model model) {
-        model.addAttribute("fail", "test");
+    public String showSignupForm() {
         return "signup/signuppage";
     }
    
     @PostMapping("/signup")
     public String processSignupForm(@RequestParam String email, @RequestParam String username, @RequestParam String password, Model model) {
-        
         
         if (!userService.isEmail(email)){
 
