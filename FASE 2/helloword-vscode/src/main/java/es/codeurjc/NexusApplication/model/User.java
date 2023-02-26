@@ -4,6 +4,7 @@ import java.sql.Blob;
 import java.util.List;
 import java.util.ArrayList;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -32,17 +33,10 @@ public class User {
 
     private String email;
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     private String encodedPassword;
 
-    private ArrayList<String> roles;
+    //@ElementCollection
+    private ArrayList<String> roles = new ArrayList<>();
 
     private int followersNumber;
 
@@ -110,7 +104,12 @@ public class User {
             this.roles.add("ADMIN");
         }
     }
-    public User(String username, String email, String password, boolean admin, Blob profilePicture) {
+
+    /*
+     * Para declarar usuarios al iniciar la aplicación
+     */
+    public User(String name, String username, String email, String password, boolean admin, Blob profilePicture) {
+        this.name = name;
         this.username = username;
         this.email = email;
         this.encodedPassword = password;
@@ -118,6 +117,13 @@ public class User {
             this.roles.add("ADMIN");
         }
         this.profilePicture = profilePicture;
+        this.banned = false;
+        this.blockedUserList = new ArrayList<Block>();
+        this.followersNumber = 0;
+        this.followers = new ArrayList<User>();
+        this.follows = new ArrayList<User>();
+        this.passwordEncoded = false;
+        this.tweets = new ArrayList<Tweet>();
     }
 
     public long getId() {
@@ -144,12 +150,19 @@ public class User {
         this.username = username;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void setPassword(String password, PasswordEncoder passwordEncoder) {
         this.encodedPassword = password;
         passwordEncoded = false;
         encodePassword(passwordEncoder);
     }
-
 
     public String getEncodedPassword() {
         return encodedPassword;
@@ -214,11 +227,37 @@ public class User {
     public void setTweets(List<Tweet> tweets) {
         this.tweets = tweets;
     }
-
-    
+  
     public ArrayList<String> getRoles(){
         return this.roles;
     }
 
-    
+    public void setBanned(boolean banned) {
+        this.banned = banned;
+    }
+
+    public List<User> getFollows() {
+        return follows;
+    }
+
+    public void setFollows(List<User> follows) {
+        this.follows = follows;
+    }
+
+    public List<User> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<User> followers) {
+        this.followers = followers;
+    }
+
+    public List<Block> getBlockedUserList() {
+        return blockedUserList;
+    }
+
+    public void setBlockedUserList(List<Block> blockedUserList) {
+        this.blockedUserList = blockedUserList;
+    }
+
 }

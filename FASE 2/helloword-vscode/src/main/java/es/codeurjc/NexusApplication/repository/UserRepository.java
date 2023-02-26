@@ -12,7 +12,7 @@ import es.codeurjc.NexusApplication.model.User;
 @Component
 public interface UserRepository extends JpaRepository<User, Long>{
 
-    Optional<User> findByUsername(String name);
+    Optional<User> findByUsername(String username);
     Optional<User> findByEmail(String email);
     boolean existsByEmail(String email);
     boolean existsByUsername(String username);
