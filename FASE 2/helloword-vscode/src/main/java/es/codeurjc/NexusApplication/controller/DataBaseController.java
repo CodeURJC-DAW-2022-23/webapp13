@@ -59,7 +59,6 @@ public class DataBaseController {
         //User auxUser = userRepository.findByUsername("alb014").orElse(null);
         //List<Tweet> aList = auxUser.getTweets();
         //System.out.println(aList.get(0).getText());
-        
     }
     
 }

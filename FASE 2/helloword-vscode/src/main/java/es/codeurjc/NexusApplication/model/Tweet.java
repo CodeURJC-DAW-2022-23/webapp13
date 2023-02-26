@@ -33,12 +33,14 @@ public class Tweet {
 
     private int likesNumber;
 
+    @Nullable
     private String tag;
 
     @Nullable
     @OneToOne
     private Tweet replyTo;
 
+    @Nullable
     @Lob
     private Blob media;
 

@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -44,18 +45,22 @@ public class User {
 
     private boolean passwordEncoded = false;
     
+    @Nullable
     @Lob
     private Blob profilePicture;
 
     @OneToMany(mappedBy = "owner")
     private List<Tweet> tweets;
 
+    @Nullable
     @ManyToMany
     private List<User> follows;
 
+    @Nullable
     @ManyToMany
     private List<User> followers;
 
+    @Nullable
     @OneToMany(mappedBy = "user")
     private List<Block> blockedUserList;
 
