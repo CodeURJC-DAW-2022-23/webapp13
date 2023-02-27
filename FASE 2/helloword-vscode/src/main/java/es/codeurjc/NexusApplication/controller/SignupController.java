@@ -18,7 +18,7 @@ public class SignupController {
     
     @GetMapping("/signup")
     public String showSignupForm() {
-        return "signup/signuppage";
+        return "signuppage";
     }
    
     @PostMapping("/signup")
@@ -27,22 +27,22 @@ public class SignupController {
         if (!userService.isEmail(email)){
 
             model.addAttribute("fail", "E-mail format not adequate.");
-            return "signup/signuppage";
+            return "signuppage";
         }
         else if(userService.isEmailTaken(email)){
 
             model.addAttribute("fail", "E-mail address already in use.");
-            return "signup/signuppage";
+            return "signuppage";
         }
         else if (userService.isUsernameTaken(username)){
 
             model.addAttribute("fail", "Username is taken.");
-            return "signup/signuppage";
+            return "signuppage";
         }
         else if (password.length() <= 8){
 
             model.addAttribute("fail", "Password is too short (min 8 characters).");
-            return "signup/signuppage";
+            return "signuppage";
         }
 
         User.Builder builder = new User.Builder();
@@ -56,6 +56,6 @@ public class SignupController {
 
         userService.registerUser(newUser);
 
-        return "userfeed/feedanon";
+        return "feedanon";
     }
 }

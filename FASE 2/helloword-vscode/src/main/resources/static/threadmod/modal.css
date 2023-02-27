@@ -1,0 +1,13 @@
+
+#blurbg {
+	position: absolute;
+	width: 100%;
+  	height: 1326px;
+	z-index: 0;
+	background-color: #00000066;
+	top: 50px;
+	left: 0;
+	filter: blur(5px);
+	-webkit-filter: blur(5px);
+	backdrop-filter: blur(5px);
+}
