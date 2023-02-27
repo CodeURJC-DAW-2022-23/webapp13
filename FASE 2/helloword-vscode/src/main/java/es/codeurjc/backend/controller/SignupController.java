@@ -1,4 +1,4 @@
-package es.codeurjc.NexusApplication.controller;
+package es.codeurjc.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import es.codeurjc.NexusApplication.service.UserService;
-import es.codeurjc.NexusApplication.model.User;
+import es.codeurjc.backend.model.User;
+import es.codeurjc.backend.service.UserService;
 
 @Controller
 public class SignupController {

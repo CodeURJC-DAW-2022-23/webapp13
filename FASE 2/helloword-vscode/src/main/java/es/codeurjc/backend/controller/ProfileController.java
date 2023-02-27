@@ -1,4 +1,4 @@
-package es.codeurjc.NexusApplication.controller;
+package es.codeurjc.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import es.codeurjc.NexusApplication.service.UserService;
+import es.codeurjc.backend.service.UserService;
 
 @Controller
 public class ProfileController {

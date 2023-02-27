@@ -1,4 +1,4 @@
-package es.codeurjc.NexusApplication.model;
+package es.codeurjc.backend.model;
 
 import java.sql.Date;
 

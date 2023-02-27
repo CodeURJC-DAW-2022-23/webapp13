@@ -1,4 +1,4 @@
-package es.codeurjc.NexusApplication.controller;
+package es.codeurjc.backend.controller;
 
 import java.util.List;
 //import java.util.Date;
@@ -9,10 +9,10 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import es.codeurjc.NexusApplication.model.Tweet;
-import es.codeurjc.NexusApplication.model.User;
-import es.codeurjc.NexusApplication.repository.TweetRepository;
-import es.codeurjc.NexusApplication.repository.UserRepository;
+import es.codeurjc.backend.model.Tweet;
+import es.codeurjc.backend.model.User;
+import es.codeurjc.backend.repository.TweetRepository;
+import es.codeurjc.backend.repository.UserRepository;
 
 @RestController
 //@RequestMapping("/users")
@@ -30,7 +30,7 @@ public class DataBaseController {
     @PostConstruct
     public void init() {
         Date todayDate = new Date(System.currentTimeMillis());
-        User alberto = new User("Alberto", "alb014", "alb@mail.com", "pass", true, null);
+        User alberto = new User("Alberto", "hola", "hola@hola.com", "hola", true, null);
         User pepe = new User("Pepe", "pepito", "pepito@gmail.com", "pepito123", false, null);
         User paco = new User("Paco", "paquito", "paquitunin@gamil.com", "paco123", false, null);
         User blopp = new User("Blop", "BlopGG", "blopp@gmail.com", "blopp", false, null);

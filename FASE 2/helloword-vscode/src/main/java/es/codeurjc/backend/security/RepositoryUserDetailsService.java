@@ -1,5 +1,5 @@
 
-package es.codeurjc.NexusApplication.security;
+package es.codeurjc.backend.security;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import es.codeurjc.NexusApplication.repository.UserRepository;
-import es.codeurjc.NexusApplication.model.User;
+import es.codeurjc.backend.model.User;
+import es.codeurjc.backend.repository.UserRepository;
 
 @Service
 public class RepositoryUserDetailsService implements UserDetailsService {

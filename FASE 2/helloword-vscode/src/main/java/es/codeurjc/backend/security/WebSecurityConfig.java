@@ -1,20 +1,23 @@
-package es.codeurjc.NexusApplication.security;
+package es.codeurjc.backend.security;
 
 import java.security.SecureRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.batch.BatchDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+@Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Autowired
-	RepositoryUserDetailsService userDetailsService;
+	private RepositoryUserDetailsService userDetailsService;
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -34,6 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/").permitAll();
         http.authorizeRequests().antMatchers("/signup").permitAll();
         http.authorizeRequests().antMatchers("/login").permitAll();
+        http.authorizeRequests().antMatchers("/feed").permitAll();
         http.authorizeRequests().antMatchers("/loginerror").permitAll();
         http.authorizeRequests().antMatchers("/logout").permitAll();
 
@@ -47,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin().loginPage("/login");
         http.formLogin().usernameParameter("username");
         http.formLogin().passwordParameter("password");
-        http.formLogin().defaultSuccessUrl("/");
+        http.formLogin().defaultSuccessUrl("/feed", true);
         http.formLogin().failureUrl("/loginerror");
 
         // Logout
@@ -55,4 +59,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout().logoutSuccessUrl("/home");
         
     }
+
+    /* 
+    @Bean
+    public ObjectPostProcessor<Object> objectPostProcessor() {
+        return new ObjectPostProcessor<Object>() {
+            @Override
+            public <T> T postProcess(T object) {
+                // No-op post processor, simply returns the input object
+                return object;
+            }
+        };
+    }*/
 }

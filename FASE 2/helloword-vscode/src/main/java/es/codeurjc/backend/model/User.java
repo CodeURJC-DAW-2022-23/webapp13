@@ -1,4 +1,4 @@
-package es.codeurjc.NexusApplication.model;
+package es.codeurjc.backend.model;
 
 import java.sql.Blob;
 import java.util.List;
@@ -185,10 +185,7 @@ public class User {
     }
 
     public boolean isAdmin() {
-        if(roles.contains("ADMIN")){
-            return true;
-        }
-        return false;
+        return roles.contains("ADMIN");
     }
 
     public void setAdmin() {

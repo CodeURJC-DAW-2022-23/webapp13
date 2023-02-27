@@ -1,4 +1,4 @@
-package es.codeurjc.NexusApplication.model;
+package es.codeurjc.backend.model;
 
 import java.sql.Date;
 
@@ -9,39 +9,32 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Block {
+public class Like {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     
-    private Date date;
-
     @ManyToOne
     private User user;
 
     @ManyToOne
-    private User blocked;
+    private Tweet tweet;
 
-    
-    public Block() {
+    //Por motivos de depuración
+    private Date date;
+
+
+    public Like() {
     }
-    
-    public Block(long id, Date date, User user, User blocked) {
+
+    public Like(long id, User user, Tweet tweet, Date date) {
         this.id = id;
-        this.date = date;
         this.user = user;
-        this.blocked = blocked;
-    }
-
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
+        this.tweet = tweet;
         this.date = date;
     }
+
 
     public User getUser() {
         return user;
@@ -51,12 +44,20 @@ public class Block {
         this.user = user;
     }
 
-    public User getBlocked() {
-        return blocked;
+    public Tweet getTweet() {
+        return tweet;
     }
 
-    public void setBlocked(User blocked) {
-        this.blocked = blocked;
+    public void setTweet(Tweet tweet) {
+        this.tweet = tweet;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public long getId() {

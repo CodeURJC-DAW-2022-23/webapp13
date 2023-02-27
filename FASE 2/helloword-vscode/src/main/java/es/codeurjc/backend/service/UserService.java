@@ -1,15 +1,16 @@
-package es.codeurjc.NexusApplication.service;
+package es.codeurjc.backend.service;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.codeurjc.NexusApplication.model.User;
-import es.codeurjc.NexusApplication.repository.UserRepository;
+import es.codeurjc.backend.model.User;
+import es.codeurjc.backend.repository.UserRepository;
 
 @Service
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -26,12 +27,9 @@ public class UserService {
         return userRepository.existsByUsername(username);
     }
     public void registerUser(User user){
-        
         userRepository.save(user);
     }
     public boolean isEmail(String input){
         return input.matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
     }
-
-
 }

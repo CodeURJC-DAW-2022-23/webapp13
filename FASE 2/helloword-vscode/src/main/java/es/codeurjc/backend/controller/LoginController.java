@@ -1,6 +1,7 @@
-package es.codeurjc.NexusApplication.controller;
+package es.codeurjc.backend.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -14,7 +15,8 @@ public class LoginController {
     }
 
     @RequestMapping("/loginerror")
-    public String loginerror(){
+    public String loginerror(Model model){
+        model.addAttribute("fail", "fallaste");
         return "loginpageerror";
     }
 }
