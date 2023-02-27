@@ -6,15 +6,15 @@ import java.util.ArrayList;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import org.springframework.lang.Nullable;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -36,8 +36,8 @@ public class User {
 
     private String encodedPassword;
 
-    //@ElementCollection
-    private ArrayList<String> roles = new ArrayList<>();
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles;
 
     private int followersNumber;
 
@@ -117,7 +117,10 @@ public class User {
         this.name = name;
         this.username = username;
         this.email = email;
-        this.encodedPassword = password;
+        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        this.encodedPassword = encoder.encode(password);
+        this.roles = new ArrayList<>();
+        this.roles.add("USER");
         if (admin){
             this.roles.add("ADMIN");
         }
@@ -127,7 +130,7 @@ public class User {
         this.followersNumber = 0;
         this.followers = new ArrayList<User>();
         this.follows = new ArrayList<User>();
-        this.passwordEncoded = false;
+        this.passwordEncoded = true;
         this.tweets = new ArrayList<Tweet>();
     }
 
@@ -233,7 +236,7 @@ public class User {
         this.tweets = tweets;
     }
   
-    public ArrayList<String> getRoles(){
+    public List<String> getRoles(){
         return this.roles;
     }
 

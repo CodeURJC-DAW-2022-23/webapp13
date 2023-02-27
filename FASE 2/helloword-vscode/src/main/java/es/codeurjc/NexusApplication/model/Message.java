@@ -7,9 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Message {
@@ -21,10 +19,10 @@ public class Message {
     private Date date;
 
     @ManyToOne
-    private User receptor;
+    private User reciever;
 
     @ManyToOne
-    private User emisor;
+    private User transmitter;
 
     @Column(columnDefinition = "TEXT")
     private String message;
@@ -33,11 +31,11 @@ public class Message {
 
     }
 
-    public Message(long id, Date date, User receptor, User emisor, String message) {
+    public Message(long id, Date date, User reciever, User transmitter, String message) {
         this.id = id;
         this.date = date;
-        this.receptor = receptor;
-        this.emisor = emisor;
+        this.reciever = reciever;
+        this.transmitter = transmitter;
         this.message = message;
     }
 
@@ -50,20 +48,20 @@ public class Message {
         this.date = date;
     }
 
-    public User getReceptor() {
-        return receptor;
+    public User getReciever() {
+        return reciever;
     }
 
-    public void setReceptor(User receptor) {
-        this.receptor = receptor;
+    public void setReciever(User reciever) {
+        this.reciever = reciever;
     }
 
-    public User getEmisor() {
-        return emisor;
+    public User getTransmitter() {
+        return transmitter;
     }
 
-    public void setEmisor(User emisor) {
-        this.emisor = emisor;
+    public void setTransmitter(User transmitter) {
+        this.transmitter = transmitter;
     }
 
     public String getMessage() {
