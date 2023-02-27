@@ -5,13 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class FeedController {
+public class ProfileController {
     
-
-    @GetMapping("/feed")
+    @GetMapping("/u/{{username}}")
     public String showFeed(Model model){
         
-        return "userfeed/feeduser";
+        return "profile/profile";
     }
 
 }
