@@ -1,18 +1,12 @@
 package es.codeurjc.NexusApplication.controller;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
+//import java.util.Date;
+import java.sql.Date;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.codeurjc.NexusApplication.model.Tweet;
@@ -31,19 +25,20 @@ public class DataBaseController {
     private TweetRepository tweetRepository;
 
     /*
-     * Order is very important.
+     * 
      */
     @PostConstruct
     public void init() {
+        Date todayDate = new Date(System.currentTimeMillis());
         User alberto = new User("Alberto", "alb014", "alb@mail.com", "pass", true, null);
         User pepe = new User("Pepe", "pepito", "pepito@gmail.com", "pepito123", false, null);
         User paco = new User("Paco", "paquito", "paquitunin@gamil.com", "paco123", false, null);
         User blopp = new User("Blop", "BlopGG", "blopp@gmail.com", "blopp", false, null);
-        Tweet tweet = new Tweet(alberto, null, "Esto es una prueba", 0, null, null, null);
-        Tweet tweet1 = new Tweet(alberto, null, "Esto es otra prueba", 0, null, null, null);
-        Tweet tweet2 = new Tweet(alberto, null, "Esto es una ultima prueba", 0, null, tweet1, null);
-        Tweet tweet3 = new Tweet(paco, null, "Esto es una prueba de paco", 0, null, null, null);
-        Tweet tweet4 = new Tweet(pepe, null, "Esto es una prueba de pepe", 0, null, null, null);
+        Tweet tweet = new Tweet(alberto, todayDate, "Esto es una prueba", 0, null, null, null);
+        Tweet tweet1 = new Tweet(alberto, todayDate, "Esto es otra prueba", 0, null, null, null);
+        Tweet tweet2 = new Tweet(alberto, todayDate, "Esto es una ultima prueba", 0, null, tweet1, null);
+        Tweet tweet3 = new Tweet(paco, todayDate, "Esto es una prueba de paco", 0, null, null, null);
+        Tweet tweet4 = new Tweet(pepe, todayDate, "Esto es una prueba de pepe", 0, null, null, null);
         List<User> aux = alberto.getFollowers();
         aux.add(pepe);
         alberto.setFollowers(aux);
