@@ -10,11 +10,11 @@ public class LoginController {
    
     @RequestMapping("/login")
     public String login(){
-        return "login/loginpage";
+        return "loginpage";
     }
 
     @RequestMapping("/loginerror")
     public String loginerror(){
-        return "login/loginpageerror";
+        return "loginpageerror";
     }
 }

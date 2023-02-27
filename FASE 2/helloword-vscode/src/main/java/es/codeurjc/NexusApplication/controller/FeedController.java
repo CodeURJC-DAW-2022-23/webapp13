@@ -16,7 +16,7 @@ public class FeedController {
     @GetMapping("/feed")
     public String showFeed(Model model){
         
-        return "userfeed/feeduser";
+        return "feeduser";
     }
 
 }

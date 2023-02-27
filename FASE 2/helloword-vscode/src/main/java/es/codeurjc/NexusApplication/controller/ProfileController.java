@@ -17,7 +17,7 @@ public class ProfileController {
     @GetMapping("/u/{username}")
     public String showFeed(Model model, @PathVariable String username){
         
-        return "profileuser/profileuser";
+        return "profileuser";
     }
 
 }
