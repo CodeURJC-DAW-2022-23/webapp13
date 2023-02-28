@@ -51,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin().loginPage("/login");
         http.formLogin().usernameParameter("username");
         http.formLogin().passwordParameter("password");
-        http.formLogin().defaultSuccessUrl("/feed", true);
+        http.formLogin().defaultSuccessUrl("/feed");
         http.formLogin().failureUrl("/loginerror");
 
         // Logout
@@ -60,15 +60,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         
     }
 
-    /* 
-    @Bean
-    public ObjectPostProcessor<Object> objectPostProcessor() {
-        return new ObjectPostProcessor<Object>() {
-            @Override
-            public <T> T postProcess(T object) {
-                // No-op post processor, simply returns the input object
-                return object;
-            }
-        };
-    }*/
 }

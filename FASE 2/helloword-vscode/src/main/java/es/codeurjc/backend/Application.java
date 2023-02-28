@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 
 @ComponentScan
-@SpringBootApplication (exclude ={SecurityAutoConfiguration.class})
+@SpringBootApplication 
 public class Application {
 
 	public static void main(String[] args) {
