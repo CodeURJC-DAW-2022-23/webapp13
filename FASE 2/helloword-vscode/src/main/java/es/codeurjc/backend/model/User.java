@@ -94,6 +94,8 @@ public class User {
         }
     }
 
+    private User() {}
+
     private User(User.Builder builder){
         this.username = builder.username;
         this.email = builder.email;
@@ -117,8 +119,7 @@ public class User {
         this.name = name;
         this.username = username;
         this.email = email;
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        this.encodedPassword = encoder.encode(password);
+        this.encodedPassword = password;
         this.roles = new ArrayList<>();
         this.roles.add("USER");
         if (admin){

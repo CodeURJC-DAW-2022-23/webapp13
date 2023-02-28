@@ -7,6 +7,7 @@ import java.sql.Date;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.codeurjc.backend.model.Tweet;
@@ -24,13 +25,15 @@ public class DataBaseController {
     @Autowired
     private TweetRepository tweetRepository;
 
+    @Autowired
+	private PasswordEncoder passwordEncoder;
     /*
      * 
      */
     @PostConstruct
     public void init() {
         Date todayDate = new Date(System.currentTimeMillis());
-        User alberto = new User("Alberto", "hola", "hola@hola.com", "hola", true, null);
+        User alberto = new User("Alberto", "hola", "hola@hola.com", passwordEncoder.encode("hola"), true, null);
         User pepe = new User("Pepe", "pepito", "pepito@gmail.com", "pepito123", false, null);
         User paco = new User("Paco", "paquito", "paquitunin@gamil.com", "paco123", false, null);
         User blopp = new User("Blop", "BlopGG", "blopp@gmail.com", "blopp", false, null);

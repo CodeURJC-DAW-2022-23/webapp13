@@ -3,7 +3,7 @@ package es.codeurjc.backend.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import es.codeurjc.backend.service.TweetService;
 
@@ -13,7 +13,7 @@ public class FeedController {
     @Autowired
     private TweetService tweetService;
 
-    @GetMapping("/feed")
+    @RequestMapping("/feed")
     public String showFeed(Model model){
         
         return "feeduser";
