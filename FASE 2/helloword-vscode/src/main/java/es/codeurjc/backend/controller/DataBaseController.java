@@ -33,22 +33,24 @@ public class DataBaseController {
     @PostConstruct
     public void init() {
         Date todayDate = new Date(System.currentTimeMillis());
-        User alberto = new User("Alberto", "a", "a@a.com", passwordEncoder.encode("a"), true, null);
-        User pepe = new User("Pepe", "pepito", "pepito@gmail.com", "pepito123", false, null);
-        User paco = new User("Paco", "paquito", "paquitunin@gamil.com", "paco123", false, null);
-        User blopp = new User("Blop", "BlopGG", "blopp@gmail.com", "blopp", false, null);
-        Tweet tweet = new Tweet(alberto, todayDate, "Esto es una prueba", 0, null, null, null);
-        Tweet tweet1 = new Tweet(alberto, todayDate, "Esto es otra prueba", 0, null, null, null);
-        Tweet tweet2 = new Tweet(alberto, todayDate, "Esto es una ultima prueba", 0, null, tweet1, null);
-        Tweet tweet3 = new Tweet(paco, todayDate, "Esto es una prueba de paco", 0, null, null, null);
-        Tweet tweet4 = new Tweet(pepe, todayDate, "Esto es una prueba de pepe", 0, null, null, null);
-        List<User> aux = alberto.getFollowers();
-        aux.add(pepe);
-        alberto.setFollowers(aux);
-        userRepository.save(pepe);
-        userRepository.save(alberto);
-        userRepository.save(paco);
-        userRepository.save(blopp);
+        
+        User.Builder builder = new User.Builder();
+
+        builder.setUsername("a").setEmail("a@a.com").setEncodedPassword(passwordEncoder.encode("a"));
+
+        User testUser1 = builder.build();
+
+
+        Tweet tweet = new Tweet(testUser1, todayDate, "Esto es una prueba", 0, null, null, null);
+        Tweet tweet1 = new Tweet(testUser1, todayDate, "Esto es otra prueba", 0, null, null, null);
+        Tweet tweet2 = new Tweet(testUser1, todayDate, "Esto es una ultima prueba", 0, null, tweet1, null);
+        Tweet tweet3 = new Tweet(testUser1, todayDate, "Esto es una prueba de paco", 0, null, null, null);
+        Tweet tweet4 = new Tweet(testUser1, todayDate, "Esto es una prueba de pepe", 0, null, null, null);
+        List<User> aux = testUser1.getFollowers();
+        aux.add(testUser1);
+        testUser1.setFollowers(aux);
+        userRepository.save(testUser1);
+
         tweetRepository.save(tweet);
         tweetRepository.save(tweet1);
         tweetRepository.save(tweet2);

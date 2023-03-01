@@ -3,6 +3,7 @@ package es.codeurjc.backend.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import es.codeurjc.backend.model.User;
@@ -14,6 +15,9 @@ public final class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public User getUserByUsernameForced(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User " + username +" not found"));
+    }
     public Optional<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }

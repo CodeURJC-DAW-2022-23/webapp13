@@ -14,18 +14,18 @@ import org.springframework.stereotype.Service;
 
 import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.repository.UserRepository;
+import es.codeurjc.backend.service.UserService;
 
 @Service
 public final class RepositoryUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) {
 
-		User user = userRepository.findByUsername(username)
-				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		User user = userService.getUserByUsernameForced(username);
 
 		List<GrantedAuthority> roles = new ArrayList<>();
 		for (String role : user.getRoles()) {

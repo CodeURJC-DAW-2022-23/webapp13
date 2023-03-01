@@ -51,14 +51,20 @@ public class User {
 
     @Nullable
     @OneToMany(mappedBy = "user")
-    private List<Block> blockedUserList;
+    private List<Block> blockedUsers;
 
     public static class Builder {
         private String username;
         private String email;
         private String encodedPassword;
-        private ArrayList<String> roles = new ArrayList<String>();
+        private String name;
+        private boolean admin = false;
+        private boolean banned = false;
 
+        public Builder setName(String name){
+            this.name = name;
+            return this;
+        }
         public Builder setUsername(String username){
             this.username = username;
             return this;
@@ -72,35 +78,26 @@ public class User {
             return this;
         }
         public Builder setAdmin(){
-            this.roles.add("ADMIN");
+            this.admin = true;
+            return this;
+        }
+        public Builder setBan(){
+            this.banned = true;
             return this;
         }
         public User build(){
-            this.roles.add("USER");
             return new User(this);
         }
     }
 
-    private User() {}
+    //DON'T USE
+    public User() {}
 
     private User(User.Builder builder){
-        this.username = builder.username;
-        this.email = builder.email;
-        this.roles = builder.roles;    
-        this.encodedPassword = builder.encodedPassword;   
+        this(builder.username, builder.email, builder.encodedPassword, builder.name, builder.admin, builder.banned, null);
     }
 
-    public User(String username, String email, String encodedPassword, boolean admin) {
-        this.username = username;
-        this.email = email;
-        this.encodedPassword = encodedPassword;
-        this.roles.add("USER");
-        if (admin){
-            this.roles.add("ADMIN");
-        }
-    }
-
-    public User(String name, String username, String email, String encodedPassword, boolean admin, Blob profilePicture) {
+    private User(String username, String email, String encodedPassword, String name, boolean admin, boolean banned, Blob profilePicture) {
         this.name = name;
         this.username = username;
         this.email = email;
@@ -111,10 +108,9 @@ public class User {
             this.roles.add("ADMIN");
         }
         this.profilePicture = profilePicture;
-        this.blockedUserList = new ArrayList<Block>();
+        this.blockedUsers = new ArrayList<Block>();
         this.followers = new ArrayList<User>();
         this.follows = new ArrayList<User>();
-
         this.tweets = new ArrayList<Tweet>();
     }
 
@@ -156,6 +152,6 @@ public class User {
     public List<User> getFollowers() {return followers;}
     public void setFollowers(List<User> followers) {this.followers = followers;}
 
-    public List<Block> getBlockedUserList() {return blockedUserList;}
-    public void setBlockedUserList(List<Block> blockedUserList) {this.blockedUserList = blockedUserList;}
+    public List<Block> getBlockedUsers() {return blockedUsers;}
+    public void setBlockedUsers(List<Block> blockedUsers) {this.blockedUsers = blockedUsers;}
 }
