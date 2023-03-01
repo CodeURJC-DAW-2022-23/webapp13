@@ -119,6 +119,19 @@
   border-color: transparent;
   flex-direction: column;
 }
+
+.loginpage-keplr {
+  bottom: -40px;
+  left: 1px;
+  width: 423px;
+  display: flex;
+  padding: 19px 0;
+  overflow: hidden;
+  position: absolute;
+  align-items: center;
+  border-color: transparent;
+  flex-direction: column;
+}
 .loginpage-input {
   color: rgba(83, 76, 134, 1);
   width: 268px;
@@ -139,7 +152,7 @@
   margin-bottom: 25px;
   background-color: rgba(30, 26, 59, 1);
 }
-.loginpage-loginbutton {
+.loginpage-mainbutton {
   width: 164px;
   height: 41px;
   display: flex;
@@ -154,12 +167,8 @@
   margin-bottom: 25px;
   background-color: rgba(224, 211, 222, 1);
 }
-.loginpage-text02 {
-  top: 11px;
-  left: 59px;
+.loginpage-mainbutton[value="Log in"] {
   color: rgba(30, 26, 59, 1);
-  height: auto;
-  position: absolute;
   font-size: 16px;
   align-self: auto;
   font-style: Medium;
@@ -172,6 +181,7 @@
   margin-bottom: 0;
   text-decoration: none;
 }
+
 .loginpage-divisor {
   width: 423px;
   height: 43px;
@@ -218,20 +228,6 @@
   position: absolute;
   border-color: #534c86;
   border-width: 1px;
-}
-.loginpage-connectbutton {
-  width: 164px;
-  height: 41px;
-  display: flex;
-  overflow: hidden;
-  position: relative;
-  align-items: flex-start;
-  flex-shrink: 0;
-  border-color: rgba(83, 76, 134, 1);
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 84px;
-  background-color: rgba(224, 211, 222, 1);
 }
 .loginpage-text06 {
   top: 11px;
