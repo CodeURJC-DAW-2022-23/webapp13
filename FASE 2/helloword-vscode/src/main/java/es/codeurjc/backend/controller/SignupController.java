@@ -1,6 +1,7 @@
 package es.codeurjc.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,18 +12,21 @@ import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.service.UserService;
 
 @Controller
-public class SignupController {
+public class SignUpController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     
     @GetMapping("/signup")
-    public String showSignupForm() {
+    public String showSignUpForm() {
         return "signuppage";
     }
    
     @PostMapping("/signup")
-    public String processSignupForm(@RequestParam String email, @RequestParam String username, @RequestParam String password, Model model) {
+    public String processSignUpForm(@RequestParam String email, @RequestParam String username, @RequestParam String password, Model model) {
         
         if (!userService.isEmail(email)){
 
@@ -49,8 +53,7 @@ public class SignupController {
 
         builder.setUsername(username);
         builder.setEmail(email);
-        
-        //builder.setPassword(password);
+        builder.setEncodedPassword(passwordEncoder.encode(password));
 
         User newUser = builder.build();
 
