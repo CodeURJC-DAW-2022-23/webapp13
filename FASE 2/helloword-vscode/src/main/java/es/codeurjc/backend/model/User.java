@@ -14,12 +14,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.springframework.lang.Nullable;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
 import javax.persistence.GenerationType;
 
+@Component
 @Entity(name = "UserTable")
 @SessionScope
 public class User {
@@ -83,7 +83,6 @@ public class User {
 
     private User() {}
 
-    //TODO: encode passwords in all the constructors
     private User(User.Builder builder){
         this.username = builder.username;
         this.email = builder.email;

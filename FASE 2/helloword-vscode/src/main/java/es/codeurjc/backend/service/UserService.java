@@ -9,7 +9,7 @@ import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.repository.UserRepository;
 
 @Service
-public class UserService {
+public final class UserService {
 
     @Autowired
     private UserRepository userRepository;

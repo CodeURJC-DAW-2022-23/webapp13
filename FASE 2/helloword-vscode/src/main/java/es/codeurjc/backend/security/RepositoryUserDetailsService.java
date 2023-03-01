@@ -16,7 +16,7 @@ import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.repository.UserRepository;
 
 @Service
-public class RepositoryUserDetailsService implements UserDetailsService {
+public final class RepositoryUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
