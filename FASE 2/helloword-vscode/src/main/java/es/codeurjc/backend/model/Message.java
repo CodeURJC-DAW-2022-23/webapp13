@@ -19,64 +19,36 @@ public class Message {
     private Date date;
 
     @ManyToOne
-    private User reciever;
+    private User recipient;
 
     @ManyToOne
-    private User transmitter;
+    private User sender;
 
     @Column(columnDefinition = "TEXT")
-    private String message;
+    private String textContent;
 
     public Message(){
 
     }
 
-    public Message(long id, Date date, User reciever, User transmitter, String message) {
+    public Message(long id, Date date, User recipient, User sender, String textContent) {
         this.id = id;
         this.date = date;
-        this.reciever = reciever;
-        this.transmitter = transmitter;
-        this.message = message;
+        this.recipient = recipient;
+        this.sender = sender;
+        this.textContent = textContent;
     }
 
 
-    public Date getDate() {
-        return date;
-    }
+    public Date getDate() {return date;}
+    public void setDate(Date date) {this.date = date;}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+    public User getSender() {return sender;}
+    public User getRecipient() {return recipient;}
 
-    public User getReciever() {
-        return reciever;
-    }
+    public String getTextContent() {return textContent;}
+    public void setTextContent(String textContent) {this.textContent = textContent;}
 
-    public void setReciever(User reciever) {
-        this.reciever = reciever;
-    }
-
-    public User getTransmitter() {
-        return transmitter;
-    }
-
-    public void setTransmitter(User transmitter) {
-        this.transmitter = transmitter;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+    public long getId() {return id;}
+    public void setId(long id) {this.id = id;}
 }

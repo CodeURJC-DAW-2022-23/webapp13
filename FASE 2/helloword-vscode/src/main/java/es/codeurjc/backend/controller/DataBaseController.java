@@ -33,7 +33,7 @@ public class DataBaseController {
     @PostConstruct
     public void init() {
         Date todayDate = new Date(System.currentTimeMillis());
-        User alberto = new User("Alberto", "hola", "hola@hola.com", passwordEncoder.encode("hola"), true, null);
+        User alberto = new User("Alberto", "a", "a@a.com", passwordEncoder.encode("a"), true, null);
         User pepe = new User("Pepe", "pepito", "pepito@gmail.com", "pepito123", false, null);
         User paco = new User("Paco", "paquito", "paquitunin@gamil.com", "paco123", false, null);
         User blopp = new User("Blop", "BlopGG", "blopp@gmail.com", "blopp", false, null);

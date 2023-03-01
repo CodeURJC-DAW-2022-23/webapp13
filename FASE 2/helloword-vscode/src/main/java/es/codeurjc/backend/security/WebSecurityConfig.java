@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public final class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Autowired
 	private RepositoryUserDetailsService userDetailsService;
@@ -47,6 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin().defaultSuccessUrl("/feed");
         http.formLogin().failureUrl("/loginerror");
 
+        //http.formLogin().failureHandler(null)
+
         // Logout
         http.logout().logoutUrl("/logout");
         http.logout().logoutSuccessUrl("/home");
@@ -57,5 +59,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         
     }
-
 }

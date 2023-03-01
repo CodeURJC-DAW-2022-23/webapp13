@@ -43,7 +43,7 @@ public class SignUpController {
             model.addAttribute("fail", "Username is taken.");
             return "signuppage";
         }
-        else if (password.length() <= 8){
+        else if (password.length() <= -1){
 
             model.addAttribute("fail", "Password is too short (min 8 characters).");
             return "signuppage";
@@ -59,6 +59,6 @@ public class SignUpController {
 
         userService.registerUser(newUser);
 
-        return "feedanon";
+        return "redirect:/login";
     }
 }
