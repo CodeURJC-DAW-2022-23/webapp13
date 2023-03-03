@@ -24,40 +24,74 @@ public class Tweet {
     private long id;
 
     @ManyToOne
-    private User owner;
+    private User author;
 
     private Date date;
 
     @Column(columnDefinition = "TEXT")
     private String text;
 
-    private int likesNumber;
-
     @Nullable
     private String tag;
 
     @Nullable
     @OneToOne
-    private Tweet replyTo;
+    private Tweet repliesTo;
 
     @Nullable
     @Lob
     private Blob media;
 
-    @OneToMany(mappedBy = "tweet")
-    private List<Like> likes;
+    @Nullable
+    @OneToMany
+    private List<User> likes;
 
     public Tweet(){
 
     }
 
-    public Tweet(User owner, Date date, String text, int likesNumber, String tag, Tweet replyTo, Blob media) {
-        this.owner = owner;
+    //TODO
+    /*public static class Builder {
+        private String owner;
+        private String tag;
+        private boolean admin = false;
+        private boolean banned = false;
+
+        public Builder setName(String name){
+            this.name = name;
+            return this;
+        }
+        public Builder setUsername(String username){
+            this.username = username;
+            return this;
+        }
+        public Builder setEmail(String email){
+            this.email = email;
+            return this;
+        }
+        public Builder setEncodedPassword(String encodedPassword){
+            this.encodedPassword = encodedPassword;
+            return this;
+        }
+        public Builder setAdmin(){
+            this.admin = true;
+            return this;
+        }
+        public Builder setBan(){
+            this.banned = true;
+            return this;
+        }
+        public Tweet build(){
+            return new Tweet(this);
+        }
+    }*/
+
+    public Tweet(User author, Date date, String text, String tag, Tweet repliesTo, Blob media) {
+        this.author = author;
         this.date = date;
         this.text = text;
-        this.likesNumber = likesNumber;
         this.tag = tag;
-        this.replyTo = replyTo;
+        this.repliesTo = repliesTo;
         this.media = media;
     }
 
@@ -69,37 +103,23 @@ public class Tweet {
         this.id = id;
     }
 
-    public User getOwner() {
-        return owner;
-    }
+    public User getAuthor() {return author;}
 
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
+    public String getAuthorName() {return author.getUsername();};
 
-    public Date getDate() {
-        return date;
-    }
+    public Date getDate() {return date;}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
     public String getText() {
         return text;
     }
-
     public void setText(String text) {
         this.text = text;
     }
 
-    public int getLikesNumber() {
-        return likesNumber;
-    }
-
-    public void setLikesNumber(int likesNumber) {
-        this.likesNumber = likesNumber;
-    }
+    /*public List<User> getLikes() {
+        return likes;
+    }*/
 
     public String getTag() {
         return tag;
@@ -109,12 +129,8 @@ public class Tweet {
         this.tag = tag;
     }
 
-    public Tweet getReplyTo() {
-        return replyTo;
-    }
-
-    public void setReplyTo(Tweet replyTo) {
-        this.replyTo = replyTo;
+    public Tweet getRepliedTo() {
+        return repliesTo;
     }
 
     public Blob getMedia() {
@@ -125,5 +141,7 @@ public class Tweet {
         this.media = media;
     }
     
-    
+    public boolean hasMedia() {
+        return media != null;
+    }
 }

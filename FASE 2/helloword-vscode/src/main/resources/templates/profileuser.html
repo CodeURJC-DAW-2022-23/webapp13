@@ -50,92 +50,40 @@
           <div class="profileanon-twits">
             <div class="profileanon-container1">
               <div class="profileanon-twitslayout">
-                <div class="profileanon-twit" onclick="location.href='../threaduser/profileanon.html'">
-                  <div class="profileanon-op">
-                    <div class="profileanon-pfp">
-                      <img
-                        src="profileuser/assets/imgi135-8bbj-200h.png"
-                        alt="imgI135"
-                        class="profileanon-img"
-                      />
-                    </div>
-                    <div class="profileanon-nameanddate">
-                      <span class="profileanon-text">
-                        <span>02/06/23 10:42 AM</span>
-                      </span>
-                      <span class="profileanon-text002">
-                        <span>FakeName31</span>
-                      </span>
-                    </div>
-                    <div class="profileanon-interactions">
-                      <span class="profileanon-text004"><span>300</span></span>
-                      <img
-                        src="profileuser/assets/iconsaxlinearhearti135-vqc.svg"
-                        alt="IconsaxLinearheartI135"
-                        class="profileanon-iconsax-linearheart"
-                      />
-                      <span class="profileanon-text006"><span>25</span></span>
-                      <img
-                        src="profileuser/assets/iconsaxlinearrepeati135-3ytg.svg"
-                        alt="IconsaxLinearrepeatI135"
-                        class="profileanon-iconsax-linearrepeat"
-                      />
-                      <span class="profileanon-text008"><span>10</span></span>
-                      <img
-                        src="profileuser/assets/iconsaxlinearmessagei135-wfjk.svg"
-                        alt="IconsaxLinearmessageI135"
-                        class="profileanon-iconsax-linearmessage"
-                      />
-                    </div>
-                  </div>
-                  <div class="profileanon-post">
-                    <div class="profileanon-content">
-                      <span class="profileanon-text010">
-                        <span>
-                          Elit fugiat accusantium nihil iste iusto Quidem vero
-                          repellendus adipisci at quae? Esse ducimus porro ex
-                          debitis perferendis assumenda. Autem placeat commodi
-                          recusandae fugiat odit, at Nisi soluta maxime
-                          consectetur.
-                        </span>
-                      </span>
-                    </div>
-                    <div class="profileanon-thread"></div>
-                  </div>
-                </div>
+                {{#tweets}}
                 <div class="profileanon-twit-variant3">
                   <div class="profileanon-op1">
                     <div class="extraimg">
                       <img
-                        src="profileuser/assets/imgi135-bmp-200h.png"
+                        src="/profileuser/assets/imgi135-bmp-200h.png"
                         alt="imgI135"
                         class="profileanon-img1"
                       />
                     </div>
                     <div class="profileanon-nameanddate1">
                       <span class="profileanon-text012">
-                        <span>02/06/23 10:42 AM</span>
+                        <span>{{date}} {{time}</span>
                       </span>
                       <span class="profileanon-text014">
-                        <span>FakeName31</span>
+                        <span>{{getAuthorName}}</span>
                       </span>
                     </div>
                     <div class="profileanon-interactions1">
                       <span class="profileanon-text016"><span>300</span></span>
                       <img
-                        src="profileuser/assets/iconsaxlinearhearti135-0d8.svg"
+                        src="/profileuser/assets/iconsaxlinearhearti135-0d8.svg"
                         alt="IconsaxLinearheartI135"
                         class="profileanon-iconsax-linearheart1"
                       />
                       <span class="profileanon-text018"><span>25</span></span>
                       <img
-                        src="profileuser/assets/iconsaxlinearrepeati135-eqaa.svg"
+                        src="/profileuser/assets/iconsaxlinearrepeati135-eqaa.svg"
                         alt="IconsaxLinearrepeatI135"
                         class="profileanon-iconsax-linearrepeat1"
                       />
                       <span class="profileanon-text020"><span>10</span></span>
                       <img
-                        src="profileuser/assets/iconsaxlinearmessagei135-n7p.svg"
+                        src="/profileuser/assets/iconsaxlinearmessagei135-n7p.svg"
                         alt="IconsaxLinearmessageI135"
                         class="profileanon-iconsax-linearmessage1"
                       />
@@ -145,85 +93,32 @@
                     <div class="profileanon-content1">
                       <span class="profileanon-text022">
                         <span>
-                          Elit fugiat accusantium nihil iste iusto Quidem vero
-                          repellendus adipisci at quae? Esse ducimus porro ex
-                          debitis perferendis assumenda. Autem placeat commodi
-                          recusandae fugiat odit, at Nisi soluta maxime
-                          consectetur.
+                          {{text}}
                         </span>
                       </span>
                     </div>
                     <div class="profileanon-thread1"></div>
                   </div>
+                  {{#hasMedia?}}
                   <div class="profileanon-img2">
+                    
                     <div class="profileanon-img3">
                       <img
-                        src="profileuser/assets/image95537386p11i135-hi92j-400h.png"
+                        src="/profileuser/assets/image95537386p11i135-hi92j-400h.png"
                         alt="IMAGE95537386p11I135"
                         class="profileanon-i-m-a-g-e95537386p11"
                       />
-                    </div>
+                    </div>                        
                     <div class="profileanon-thread2"></div>
                   </div>
+                  {{/hasMedia?}}
                 </div>
-                <div class="profileanon-twit1">
-                  <div class="profileanon-op2">
-                    <div class="extraimg">
-                      <img
-                        src="profileuser/assets/imgi135-n3ls-200h.png"
-                        alt="imgI135"
-                        class="profileanon-img4"
-                      />
-                    </div>
-                    <div class="profileanon-nameanddate2">
-                      <span class="profileanon-text024">
-                        <span>02/06/23 10:42 AM</span>
-                      </span>
-                      <span class="profileanon-text026">
-                        <span>FakeName31</span>
-                      </span>
-                    </div>
-                    <div class="profileanon-interactions2">
-                      <span class="profileanon-text028"><span>300</span></span>
-                      <img
-                        src="profileuser/assets/iconsaxlinearhearti135-f7cf.svg"
-                        alt="IconsaxLinearheartI135"
-                        class="profileanon-iconsax-linearheart2"
-                      />
-                      <span class="profileanon-text030"><span>25</span></span>
-                      <img
-                        src="profileuser/assets/iconsaxlinearrepeati135-j1jt.svg"
-                        alt="IconsaxLinearrepeatI135"
-                        class="profileanon-iconsax-linearrepeat2"
-                      />
-                      <span class="profileanon-text032"><span>10</span></span>
-                      <img
-                        src="profileuser/assets/iconsaxlinearmessagei135-96wl.svg"
-                        alt="IconsaxLinearmessageI135"
-                        class="profileanon-iconsax-linearmessage2"
-                      />
-                    </div>
-                  </div>
-                  <div class="profileanon-post2">
-                    <div class="profileanon-content2">
-                      <span class="profileanon-text034">
-                        <span>
-                          Elit fugiat accusantium nihil iste iusto Quidem vero
-                          repellendus adipisci at quae? Esse ducimus porro ex
-                          debitis perferendis assumenda. Autem placeat commodi
-                          recusandae fugiat odit, at Nisi soluta maxime
-                          consectetur.
-                        </span>
-                      </span>
-                    </div>
-                    <div class="profileanon-thread3"></div>
-                  </div>
-                </div>
+                {{/tweets}}
               </div>
             </div>
             <div class="profileanon-bannercontainer">
               <img
-                src="profileuser/assets/banner1353-bdcm-600h.png"
+                src="/profileuser/assets/banner1353-bdcm-600h.png"
                 alt="banner1353"
                 class="profileanon-banner"
               />
@@ -278,7 +173,7 @@
             <div class="profileanon-logo">
               <div class="profileanon-group">
                 <img
-                  src="profileuser/assets/vector1353-vwne.svg"
+                  src="/profileuser/assets/vector1353-vwne.svg"
                   alt="Vector1353"
                   class="profileanon-vector"
                 />
@@ -294,7 +189,7 @@
           <div class="profileanon-leftcomponents">
             <div class="profileanon-searchbar">
               <img
-                src="profileuser/assets/iconsaxlinearboxsearchi135-6ep.svg"
+                src="/profileuser/assets/iconsaxlinearboxsearchi135-6ep.svg"
                 alt="IconsaxLinearboxsearchI135"
                 class="profileanon-iconsax-linearboxsearch"
               />
@@ -304,26 +199,26 @@
             </div>
             <div class="profileanon-profile-variant3">
               <img
-                src="profileuser/assets/vector3i135-3i6f.svg"
+                src="/profileuser/assets/vector3i135-3i6f.svg"
                 alt="Vector3I135"
                 class="profileanon-vector3"
               />
               <div class="profileanon-pfp3">
                 <img
-                  src="profileuser/assets/pfp1i135-dd5-200h.png"
+                  src="/profileuser/assets/pfp1i135-dd5-200h.png"
                   alt="pfp1I135"
                   class="profileanon-pfp1"
                 />
               </div>
-              <span class="profileanon-text078"><span>FakeName31</span></span>
+              <span class="profileanon-text078"><span>{{username}}</span></span>
               <div class="profileanon-frameiconcheck">
                 <img
-                  src="profileuser/assets/polygon2i135-lapn.svg"
+                  src="/profileuser/assets/polygon2i135-lapn.svg"
                   alt="Polygon2I135"
                   class="profileanon-polygon2"
                 />
                 <img
-                  src="profileuser/assets/vectori135-u93o.svg"
+                  src="/profileuser/assets/vectori135-u93o.svg"
                   alt="VectorI135"
                   class="profileanon-vector1"
                 />
@@ -340,7 +235,7 @@
                 <span class="profileanon-text084"><span>follow</span></span>
               </div>
               <span class="profileanon-text086">
-                <span>13 following / 6 followers</span>
+                <span>{{followingCount}} following / {{followerCount}} followers</span>
               </span>
             </div>
             <div class="profileanon-related">
@@ -351,7 +246,7 @@
                 <div class="profileanon-user">
                   <div class="profileanon-img5">
                     <img
-                      src="profileuser/assets/pfp2i135-y6z-200h.png"
+                      src="/profileuser/assets/pfp2i135-y6z-200h.png"
                       alt="pfp2I135"
                       class="profileanon-pfp2"
                     />
@@ -364,7 +259,7 @@
                 <div class="profileanon-user1">
                   <div class="profileanon-img6">
                     <img
-                      src="profileuser/assets/pfp2i135-iyi1-200h.png"
+                      src="/profileuser/assets/pfp2i135-iyi1-200h.png"
                       alt="pfp2I135"
                       class="profileanon-pfp21"
                     />
@@ -377,7 +272,7 @@
                 <div class="profileanon-user2">
                   <div class="profileanon-img7">
                     <img
-                      src="profileuser/assets/pfp2i135-enwl-200h.png"
+                      src="/profileuser/assets/pfp2i135-enwl-200h.png"
                       alt="pfp2I135"
                       class="profileanon-pfp22"
                     />

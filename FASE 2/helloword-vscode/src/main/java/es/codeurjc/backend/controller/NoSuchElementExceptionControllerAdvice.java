@@ -11,7 +11,7 @@ public class NoSuchElementExceptionControllerAdvice {
     
     //@ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoSuchElementException.class)
-    public void handleNoTFound() {
+    public void handleNotFound() {
         
     }
 }

@@ -15,11 +15,11 @@ import es.codeurjc.backend.model.User;
 public interface TweetRepository extends JpaRepository<Tweet, Long>{
 
     Optional<Tweet> findById(Long id);
-    List<Tweet> findByOwnerOrderByDate(User owner);//if doesnt work, just put: findByOwnerOrderByDateAsc
+    List<Tweet> findByAuthorOrderByDate(User author);//if doesnt work, just put: findByOwnerOrderByDateAsc
     List<Tweet> findByTag(String tag);
-    List<Tweet> findByOwner(User owner);
+    List<Tweet> findByAuthor(User author);
     //List<Tweet> findAllOrderByDate();
-    List<Tweet> findFirst10ByOwner(User owner);
-    List<Tweet> findFirst10ByOwnerOrderByDate(User owner);
-    //Page<Tweet> findByOwner(User user, Pageable page);*/
+    List<Tweet> findFirst10ByAuthor(User author);
+    List<Tweet> findFirst10ByAuthorOrderByDate(User author);
+    //Page<Tweet> findByAuthor(User user, Pageable page);*/
 }

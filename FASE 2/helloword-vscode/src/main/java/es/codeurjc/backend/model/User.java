@@ -19,9 +19,7 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import javax.persistence.GenerationType;
 
-@Component
 @Entity(name = "UserTable")
-@SessionScope
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,20 +36,20 @@ public class User {
     @Lob
     private Blob profilePicture;
     
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "author")
     private List<Tweet> tweets;
 
     @Nullable
     @ManyToMany
-    private List<User> follows;
+    private List<User> following;
 
     @Nullable
     @ManyToMany
     private List<User> followers;
 
     @Nullable
-    @OneToMany(mappedBy = "user")
-    private List<Block> blockedUsers;
+    @ManyToMany
+    private List<User> blockedUsers;
 
     public static class Builder {
         private String username;
@@ -108,9 +106,9 @@ public class User {
             this.roles.add("ADMIN");
         }
         this.profilePicture = profilePicture;
-        this.blockedUsers = new ArrayList<Block>();
+        this.blockedUsers = new ArrayList<User>();
         this.followers = new ArrayList<User>();
-        this.follows = new ArrayList<User>();
+        this.following = new ArrayList<User>();
         this.tweets = new ArrayList<Tweet>();
     }
 
@@ -140,18 +138,18 @@ public class User {
     public void setTweets(List<Tweet> tweets) {this.tweets = tweets;}
   
     public List<String> getRoles() {return this.roles;}
-    public void setBanned(boolean banned) {this.banned = banned;}
 
     public boolean isAdmin() {return roles.contains("ADMIN");}
     public void setAdmin() {assert(!isAdmin()); this.roles.add("ADMIN");}
     public void removeAdmin(){this.roles.remove("ADMIN");}
 
-    public List<User> getFollows() {return follows;}
-    public void setFollows(List<User> follows) {this.follows = follows;}
+    public List<User> getFollowing() {return following;}
+    public void follow(User user) {this.following.add(user);}
+    public void unfollow(User user) {this.following.remove(user);}
 
     public List<User> getFollowers() {return followers;}
-    public void setFollowers(List<User> followers) {this.followers = followers;}
 
-    public List<Block> getBlockedUsers() {return blockedUsers;}
-    public void setBlockedUsers(List<Block> blockedUsers) {this.blockedUsers = blockedUsers;}
+    public List<User> getBlockedUsers() {return blockedUsers;}
+    public void block(User user){blockedUsers.add(user);};
+    public void unblock(User user){blockedUsers.remove(user);};
 }

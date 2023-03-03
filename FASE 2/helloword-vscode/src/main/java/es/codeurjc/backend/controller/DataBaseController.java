@@ -41,14 +41,14 @@ public class DataBaseController {
         User testUser1 = builder.build();
 
 
-        Tweet tweet = new Tweet(testUser1, todayDate, "Esto es una prueba", 0, null, null, null);
-        Tweet tweet1 = new Tweet(testUser1, todayDate, "Esto es otra prueba", 0, null, null, null);
-        Tweet tweet2 = new Tweet(testUser1, todayDate, "Esto es una ultima prueba", 0, null, tweet1, null);
-        Tweet tweet3 = new Tweet(testUser1, todayDate, "Esto es una prueba de paco", 0, null, null, null);
-        Tweet tweet4 = new Tweet(testUser1, todayDate, "Esto es una prueba de pepe", 0, null, null, null);
+        Tweet tweet = new Tweet(testUser1, todayDate, "tweet 1 example text", null, null, null);
+        Tweet tweet1 = new Tweet(testUser1, todayDate, "tweet 2 example text", null, null, null);
+        Tweet tweet2 = new Tweet(testUser1, todayDate, "Esto es una ultima prueba", null, tweet1, null);
+        Tweet tweet3 = new Tweet(testUser1, todayDate, "Esto es una prueba de paco", null, null, null);
+        Tweet tweet4 = new Tweet(testUser1, todayDate, "Esto es una prueba de pepe", null, null, null);
         List<User> aux = testUser1.getFollowers();
         aux.add(testUser1);
-        testUser1.setFollowers(aux);
+
         userRepository.save(testUser1);
 
         tweetRepository.save(tweet);
