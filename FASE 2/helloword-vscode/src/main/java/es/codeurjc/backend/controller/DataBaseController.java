@@ -32,30 +32,37 @@ public class DataBaseController {
      */
     @PostConstruct
     public void init() {
-        Date todayDate = new Date(System.currentTimeMillis());
         
         User.Builder builder = new User.Builder();
 
         builder.setUsername("a").setEmail("a@a.com").setEncodedPassword(passwordEncoder.encode("a"));
 
-        User testUser1 = builder.build();
+        User userA = builder.build();
+        User userB = builder.setUsername("userB").build();
 
+        Tweet.Builder tweetBuilder = new Tweet.Builder();
 
-        Tweet tweet = new Tweet(testUser1, todayDate, "tweet 1 example text", null, null, null);
-        Tweet tweet1 = new Tweet(testUser1, todayDate, "tweet 2 example text", null, null, null);
-        Tweet tweet2 = new Tweet(testUser1, todayDate, "Esto es una ultima prueba", null, tweet1, null);
-        Tweet tweet3 = new Tweet(testUser1, todayDate, "Esto es una prueba de paco", null, null, null);
-        Tweet tweet4 = new Tweet(testUser1, todayDate, "Esto es una prueba de pepe", null, null, null);
-        List<User> aux = testUser1.getFollowers();
-        aux.add(testUser1);
+        //-------------------------------------
+        tweetBuilder.setAuthor(userA).setText("This is my first tweet!")
+        .addTag("halal").addTag("amogus").addTag("sus");
+        
+        Tweet tweet1 = tweetBuilder.build();
 
-        userRepository.save(testUser1);
+        tweet1.addLike(userB);
+        //-------------------------------------
+        tweetBuilder.setAuthor(userB).setText("I replied to userA's tweet!").setParent(tweet1);
+        
+        Tweet tweet2 = tweetBuilder.build();
 
-        tweetRepository.save(tweet);
-        tweetRepository.save(tweet1);
+  
+        List<User> aux = userA.getFollowers();
+        aux.add(userA);
+
+        userRepository.save(userA);
+
+        tweetRepository.save(tweet1);//TODO hacer esto cada vez que se agregue un like en el code
         tweetRepository.save(tweet2);
-        tweetRepository.save(tweet3);
-        tweetRepository.save(tweet4);
+
         //User auxUser = userRepository.findByUsername("alb014").orElse(null);
         //List<Tweet> aList = auxUser.getTweets();
         //System.out.println(aList.get(0).getText());

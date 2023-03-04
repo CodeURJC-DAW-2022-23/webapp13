@@ -69,19 +69,19 @@
                       </span>
                     </div>
                     <div class="profileanon-interactions1">
-                      <span class="profileanon-text016"><span>300</span></span>
+                      <span class="profileanon-text016"><span>{{getLikeCount}}</span></span>
                       <img
                         src="/profileuser/assets/iconsaxlinearhearti135-0d8.svg"
                         alt="IconsaxLinearheartI135"
                         class="profileanon-iconsax-linearheart1"
                       />
-                      <span class="profileanon-text018"><span>25</span></span>
+                      <span class="profileanon-text018"><span>{{getShareCount}}</span></span>
                       <img
                         src="/profileuser/assets/iconsaxlinearrepeati135-eqaa.svg"
                         alt="IconsaxLinearrepeatI135"
                         class="profileanon-iconsax-linearrepeat1"
                       />
-                      <span class="profileanon-text020"><span>10</span></span>
+                      <span class="profileanon-text020"><span>{{getChildrenCount}}</span></span>
                       <img
                         src="/profileuser/assets/iconsaxlinearmessagei135-n7p.svg"
                         alt="IconsaxLinearmessageI135"
@@ -185,6 +185,9 @@
             <div class="profileanon-btn" onclick="location.href='../userfeed/feedanon.html'">
               <span class="profileanon-text074"><span>Log out</span></span>
             </div>
+            <div class="profileanon-btn">
+              <span class="profileanon-text074"><span>Mod</span></span>
+            </div>
           </div>
           <div class="profileanon-leftcomponents">
             <div class="profileanon-searchbar">
@@ -226,9 +229,7 @@
               <span class="profileanon-text080"><span>12/11/22</span></span>
               <span class="profileanon-text082">
                 <span>
-                  Amet voluptatum eos ratione impedit sapiente, est Quis laborum
-                  porro quam aperiam mollitia, est, aliquid quisquam Perferendis
-                  eum vel dolorem assumenda.
+                  {{description}}
                 </span>
               </span>
               <div class="profileanon-btn1">

@@ -25,7 +25,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String name, username, email, encodedPassword;
+    private String name, username, email, encodedPassword, description;
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
@@ -42,7 +42,6 @@ public class User {
     @Nullable
     @ManyToMany
     private List<User> following;
-
     @Nullable
     @ManyToMany
     private List<User> followers;
@@ -52,10 +51,7 @@ public class User {
     private List<User> blockedUsers;
 
     public static class Builder {
-        private String username;
-        private String email;
-        private String encodedPassword;
-        private String name;
+        private String username, email, encodedPassword, name, description;
         private boolean admin = false;
         private boolean banned = false;
 
@@ -75,6 +71,10 @@ public class User {
             this.encodedPassword = encodedPassword;
             return this;
         }
+        public Builder setDescription(String description){
+            this.description = description;
+            return this;
+        }
         public Builder setAdmin(){
             this.admin = true;
             return this;
@@ -83,19 +83,22 @@ public class User {
             this.banned = true;
             return this;
         }
+        public void reset(){
+            username = null; email = null; encodedPassword = null; 
+            name = null; description = null; admin = false; banned = false;
+        }
         public User build(){
             return new User(this);
         }
     }
-
-    //DON'T USE
-    public User() {}
-
+    
     private User(User.Builder builder){
-        this(builder.username, builder.email, builder.encodedPassword, builder.name, builder.admin, builder.banned, null);
+        this(builder.username, builder.email, builder.encodedPassword, builder.name, 
+        builder.description, builder.admin, builder.banned, null);
     }
+    private User(String username, String email, String encodedPassword, String name, 
+    String Description, boolean admin, boolean banned, Blob profilePicture) {
 
-    private User(String username, String email, String encodedPassword, String name, boolean admin, boolean banned, Blob profilePicture) {
         this.name = name;
         this.username = username;
         this.email = email;
@@ -152,4 +155,7 @@ public class User {
     public List<User> getBlockedUsers() {return blockedUsers;}
     public void block(User user){blockedUsers.add(user);};
     public void unblock(User user){blockedUsers.remove(user);};
+
+    //DON'T USE, ONLY FOR DATABASE 
+    public User() {}
 }
