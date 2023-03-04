@@ -16,8 +16,8 @@ public interface TweetRepository extends JpaRepository<Tweet, Long>{
 
     Optional<Tweet> findById(Long id);
     List<Tweet> findByAuthorOrderByDate(User author);//if doesnt work, just put: findByOwnerOrderByDateAsc
-    List<Tweet> findByTag(String tag);
     List<Tweet> findByAuthor(User author);
+    //List<Tweet> findByTag(String tag);
     //List<Tweet> findAllOrderByDate();
     List<Tweet> findFirst10ByAuthor(User author);
     List<Tweet> findFirst10ByAuthorOrderByDate(User author);

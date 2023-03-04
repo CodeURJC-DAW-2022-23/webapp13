@@ -3,17 +3,14 @@ package es.codeurjc.backend.model;
 import java.sql.Blob;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.List;
+import java.util.ArrayList;
+
+import javax.persistence.*;
 
 import org.springframework.lang.Nullable;
 
@@ -21,7 +18,7 @@ import org.springframework.lang.Nullable;
 public class Tweet {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne
@@ -36,34 +33,39 @@ public class Tweet {
     @Lob
     private Blob media;
 
-    @Nullable
-    @ManyToMany
-    private List<String> tags;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<String> tags = new TreeSet<String>();;    
 
     @Nullable
     @OneToMany
-    private List<User> likes;
+    private List<User> likes  = new ArrayList<>();
 
-    @Nullable
-    @ManyToOne
+    /*
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
     private Tweet parent;
+    
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)*/
+    
     @Nullable
     @OneToMany
-    private List<Tweet> children;
+    private List<Tweet> children = new ArrayList<>();
 
+    /*
     @Nullable
     @ManyToOne
     private Tweet shared;
+    */
     @Nullable
     @OneToMany
-    private List<Tweet> shares;
+    private List<Tweet> sharedBy = new ArrayList<>();
 
     public static class Builder {
         private User author;
         private String text;
         private Blob media;
-        private ArrayList<String> tags = new ArrayList<String>();
-        private Tweet parent, shared;
+        private TreeSet<String> tags = new TreeSet<String>();
+        //private Tweet parent, shared;
 
         public Builder setAuthor(User author){
             this.author = author;
@@ -77,7 +79,7 @@ public class Tweet {
             this.media = media;
             return this;
         }
-        public Builder setTags(ArrayList<String> tags){
+        public Builder setTags(TreeSet<String> tags){
             this.tags = tags;
             return this;
         }
@@ -85,11 +87,12 @@ public class Tweet {
             this.tags.clear();
             return this;
         }
-        public Builder addTag(String tag){
-            assert(parent == null);
-            this.tags.add(tag);
+        public Builder addTag(String String){
+            //assert(parent == null);
+            this.tags.add(String);
             return this;
         }
+        /*
         public Builder setParent(Tweet parent){
             this.parent = parent;
             this.shared = null;
@@ -98,26 +101,29 @@ public class Tweet {
         }
         public Builder setShared(Tweet shared){
             this.shared = shared;
-            this.parent = null;
+            
             return this;
-        }
+        }*/
         public void reset(){
-            author = null; text = null; media = null; tags.clear(); parent = null; shared = null;
+            author = null; text = null; media = null; tags.clear();// parent = null; shared = null;
         }
         public Tweet build(){
+            assert(author != null && text != null);
             return new Tweet(this);
         }
     }
 
     private Tweet(Tweet.Builder builder) {
-        this(builder.author, builder.text, builder.media, builder.tags, builder.parent, builder.shared);
+        this(builder.author, builder.text, builder.media, builder.tags/*, builder.parent, builder.shared*/);
     }
-    private Tweet(User author, String text, Blob media, ArrayList<String> tags, Tweet parent, Tweet shared) {
+    private Tweet(User author, String text, Blob media, TreeSet<String> tags/*, Tweet parent, Tweet shared*/) {
         this.author = author;
         this.date = LocalDateTime.now();
         this.text = text;
         this.media = media;
         this.tags = tags;
+
+        /*
         this.parent = parent;
         if (parent != null){ 
             assert(parent != this && shared == null);
@@ -126,10 +132,8 @@ public class Tweet {
         if (shared != null){ 
             assert(shared != this && parent == null);
             shared.shares.add(this);
-        }
-        this.children = new ArrayList<Tweet>();
-        this.likes = new ArrayList<User>();
-        this.shares = new ArrayList<Tweet>();
+        }*/
+    
     }
 
     public long getId() {return id;}
@@ -147,21 +151,49 @@ public class Tweet {
     public int getLikeCount() {return likes.size();}
     public void addLike(User like) {likes.add(like);}
 
-    public int getShareCount() {return shares.size();}
-
-    public List <String> getTags() {return tags;}
-    public void addTag(String tag) {
-        assert(this.parent == null);
-        this.tags.add(tag);
+    public int getShareCount() {return sharedBy.size();}
+    
+    public Set<String> getTags() {return tags;}
+    public void addTag(String String) {
+        //assert(this.parent == null);
+        this.tags.add(String);
     }
 
+    /*
     public Tweet getParent() {return parent;}
+    public void setParent(Tweet parent) {this.parent = parent;}
+    */
+
     public List<Tweet> getChildren() {return children;}
     public int getChildrenCount() {return children.size();}
+    public void addChild(Tweet tweet) {children.add(tweet);}
+
+    /*
+    public List<Tweet> getTweetThread(Long tweetId) {
+        Tweet tweet = em.find(Tweet.class, tweetId);
+        if (tweet == null) {
+            throw new EntityNotFoundException("Comment with id " + tweetId + " not found");
+        }
+        String query = "SELECT t FROM Tweet t WHERE t.parent IS NULL START WITH t.id = :tweetId CONNECT BY PRIOR t.id = t.parent.id ORDER SIBLINGS BY t.createdDate DESC";
+        TypedQuery<Tweet> q = em.createQuery(query, Tweet.class);
+        q.setParameter("tweetId", tweetId);
+        return q.getResultList();
+    }
+    public void addChildTweet(Long parentId, Tweet childTweet) {
+        Tweet parentTweet = em.find(Tweet.class, parentId);
+        if (parentTweet == null) {
+            throw new EntityNotFoundException("Tweet with id " + parentId + " not found");
+        }
+        childTweet.setParent(parentTweet);
+        parentTweet.getChildren().add(childTweet);
+        em.persist(childTweet);
+        em.merge(parentTweet);
+    }*/
+
 
     public Blob getMedia() {return media;}
     public boolean hasMedia() {return media != null;}
 
     //DON'T USE, ONLY FOR DATABASE
-    public Tweet(){}
+    public Tweet() {}
 }

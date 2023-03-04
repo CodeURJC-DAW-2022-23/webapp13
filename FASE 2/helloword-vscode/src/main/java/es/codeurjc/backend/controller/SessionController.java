@@ -71,6 +71,7 @@ public class SessionController {
         model.addAttribute("followerCount", profileUser.getFollowers().size());
         model.addAttribute("followingCount", profileUser.getFollowing().size());
         model.addAttribute("tweets", profileUser.getTweets());
+        model.addAttribute("description", profileUser.getDescription());
 
         return "profileuser";
     }

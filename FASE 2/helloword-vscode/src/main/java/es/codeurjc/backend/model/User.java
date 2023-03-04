@@ -25,7 +25,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String name, username, email, encodedPassword, description;
+    private String name, username, email, encodedPassword, description = "";
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
@@ -51,7 +51,7 @@ public class User {
     private List<User> blockedUsers;
 
     public static class Builder {
-        private String username, email, encodedPassword, name, description;
+        private String username, email, encodedPassword, name, description = "";
         private boolean admin = false;
         private boolean banned = false;
 
@@ -72,6 +72,7 @@ public class User {
             return this;
         }
         public Builder setDescription(String description){
+            assert(description != null);
             this.description = description;
             return this;
         }
@@ -85,7 +86,7 @@ public class User {
         }
         public void reset(){
             username = null; email = null; encodedPassword = null; 
-            name = null; description = null; admin = false; banned = false;
+            name = null; description = ""; admin = false; banned = false;
         }
         public User build(){
             return new User(this);
@@ -97,13 +98,15 @@ public class User {
         builder.description, builder.admin, builder.banned, null);
     }
     private User(String username, String email, String encodedPassword, String name, 
-    String Description, boolean admin, boolean banned, Blob profilePicture) {
+    String description, boolean admin, boolean banned, Blob profilePicture) {
 
-        this.name = name;
+        
         this.username = username;
         this.email = email;
         this.encodedPassword = encodedPassword;
         this.roles = new ArrayList<>();
+        this.name = name;
+        this.description = description;
         this.roles.add("USER");
         if (admin){
             this.roles.add("ADMIN");
@@ -129,6 +132,9 @@ public class User {
 
     public String getEncodedPassword() {return encodedPassword;}
     public void setEncodedPassword(String encodedPassword) {this.encodedPassword = encodedPassword;}
+
+    public String getDescription() {return description;}
+    public void setDescription(String description) {this.description = description;}
 
     public void ban() {this.banned = true;}
     public void unban() {this.banned = false;}

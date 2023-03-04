@@ -27,9 +27,7 @@ public class Message {
     @Column(columnDefinition = "TEXT")
     private String textContent;
 
-    public Message(){
-
-    }
+    public Message(){}
 
     public Message(long id, Date date, User recipient, User sender, String textContent) {
         this.id = id;
@@ -38,7 +36,6 @@ public class Message {
         this.sender = sender;
         this.textContent = textContent;
     }
-
 
     public Date getDate() {return date;}
     public void setDate(Date date) {this.date = date;}
