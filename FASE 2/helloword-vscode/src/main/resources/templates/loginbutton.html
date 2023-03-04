@@ -1,0 +1,15 @@
+{{#logged}}
+    <!-- TODO add href -->
+    <div class="profileanon-btn" onclick="location.href='#'">
+      <span class="profileanon-text074">
+        <span>{{login_logout_text}}</span>
+      </span>
+    </div>
+{{/logged}}
+{{^logged}}
+    <div class="profileanon-btn" onclick="location.href='/login'">
+      <span class="profileanon-text074">
+        <span>{{login_logout_text}}</span>
+      </span>
+    </div>
+{{/logged}}
