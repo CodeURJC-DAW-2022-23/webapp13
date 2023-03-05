@@ -34,7 +34,7 @@ public class DataBaseController {
 
         // Building users
         builder
-            .setUsername("AnRandomLoremUser")
+            .setUsername("a")
             .setEmail("a@a.com")
             .setEncodedPassword(passwordEncoder.encode("a"));
         
@@ -52,26 +52,29 @@ public class DataBaseController {
             .addTag("amogus").addTag("asd").addTag("sus");
         
         Tweet tweet1 = tweetBuilder.build();
-        Tweet tweet2 = tweetBuilder.setText("This is my second twit from da builder :D").build();
-        Tweet tweet3 = tweetBuilder.setText("Random shitpost").build();
 
         tweet1.addLike(userB);
+        //-------------------------------------
         tweetBuilder.setAuthor(userB).setText("I replied to userA's tweet!");
         
-        Tweet tweet1reply = tweetBuilder.build();
+        Tweet tweet2 = tweetBuilder.build();
 
-        tweet1.addChild(tweet1reply);
+        tweet1.addChild(tweet2);
 
         List<User> aux = userA.getFollowers();
         aux.add(userA);
 
-        // FIXME changing save order could break tweet/reply linkings
-        tweetRepository.save(tweet1reply);
-        tweetRepository.save(tweet1);
+        //DON'T CHANGE ORDER
         tweetRepository.save(tweet2);
-        tweetRepository.save(tweet3);
+        tweetRepository.save(tweet1);
+        tweetRepository.save(
+            tweetBuilder.setAuthor(userA).setText("Random post").build()
+        );
+        tweetRepository.save(
+            tweetBuilder.setText("Shitpost severo, boilerplate").build()
+        );
 
-        // TODO this logic should get replicated for every added like in execution time
+        //TODO hacer esto cada vez que se agregue un like en el code
     }
 
 }

@@ -48,7 +48,6 @@ public class SessionController {
     //TODO
     @RequestMapping("/tomyprofile")
     public String redirectToProfile(final Model model) {
-        
         return "redirect:/u/" + loggedUser.getUsername();
     }
     

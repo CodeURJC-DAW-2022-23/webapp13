@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="english">
+  <head>
+    <title>exported project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Inter;
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-gray-black);
+        background-color: var(--dl-color-gray-white);
+
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&amp;display=swap"
+      data-tag="font"
+    />
+    <link rel="stylesheet" href="/feeduser/style.css" />
+  </head>
+  <body>
+    <div>
+      <link href="/feeduser/feeduser.css" rel="stylesheet" />
+      <link href="/feeduser/nav.css" rel="stylesheet" />
+      <link href="/feeduser/components.css" rel="stylesheet" />
+
+      <div class="feedanon-container">
+        <div class="feedanon-feedanon">
+          <div class="feedanon-twits">
+            <div class="feedanon-container1">
+              {{#tweets}}
+                {{> tweetcomponent}}
+              {{/tweets}}
+            </div>
+            <span class="feedanon-text048"><span>load more...</span></span>
+          </div>
+          <div class="feedanon-trending">
+            <span class="feedanon-text050"><span>Trending</span></span>
+            <div class="feedanon-content4">
+              <div class="feedanon-singletrending">
+                <span class="feedanon-text052"><span>#Lorem</span></span>
+                <span class="feedanon-text054"><span class="tag">31 posts</span></span>
+              </div>
+              <div class="feedanon-singletrending1">
+                <span class="feedanon-text056"><span>ipsum</span></span>
+                <span class="feedanon-text058"><span class="tag">16 posts</span></span>
+              </div>
+              <div class="feedanon-singletrending2">
+                <span class="feedanon-text060"><span>#consectetur</span></span>
+                <span class="feedanon-text062"><span class="tag">31 posts</span></span>
+              </div>
+              <div class="feedanon-singletrending3">
+                <span class="feedanon-text064"><span>#Lorem</span></span>
+                <span class="feedanon-text066"><span class="tag">31 posts</span></span>
+              </div>
+              <div class="feedanon-singletrending4">
+                <span class="feedanon-text068"><span>ipsum</span></span>
+                <span class="feedanon-text070"><span class="tag">16 posts</span></span>
+              </div>
+              <div class="feedanon-singletrending5">
+                <span class="feedanon-text072"><span>#consectetur</span></span>
+                <span class="feedanon-text074"><span class="tag">31 posts</span></span>
+              </div>
+              <div class="feedanon-singletrending6">
+                <span class="feedanon-text076"><span>#Lorem</span></span>
+                <span class="feedanon-text078"><span class="tag">31 posts</span></span>
+              </div>
+              <div class="feedanon-singletrending7">
+                <span class="feedanon-text080"><span>ipsum</span></span>
+                <span class="feedanon-text082"><span class="tag">16 posts</span></span>
+              </div>
+              <div class="feedanon-singletrending8">
+                <span class="feedanon-text084"><span>#consectetur</span></span>
+                <span class="feedanon-text086"><span class="tag">31 posts</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="feedanon-frame30">
+            <div class="feedanon-searchbarinput">
+              <img
+                src="feeduser/assets/iconsaxlinearboxsearchi133-oodp.svg"
+                alt="IconsaxLinearboxsearchI133"
+                class="feedanon-iconsax-linearboxsearch"
+              />
+              <span class="feedanon-text088">
+                <span>search over nexus</span>
+              </span>
+            </div>
+            <div class="feedanon-related">
+              <div class="feedanon-stack">
+                <span class="feedanon-text090">
+                  <span>Relevant people</span>
+                </span>
+                <div class="feedanon-user">
+                  <div class="feedanon-img08">
+                    <img
+                      src="feeduser/assets/pfp2i133-0tih-200h.png"
+                      alt="pfp2I133"
+                      class="feedanon-pfp2"
+                    />
+                  </div>
+                  <span class="feedanon-text092"><span>Lorem_2</span></span>
+                  <button class="feedanon-button">
+                    <span class="feedanon-text094"><span>follow</span></span>
+                  </button>
+                </div>
+                <div class="feedanon-user1">
+                  <div class="feedanon-img09">
+                    <img
+                      src="feeduser/assets/pfp2i133-pzf-200h.png"
+                      alt="pfp2I133"
+                      class="feedanon-pfp21"
+                    />
+                  </div>
+                  <span class="feedanon-text096"><span>Lorem_3</span></span>
+                  <button class="feedanon-button1">
+                    <span class="feedanon-text098"><span>follow</span></span>
+                  </button>
+                </div>
+                <div class="feedanon-user2">
+                  <div class="feedanon-img10">
+                    <img
+                      src="feeduser/assets/pfp2i133-japh-200h.png"
+                      alt="pfp2I133"
+                      class="feedanon-pfp22"
+                    />
+                  </div>
+                  <span class="feedanon-text100"><span>Lorem_4</span></span>
+                  <button class="feedanon-button2">
+                    <span class="feedanon-text102"><span>follow</span></span>
+                  </button>
+                </div>
+                <div class="feedanon-user3">
+                  <div class="feedanon-img11">
+                    <img
+                      src="feeduser/assets/pfp2i133-ycqd-200h.png"
+                      alt="pfp2I133"
+                      class="feedanon-pfp23"
+                    />
+                  </div>
+                  <span class="feedanon-text104"><span>Lorem_2</span></span>
+                  <button class="feedanon-button3">
+                    <span class="feedanon-text106"><span>follow</span></span>
+                  </button>
+                </div>
+                <div class="feedanon-user4">
+                  <div class="feedanon-img12">
+                    <img
+                      src="feeduser/assets/pfp2i133-wy9o-200h.png"
+                      alt="pfp2I133"
+                      class="feedanon-pfp24"
+                    />
+                  </div>
+                  <span class="feedanon-text108"><span>Lorem_3</span></span>
+                  <button class="feedanon-button4">
+                    <span class="feedanon-text110"><span>follow</span></span>
+                  </button>
+                </div>
+                <div class="feedanon-user5">
+                  <div class="feedanon-img13">
+                    <img
+                      src="feeduser/assets/pfp2i133-o9xj-200h.png"
+                      alt="pfp2I133"
+                      class="feedanon-pfp25"
+                    />
+                  </div>
+                  <span class="feedanon-text112"><span>Lorem_4</span></span>
+                  <button class="feedanon-button5">
+                    <span class="feedanon-text114"><span>follow</span></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feedanon-nav">
+            <img
+              src="feeduser/assets/chi1331-lzc.svg"
+              alt="chi1331"
+              class="feedanon-chi"
+            /> 
+			<form id="loginButton" action="/tomyprofile" method="post">
+				<input class="feedanon-button6" type="submit" value="Profile">
+				 
+        </input>
+			</form>
+			<div id="loginButton2">
+				<button class="feedanon-button6">
+				  <span class="feedanon-text116"><span>Log out</span></span>
+				</button>
+			</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

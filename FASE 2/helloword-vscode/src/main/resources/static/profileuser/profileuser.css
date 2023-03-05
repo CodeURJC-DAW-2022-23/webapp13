@@ -550,6 +550,13 @@
   border-color: transparent;
   border-radius: 100px;
 }
+.profileanon-img1, .extraimg {
+    border-radius: 50%;
+    height: 100%;
+    width: auto;
+    left: 0px;
+    top: 0px;
+}
 .profileanon-img4 {
   top: -2px;
   left: -2px;

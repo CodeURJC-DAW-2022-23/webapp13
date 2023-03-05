@@ -23,4 +23,5 @@ public interface TweetRepository extends JpaRepository<Tweet, Long>{
     List<Tweet> findFirst10ByAuthor(User author);
     List<Tweet> findFirst10ByAuthorOrderByDate(User author);
     //Page<Tweet> findByAuthor(User user, Pageable page);*/
+    List<Tweet> findTop10ByOrderByDateDesc();
 }
