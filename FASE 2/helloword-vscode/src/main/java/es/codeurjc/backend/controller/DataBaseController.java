@@ -28,52 +28,50 @@ public class DataBaseController {
    
     @PostConstruct
     public void init() {
-        
-        User.Builder builder = new User.Builder();
 
-        builder.setUsername("a").setEmail("a@a.com").setEncodedPassword(passwordEncoder.encode("a"));
+        User.Builder builder = new User.Builder();
+        Tweet.Builder tweetBuilder = new Tweet.Builder();
+
+        // Building users
+        builder
+            .setUsername("AnRandomLoremUser")
+            .setEmail("a@a.com")
+            .setEncodedPassword(passwordEncoder.encode("a"));
         
 
         User userA = builder.build();
-        
-        User userB = builder.setUsername("userB").build();
+        User userB = builder.setUsername("userB").setEmail("b@b.com").build();
 
         userRepository.save(userA);
         userRepository.save(userB);
 
-        Tweet.Builder tweetBuilder = new Tweet.Builder();
-
-        //-------------------------------------
-        tweetBuilder.setAuthor(userA).setText("This is my first tweet!")
-        .addTag("amogus").addTag("asd").addTag("sus");
+        // Building tweets
+        tweetBuilder
+            .setAuthor(userA)
+            .setText("This is my first tweet!")
+            .addTag("amogus").addTag("asd").addTag("sus");
         
         Tweet tweet1 = tweetBuilder.build();
+        Tweet tweet2 = tweetBuilder.setText("This is my second twit from da builder :D").build();
+        Tweet tweet3 = tweetBuilder.setText("Random shitpost").build();
 
         tweet1.addLike(userB);
-        //-------------------------------------
         tweetBuilder.setAuthor(userB).setText("I replied to userA's tweet!");
         
-        Tweet tweet2 = tweetBuilder.build();
+        Tweet tweet1reply = tweetBuilder.build();
 
-        tweet1.addChild(tweet2);
+        tweet1.addChild(tweet1reply);
 
         List<User> aux = userA.getFollowers();
         aux.add(userA);
 
-        //DON'T CHANGE ORDER
-        tweetRepository.save(tweet2);
+        // FIXME changing save order could break tweet/reply linkings
+        tweetRepository.save(tweet1reply);
         tweetRepository.save(tweet1);
-        
-        //TODO hacer esto cada vez que se agregue un like en el code
-        
+        tweetRepository.save(tweet2);
+        tweetRepository.save(tweet3);
 
-        
-        
-        
-
-        //User auxUser = userRepository.findByUsername("alb014").orElse(null);
-        //List<Tweet> aList = auxUser.getTweets();
-        //System.out.println(aList.get(0).getText());
+        // TODO this logic should get replicated for every added like in execution time
     }
-    
+
 }

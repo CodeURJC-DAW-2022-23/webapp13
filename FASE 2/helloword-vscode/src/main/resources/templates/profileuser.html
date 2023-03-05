@@ -51,76 +51,7 @@
             <div class="profileanon-container1">
               <div class="profileanon-twitslayout">
                 {{#tweets}}
-                <div class="profileanon-twit">
-                  <div class="profileanon-op1">
-                    <div class="extraimg">
-                      <img
-                        src="/profileuser/assets/imgi135-bmp-200h.png"
-                        alt="imgI135"
-                        class="profileanon-img1"
-                      />
-                    </div>
-                    <div class="profileanon-nameanddate1">
-                      <span class="profileanon-text012">
-                        <span>{{date}}</span>
-                      </span>
-                      <span class="profileanon-text014">
-                        <span>{{getAuthorName}}</span>
-                      </span>
-                    </div>
-                    <div class="profileanon-interactions1">
-                      <span class="profileanon-text016"><span>{{getLikeCount}}</span></span>
-                      <img
-                        src="/profileuser/assets/iconsaxlinearhearti135-0d8.svg"
-                        alt="IconsaxLinearheartI135"
-                        class="profileanon-iconsax-linearheart1"
-                      />
-                      <span class="profileanon-text018"><span>{{getShareCount}}</span></span>
-                      <img
-                        src="/profileuser/assets/iconsaxlinearrepeati135-eqaa.svg"
-                        alt="IconsaxLinearrepeatI135"
-                        class="profileanon-iconsax-linearrepeat1"
-                      />
-                      <span class="profileanon-text020"><span>{{getChildrenCount}}</span></span>
-                      <!-- TODO add a custom icon to deleting posts, heres how it should be implemented
-                      <form action="/tweet/delete/{{id}}" method="GET">
-                        <button type="submit">
-                          <span class="profileanon-text020"><span>10</span></span>
-                        </button>
-                      </form>
-                      -->
-                      <img
-                        src="/profileuser/assets/iconsaxlinearmessagei135-n7p.svg"
-                        alt="IconsaxLinearmessageI135"
-                        class="profileanon-iconsax-linearmessage1"
-                      />
-                      </a>
-                    </div>
-                  </div>
-                  <div class="profileanon-post1">
-                    <div class="profileanon-content1">
-                      <span class="profileanon-text022">
-                        <span>
-                          {{text}}
-                        </span>
-                      </span>
-                    </div>
-                    <div class="profileanon-thread1"></div>
-                  </div>
-                  {{#hasMedia?}}
-                  <div class="profileanon-img2">
-                    
-                    <div class="profileanon-img3">
-                      <img
-                        src="/profileuser/assets/image95537386p11i135-hi92j-400h.png"
-                        alt="IMAGE95537386p11I135"
-                        class="profileanon-i-m-a-g-e95537386p11"
-                      />
-                    </div>                        
-                    <div class="profileanon-thread2"></div>
-                  </div>
-                  {{/hasMedia?}}
-                </div>
+                  {{> tweetcomponent}}
                 {{/tweets}}
               </div>
             </div>
