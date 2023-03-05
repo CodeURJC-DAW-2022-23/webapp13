@@ -27,41 +27,31 @@ public class FeedController {
     private TweetRepository tweetRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private User loggedUser;
+
 
     private final FeedQuerier querier = new FeedQuerier();
 
     @RequestMapping("/feed")
     public String showFeed(Model model){
-        if (userIsLogged(model)) handleModelForLoggedUser(model);
-        handleAnonFeed(model);
+        if (loggedUser != null)
+            handleModelForLoggedUser(model);
+        else
+            handleModelForAnonUser(model);
         return "feed";
     }
 
     private void handleModelForLoggedUser(Model model) {
-        Optional<User> user = getCurrentUser(model);
-        if(user.isEmpty()) return;
 
-        List<User> followings = userRepository.findByFollowers(user.get());
+        List<User> followings = userRepository.findByFollowers(loggedUser);
         model.addAttribute("tweets", querier.queryTweetsForUsers(followings));
     }
 
-    private void handleAnonFeed(Model model) {
+    private void handleModelForAnonUser(Model model) {
         List<Tweet> tweets = tweetRepository.findTop10ByOrderByDateDesc();
         model.addAttribute("tweets", tweets);
     }
 
-    private Boolean userIsLogged(Model model) {
-        return Try
-            .of(() -> (Boolean) model.getAttribute("logged"))
-            .getOrElse(false);
-    }
-
-    private Optional<User> getCurrentUser(Model model) {
-        return Try
-            .of(() -> (User) model.getAttribute("logged_user"))
-            .toOption()
-            .orElse(Option.none())
-            .toJavaOptional();
-    }
 
 }

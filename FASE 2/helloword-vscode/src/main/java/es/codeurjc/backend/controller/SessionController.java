@@ -24,7 +24,9 @@ public class SessionController {
     @Autowired
     private UserService userService;
 
+    @Autowired
     private User loggedUser;
+
     private Boolean isSomeoneLogged = false;
 
     @ModelAttribute
@@ -32,9 +34,9 @@ public class SessionController {
 
 		Principal principal = request.getUserPrincipal();
 
-		if (principal != null) {
+		if (loggedUser != null) {
 
-            loggedUser = userService.getUserByUsernameForced(principal.getName());
+            //loggedUser = userService.getUserByUsernameForced(principal.getName());
             isSomeoneLogged = true;
 			model.addAttribute("logged", true);
             model.addAttribute("logged_user", loggedUser);

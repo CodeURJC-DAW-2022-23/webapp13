@@ -11,11 +11,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import es.codeurjc.backend.handler.SuccessHandler;
+
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Autowired
 	private RepositoryUserDetailsService userDetailsService;
+
+    @Autowired
+    private SuccessHandler successHandler;
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -47,7 +52,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.formLogin().failureUrl("/loginerror");
 
-        http.formLogin().defaultSuccessUrl("/feed");
+        //http.formLogin().defaultSuccessUrl("/feed");
+
+        http.formLogin().successHandler(successHandler);
 
         // Logout
         http.logout().logoutUrl("/logout");

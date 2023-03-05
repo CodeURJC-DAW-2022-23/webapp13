@@ -19,6 +19,8 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import javax.persistence.GenerationType;
 
+@SessionScope
+@Component
 @Entity(name = "UserTable")
 public class User {
     @Id
