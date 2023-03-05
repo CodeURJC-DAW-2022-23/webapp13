@@ -82,11 +82,19 @@
                         class="profileanon-iconsax-linearrepeat1"
                       />
                       <span class="profileanon-text020"><span>{{getChildrenCount}}</span></span>
+                      <!-- TODO add a custom icon to deleting posts, heres how it should be implemented
+                      <form action="/tweet/delete/{{id}}" method="GET">
+                        <button type="submit">
+                          <span class="profileanon-text020"><span>10</span></span>
+                        </button>
+                      </form>
+                      -->
                       <img
                         src="/profileuser/assets/iconsaxlinearmessagei135-n7p.svg"
                         alt="IconsaxLinearmessageI135"
                         class="profileanon-iconsax-linearmessage1"
                       />
+                      </a>
                     </div>
                   </div>
                   <div class="profileanon-post1">
@@ -182,9 +190,7 @@
             <div class="profileanon-btn">
               <span class="profileanon-text074"><span>Feed</span></span>
             </div>
-            <div class="profileanon-btn" onclick="location.href='../userfeed/feedanon.html'">
-              <span class="profileanon-text074"><span>Log out</span></span>
-            </div>
+            {{> loginbutton }}
             <div class="profileanon-btn">
               <span class="profileanon-text074"><span>Mod</span></span>
             </div>

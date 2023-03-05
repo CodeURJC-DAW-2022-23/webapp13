@@ -3,15 +3,12 @@ package es.codeurjc.backend.controller;
 import java.security.Principal;
 import java.util.Optional;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.annotation.SessionScope;
 
 import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.service.UserService;
@@ -28,6 +25,7 @@ public class SessionController {
     private UserService userService;
 
     private User loggedUser;
+    private Boolean isSomeoneLogged = false;
 
     @ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -36,12 +34,14 @@ public class SessionController {
 
 		if (principal != null) {
 
-            this.loggedUser = userService.getUserByUsernameForced(principal.getName());
-
+            loggedUser = userService.getUserByUsernameForced(principal.getName());
+            isSomeoneLogged = true;
 			model.addAttribute("logged", true);
             model.addAttribute("logged_user", loggedUser);
+            model.addAttribute("login_logout_text", "Log out");
 		} else {
-			model.addAttribute("logged", false);
+			model.addAttribute("logged", isSomeoneLogged);
+            model.addAttribute("login_logout_text", "Log in");
 		}
 	}
 
@@ -54,16 +54,12 @@ public class SessionController {
     
     @RequestMapping("/u/{username}")
     public String showProfile(Model model, @PathVariable String username){
-        
         Optional <User> profileUser = userService.getUserByUsername(username);
+        return loadProfile(model, profileUser.get(), isUserGoingToHisOwnProfile(username));
+    }
 
-        if (profileUser.isPresent()){
-
-            boolean ownProfile = username.equals(loggedUser.getUsername());
-
-            return loadProfile(model, profileUser.get(), ownProfile).toString();
-        } 
-        else return null;
+    private Boolean isUserGoingToHisOwnProfile(String user) {
+        return isSomeoneLogged && user.equals(loggedUser.getUsername());
     }
 
     private String loadProfile (Model model, User profileUser, boolean ownProfile){
