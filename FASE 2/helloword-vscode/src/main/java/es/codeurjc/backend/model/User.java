@@ -16,9 +16,11 @@ import javax.persistence.OneToMany;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.web.context.annotation.ApplicationScope;
 
 import javax.persistence.GenerationType;
 
+@ApplicationScope
 @SessionScope
 @Component
 @Entity(name = "UserTable")
@@ -39,18 +41,18 @@ public class User {
     private Blob profilePicture;
     
     @OneToMany(mappedBy = "author")
-    private List<Tweet> tweets;
+    private List<Tweet> tweets = new ArrayList<Tweet>();
 
     @Nullable
     @ManyToMany
-    private List<User> following;
+    private List<User> following = new ArrayList<User>();
     @Nullable
     @ManyToMany
-    private List<User> followers;
+    private List<User> followers = new ArrayList<User>();
 
     @Nullable
     @ManyToMany
-    private List<User> blockedUsers;
+    private List<User> blockedUsers = new ArrayList<User>();
 
     public static class Builder {
         private String username, email, encodedPassword, name, description = "";
@@ -102,7 +104,6 @@ public class User {
     private User(String username, String email, String encodedPassword, String name, 
     String description, boolean admin, boolean banned, Blob profilePicture) {
 
-        
         this.username = username;
         this.email = email;
         this.encodedPassword = encodedPassword;
@@ -114,10 +115,6 @@ public class User {
             this.roles.add("ADMIN");
         }
         this.profilePicture = profilePicture;
-        this.blockedUsers = new ArrayList<User>();
-        this.followers = new ArrayList<User>();
-        this.following = new ArrayList<User>();
-        this.tweets = new ArrayList<Tweet>();
     }
 
     public long getId() {return id;}

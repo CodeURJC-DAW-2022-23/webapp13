@@ -34,8 +34,7 @@ public class SessionController {
 
 		Principal principal = request.getUserPrincipal();
 
-		if (loggedUser != null) {
-
+		if (principal != null) {
             //loggedUser = userService.getUserByUsernameForced(principal.getName());
             isSomeoneLogged = true;
 			model.addAttribute("logged", true);
@@ -48,28 +47,25 @@ public class SessionController {
 	}
 
     //TODO
-    @RequestMapping("/tomyprofile")
-    public String redirectToProfile(final Model model) {
-        return "redirect:/u/" + loggedUser.getUsername();
-    }
+    
     
     @RequestMapping("/u/{username}")
     public String showProfile(Model model, @PathVariable String username){
         Optional <User> profileUser = userService.getUserByUsername(username);
-        return loadProfile(model, profileUser.get(), isUserGoingToHisOwnProfile(username));
+        modelProfile(model, profileUser.get(), visitingOwnProfile(username));
+
+        return "profileuser";
     }
 
-    private Boolean isUserGoingToHisOwnProfile(String user) {
+    private Boolean visitingOwnProfile(String user) {
         return isSomeoneLogged && user.equals(loggedUser.getUsername());
     }
 
-    private String loadProfile (Model model, User profileUser, boolean ownProfile){
+    private void modelProfile (Model model, User profileUser, boolean ownProfile){
         model.addAttribute("profileUsername", profileUser.getUsername());
-        model.addAttribute("followerCount", profileUser.getFollowers().size());
+        model.addAttribute("followerCount", profileUser.getFollowing().size());
         model.addAttribute("followingCount", profileUser.getFollowing().size());
         model.addAttribute("tweets", profileUser.getTweets());
-        model.addAttribute("description", profileUser.getDescription());
-
-        return "profileuser";
+        model.addAttribute("description", profileUser.getDescription());    
     }
 }
