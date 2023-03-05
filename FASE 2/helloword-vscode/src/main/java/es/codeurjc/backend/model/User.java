@@ -20,9 +20,6 @@ import org.springframework.web.context.annotation.ApplicationScope;
 
 import javax.persistence.GenerationType;
 
-@ApplicationScope
-@SessionScope
-@Component
 @Entity(name = "UserTable")
 public class User {
     @Id
@@ -152,8 +149,12 @@ public class User {
     public void removeAdmin(){this.roles.remove("ADMIN");}
 
     public List<User> getFollowing() {return following;}
-    public void follow(User user) {this.following.add(user);}
-    public void unfollow(User user) {this.following.remove(user);}
+    public void follow(User user) {
+        this.following.add(user);
+    }
+    public void unfollow(User user) {
+        this.following.remove(user);
+    }
 
     public List<User> getFollowers() {return followers;}
 

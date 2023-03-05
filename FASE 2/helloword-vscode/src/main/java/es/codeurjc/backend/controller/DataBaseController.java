@@ -42,13 +42,14 @@ public class DataBaseController {
         User userA = builder.build();
         User userB = builder.setUsername("userB").setEmail("b@b.com").build();
         
-        userRepository.save(userB);
-        userA.follow(userB);
         
-        userRepository.save(userA);
-        userB.follow(userA);
         userRepository.save(userB);
-
+        userRepository.save(userA);
+        
+        userA.follow(userB);
+        userRepository.save(userA);
+        userRepository.save(userB);
+        
         // Building tweets
         tweetBuilder
             .setAuthor(userA)
@@ -64,9 +65,6 @@ public class DataBaseController {
         Tweet tweet2 = tweetBuilder.build();
 
         tweet1.addChild(tweet2);
-
-        List<User> aux = userA.getFollowing();
-        aux.add(userA);
 
         //DON'T CHANGE ORDER
         tweetRepository.save(tweet2);

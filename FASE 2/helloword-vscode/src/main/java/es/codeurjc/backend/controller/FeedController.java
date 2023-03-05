@@ -29,7 +29,6 @@ public class FeedController {
     @Autowired
     private UserService userService;
 
-    @Autowired
     private User loggedUser;
 
     private final FeedQuerier querier = new FeedQuerier();
@@ -40,7 +39,6 @@ public class FeedController {
         if (request.getUserPrincipal() != null){
             
             String username = request.getUserPrincipal().getName();
-
             loggedUser = userService.getUserByUsernameForced(username);
             modelFeedUser(model);
         }
@@ -58,13 +56,11 @@ public class FeedController {
         List<User> followings = loggedUser.getFollowing();
         model.addAttribute("username", loggedUser.getUsername());
         //model.addAttribute("tweets", querier.queryTweetsForUsers(followings));
-        return;
     }
 
     private void modelFeedAnon(Model model) {
         List<Tweet> tweets = tweetRepository.findTop10ByOrderByDateDesc();
         model.addAttribute("tweets", tweets);
-        return;
     }
 
 
