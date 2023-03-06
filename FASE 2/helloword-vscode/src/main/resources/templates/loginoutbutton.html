@@ -1,0 +1,13 @@
+<link href="/profileuser/nav.css" rel="stylesheet" />
+<link href="/profileuser/profileuser.css" rel="stylesheet" />
+{{#authenticated}}
+    <!-- TODO add href -->
+    <form class="profileanon-btn" action="/logout" method="post">
+      <button class="profileanon-text074"><span>Log out</span></button>
+    </form>
+{{/authenticated}}
+{{^authenticated}}
+    <form class="profileanon-btn" action="/login">
+      <button class="profileanon-text074"><span>Log in</span></button>
+    </form>
+{{/authenticated}}

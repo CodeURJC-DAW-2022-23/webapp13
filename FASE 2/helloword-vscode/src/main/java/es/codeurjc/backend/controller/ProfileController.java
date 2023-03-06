@@ -42,10 +42,10 @@ public class ProfileController {
 
 		if (visitorAuthenticated) {
             loggedUser = userService.getUserByUsernameForced(principal.getName());
-			model.addAttribute("logged", visitorAuthenticated);
+			model.addAttribute("authenticated", visitorAuthenticated);
             model.addAttribute("logged_user", loggedUser);
 		} else {
-			model.addAttribute("logged", visitorAuthenticated);
+			model.addAttribute("authenticated", visitorAuthenticated);
 		}
 	}
 
@@ -70,10 +70,9 @@ public class ProfileController {
 
         if (following){
             loggedUser.unfollow(profileUser);
-            profileUser.getFollowers().remove(loggedUser);
         }else{
             loggedUser.follow(profileUser);
-            profileUser.getFollowers().add(profileUser);
+
         }
 
         this.following = !this.following;

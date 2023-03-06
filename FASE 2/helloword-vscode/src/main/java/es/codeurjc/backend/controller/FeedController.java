@@ -31,12 +31,16 @@ public class FeedController {
 
     private User loggedUser;
 
+    private boolean visitorAuthenticated;
+
     private final FeedQuerier querier = new FeedQuerier();
 
     @RequestMapping("/feed")
     public String showFeed(Model model, HttpServletRequest request){
 
-        if (request.getUserPrincipal() != null){
+        visitorAuthenticated = (request.getUserPrincipal() != null);
+        
+        if (visitorAuthenticated){
             
             String username = request.getUserPrincipal().getName();
             loggedUser = userService.getUserByUsernameForced(username);
@@ -44,6 +48,7 @@ public class FeedController {
         }
         else
             modelFeedAnon(model);
+        model.addAttribute("authenticated", visitorAuthenticated);
         return "feed";
     }
 

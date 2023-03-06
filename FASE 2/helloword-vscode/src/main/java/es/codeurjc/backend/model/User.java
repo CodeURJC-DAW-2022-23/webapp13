@@ -43,9 +43,6 @@ public class User {
     @Nullable
     @ManyToMany
     private List<User> following = new ArrayList<User>();
-    @Nullable
-    @ManyToMany
-    private List<User> followers = new ArrayList<User>();
 
     @Nullable
     @ManyToMany
@@ -155,8 +152,6 @@ public class User {
     public void unfollow(User user) {
         this.following.remove(user);
     }
-
-    public List<User> getFollowers() {return followers;}
 
     public List<User> getBlockedUsers() {return blockedUsers;}
     public void block(User user){blockedUsers.add(user);};
