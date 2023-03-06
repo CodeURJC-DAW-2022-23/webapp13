@@ -13,9 +13,13 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
+
+import es.codeurjc.backend.service.UserService;
+
 import org.springframework.web.context.annotation.ApplicationScope;
 
 import javax.persistence.GenerationType;
@@ -152,6 +156,11 @@ public class User {
     public void unfollow(User user) {
         this.following.remove(user);
     }
+
+    public List<User> getFollowers(UserService userService) {        
+        return userService.getFollowers(this);
+    }
+
 
     public List<User> getBlockedUsers() {return blockedUsers;}
     public void block(User user){blockedUsers.add(user);};

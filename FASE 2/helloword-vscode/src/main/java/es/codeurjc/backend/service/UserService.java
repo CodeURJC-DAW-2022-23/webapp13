@@ -1,5 +1,6 @@
 package es.codeurjc.backend.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,8 @@ public final class UserService {
     }
     public boolean isEmail(String input){
         return input.matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
+    }
+    public List<User> getFollowers(User user) {
+        return userRepository.findByFollowing(user);
     }
 }
