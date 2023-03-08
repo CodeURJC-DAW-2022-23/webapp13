@@ -73,7 +73,7 @@ public class DataBaseController {
             tweetBuilder.setAuthor(userA).setText("Random post").build()
         );
         tweetRepository.save(
-            tweetBuilder.setText("Shitpost severo, boilerplate").build()
+            tweetBuilder.setText("post severo, boilerplate").build()
         );
 
         //TODO hacer esto cada vez que se agregue un like en el code

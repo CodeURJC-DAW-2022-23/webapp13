@@ -50,7 +50,7 @@ public class User {
 
     @Nullable
     @ManyToMany
-    private List<User> blockedUsers = new ArrayList<User>();
+    private List<User> blockedUsers = new ArrayList<User>();  
 
     public static class Builder {
         private String username, email, encodedPassword, name, description = "";
@@ -160,7 +160,6 @@ public class User {
     public List<User> getFollowers(UserService userService) {        
         return userService.getFollowers(this);
     }
-
 
     public List<User> getBlockedUsers() {return blockedUsers;}
     public void block(User user){blockedUsers.add(user);};

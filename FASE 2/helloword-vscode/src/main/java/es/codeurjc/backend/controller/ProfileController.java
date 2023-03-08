@@ -1,24 +1,33 @@
 package es.codeurjc.backend.controller;
 
+import java.io.IOException;
 import java.security.Principal;
+import java.sql.SQLException;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
-
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.repository.UserRepository;
 import es.codeurjc.backend.service.UserService;
 
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-//@SessionScope
+
 @Controller
 public class ProfileController {
     
@@ -39,14 +48,11 @@ public class ProfileController {
 		Principal principal = request.getUserPrincipal();
 
         visitorAuthenticated = (principal != null);
+        model.addAttribute("authenticated", visitorAuthenticated);
 
 		if (visitorAuthenticated) {
             loggedUser = userService.getUserByUsernameForced(principal.getName());
-			model.addAttribute("authenticated", visitorAuthenticated);
-            model.addAttribute("logged_user", loggedUser);
-		} else {
-			model.addAttribute("authenticated", visitorAuthenticated);
-		}
+		} 
 	}
 
     //TODO
@@ -72,7 +78,6 @@ public class ProfileController {
             loggedUser.unfollow(profileUser);
         }else{
             loggedUser.follow(profileUser);
-
         }
 
         this.following = !this.following;
@@ -87,6 +92,41 @@ public class ProfileController {
 
     private boolean visitingOwnProfile(String user) {
         return visitorAuthenticated && user.equals(loggedUser.getUsername());
+    }
+
+    @GetMapping("/u/{username}/profilepicture")
+	public ResponseEntity<Object> downloadImage(@PathVariable String username) throws SQLException{
+		
+		//hacer método en userservice que devuelve boolean
+		Optional<User> possibleUser = userService.getUserByUsername(username);
+		
+        boolean profileHasPicture = possibleUser.get().getProfilePicture() != null;
+		
+		if (possibleUser.isPresent() && profileHasPicture){
+			
+			User user = possibleUser.get();
+			
+			Resource file = new InputStreamResource(user.getProfilePicture().getBinaryStream());
+			
+			return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+            .contentLength(user.getProfilePicture().length()).body(file);
+		} else{
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	@RequestMapping("/updateprofilepicture")
+    public String uploadProfilePicture(@RequestParam MultipartFile inputImage, @RequestParam boolean removePicture) 
+    throws IOException, SQLException {
+
+		if (removePicture){
+			profileUser.setProfilePicture(null);
+		}
+		else if(!inputImage.isEmpty()){
+			profileUser.setProfilePicture(BlobProxy.generateProxy(inputImage.getInputStream(), inputImage.getSize()));
+		}
+		
+        return "profileuser";
     }
 
     private void modelProfile (Model model, boolean ownProfile){
