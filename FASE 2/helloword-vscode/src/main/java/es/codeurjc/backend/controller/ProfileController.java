@@ -2,11 +2,13 @@ package es.codeurjc.backend.controller;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import io.vavr.control.Try;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,8 +53,10 @@ public class ProfileController {
         model.addAttribute("authenticated", visitorAuthenticated);
 
 		if (visitorAuthenticated) {
-            loggedUser = userService.getUserByUsernameForced(principal.getName());
-		} 
+            loggedUser = Try
+                .of(() -> userService.getUserByUsernameForced(principal.getName()))
+                .getOrNull();
+		}
 	}
 
     //TODO
@@ -60,11 +64,12 @@ public class ProfileController {
     
     @RequestMapping("/u/{username}")
     public String showProfile(Model model, @PathVariable String username){
-        Optional <User> optionalProfileUser = userService.getUserByUsername(username);
+        Optional<User> user = userService.getUserByUsername(username);
+        if (user.isEmpty()) return "error";
 
-        profileUser = optionalProfileUser.get();
-
-        following = loggedUser.getFollowing().contains(profileUser);
+        following = Try
+            .of(() -> loggedUser.getFollowing().contains(user.get()))
+            .getOrElse(false);
 
         modelProfile(model, visitingOwnProfile(username));
 
@@ -74,11 +79,8 @@ public class ProfileController {
     @RequestMapping("/switchfollowprofile")
     public String switchFollow(Model model){
 
-        if (following){
-            loggedUser.unfollow(profileUser);
-        }else{
-            loggedUser.follow(profileUser);
-        }
+        if (following) loggedUser.unfollow(profileUser);
+        else loggedUser.follow(profileUser);
 
         this.following = !this.following;
 
@@ -95,37 +97,34 @@ public class ProfileController {
     }
 
     @GetMapping("/u/{username}/profilepicture")
-	public ResponseEntity<Object> downloadImage(@PathVariable String username) throws SQLException{
-		
-		//hacer método en userservice que devuelve boolean
-		Optional<User> possibleUser = userService.getUserByUsername(username);
-		
-        boolean profileHasPicture = possibleUser.get().getProfilePicture() != null;
-		
-		if (possibleUser.isPresent() && profileHasPicture){
-			
-			User user = possibleUser.get();
-			
-			Resource file = new InputStreamResource(user.getProfilePicture().getBinaryStream());
-			
-			return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-            .contentLength(user.getProfilePicture().length()).body(file);
-		} else{
-			return ResponseEntity.notFound().build();
-		}
+	public ResponseEntity<Resource> downloadImage(@PathVariable String username) {
+        ResponseEntity<Resource> notFoundRes = ResponseEntity.notFound().build();
+
+		Optional<User> user = userService.getUserByUsername(username);
+        if (user.isEmpty()) return notFoundRes;
+
+        Optional<Blob> pfp = Optional.ofNullable(user.get().getProfilePicture());
+        if (pfp.isEmpty()) return notFoundRes;
+
+        return Try.of(() -> ResponseEntity
+            .ok()
+            .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+            .contentLength(pfp.get().length())
+            .body((Resource) new InputStreamResource(pfp.get().getBinaryStream()))
+        ).getOrElse(notFoundRes);
 	}
 	
-	@RequestMapping("/updateprofilepicture")
-    public String uploadProfilePicture(@RequestParam MultipartFile inputImage, @RequestParam boolean removePicture) 
-    throws IOException, SQLException {
+	@RequestMapping("/update/pfp")
+    public String uploadProfilePicture(@RequestParam MultipartFile img) {
+        Try.run(() -> profileUser.setProfilePicture(
+            BlobProxy.generateProxy(img.getInputStream(), img.getSize())
+        ));
+        return "profileuser";
+    }
 
-		if (removePicture){
-			profileUser.setProfilePicture(null);
-		}
-		else if(!inputImage.isEmpty()){
-			profileUser.setProfilePicture(BlobProxy.generateProxy(inputImage.getInputStream(), inputImage.getSize()));
-		}
-		
+    @RequestMapping("/remove/pfp")
+    public String removeProfilePicture() {
+        profileUser.setProfilePicture(null);
         return "profileuser";
     }
 
