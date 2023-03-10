@@ -13,14 +13,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.SessionScope;
 
+import org.springframework.lang.Nullable;
 import es.codeurjc.backend.service.UserService;
 
-import org.springframework.web.context.annotation.ApplicationScope;
 
 import javax.persistence.GenerationType;
 
