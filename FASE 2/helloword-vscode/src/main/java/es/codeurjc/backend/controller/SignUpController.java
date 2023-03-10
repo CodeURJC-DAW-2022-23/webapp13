@@ -28,22 +28,22 @@ public class SignUpController {
     @PostMapping("/signup")
     public String processSignUpForm(@RequestParam String email, @RequestParam String username, @RequestParam String password, Model model) {
         
-        if (!userService.isEmail(email)){
+        if (!userService.isEmail(email)) {
 
             model.addAttribute("fail", "E-mail format not adequate.");
             return "signuppage";
         }
-        else if(userService.isEmailTaken(email)){
+        else if(userService.isEmailTaken(email)) {
 
             model.addAttribute("fail", "E-mail address already in use.");
             return "signuppage";
         }
-        else if (userService.isUsernameTaken(username)){
+        else if (userService.isUsernameTaken(username)) {
 
             model.addAttribute("fail", "Username is taken.");
             return "signuppage";
         }
-        else if (password.length() <= -1){
+        else if (password.length() <= -1) {
 
             model.addAttribute("fail", "Password is too short (min 8 characters).");
             return "signuppage";
@@ -57,7 +57,7 @@ public class SignUpController {
 
         User newUser = builder.build();
 
-        userService.registerUser(newUser);
+        userService.saveUser(newUser);
 
         return "redirect:/login";
     }

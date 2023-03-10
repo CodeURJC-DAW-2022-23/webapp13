@@ -33,7 +33,7 @@ public final class UserService {
     public boolean isUsernameTaken(String username){
         return userRepository.existsByUsername(username);
     }
-    public void registerUser(User user){
+    public void saveUser(User user){
         userRepository.save(user);
     }
     public boolean isEmail(String input){

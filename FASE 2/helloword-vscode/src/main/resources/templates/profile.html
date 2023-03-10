@@ -50,9 +50,9 @@
           <div class="profileanon-twits">
             <div class="profileanon-container1">
               <div class="profileanon-twitslayout">
-                {{#tweets}}
+                {{#profileUser.tweets}}
                   {{> tweetcomponent}}
-                {{/tweets}}
+                {{/profileUser.tweets}}
               </div>
             </div>
             <div class="profileanon-bannercontainer">
@@ -134,6 +134,7 @@
               />
               <span class="profileanon-text076">
                 <span>search over nexus</span>
+                {{> uploadprofilepicturebutton}}
               </span>
             </div>
             <div class="profileanon-profile-variant3">
@@ -143,13 +144,11 @@
                 class="profileanon-vector3"
               />
               <div class="profileanon-pfp3">
-                <img
-                  src="/profileuser/assets/pfp1i135-dd5-200h.png"
-                  alt="pfp1I135"
-                  class="profileanon-pfp1"
-                />
+                {{#profileUser}}
+                  {{> userimage}}
+                {{/profileUser}}
               </div>
-              <span class="profileanon-text078"><span>{{username}}</span></span>
+              <span class="profileanon-text078"><span>{{profileUser.username}}</span></span>
               <div class="profileanon-frameiconcheck">
                 <img
                   src="/profileuser/assets/polygon2i135-lapn.svg"
@@ -163,17 +162,18 @@
                 />
               </div>
               <span class="profileanon-text080"><span>12/11/22</span></span>
+              
               <span class="profileanon-text082">
                 <span>
-                  {{description}}
+                  {{profileUser.description}}
                 </span>
               </span>
-
-              {{> uploadprofilepicturebutton}}
+              
+              
 
               {{> followprofilebutton }}
               <span class="profileanon-text086">
-                <span>{{followingCount}} following / {{followerCount}} followers</span>
+                <span>following {{profileUser.following.size}}/ {{followerCount}} followers</span>
               </span>
             </div>
             <div class="profileanon-related">

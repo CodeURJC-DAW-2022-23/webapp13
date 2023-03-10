@@ -1,9 +1,7 @@
 package es.codeurjc.backend.controller;
 
-import java.io.IOException;
 import java.security.Principal;
 import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +10,7 @@ import io.vavr.control.Try;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -58,29 +57,32 @@ public class ProfileController {
                 .getOrNull();
 		}
 	}
-
-    //TODO
-    
     
     @RequestMapping("/u/{username}")
     public String showProfile(Model model, @PathVariable String username){
         Optional<User> user = userService.getUserByUsername(username);
         if (user.isEmpty()) return "error";
+        else profileUser = user.get();
 
         following = Try
-            .of(() -> loggedUser.getFollowing().contains(user.get()))
+            .of(() -> loggedUser.getFollowing().contains(profileUser))
             .getOrElse(false);
 
         modelProfile(model, visitingOwnProfile(username));
 
-        return "profileuser";
+        return "profile";
     }
 
     @RequestMapping("/switchfollowprofile")
     public String switchFollow(Model model){
 
-        if (following) loggedUser.unfollow(profileUser);
-        else loggedUser.follow(profileUser);
+        //don't remove brackets, body might be expanded
+        if (following) {
+            loggedUser.unfollow(profileUser);
+        }
+        else {
+            loggedUser.follow(profileUser);
+        }
 
         this.following = !this.following;
 
@@ -89,7 +91,7 @@ public class ProfileController {
 
         model.addAttribute("alreadyFollowing", this.following);
 
-        return "profileuser";
+        return "profile";
     }
 
     private boolean visitingOwnProfile(String user) {
@@ -98,43 +100,43 @@ public class ProfileController {
 
     @GetMapping("/u/{username}/profilepicture")
 	public ResponseEntity<Resource> downloadImage(@PathVariable String username) {
-        ResponseEntity<Resource> notFoundRes = ResponseEntity.notFound().build();
+        ResponseEntity<Resource> notFoundResource = ResponseEntity.notFound().build();
 
 		Optional<User> user = userService.getUserByUsername(username);
-        if (user.isEmpty()) return notFoundRes;
+        if (user.isEmpty()) return notFoundResource;
 
-        Optional<Blob> pfp = Optional.ofNullable(user.get().getProfilePicture());
-        if (pfp.isEmpty()) return notFoundRes;
+        Optional<Blob> profilePicture = Optional.ofNullable(user.get().getProfilePicture());
+        if (profilePicture.isEmpty()) return notFoundResource;
 
         return Try.of(() -> ResponseEntity
             .ok()
             .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-            .contentLength(pfp.get().length())
-            .body((Resource) new InputStreamResource(pfp.get().getBinaryStream()))
-        ).getOrElse(notFoundRes);
+            .contentLength(profilePicture.get().length())
+            .body((Resource) new InputStreamResource(profilePicture.get().getBinaryStream()))
+        ).getOrElse(notFoundResource);
 	}
 	
-	@RequestMapping("/update/pfp")
-    public String uploadProfilePicture(@RequestParam MultipartFile img) {
+	@PostMapping("/update/profilepicture")
+    public String uploadProfilePicture(@RequestParam MultipartFile image) {
+       
         Try.run(() -> profileUser.setProfilePicture(
-            BlobProxy.generateProxy(img.getInputStream(), img.getSize())
+            BlobProxy.generateProxy(image.getInputStream(), image.getSize())
         ));
-        return "profileuser";
+
+        userService.saveUser(profileUser);
+        return "redirect:/u/" + loggedUser.getUsername();
     }
 
-    @RequestMapping("/remove/pfp")
+    @RequestMapping("/remove/profilepicture")
     public String removeProfilePicture() {
         profileUser.setProfilePicture(null);
-        return "profileuser";
+        return "profile";
     }
 
     private void modelProfile (Model model, boolean ownProfile){
         model.addAttribute("profileUser", profileUser);
-        model.addAttribute("profileUsername", profileUser.getUsername());
-        model.addAttribute("followerCount", profileUser.getFollowing().size());
-        model.addAttribute("followingCount", profileUser.getFollowing().size());
-        model.addAttribute("tweets", profileUser.getTweets());
-        model.addAttribute("description", profileUser.getDescription());    
+        model.addAttribute("followerCount", "todo");
+
         model.addAttribute("ownProfile", ownProfile);
         model.addAttribute("alreadyFollowing", following);
     }

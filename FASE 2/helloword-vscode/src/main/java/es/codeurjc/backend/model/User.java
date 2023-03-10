@@ -134,6 +134,7 @@ public class User {
     public boolean isBanned() {return banned;}
 
     public Blob getProfilePicture() {return profilePicture;}
+    public boolean hasProfilePicture() {return profilePicture != null;}
     public void setProfilePicture(Blob profilePicture) {this.profilePicture = profilePicture;}
 
     public List<Tweet> getTweets() {return tweets;}

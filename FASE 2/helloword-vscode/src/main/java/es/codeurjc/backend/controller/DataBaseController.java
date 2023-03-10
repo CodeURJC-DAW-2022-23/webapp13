@@ -16,7 +16,6 @@ import es.codeurjc.backend.repository.TweetRepository;
 import es.codeurjc.backend.repository.UserRepository;
 
 @RestController
-//@RequestMapping("/users")
 public class DataBaseController {
 
     @Autowired
