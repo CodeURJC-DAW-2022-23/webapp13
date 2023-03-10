@@ -11,10 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import es.codeurjc.backend.model.User;
-import es.codeurjc.backend.model.ActionChronoWrapper;
 import es.codeurjc.backend.service.UserService;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 
 @Controller
@@ -49,12 +50,12 @@ public class FeedController {
     
     private void updateFeedModelForUsers(Model model) {
         
-        TreeSet<ActionChronoWrapper> followings = (TreeSet<ActionChronoWrapper>)loggedUser.getFollowing();
+        Set<User> followings = loggedUser.getFollowing();
         model.addAttribute("username", loggedUser.getUsername());
         /*model.addAttribute(
             "tweets",
             FeedQuerier.queryTweetsForUsers(followings, tweetRepository)
-        ); TODO FIX*/ 
+        );*/
     }
 
     private void updateFeedModelForAnons(Model model) {

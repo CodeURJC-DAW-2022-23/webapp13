@@ -38,7 +38,7 @@ public class Tweet {
 
     @Nullable
     @OneToMany
-    private Set<ActionChronoWrapper> likes  = new HashSet<>();
+    private Set<User> likes  = new HashSet<>();
 
     /*
     @ManyToOne(fetch = FetchType.LAZY)
@@ -147,12 +147,12 @@ public class Tweet {
     public String getText() {return text;}
     public void setText(String text) {this.text = text;}
     
-    public Set<ActionChronoWrapper> getLikes() {return likes;}
+    public Set<User> getLikes() {return likes;}
     public void addLike(User user) {
-        likes.add(new ActionChronoWrapper(user));
+        likes.add(user);
     }
     public void removeLike(User user) {
-        likes.remove(new ActionChronoWrapper(user));
+        likes.remove(user);
 	}
 
     public Set<Tweet> getShares() {return shares;}

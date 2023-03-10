@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import es.codeurjc.backend.model.User;
-import es.codeurjc.backend.model.ActionChronoWrapper;
 import es.codeurjc.backend.repository.UserRepository;
 import es.codeurjc.backend.service.UserService;
 
@@ -62,7 +61,7 @@ public class ProfileController {
         else profileUser = user.get();
 
         following = Try
-            .of(() -> loggedUser.getFollowing().contains(new ActionChronoWrapper(profileUser)))
+            .of(() -> loggedUser.getFollowing().contains(profileUser))
             .getOrElse(false);
 
         modelProfile(model, visitingOwnProfile(username));

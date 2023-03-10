@@ -3,7 +3,7 @@ package es.codeurjc.backend.model;
 import java.sql.Blob;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -19,7 +19,7 @@ import javax.persistence.OneToMany;
 
 import org.springframework.lang.Nullable;
 
-import es.codeurjc.backend.repository.ActionChronoWrapperRepository;
+import es.codeurjc.backend.repository.UserRepository;
 import es.codeurjc.backend.service.UserService;
 
 
@@ -34,7 +34,7 @@ public class User {
     private String name, username, email, encodedPassword, description = "";
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<String> roles = new TreeSet<>();
+    private Set<String> roles = new HashSet<>();
 
     private boolean banned = false;
 
@@ -51,7 +51,7 @@ public class User {
 
     @Nullable
     @OneToMany
-    private Set<ActionChronoWrapper> blockedUsers = new TreeSet<>();  
+    private Set<User> blockedUsers = new HashSet<>();  
 
     public static class Builder {
         private String username, email, encodedPassword, name, description = "";
@@ -150,14 +150,12 @@ public class User {
     public void setAdmin() {assert(!isAdmin()); this.roles.add("ADMIN");}
     public void removeAdmin(){this.roles.remove("ADMIN");}
 
-    public Set<ActionChronoWrapper> getFollowing() {return following;}
-    public void follow(User user, ActionChronoWrapperRepository repository) {
-        ActionChronoWrapper acw = new ActionChronoWrapper(user);
-        //repository.save(acw);
-        this.following.add(acw);
+    public Set<User> getFollowing() {return following;}
+    public void follow(User user) {
+        this.following.add(user);
     }
     public void unfollow(User user) {
-        this.following.remove(new ActionChronoWrapper(user));
+        this.following.remove(user);
     }
 
     /* TODO
@@ -168,9 +166,9 @@ public class User {
 
 
 
-    public Set<ActionChronoWrapper> getBlockedUsers() {return blockedUsers;}
-    public void block(User user){blockedUsers.add(new ActionChronoWrapper(user));};
-    public void unblock(User user){blockedUsers.remove(new ActionChronoWrapper(user));};
+    public Set<User> getBlockedUsers() {return blockedUsers;}
+    public void block(User user){blockedUsers.add(user);};
+    public void unblock(User user){blockedUsers.remove(user);};
 
     //DON'T USE, ONLY FOR DATABASE 
     public User() {}

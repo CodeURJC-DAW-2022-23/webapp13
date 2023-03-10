@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import es.codeurjc.backend.model.Tweet;
 import es.codeurjc.backend.model.User;
-import es.codeurjc.backend.model.ActionChronoWrapper;
 import es.codeurjc.backend.repository.TweetRepository;
 import es.codeurjc.backend.service.UserService;
 
@@ -38,10 +37,10 @@ public class TweetController {
         if (tweetOpt.isPresent()) {
             Tweet tweet = tweetOpt.get();
 
-            Set<ActionChronoWrapper> likes = tweet.getLikes();
+            Set<User> likes = tweet.getLikes();
 
             //don't 
-            if (!likes.contains(tweetOpt)) {
+            if (!likes.contains(likingUser)) {
                 tweet.addLike(likingUser);
             }
             else {
