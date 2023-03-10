@@ -29,7 +29,7 @@ public class TweetDeleterController {
         return readIfPostShouldGetDeleted(jsonStr);
     }
 
-    private Boolean readIfPostShouldGetDeleted(String jsonStr) {
+    private boolean readIfPostShouldGetDeleted(String jsonStr) {
         return Try
             .of(() -> new ObjectMapper().readTree(jsonStr))
             .map(json -> json.get("response").asBoolean())

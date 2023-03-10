@@ -11,10 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import es.codeurjc.backend.model.User;
-
+import es.codeurjc.backend.model.ActionChronoWrapper;
 import es.codeurjc.backend.service.UserService;
 
 import java.util.List;
+import java.util.TreeSet;
 
 @Controller
 public class FeedController {
@@ -35,7 +36,7 @@ public class FeedController {
             updateFeedModelForUsers(model);
         else
             updateFeedModelForAnons(model);
-            
+
         model.addAttribute("authenticated", visitorAuthenticated);
         return "feed";
     }
@@ -45,13 +46,15 @@ public class FeedController {
         return "redirect:/u/" + loggedUser.getUsername();
     }
 
+    
     private void updateFeedModelForUsers(Model model) {
-        List<User> followings = loggedUser.getFollowing();
+        
+        TreeSet<ActionChronoWrapper> followings = (TreeSet<ActionChronoWrapper>)loggedUser.getFollowing();
         model.addAttribute("username", loggedUser.getUsername());
-        model.addAttribute(
+        /*model.addAttribute(
             "tweets",
             FeedQuerier.queryTweetsForUsers(followings, tweetRepository)
-        );
+        ); TODO FIX*/ 
     }
 
     private void updateFeedModelForAnons(Model model) {

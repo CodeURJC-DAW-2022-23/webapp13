@@ -2,7 +2,10 @@ package es.codeurjc.backend.model;
 
 import java.sql.Blob;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -15,6 +18,8 @@ import javax.persistence.OneToMany;
 
 
 import org.springframework.lang.Nullable;
+
+import es.codeurjc.backend.repository.ActionChronoWrapperRepository;
 import es.codeurjc.backend.service.UserService;
 
 
@@ -23,13 +28,13 @@ import javax.persistence.GenerationType;
 @Entity(name = "UserTable")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name, username, email, encodedPassword, description = "";
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> roles;
+    private Set<String> roles = new TreeSet<>();
 
     private boolean banned = false;
 
@@ -42,11 +47,11 @@ public class User {
 
     @Nullable
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<User> following = new ArrayList<User>();
+    private Set<User> following = new HashSet<User>();
 
     @Nullable
-    @ManyToMany
-    private List<User> blockedUsers = new ArrayList<User>();  
+    @OneToMany
+    private Set<ActionChronoWrapper> blockedUsers = new TreeSet<>();  
 
     public static class Builder {
         private String username, email, encodedPassword, name, description = "";
@@ -101,7 +106,6 @@ public class User {
         this.username = username;
         this.email = email;
         this.encodedPassword = encodedPassword;
-        this.roles = new ArrayList<>();
         this.name = name;
         this.description = description;
         this.roles.add("USER");
@@ -140,27 +144,33 @@ public class User {
     public List<Tweet> getTweets() {return tweets;}
     public void setTweets(List<Tweet> tweets) {this.tweets = tweets;}
   
-    public List<String> getRoles() {return this.roles;}
+    public Set<String> getRoles() {return this.roles;}
 
     public boolean isAdmin() {return roles.contains("ADMIN");}
     public void setAdmin() {assert(!isAdmin()); this.roles.add("ADMIN");}
     public void removeAdmin(){this.roles.remove("ADMIN");}
 
-    public List<User> getFollowing() {return following;}
-    public void follow(User user) {
-        this.following.add(user);
+    public Set<ActionChronoWrapper> getFollowing() {return following;}
+    public void follow(User user, ActionChronoWrapperRepository repository) {
+        ActionChronoWrapper acw = new ActionChronoWrapper(user);
+        //repository.save(acw);
+        this.following.add(acw);
     }
     public void unfollow(User user) {
-        this.following.remove(user);
+        this.following.remove(new ActionChronoWrapper(user));
     }
 
-    public List<User> getFollowers(UserService userService) {        
-        return userService.getFollowers(this);
+    /* TODO
+    public Set<UserActionChronologicalWrapper> getFollowers(UserService userService) {        
+        return .getFollowers(this);
     }
+    */
 
-    public List<User> getBlockedUsers() {return blockedUsers;}
-    public void block(User user){blockedUsers.add(user);};
-    public void unblock(User user){blockedUsers.remove(user);};
+
+
+    public Set<ActionChronoWrapper> getBlockedUsers() {return blockedUsers;}
+    public void block(User user){blockedUsers.add(new ActionChronoWrapper(user));};
+    public void unblock(User user){blockedUsers.remove(new ActionChronoWrapper(user));};
 
     //DON'T USE, ONLY FOR DATABASE 
     public User() {}

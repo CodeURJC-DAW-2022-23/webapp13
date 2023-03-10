@@ -38,6 +38,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/login").permitAll();
         http.authorizeRequests().antMatchers("/feed").permitAll();
         http.authorizeRequests().antMatchers("/loginsuccess").hasAnyRole("USER");
+
+        http.authorizeRequests().antMatchers("/like").hasAnyRole("USER");
+
         http.authorizeRequests().antMatchers("/loginerror").permitAll();
         http.authorizeRequests().antMatchers("/logout").permitAll();
         http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
