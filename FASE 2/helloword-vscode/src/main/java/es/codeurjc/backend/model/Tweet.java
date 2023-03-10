@@ -58,7 +58,7 @@ public class Tweet {
     */
     @Nullable
     @OneToMany
-    private List<Tweet> sharedBy = new ArrayList<>();
+    private List<Tweet> shares = new ArrayList<>();
 
     public static class Builder {
         private User author;
@@ -140,7 +140,7 @@ public class Tweet {
     public void setId(long id) {this.id = id;}
 
     public User getAuthor() {return author;}
-    public String getAuthorName() {return author.getUsername();}
+    public String getUserName() {return author.getUsername();}
 
     public LocalDateTime getDate() {return date;}
 
@@ -148,10 +148,9 @@ public class Tweet {
     public void setText(String text) {this.text = text;}
     
     public List<User> getLikes() {return likes;}
-    public int getLikeCount() {return likes.size();}
     public void addLike(User like) {likes.add(like);}
 
-    public int getShareCount() {return sharedBy.size();}
+    public List<Tweet> getShares() {return shares;}
     
     public Set<String> getTags() {return tags;}
     public void addTag(String String) {
@@ -165,7 +164,6 @@ public class Tweet {
     */
 
     public List<Tweet> getChildren() {return children;}
-    public int getChildrenCount() {return children.size();}
     public void addChild(Tweet tweet) {children.add(tweet);}
 
     /*
