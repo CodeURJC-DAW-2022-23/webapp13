@@ -13,14 +13,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.SessionScope;
 
+import org.springframework.lang.Nullable;
 import es.codeurjc.backend.service.UserService;
 
-import org.springframework.web.context.annotation.ApplicationScope;
 
 import javax.persistence.GenerationType;
 
@@ -50,7 +46,7 @@ public class User {
 
     @Nullable
     @ManyToMany
-    private List<User> blockedUsers = new ArrayList<User>();
+    private List<User> blockedUsers = new ArrayList<User>();  
 
     public static class Builder {
         private String username, email, encodedPassword, name, description = "";
@@ -138,6 +134,7 @@ public class User {
     public boolean isBanned() {return banned;}
 
     public Blob getProfilePicture() {return profilePicture;}
+    public boolean hasProfilePicture() {return profilePicture != null;}
     public void setProfilePicture(Blob profilePicture) {this.profilePicture = profilePicture;}
 
     public List<Tweet> getTweets() {return tweets;}
@@ -160,7 +157,6 @@ public class User {
     public List<User> getFollowers(UserService userService) {        
         return userService.getFollowers(this);
     }
-
 
     public List<User> getBlockedUsers() {return blockedUsers;}
     public void block(User user){blockedUsers.add(user);};

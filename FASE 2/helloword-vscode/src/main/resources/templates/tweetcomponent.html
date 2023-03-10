@@ -3,7 +3,7 @@
   <div class="profileanon-op1">
 	<div class="extraimg">
 	  <img
-		src="/profileuser/assets/imgi135-bmp-200h.png"
+		src="/u/{{author.username}}/profilepicture"
 		alt="imgI135"
 		class="profileanon-img1"
 	  />
@@ -13,23 +13,23 @@
 		<span>{{date}}</span>
 	  </span>
 	  <span class="profileanon-text014">
-		<span>{{getAuthorName}}</span>
+		<span>{{author.username}}</span>
 	  </span>
 	</div>
 	<div class="profileanon-interactions1">
-	  <span class="profileanon-text016"><span>{{getLikeCount}}</span></span>
+	  <span class="profileanon-text016"><span>{{likes.size}}</span></span>
 	  <img
 		src="/profileuser/assets/iconsaxlinearhearti135-0d8.svg"
 		alt="IconsaxLinearheartI135"
 		class="profileanon-iconsax-linearheart1"
 	  />
-	  <span class="profileanon-text018"><span>{{getShareCount}}</span></span>
+	  <span class="profileanon-text018"><span>{{shares.size}}</span></span>
 	  <img
 		src="/profileuser/assets/iconsaxlinearrepeati135-eqaa.svg"
 		alt="IconsaxLinearrepeatI135"
 		class="profileanon-iconsax-linearrepeat1"
 	  />
-	  <span class="profileanon-text020"><span>{{getChildrenCount}}</span></span>
+	  <span class="profileanon-text020"><span>{{children.size}}</span></span>
 	  <!-- TODO add a custom icon to deleting posts, heres how it should be implemented
 	  <form action="/tweet/delete/{{id}}" method="GET">
 		<button type="submit">
@@ -57,7 +57,6 @@
   </div>
   {{#hasMedia?}}
   <div class="profileanon-img2">
-	
 	<div class="profileanon-img3">
 	  <img
 		src="/profileuser/assets/image95537386p11i135-hi92j-400h.png"

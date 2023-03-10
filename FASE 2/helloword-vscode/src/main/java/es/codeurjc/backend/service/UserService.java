@@ -17,7 +17,9 @@ public final class UserService {
     private UserRepository userRepository;
 
     public User getUserByUsernameForced(String username) {
-        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User " + username +" not found"));
+        return userRepository
+            .findByUsername(username)
+            .orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found"));
     }
     public Optional<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
@@ -31,7 +33,7 @@ public final class UserService {
     public boolean isUsernameTaken(String username){
         return userRepository.existsByUsername(username);
     }
-    public void registerUser(User user){
+    public void saveUser(User user){
         userRepository.save(user);
     }
     public boolean isEmail(String input){

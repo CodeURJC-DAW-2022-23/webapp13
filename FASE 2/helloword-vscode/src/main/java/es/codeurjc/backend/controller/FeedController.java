@@ -4,12 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import es.codeurjc.backend.model.Tweet;
 import es.codeurjc.backend.repository.TweetRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import es.codeurjc.backend.model.User;
+
 import es.codeurjc.backend.service.UserService;
 
 import java.util.List;
