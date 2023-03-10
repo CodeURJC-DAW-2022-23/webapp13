@@ -26,25 +26,23 @@ public class FeedController {
 
     private User loggedUser;
 
-    private boolean visitorAuthenticated;
-
-    private final FeedQuerier querier = new FeedQuerier();
-
     @RequestMapping("/feed")
-    public String showFeed(Model model, HttpServletRequest request){
+    public String showFeed(Model model, HttpServletRequest req){
 
-        visitorAuthenticated = (request.getUserPrincipal() != null);
-        
-        if (visitorAuthenticated){
-            
-            String username = request.getUserPrincipal().getName();
+        if (visitorAuthenticated(req)) {
+
+            String username = req.getUserPrincipal().getName();
             loggedUser = userService.getUserByUsernameForced(username);
-            modelFeedUser(model);
-        }
-        else
-            modelFeedAnon(model);
-        model.addAttribute("authenticated", visitorAuthenticated);
+            updateFeedModelForUsers(model);
+
+        } else updateFeedModelForAnons(model);
+
+        model.addAttribute("authenticated", visitorAuthenticated((req)));
         return "feed";
+    }
+
+    public static boolean visitorAuthenticated(HttpServletRequest req) {
+        return req.getUserPrincipal() != null;
     }
 
     @RequestMapping("/tomyprofile")
@@ -52,16 +50,17 @@ public class FeedController {
         return "redirect:/u/" + loggedUser.getUsername();
     }
 
-    private void modelFeedUser(Model model) {
+    private void updateFeedModelForUsers(Model model) {
         List<User> followings = loggedUser.getFollowing();
         model.addAttribute("username", loggedUser.getUsername());
-        //model.addAttribute("tweets", querier.queryTweetsForUsers(followings));
+        model.addAttribute(
+            "tweets",
+            FeedQuerier.queryTweetsForUsers(followings, tweetRepository)
+        );
     }
 
-    private void modelFeedAnon(Model model) {
+    private void updateFeedModelForAnons(Model model) {
         List<Tweet> tweets = tweetRepository.findTop10ByOrderByDateDesc();
         model.addAttribute("tweets", tweets);
     }
-
-
 }
