@@ -9,7 +9,6 @@ Es una red social similar a Twitter, pero con diferente implementación, al util
 | Oskar Denis Siodmok | DenisUrjc@proton.me | DenisUrjc |  
 | Stefano Tomasini Hoefner | s.tomasini.2019@alumnos.urjc.es | Dariagan |    
 | Alberto Jesús García Guerra | aj.garciag.2019@alumnos.urjc.es | tomy014 |  
-| Carlos Solsona Álvarez | c.solsona.2020@alumnos.urjc.es | azu173 |  
 | Álvaro Pindado Castiñeira | a.pindado.2019@alumnos.urjc.es | Alvaropin17 |  
 
 
