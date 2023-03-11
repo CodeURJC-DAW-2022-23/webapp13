@@ -42,7 +42,7 @@
   <body>
     <div>
       <!-- <link href="/profileuser/profileuser.css" rel="stylesheet" /> -->
-      <link href="/profileuser/nav.css" rel="stylesheet" />
+      <link href="/feeduser/nav.css" rel="stylesheet" />
       <link href="/profileuser/components.css" rel="stylesheet" />
 
       <div class="profileanon-container">
@@ -108,23 +108,13 @@
               </div>
             </div>
           </div>
-          <div class="profileanon-nav">
-            <div class="profileanon-logo">
-              <div class="profileanon-group">
-                <img
-                  src="/profileuser/assets/vector1353-vwne.svg"
-                  alt="Vector1353"
-                  class="profileanon-vector"
-                />
-              </div>
-            </div>
-            <div class="profileanon-btn">
-              <span class="profileanon-text074"><span>Feed</span></span>
-            </div>
-            {{> loginoutbutton}}
-            {{> modbutton}}
-            
+          
+          <div class="feedanon-nav">
+            {{> nexuschi}}
+            {{> feedbutton}}
+			      {{> loginoutbutton}}
           </div>
+          
           <div class="profileanon-leftcomponents">
             <div class="profileanon-searchbar">
               <img

@@ -56,7 +56,6 @@ public class TweetController {
                 tweet.addLike(likingUser);
             else tweet.removeLike(likingUser);
 
-            userService.saveUser(likingUser);
             tweetRepository.save(tweet);
         }
 
