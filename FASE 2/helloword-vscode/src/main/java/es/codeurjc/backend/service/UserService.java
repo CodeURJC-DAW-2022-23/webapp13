@@ -49,4 +49,8 @@ public final class UserService {
     public static boolean isAuthenticated(HttpSession session){
         return session.getAttribute("user") != null;
     }
+
+    public static Optional<User> getUserFrom(HttpSession session) {
+        return Optional.ofNullable((User) session.getAttribute("user"));
+    }
 }
