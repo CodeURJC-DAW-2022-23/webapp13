@@ -20,7 +20,10 @@ public class LoginController {
     private UserService userService;
    
     @RequestMapping("/login")
-    public String login(){
+    public String login(Model model){
+
+        model.addAttribute("inLogin", true);
+
         return "loginpage";
     }
 

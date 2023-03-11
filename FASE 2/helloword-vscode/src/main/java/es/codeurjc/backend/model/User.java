@@ -174,13 +174,12 @@ public class User {
         if (o == this) {
             return true;
         }
-        else if ((o == null) || (o.getClass() != this.getClass())) {
+        else if ((o == null)|| (o.getClass() != this.getClass())) {
             return false;
         }
          
         User other = (User) o;
          
-
         return this.id == other.id;
     }
 

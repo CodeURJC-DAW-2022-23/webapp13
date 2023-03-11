@@ -1,13 +1,15 @@
-<link href="/profileuser/nav.css" rel="stylesheet" />
-<link href="/profileuser/profileuser.css" rel="stylesheet" />
+<link href="/feeduser/nav.css" rel="stylesheet" />
 {{#authenticated}}
-    <!-- TODO add href -->
-    <form class="profileanon-btn" action="/logout" method="post">
-      <button class="profileanon-text074"><span>Log out</span></button>
-    </form>
+    <a href="/logout">
+      <div class="feedanon-button6">
+        <span class="profileanon-text074">Log out</span>
+      </div>
+    </a>
 {{/authenticated}}
 {{^authenticated}}
-    <form class="profileanon-btn" action="/login">
-      <button class="profileanon-text074"><span>Log in</span></button>
-    </form>
+<a href="/login">
+  <div class="feedanon-button6">
+    <span class="profileanon-text074">Log in</span>
+  </div>
+</a>
 {{/authenticated}}

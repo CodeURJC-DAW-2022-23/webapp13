@@ -1,4 +1,4 @@
-.feedanon-nav {
+.nav {
   top: 0px;
   left: -0.07169532775878906px;
   width: 100%;
@@ -30,15 +30,11 @@
   background-color: rgba(51, 46, 89, 1);
   color: #E0D3DE;
   font-weight: bold;
+  margin-right: 10px;
+  float: right;
 }
 
-#loginButton { 
-	float: right;
-}
-#loginButton2 { 
-	float: right;
-	margin-right: 10px;
-}
+
 .feedanon-chi {
 	float: left;
 	width: auto;

@@ -42,20 +42,14 @@
   <body>
     <div>
       <link href="/login/loginpage.css" rel="stylesheet" />
-      <link href="/login/nav.css" rel="stylesheet" />
+      <link href="/nav.css" rel="stylesheet" />
 
       <div class="loginpage-container">
         <div class="loginpage-loginpage">
-          <div class="loginpage-nav">
-            <div class="loginpage-logo">
-              <div class="loginpage-group">
-                <img
-                  src="login/assets/vector8812-zp5.svg"
-                  alt="Vector8812"
-                  class="loginpage-vector"
-                />
-              </div>
-            </div>
+          <div class="nav">
+            {{> nexuschi}}
+            {{> feedbutton}}
+          </div>
           
           <div class="loginpage-content">
             <form class="loginpage-login" action="/login" method="post">

@@ -42,7 +42,7 @@
   <body>
     <div>
       <link href="/feeduser/feeduser.css" rel="stylesheet" />
-      <link href="/feeduser/nav.css" rel="stylesheet" />
+      <link href="/nav.css" rel="stylesheet" />
       <link href="/feeduser/components.css" rel="stylesheet" />
 
       <div class="feedanon-container">
@@ -193,17 +193,9 @@
               </div>
             </div>
           </div>
-          <div class="feedanon-nav">
-            <img
-              src="feeduser/assets/chi1331-lzc.svg"
-              alt="chi1331"
-              class="feedanon-chi"
-            /> 
-            <form id="loginButton" action="/tomyprofile" method="post">
-              <input class="feedanon-button6" type="submit" value="Profile">
-              
-              </input>
-            </form>
+          <div class="nav">
+            {{> nexuschi}}
+            {{> profilebutton}}
 			      {{> loginoutbutton}}
           </div>
         </div>
