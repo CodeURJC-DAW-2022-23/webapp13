@@ -58,7 +58,7 @@ public class ProfileController {
     @RequestMapping("/u/{username}")
     public String showProfile(Model model, @PathVariable String username){
         Optional<User> user = userService.getUserByUsername(username);
-        if (user.isEmpty()) return "/error";
+        if (user.isEmpty()) return "error";
         else profileUser = user.get();
 
         following = Try
