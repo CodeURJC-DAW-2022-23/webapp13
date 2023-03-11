@@ -148,12 +148,12 @@ public class Tweet {
     public void setText(String text) {this.text = text;}
     
     public Set<User> getLikes() {return likes;}
-    public void addLike(User user) {
-        likes.add(user);
+    public void switchLike(User user) {
+        assert(user != null);
+        if (!likes.contains(user))
+            likes.add(user);
+        else likes.remove(user);
     }
-    public void removeLike(User user) {
-        likes.remove(user);
-	}
 
     public Set<Tweet> getShares() {return shares;}
     

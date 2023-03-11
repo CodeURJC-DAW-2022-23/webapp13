@@ -1,12 +1,14 @@
-{{#logged}}
+<a href="/follow/{{profileUser.username}}">
+{{#authenticated}}
 {{^ownProfile}}
-    <form class="profileanon-btn1" action="/switchfollowprofile">
-        {{#alreadyFollowed}}
-        <button type="submit" class="profileanon-text084">Follow</button>
-        {{/alreadyFollowed}}
-        {{^alreadyFollowed}}
-        <button type="submit" class="profileanon-text084">Unfollow</button>
-        {{/alreadyFollowed}}
-    </form> 
+        <div class="profileanon-btn1">
+            {{#following}}
+            <span class="profileanon-text084">Unfollow</span>
+            {{/following}}
+            {{^following}}
+            <span class="profileanon-text084">Follow</span>
+            {{/following}}
+        </div> 
 {{/ownProfile}}   
-{{/logged}}
+{{/authenticated}}
+</a>

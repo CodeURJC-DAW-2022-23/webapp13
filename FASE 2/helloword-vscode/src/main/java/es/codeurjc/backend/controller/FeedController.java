@@ -34,8 +34,6 @@ public class FeedController {
 
         boolean visitorAuthenticated = UserService.isAuthenticated(session);
 
-        
-
         if (visitorAuthenticated)
             updateFeedModelForUsers(model);
         else

@@ -23,7 +23,7 @@ import es.codeurjc.backend.repository.UserRepository;
 import es.codeurjc.backend.service.UserService;
 
 @Controller
-public class TweetController {
+public class InteractionController {
 
     @Autowired
     TweetRepository tweetRepository;
@@ -35,7 +35,7 @@ public class TweetController {
     TweetService tweetService;
     
     @RequestMapping("/like/{id}")
-    public String likeHandler(
+    public String handleLike(
         HttpServletRequest request, HttpSession session, @PathVariable String id
     ) {
         Optional<User> userOpt = UserService.getUserFrom(session);
@@ -48,18 +48,36 @@ public class TweetController {
         if (tweetOpt.isPresent()) {
             Tweet tweet = tweetOpt.get();
 
-            Set<User> likes = Optional
-                .ofNullable(tweet.getLikes())
-                .orElseGet(Collections::emptySet);
-
-            if (!likes.contains(likingUser))
-                tweet.addLike(likingUser);
-            else tweet.removeLike(likingUser);
+            tweet.switchLike(likingUser);
 
             tweetRepository.save(tweet);
         }
 
-        return "redirect:" + request.getHeader("Referer");
+        return getCurrentPage(request);
+    }
+
+    @RequestMapping("/follow/{username}")
+    public String handleFollow(
+        HttpServletRequest request, HttpSession session, @PathVariable String username
+    ) {
+        Optional<User> followingUserOpt = UserService.getUserFrom(session);
+        Optional<User> followedUserOpt = userService.getUserByUsername(username);
+
+        if (followingUserOpt.isEmpty()) return "redirect:/login";
+        if (followedUserOpt.isEmpty()) return getCurrentPage(request);
+
+        User followingUser = followingUserOpt.get();
+        User followedUser = followedUserOpt.get();
+
+        followingUser.switchFollow(followedUser);
+
+        userService.saveUser(followedUser);
+
+        return getCurrentPage(request);
+    }
+
+    private String getCurrentPage(HttpServletRequest req) {
+        return "redirect:" + req.getHeader("Referer");
     }
 
 }
