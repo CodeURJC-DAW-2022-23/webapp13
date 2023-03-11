@@ -59,7 +59,7 @@ public class InteractionController {
             tweetRepository.save(tweet);
         }
 
-        return "redirect:" + request.getHeader("Referer");
+        return getCurrentPage(request);
     }
 
     @RequestMapping("/follow/{username}")
@@ -67,25 +67,28 @@ public class InteractionController {
         HttpServletRequest request, HttpSession session, @PathVariable String username
     ) {
         Optional<User> userOpt = UserService.getUserFrom(session);
+        Optional<User> followedUserOpt = userService.getUserByUsername(username);
 
         if (userOpt.isEmpty()) return "redirect:/login";
-        User followingUser = userOpt.get();
+        if (followedUserOpt.isEmpty()) return getCurrentPage(request);
 
-        userOpt = userService.getUserByUsername(username);
+        User followedUser = followedUserOpt.get();
 
-        if (userOpt.isPresent()) {
-            User followedUser = userOpt.get();
+        Set<User> follows = Optional
+            .ofNullable(userOpt.get().getFollowing())
+            .orElseGet(Collections::emptySet);
 
-            Set<User> follows = followingUser.getFollowing();
+        if (!follows.contains(followedUser))
+            follows.add(followedUser);
+        else follows.remove(followedUser);
 
-            if (!follows.contains(followedUser))
-                follows.add(followedUser);
-            else follows.remove(followedUser);
+        userService.saveUser(followedUser);
 
-            userService.saveUser(followingUser);
-        }
+        return getCurrentPage(request);
+    }
 
-        return "redirect:" + request.getHeader("Referer");
+    private String getCurrentPage(HttpServletRequest req) {
+        return "redirect:" + req.getHeader("Referer");
     }
 
 }
