@@ -23,7 +23,7 @@ import es.codeurjc.backend.repository.UserRepository;
 import es.codeurjc.backend.service.UserService;
 
 @Controller
-public class TweetController {
+public class InteractionController {
 
     @Autowired
     TweetRepository tweetRepository;
@@ -35,7 +35,7 @@ public class TweetController {
     TweetService tweetService;
     
     @RequestMapping("/like/{id}")
-    public String likeHandler(
+    public String handleLike(
         HttpServletRequest request, HttpSession session, @PathVariable String id
     ) {
         Optional<User> userOpt = UserService.getUserFrom(session);
@@ -57,6 +57,32 @@ public class TweetController {
             else tweet.removeLike(likingUser);
 
             tweetRepository.save(tweet);
+        }
+
+        return "redirect:" + request.getHeader("Referer");
+    }
+
+    @RequestMapping("/follow/{username}")
+    public String handleFollow(
+        HttpServletRequest request, HttpSession session, @PathVariable String username
+    ) {
+        Optional<User> userOpt = UserService.getUserFrom(session);
+
+        if (userOpt.isEmpty()) return "redirect:/login";
+        User followingUser = userOpt.get();
+
+        userOpt = userService.getUserByUsername(username);
+
+        if (userOpt.isPresent()) {
+            User followedUser = userOpt.get();
+
+            Set<User> follows = followingUser.getFollowing();
+
+            if (!follows.contains(followingUser))
+                follows.add(followedUser);
+            else follows.remove(followingUser);
+
+            userService.saveUser(followingUser);
         }
 
         return "redirect:" + request.getHeader("Referer");

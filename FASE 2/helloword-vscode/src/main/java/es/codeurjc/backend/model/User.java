@@ -151,12 +151,8 @@ public class User {
     public void removeAdmin(){this.roles.remove("ADMIN");}
 
     public Set<User> getFollowing() {return following;}
-    public void follow(User user) {
-        this.following.add(user);
-    }
-    public void unfollow(User user) {
-        this.following.remove(user);
-    }
+    public void follow(User user) {this.following.add(user);}
+    public void unfollow(User user) {this.following.remove(user);}
 
     /* TODO
     public Set<UserActionChronologicalWrapper> getFollowers(UserService userService) {        
@@ -171,13 +167,11 @@ public class User {
     @Override
     public boolean equals(Object o) {
  
-        if (o == this) {
+        if (o == this) 
             return true;
-        }
-        else if ((o == null)|| (o.getClass() != this.getClass())) {
+        else if (o == null || o.getClass() != this.getClass()) 
             return false;
-        }
-         
+        
         User other = (User) o;
          
         return this.id == other.id;
