@@ -3,6 +3,8 @@ package es.codeurjc.backend.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -36,10 +38,13 @@ public final class UserService {
     public void saveUser(User user){
         userRepository.save(user);
     }
-    public boolean isEmail(String input){
+    public static boolean isEmail(String input){
         return input.matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
     }
     public List<User> getFollowers(User user) {
         return userRepository.findByFollowing(user);
+    }
+    public static boolean isAuthenticated(HttpSession session){
+        return session.getAttribute("user") != null;
     }
 }

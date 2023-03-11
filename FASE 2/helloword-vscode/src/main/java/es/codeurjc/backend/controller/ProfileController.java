@@ -5,6 +5,7 @@ import java.sql.Blob;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import io.vavr.control.Try;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,18 +45,13 @@ public class ProfileController {
 
 
     @ModelAttribute
-	public void addAttributes(Model model, HttpServletRequest request) {
+	public void addAttributes(Model model, HttpSession session) {
 
-		Principal principal = request.getUserPrincipal();
+        visitorAuthenticated = UserService.isAuthenticated(session);
 
-        visitorAuthenticated = (principal != null);
         model.addAttribute("authenticated", visitorAuthenticated);
 
-		if (visitorAuthenticated) {
-            loggedUser = Try
-                .of(() -> userService.getUserByUsernameForced(principal.getName()))
-                .getOrNull();
-		}
+		loggedUser = (User)session.getAttribute("user");
 	}
     
     @RequestMapping("/u/{username}")
