@@ -17,34 +17,39 @@
 	  </span>
 	</div>
 	<div class="profileanon-interactions1">
+
 	  <span class="profileanon-text016"><span>{{likes.size}}</span></span>
 	  <a href="/like/{{id}}">
-	  <img
-		src="/profileuser/assets/iconsaxlinearhearti135-0d8.svg"
-		alt="IconsaxLinearheartI135"
-		class="profileanon-iconsax-linearheart1"
-	  />
+		  <img
+			src="/profileuser/assets/iconsaxlinearhearti135-0d8.svg"
+			alt="IconsaxLinearheartI135"
+			class="profileanon-iconsax-linearheart1"
+		  />
 	  </a>
+
 	  <span class="profileanon-text018"><span>{{shares.size}}</span></span>
 	  <img
 		src="/profileuser/assets/iconsaxlinearrepeati135-eqaa.svg"
 		alt="IconsaxLinearrepeatI135"
 		class="profileanon-iconsax-linearrepeat1"
 	  />
+
 	  <span class="profileanon-text020"><span>{{children.size}}</span></span>
-	  <!-- TODO add a custom icon to deleting posts, heres how it should be implemented
-	  <form action="/tweet/delete/{{id}}" method="GET">
-		<button type="submit">
-		  <span class="profileanon-text020"><span>10</span></span>
-		</button>
-	  </form>
-	  -->
 	  <img
 		src="/profileuser/assets/iconsaxlinearmessagei135-n7p.svg"
 		alt="IconsaxLinearmessageI135"
 		class="profileanon-iconsax-linearmessage1"
 	  />
-	  </a>
+		
+		<a href="/tweet/delete/{{id}}">
+			<img
+				style="margin-left: 15px"
+				src="/profileuser/assets/iconsaxlinearmessagei135-n7p.svg"
+				alt="IconsaxLinearmessageI135"
+				class="profileanon-iconsax-linearmessage1"
+			/>
+		</a>
+
 	</div>
   </div>
   <div class="profileanon-post1">
