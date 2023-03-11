@@ -151,8 +151,12 @@ public class User {
     public void removeAdmin(){this.roles.remove("ADMIN");}
 
     public Set<User> getFollowing() {return following;}
-    public void follow(User user) {this.following.add(user);}
-    public void unfollow(User user) {this.following.remove(user);}
+    public void switchFollow(User user) {
+        assert(user != null);
+        if (!following.contains(user))
+            following.add(user);
+        else following.remove(user);
+    }
 
     /* TODO
     public Set<UserActionChronologicalWrapper> getFollowers(UserService userService) {        

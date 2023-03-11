@@ -48,13 +48,7 @@ public class InteractionController {
         if (tweetOpt.isPresent()) {
             Tweet tweet = tweetOpt.get();
 
-            Set<User> likes = Optional
-                .ofNullable(tweet.getLikes())
-                .orElseGet(Collections::emptySet);
-
-            if (!likes.contains(likingUser))
-                tweet.addLike(likingUser);
-            else tweet.removeLike(likingUser);
+            tweet.switchLike(likingUser);
 
             tweetRepository.save(tweet);
         }
@@ -66,21 +60,16 @@ public class InteractionController {
     public String handleFollow(
         HttpServletRequest request, HttpSession session, @PathVariable String username
     ) {
-        Optional<User> userOpt = UserService.getUserFrom(session);
+        Optional<User> followingUserOpt = UserService.getUserFrom(session);
         Optional<User> followedUserOpt = userService.getUserByUsername(username);
 
-        if (userOpt.isEmpty()) return "redirect:/login";
+        if (followingUserOpt.isEmpty()) return "redirect:/login";
         if (followedUserOpt.isEmpty()) return getCurrentPage(request);
 
+        User followingUser = followingUserOpt.get();
         User followedUser = followedUserOpt.get();
 
-        Set<User> follows = Optional
-            .ofNullable(userOpt.get().getFollowing())
-            .orElseGet(Collections::emptySet);
-
-        if (!follows.contains(followedUser))
-            follows.add(followedUser);
-        else follows.remove(followedUser);
+        followingUser.switchFollow(followedUser);
 
         userService.saveUser(followedUser);
 

@@ -45,7 +45,7 @@ public class DataBaseController {
         userRepository.save(userB);
         userRepository.save(userA);
  
-        userA.follow(userB);
+        userA.switchFollow(userB);
         userRepository.save(userA);
         userRepository.save(userB);
         
@@ -57,7 +57,7 @@ public class DataBaseController {
         
         Tweet tweet1 = tweetBuilder.build();
 
-        tweet1.addLike(userB);
+        tweet1.switchLike(userB);
         //-------------------------------------
         tweetBuilder.setAuthor(userB).setText("I replied to userA's tweet!");
         
