@@ -14,10 +14,7 @@ import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.service.UserService;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 @Controller
 public class FeedController {

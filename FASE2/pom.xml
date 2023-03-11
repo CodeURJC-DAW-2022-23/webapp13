@@ -10,9 +10,9 @@
 	</parent>
 
 	<groupId>es.codeurjc</groupId>
-	<artifactId>helloword-vscode</artifactId>
+	<artifactId>FASE2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>helloword-vscode</name>
+	<name>FASE2</name>
 	<description>Nexus social network project</description>
 	<properties>
 		<java.version>11</java.version>
