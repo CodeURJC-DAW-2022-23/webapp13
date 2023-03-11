@@ -41,7 +41,7 @@ public class User {
     private List<Tweet> tweets = new ArrayList<Tweet>();
 
     @Nullable
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<User> following = new ArrayList<User>();
 
     @Nullable
