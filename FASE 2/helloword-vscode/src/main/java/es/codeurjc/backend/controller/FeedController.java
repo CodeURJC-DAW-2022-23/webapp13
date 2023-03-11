@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.service.UserService;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -50,12 +51,14 @@ public class FeedController {
     
     private void updateFeedModelForUsers(Model model) {
         
-        Set<User> followings = loggedUser.getFollowing();
+        ArrayList<User> followings = new ArrayList<>();  
+        followings.addAll(loggedUser.getFollowing());
+        
         model.addAttribute("username", loggedUser.getUsername());
-        /*model.addAttribute(
+        model.addAttribute(
             "tweets",
             FeedQuerier.queryTweetsForUsers(followings, tweetRepository)
-        );*/
+        );
     }
 
     private void updateFeedModelForAnons(Model model) {

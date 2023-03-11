@@ -37,7 +37,7 @@ public class Tweet {
     private Set<String> tags = new HashSet<String>();;    
 
     @Nullable
-    @OneToMany
+    @ManyToMany
     private Set<User> likes  = new HashSet<>();
 
     /*

@@ -164,11 +164,33 @@ public class User {
     }
     */
 
-
-
     public Set<User> getBlockedUsers() {return blockedUsers;}
     public void block(User user){blockedUsers.add(user);};
     public void unblock(User user){blockedUsers.remove(user);};
+
+    @Override
+    public boolean equals(Object o) {
+ 
+        if (o == this) {
+            return true;
+        }
+        else if ((o == null) || (o.getClass() != this.getClass())) {
+            return false;
+        }
+         
+        User other = (User) o;
+         
+
+        return this.id == other.id;
+    }
+
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + (int)id;
+        hash = 31 * hash + (null == username ? 0 : username.hashCode());
+        return hash;
+    }
+
 
     //DON'T USE, ONLY FOR DATABASE 
     public User() {}

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import es.codeurjc.backend.model.Tweet;
 import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.repository.TweetRepository;
+import es.codeurjc.backend.repository.UserRepository;
 import es.codeurjc.backend.service.UserService;
 
 @Controller
@@ -22,11 +23,13 @@ public class TweetController {
 
     @Autowired
     TweetRepository tweetRepository;
+
+    @Autowired
+    UserService userService;
     
     @RequestMapping("/like/{id}")
     public String likeHandler(HttpServletRequest request, HttpSession session, @PathVariable String id){
 
-        
         //TODO handle exceptions
         Long tweetId = Long.parseLong(id);
 
@@ -39,17 +42,18 @@ public class TweetController {
 
             Set<User> likes = tweet.getLikes();
 
-            //don't 
             if (!likes.contains(likingUser)) {
                 tweet.addLike(likingUser);
             }
             else {
                 tweet.removeLike(likingUser);
             }
+
+            userService.saveUser(likingUser);
+            tweetRepository.save(tweet);
         }
 
         String referer = request.getHeader("Referer");
-        return "redirect:" + referer;
-        
+        return "redirect:" + referer; 
     }
 }
