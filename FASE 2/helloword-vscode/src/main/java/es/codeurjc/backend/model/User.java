@@ -2,7 +2,10 @@ package es.codeurjc.backend.model;
 
 import java.sql.Blob;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -15,6 +18,8 @@ import javax.persistence.OneToMany;
 
 
 import org.springframework.lang.Nullable;
+
+import es.codeurjc.backend.repository.UserRepository;
 import es.codeurjc.backend.service.UserService;
 
 
@@ -23,13 +28,13 @@ import javax.persistence.GenerationType;
 @Entity(name = "UserTable")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name, username, email, encodedPassword, description = "";
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> roles;
+    private Set<String> roles = new HashSet<>();
 
     private boolean banned = false;
 
@@ -42,11 +47,11 @@ public class User {
 
     @Nullable
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<User> following = new ArrayList<User>();
+    private Set<User> following = new HashSet<User>();
 
     @Nullable
-    @ManyToMany
-    private List<User> blockedUsers = new ArrayList<User>();  
+    @OneToMany
+    private Set<User> blockedUsers = new HashSet<>();  
 
     public static class Builder {
         private String username, email, encodedPassword, name, description = "";
@@ -101,7 +106,6 @@ public class User {
         this.username = username;
         this.email = email;
         this.encodedPassword = encodedPassword;
-        this.roles = new ArrayList<>();
         this.name = name;
         this.description = description;
         this.roles.add("USER");
@@ -140,13 +144,13 @@ public class User {
     public List<Tweet> getTweets() {return tweets;}
     public void setTweets(List<Tweet> tweets) {this.tweets = tweets;}
   
-    public List<String> getRoles() {return this.roles;}
+    public Set<String> getRoles() {return this.roles;}
 
     public boolean isAdmin() {return roles.contains("ADMIN");}
     public void setAdmin() {assert(!isAdmin()); this.roles.add("ADMIN");}
     public void removeAdmin(){this.roles.remove("ADMIN");}
 
-    public List<User> getFollowing() {return following;}
+    public Set<User> getFollowing() {return following;}
     public void follow(User user) {
         this.following.add(user);
     }
@@ -154,13 +158,39 @@ public class User {
         this.following.remove(user);
     }
 
-    public List<User> getFollowers(UserService userService) {        
-        return userService.getFollowers(this);
+    /* TODO
+    public Set<UserActionChronologicalWrapper> getFollowers(UserService userService) {        
+        return .getFollowers(this);
     }
+    */
 
-    public List<User> getBlockedUsers() {return blockedUsers;}
+    public Set<User> getBlockedUsers() {return blockedUsers;}
     public void block(User user){blockedUsers.add(user);};
     public void unblock(User user){blockedUsers.remove(user);};
+
+    @Override
+    public boolean equals(Object o) {
+ 
+        if (o == this) {
+            return true;
+        }
+        else if ((o == null) || (o.getClass() != this.getClass())) {
+            return false;
+        }
+         
+        User other = (User) o;
+         
+
+        return this.id == other.id;
+    }
+
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + (int)id;
+        hash = 31 * hash + (null == username ? 0 : username.hashCode());
+        return hash;
+    }
+
 
     //DON'T USE, ONLY FOR DATABASE 
     public User() {}

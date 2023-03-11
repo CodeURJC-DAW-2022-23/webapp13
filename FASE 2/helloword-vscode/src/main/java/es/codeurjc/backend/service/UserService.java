@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import es.codeurjc.backend.model.User;
+
 import es.codeurjc.backend.repository.UserRepository;
 
 @Service
@@ -41,9 +42,10 @@ public final class UserService {
     public static boolean isEmail(String input){
         return input.matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
     }
-    public List<User> getFollowers(User user) {
+    /* TODO
+    public Set<UserActionChronologicalWrapper> getFollowers(User user) {
         return userRepository.findByFollowing(user);
-    }
+    }*/
     public static boolean isAuthenticated(HttpSession session){
         return session.getAttribute("user") != null;
     }

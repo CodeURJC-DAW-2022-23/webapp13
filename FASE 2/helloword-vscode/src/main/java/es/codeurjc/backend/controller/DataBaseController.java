@@ -44,7 +44,7 @@ public class DataBaseController {
         
         userRepository.save(userB);
         userRepository.save(userA);
-        
+ 
         userA.follow(userB);
         userRepository.save(userA);
         userRepository.save(userB);

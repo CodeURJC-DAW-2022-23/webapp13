@@ -28,7 +28,7 @@ public class SignUpController {
     @PostMapping("/signup")
     public String processSignUpForm(@RequestParam String email, @RequestParam String username, @RequestParam String password, Model model) {
         
-        if (!userService.isEmail(email)) {
+        if (!UserService.isEmail(email)) {
 
             model.addAttribute("fail", "E-mail format not adequate.");
             return "signuppage";

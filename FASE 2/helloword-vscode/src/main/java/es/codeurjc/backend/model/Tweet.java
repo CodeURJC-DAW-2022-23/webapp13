@@ -34,11 +34,11 @@ public class Tweet {
     private Blob media;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<String> tags = new TreeSet<String>();;    
+    private Set<String> tags = new HashSet<String>();;    
 
     @Nullable
-    @OneToMany
-    private List<User> likes  = new ArrayList<>();
+    @ManyToMany
+    private Set<User> likes  = new HashSet<>();
 
     /*
     @ManyToOne(fetch = FetchType.LAZY)
@@ -58,13 +58,13 @@ public class Tweet {
     */
     @Nullable
     @OneToMany
-    private List<Tweet> shares = new ArrayList<>();
+    private Set<Tweet> shares = new HashSet<>();
 
     public static class Builder {
         private User author;
         private String text;
         private Blob media;
-        private TreeSet<String> tags = new TreeSet<String>();
+        private HashSet<String> tags = new HashSet<String>();
         //private Tweet parent, shared;
 
         public Builder setAuthor(User author){
@@ -79,7 +79,7 @@ public class Tweet {
             this.media = media;
             return this;
         }
-        public Builder setTags(TreeSet<String> tags){
+        public Builder setTags(HashSet<String> tags){
             this.tags = tags;
             return this;
         }
@@ -116,7 +116,7 @@ public class Tweet {
     private Tweet(Tweet.Builder builder) {
         this(builder.author, builder.text, builder.media, builder.tags/*, builder.parent, builder.shared*/);
     }
-    private Tweet(User author, String text, Blob media, TreeSet<String> tags/*, Tweet parent, Tweet shared*/) {
+    private Tweet(User author, String text, Blob media, HashSet<String> tags/*, Tweet parent, Tweet shared*/) {
         this.author = author;
         this.date = LocalDateTime.now();
         this.text = text;
@@ -147,10 +147,15 @@ public class Tweet {
     public String getText() {return text;}
     public void setText(String text) {this.text = text;}
     
-    public List<User> getLikes() {return likes;}
-    public void addLike(User like) {likes.add(like);}
+    public Set<User> getLikes() {return likes;}
+    public void addLike(User user) {
+        likes.add(user);
+    }
+    public void removeLike(User user) {
+        likes.remove(user);
+	}
 
-    public List<Tweet> getShares() {return shares;}
+    public Set<Tweet> getShares() {return shares;}
     
     public Set<String> getTags() {return tags;}
     public void addTag(String String) {
@@ -194,4 +199,5 @@ public class Tweet {
 
     //DON'T USE, ONLY FOR DATABASE
     public Tweet() {}
+	
 }

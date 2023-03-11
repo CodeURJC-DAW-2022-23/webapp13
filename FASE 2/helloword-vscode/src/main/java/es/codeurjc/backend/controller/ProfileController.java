@@ -1,10 +1,10 @@
 package es.codeurjc.backend.controller;
 
-import java.security.Principal;
+
 import java.sql.Blob;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpSession;
 
 import io.vavr.control.Try;
