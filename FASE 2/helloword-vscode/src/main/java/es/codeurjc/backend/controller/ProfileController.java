@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 
 import io.vavr.control.Try;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -96,22 +97,23 @@ public class ProfileController {
 
     @GetMapping("/u/{username}/profilepicture")
 	public ResponseEntity<Resource> downloadImage(@PathVariable String username) {
-        ResponseEntity<Resource> notFoundResource = ResponseEntity.notFound().build();
 
 		Optional<User> user = userService.getUserByUsername(username);
-        if (user.isEmpty()) return notFoundResource;
+        if (user.isEmpty()) return getAnonImage();
 
         Optional<Blob> profilePicture = Optional.ofNullable(user.get().getProfilePicture());
-        if (profilePicture.isEmpty()) return notFoundResource;
+        if (profilePicture.isEmpty()) return getAnonImage();
 
-        return Try.of(() -> ResponseEntity
-            .ok()
-            .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-            .contentLength(profilePicture.get().length())
-            .body((Resource) new InputStreamResource(profilePicture.get().getBinaryStream()))
-        ).getOrElse(notFoundResource);
+        return ResourcesBuilder
+            .tryBuildImgResponse(profilePicture)
+            .getOrElse(getAnonImage());
 	}
-	
+
+    private ResponseEntity<Resource> getAnonImage() {
+        Resource img = new ClassPathResource("static/images/anonpfp.jpg");
+        return ResourcesBuilder.buildImgResponseOrNotFound(img);
+    }
+
 	@PostMapping("/update/profilepicture")
     public String uploadProfilePicture(@RequestParam MultipartFile image) {
        
