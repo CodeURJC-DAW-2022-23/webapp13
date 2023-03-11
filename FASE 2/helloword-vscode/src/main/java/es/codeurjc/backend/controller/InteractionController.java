@@ -78,9 +78,9 @@ public class InteractionController {
 
             Set<User> follows = followingUser.getFollowing();
 
-            if (!follows.contains(followingUser))
+            if (!follows.contains(followedUser))
                 follows.add(followedUser);
-            else follows.remove(followingUser);
+            else follows.remove(followedUser);
 
             userService.saveUser(followingUser);
         }

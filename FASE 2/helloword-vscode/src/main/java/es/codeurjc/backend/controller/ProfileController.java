@@ -69,27 +69,6 @@ public class ProfileController {
         return "profile";
     }
 
-    @RequestMapping("/switchfollowprofile")
-    public String switchFollow(Model model){
-
-        //don't remove brackets, body might be expanded
-        if (following) {
-            loggedUser.unfollow(profileUser);
-        }
-        else {
-            loggedUser.follow(profileUser);
-        }
-
-        this.following = !this.following;
-
-        userRepository.save(loggedUser);
-        userRepository.save(profileUser);
-
-        model.addAttribute("alreadyFollowing", this.following);
-
-        return "profile";
-    }
-
     private boolean visitingOwnProfile(String user) {
         return visitorAuthenticated && user.equals(loggedUser.getUsername());
     }
@@ -134,6 +113,6 @@ public class ProfileController {
         model.addAttribute("followerCount", "todo");
 
         model.addAttribute("ownProfile", ownProfile);
-        model.addAttribute("alreadyFollowing", following);
+        model.addAttribute("following", following);
     }
 }
