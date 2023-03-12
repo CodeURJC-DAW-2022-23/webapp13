@@ -2,6 +2,7 @@ package es.codeurjc.backend.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,6 +30,9 @@ public final class UserService {
     }
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+    public Set<User> getFollowers(User user) {
+        return userRepository.findByFollowing(user);
     }
     public boolean isEmailTaken(String email){
         return userRepository.existsByEmail(email);

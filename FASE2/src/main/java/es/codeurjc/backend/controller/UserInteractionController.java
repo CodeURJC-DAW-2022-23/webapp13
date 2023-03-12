@@ -62,6 +62,7 @@ public class UserInteractionController {
         followingUser.switchFollow(followedUser);
 
         userService.saveUser(followedUser);
+        userService.saveUser(followingUser);
 
         return getCurrentPage(request);
     }

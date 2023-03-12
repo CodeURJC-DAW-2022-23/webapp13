@@ -110,8 +110,7 @@ public class ProfileController {
 
     private void modelProfile (Model model, boolean ownProfile){
         model.addAttribute("profileUser", profileUser);
-        model.addAttribute("followerCount", "todo");
-
+        model.addAttribute("followerCount", profileUser.getFollowers(userService).size());
         model.addAttribute("ownProfile", ownProfile);
         model.addAttribute("following", following);
     }

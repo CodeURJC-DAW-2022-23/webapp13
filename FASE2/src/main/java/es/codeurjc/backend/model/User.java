@@ -150,6 +150,9 @@ public class User {
     public void setAdmin() {assert(!isAdmin()); this.roles.add("ADMIN");}
     public void removeAdmin(){this.roles.remove("ADMIN");}
 
+    public Set<User> getFollowers(UserService userService) { 
+        return userService.getFollowers(this);
+    }
     public Set<User> getFollowing() {return following;}
     public void switchFollow(User user) {
         assert(user != null);
