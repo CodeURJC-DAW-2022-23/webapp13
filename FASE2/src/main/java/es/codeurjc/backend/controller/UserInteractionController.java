@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import es.codeurjc.backend.model.Tweet;
 import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.repository.TweetRepository;
+import es.codeurjc.backend.repository.UserRepository;
 import es.codeurjc.backend.service.UserService;
 
 @Controller
@@ -31,30 +32,30 @@ public class UserInteractionController {
     
     @RequestMapping("/like/{id}")
     public String handleLike(
-        HttpServletRequest request, HttpSession session, @PathVariable String id
+        HttpServletRequest req, HttpSession session, @PathVariable String id
     ) {
-        Optional<User> userOpt = UserService.getUserFrom(session);
+        Optional<User> userOpt = userService.getUserFromRequest(req);
         Optional<Tweet> tweetOpt = tweetService.getTweetFromId(id);
 
         if (userOpt.isEmpty()) return "redirect:/login";
-        if (tweetOpt.isEmpty()) return getCurrentPage(request);
+        if (tweetOpt.isEmpty()) return getCurrentPage(req);
 
         Tweet tweet = tweetOpt.get();
         tweet.switchLike(userOpt.get());
         tweetRepository.save(tweet);
 
-        return getCurrentPage(request);
+        return getCurrentPage(req);
     }
 
     @RequestMapping("/follow/{username}")
     public String handleFollow(
-        HttpServletRequest request, HttpSession session, @PathVariable String username
+        HttpServletRequest req, @PathVariable String username
     ) {
-        Optional<User> followingUserOpt = UserService.getUserFrom(session);
+        Optional<User> followingUserOpt = userService.getUserFromRequest(req);
         Optional<User> followedUserOpt = userService.getUserByUsername(username);
 
         if (followingUserOpt.isEmpty()) return "redirect:/login";
-        if (followedUserOpt.isEmpty()) return getCurrentPage(request);
+        if (followedUserOpt.isEmpty()) return getCurrentPage(req);
 
         User followingUser = followingUserOpt.get();
         User followedUser = followedUserOpt.get();
@@ -64,7 +65,7 @@ public class UserInteractionController {
         userService.saveUser(followedUser);
         userService.saveUser(followingUser);
 
-        return getCurrentPage(request);
+        return getCurrentPage(req);
     }
 
     private String getCurrentPage(HttpServletRequest req) {

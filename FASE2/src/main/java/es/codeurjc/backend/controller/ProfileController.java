@@ -55,9 +55,10 @@ public class ProfileController {
     
     @RequestMapping("/u/{username}")
     public String showProfile(Model model, @PathVariable String username){
-        Optional<User> user = userService.getUserByUsername(username);
-        if (user.isEmpty()) return "error";
-        else profileUser = user.get();
+
+        Optional<User> profileUserOpt = userService.getUserByUsername(username);
+        if (profileUserOpt.isEmpty()) return "error";
+        else profileUser = profileUserOpt.get();
 
         following = Try
             .of(() -> loggedUser.getFollowing().contains(profileUser))

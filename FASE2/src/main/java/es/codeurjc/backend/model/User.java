@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,11 +28,14 @@ import javax.persistence.GenerationType;
 
 @Entity(name = "UserTable")
 public class User {
-    @Id
+    
+    /*
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long id;*/
+    @Id
+    private String username;
 
-    private String name, username, email, encodedPassword, description = "";
+    private String name, email, encodedPassword, description = "";
 
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> roles = new HashSet<>();
@@ -46,7 +50,7 @@ public class User {
     private List<Tweet> tweets = new ArrayList<Tweet>();
 
     @Nullable
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade={CascadeType.ALL})
     private Set<User> following = new HashSet<User>();
 
     @Nullable
@@ -115,8 +119,9 @@ public class User {
         this.profilePicture = profilePicture;
     }
 
+    /*
     public long getId() {return id;}
-    public void setId(long id) {this.id = id;}
+    public void setId(long id) {this.id = id;}*/
 
     public String getName() {return name;}
     public void setName(String name) {this.name = name; }
@@ -181,12 +186,12 @@ public class User {
         
         User other = (User) o;
          
-        return this.id == other.id;
+        return this.username == other.username;
     }
 
     public int hashCode() {
         int hash = 7;
-        hash = 31 * hash + (int)id;
+        hash = 31 * hash;
         hash = 31 * hash + (null == username ? 0 : username.hashCode());
         return hash;
     }
