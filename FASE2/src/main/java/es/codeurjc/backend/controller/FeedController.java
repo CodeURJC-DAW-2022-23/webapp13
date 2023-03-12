@@ -1,6 +1,6 @@
 package es.codeurjc.backend.controller;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import es.codeurjc.backend.model.Tweet;
 import es.codeurjc.backend.repository.TweetRepository;
@@ -22,14 +22,17 @@ public class FeedController {
     @Autowired
     private TweetRepository tweetRepository;
 
+    @Autowired
+    private UserService userService;
+
     private User loggedUser;
 
     @RequestMapping("/feed")
-    public String showFeed(Model model, HttpSession session){
+    public String showFeed(Model model, HttpServletRequest request){
 
-        loggedUser = (User)session.getAttribute("user");
+        loggedUser = userService.getUserFromRequestOrNull(request);
 
-        boolean visitorAuthenticated = UserService.isAuthenticated(session);
+        boolean visitorAuthenticated = loggedUser != null;
 
         if (visitorAuthenticated)
             updateFeedModelForUsers(model);
