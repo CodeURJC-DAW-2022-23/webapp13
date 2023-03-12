@@ -37,10 +37,9 @@ public class FeedController {
 
         if (visitorAuthenticated)
             updateFeedModelForUsers(model);
-        else
-            updateFeedModelForAnons(model);
+        else updateFeedModelForAnons(model);
 
-        model.addAttribute("authenticated", visitorAuthenticated);
+        model.addAttribute("authenticated", loggedUser.isPresent());
         model.addAttribute("inLogin", false);
         return "feed";
     }
@@ -52,8 +51,7 @@ public class FeedController {
 
     
     private void updateFeedModelForUsers(Model model) {
-        
-        ArrayList<User> followings = new ArrayList<>();  
+        ArrayList<User> followings = new ArrayList<>();
         followings.addAll(loggedUser.get().getFollowing());
         
         model.addAttribute("username", loggedUser.get().getUsername());

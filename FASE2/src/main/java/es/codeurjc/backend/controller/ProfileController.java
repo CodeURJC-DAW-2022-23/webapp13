@@ -38,9 +38,10 @@ public class ProfileController {
     @Autowired
     private UserRepository userRepository;
 
-    private User loggedUser, profileUser;
+    private Optional<User> loggedUser;
+    private User profileUser;
 
-    private boolean visitorAuthenticated, following;
+    private boolean following;
 
     @RequestMapping("/u/{username}")
     public String showProfile(
@@ -50,25 +51,19 @@ public class ProfileController {
         OptTwo<User> users = userService.getUserFrom(username, req);
 
         if (users.isLeft()) profileUser = users.getLeft();
-        if (users.isRight()) loggedUser = users.getRight();
+        if (users.isRight()) loggedUser = users.getOptRight();
 
-        visitorAuthenticated = loggedUser != null;
-
-        model.addAttribute("authenticated", visitorAuthenticated);
+        model.addAttribute("authenticated", loggedUser.isPresent());
 
         if (profileUser == null) return "error";
 
         following = Try
-            .of(() -> loggedUser.getFollowing().contains(profileUser))
+            .of(() -> loggedUser.get().getFollowing().contains(profileUser))
             .getOrElse(false);
 
         modelProfile(model, visitingOwnProfile(username));
 
         return "profile";
-    }
-
-    private boolean visitingOwnProfile(String user) {
-        return visitorAuthenticated && user.equals(loggedUser.getUsername());
     }
 
     @GetMapping("/u/{username}/profilepicture")
@@ -90,19 +85,24 @@ public class ProfileController {
         return ResourcesBuilder.buildImgResponseOrNotFound(img);
     }
 
-	@PostMapping("/update/profilepicture")
-    public String uploadProfilePicture(@RequestParam MultipartFile image) {
-       
+    @PostMapping("/{username}/update/pfp")
+    public String uploadProfilePicture(
+        @RequestParam MultipartFile image, @PathVariable String username
+    ) {
+        if (!usernameIsLoggedUser(username)) return "redirect:/u/" + username;
+
         Try.run(() -> profileUser.setProfilePicture(
             BlobProxy.generateProxy(image.getInputStream(), image.getSize())
         ));
 
         userService.saveUser(profileUser);
-        return "redirect:/u/" + loggedUser.getUsername();
+        return "redirect:/u/" + loggedUser.get().getUsername();
     }
 
-    @RequestMapping("/remove/profilepicture")
-    public String removeProfilePicture() {
+    @RequestMapping("{username}/remove/pfp")
+    public String removeProfilePicture(@PathVariable String username) {
+        if (!usernameIsLoggedUser(username)) return "redirect:/u/" + username;
+
         profileUser.setProfilePicture(null);
         return "profile";
     }
@@ -112,5 +112,13 @@ public class ProfileController {
         model.addAttribute("followerCount", profileUser.getFollowers(userService).size());
         model.addAttribute("ownProfile", ownProfile);
         model.addAttribute("following", following);
+    }
+
+    private boolean visitingOwnProfile(String username) {
+        return usernameIsLoggedUser(username);
+    }
+
+    private boolean usernameIsLoggedUser(String username) {
+        return loggedUser.isPresent() && username.equals(loggedUser.get().getUsername());
     }
 }
