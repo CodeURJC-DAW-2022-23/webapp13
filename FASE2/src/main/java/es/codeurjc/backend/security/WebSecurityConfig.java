@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests().antMatchers("/like").hasAnyRole("USER");
 
-        http.authorizeRequests().antMatchers("/loginerror").permitAll();
+        http.authorizeRequests().antMatchers("/loginfail").permitAll();
         http.authorizeRequests().antMatchers("/logout").permitAll();
         http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
 
@@ -52,8 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin().usernameParameter("username");
         http.formLogin().passwordParameter("password");
 
-        http.formLogin().failureUrl("/loginerror");
-
+        http.formLogin().failureUrl("/loginfail");
         http.formLogin().defaultSuccessUrl("/loginsuccess");
 
         // Logout

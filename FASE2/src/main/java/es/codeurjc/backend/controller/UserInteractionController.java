@@ -18,7 +18,7 @@ import es.codeurjc.backend.repository.TweetRepository;
 import es.codeurjc.backend.service.UserService;
 
 @Controller
-public class InteractionController {
+public class UserInteractionController {
 
     @Autowired
     TweetRepository tweetRepository;

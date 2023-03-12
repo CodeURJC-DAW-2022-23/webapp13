@@ -27,10 +27,10 @@ public class LoginController {
         return "loginpage";
     }
 
-    @RequestMapping("/loginerror")
+    @RequestMapping("/loginfail")
     public String loginerror(Model model){
-        model.addAttribute("fail", "fallaste");
-        return "loginpageerror";
+        model.addAttribute("fail", "Failed login");
+        return "loginpage";
     }
 
     @RequestMapping("/loginsuccess")

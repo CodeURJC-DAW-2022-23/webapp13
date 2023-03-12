@@ -39,7 +39,7 @@ public class DataBaseController {
         
 
         User userA = builder.build();
-        User userB = builder.setUsername("userB").setEmail("b@b.com").build();
+        User userB = builder.setUsername("b").setEmail("b@b.com").build();
         
         
         userRepository.save(userB);
