@@ -2,7 +2,9 @@ package es.codeurjc.backend.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +29,14 @@ public final class UserService {
     public Optional<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+    public Optional<User> getUserFromRequest(HttpServletRequest request) {
+        return getUserByUsername(request.getUserPrincipal().getName());
+    }
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+    public Set<User> getFollowers(User user) {
+        return userRepository.findByFollowing(user);
     }
     public boolean isEmailTaken(String email){
         return userRepository.existsByEmail(email);

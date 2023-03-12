@@ -10,10 +10,11 @@ import org.springframework.stereotype.Component;
 import es.codeurjc.backend.model.User;
 
 @Component
-public interface UserRepository extends JpaRepository<User, Long>{
+public interface UserRepository extends JpaRepository<User, String>{
 
     Optional<User> findByUsername(String username);
     Optional<User> findByEmail(String email);
+    Set<User> findByFollowing(User user);
     boolean existsByEmail(String email);
     boolean existsByUsername(String username);
 }

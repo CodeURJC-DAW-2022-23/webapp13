@@ -55,9 +55,10 @@ public class ProfileController {
     
     @RequestMapping("/u/{username}")
     public String showProfile(Model model, @PathVariable String username){
-        Optional<User> user = userService.getUserByUsername(username);
-        if (user.isEmpty()) return "error";
-        else profileUser = user.get();
+
+        Optional<User> profileUserOpt = userService.getUserByUsername(username);
+        if (profileUserOpt.isEmpty()) return "error";
+        else profileUser = profileUserOpt.get();
 
         following = Try
             .of(() -> loggedUser.getFollowing().contains(profileUser))
@@ -110,8 +111,7 @@ public class ProfileController {
 
     private void modelProfile (Model model, boolean ownProfile){
         model.addAttribute("profileUser", profileUser);
-        model.addAttribute("followerCount", "todo");
-
+        model.addAttribute("followerCount", profileUser.getFollowers(userService).size());
         model.addAttribute("ownProfile", ownProfile);
         model.addAttribute("following", following);
     }
