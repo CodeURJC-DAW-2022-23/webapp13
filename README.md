@@ -105,7 +105,7 @@ Se han pasado 3 tipos diferentes de imágenes (no registrado, registrado y moder
 ![Imagen de WhatsApp 2023-03-13 a las 02 17 51](https://user-images.githubusercontent.com/38651496/224676556-298982de-9e4a-442c-87a4-f234f6fa6334.jpg)
 
 ## Class diagram:
-![Imagen de WhatsApp 2023-03-12 a las 20 19 14](https://user-images.githubusercontent.com/38651496/224676765-779f4483-4f0f-415c-8058-3a30e9ef5e23.jpg)
+![image](https://user-images.githubusercontent.com/38651496/224727082-53f56eda-680a-497c-ac5f-d45678b3a308.png)
 
 ## Members participation: 
 
