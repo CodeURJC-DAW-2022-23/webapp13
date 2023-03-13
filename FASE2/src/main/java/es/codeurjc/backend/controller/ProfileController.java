@@ -51,7 +51,7 @@ public class ProfileController {
         OptTwo<User> users = userService.getUserFrom(username, req);
 
         if (users.isLeft()) profileUser = users.getLeft();
-        if (users.isRight()) loggedUser = users.getOptRight();
+        loggedUser = users.getOptRight();
 
         model.addAttribute("authenticated", loggedUser.isPresent());
 

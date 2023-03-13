@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.service.UserService;
 
+import java.util.Optional;
+
 
 @Controller
 public class LoginController {
@@ -34,13 +36,9 @@ public class LoginController {
     }
 
     @RequestMapping("/loginsuccess")
-    public String login(HttpServletRequest request, HttpSession session){
-
-        String username = request.getUserPrincipal().getName();
-        User loggedUser = userService.getUserByUsernameForced(username);
-
-        session.setAttribute("user", loggedUser);
-
+    public String login(HttpServletRequest req, HttpSession session){
+        Optional<User> loggedUser = userService.getUserFrom(req);
+        if (loggedUser.isEmpty()) return "redirect:/loginfail";
         return "redirect:/feed";
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @Controller
@@ -17,11 +17,14 @@ public class TweetReportController {
     @Autowired
     private TweetService tweetService;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping("/report/{id}")
     public String reportTweet(
-        Model model, HttpSession session, @PathVariable Long id
+        Model model, HttpServletRequest req, @PathVariable Long id
     ) {
-        Optional<User> reporter = UserService.getUserFrom(session);
+        Optional<User> reporter = userService.getUserFrom(req);
         if (reporter.isEmpty()) return "redirect:/login";
         tweetService.addReportToTweet(reporter.get(), id);
         return "redirect:/u/" + reporter.get().getUsername();
