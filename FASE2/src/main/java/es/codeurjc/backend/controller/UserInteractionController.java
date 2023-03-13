@@ -32,7 +32,7 @@ public class UserInteractionController {
     
     @RequestMapping("/like/{id}")
     public String handleLike(
-        HttpServletRequest req, HttpSession session, @PathVariable String id
+        HttpServletRequest req, @PathVariable String id
     ) {
         Optional<User> userOpt = userService.getUserFromRequest(req);
         Optional<Tweet> tweetOpt = tweetService.getTweetFromId(id);
@@ -49,16 +49,15 @@ public class UserInteractionController {
 
     @RequestMapping("/follow/{username}")
     public String handleFollow(
-        HttpServletRequest req, @PathVariable String username
+        @PathVariable String username, HttpServletRequest req
     ) {
-        Optional<User> followingUserOpt = userService.getUserFromRequest(req);
-        Optional<User> followedUserOpt = userService.getUserByUsername(username);
+        User[] users = userService.getUsersFromUsernameAndRequest(username, req);
 
-        if (followingUserOpt.isEmpty()) return "redirect:/login";
-        if (followedUserOpt.isEmpty()) return getCurrentPage(req);
+        User followedUser = users[0];
+        User followingUser = users[1];
 
-        User followingUser = followingUserOpt.get();
-        User followedUser = followedUserOpt.get();
+        if (followedUser == null) return getCurrentPage(req);
+        if (followingUser == null) return "redirect:/login";
 
         followingUser.switchFollow(followedUser);
 
