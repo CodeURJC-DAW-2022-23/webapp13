@@ -27,6 +27,7 @@ public class TweetReportController {
         Optional<User> reporter = userService.getUserFrom(req);
         if (reporter.isEmpty()) return "redirect:/login";
         tweetService.addReportToTweet(reporter.get(), id);
+        if (reporter.get().isAdmin()) return "redirect:/tweet/delete/" + id;
         return "redirect:/u/" + reporter.get().getUsername();
     }
 }

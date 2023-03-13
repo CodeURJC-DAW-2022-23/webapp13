@@ -3,10 +3,10 @@ package es.codeurjc.backend.service;
 import es.codeurjc.backend.model.Tweet;
 import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.repository.TweetRepository;
+import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.management.LockInfo;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -44,6 +44,10 @@ public class TweetService {
         tweetRepository.save(tweet);
     }
 
+    public void deleteTweet(Long tweetId) {
+
+    }
+
     // NOTE this strategy is inefficient. If len(users) == 10
     // and each users has at least 10 posts, then len(@return) == 100.
     public List<Tweet> queryTweetsForUsers(List<User> users) {
@@ -57,7 +61,11 @@ public class TweetService {
     }
 
     public List<Tweet> queryTweetsToModerate() {
-        return tweetRepository.findTop10ByOrderByReportsDesc();
+        return tweetRepository
+            .findTop10ByOrderByReportsDesc()
+            .stream()
+            .filter(p -> p.getReports() > 0)
+            .collect(Collectors.toList());
     }
 
 }

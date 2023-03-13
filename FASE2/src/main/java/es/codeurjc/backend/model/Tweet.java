@@ -26,7 +26,7 @@ public class Tweet {
     @Column(name="reports")
     private int reports = 0;
 
-    @OneToMany
+    @ManyToMany
     private Set<User> usersThatReportedThisTweet = new HashSet<>();
 
     @Column(columnDefinition = "TEXT")
@@ -44,7 +44,7 @@ public class Tweet {
     private Set<User> likes  = new HashSet<>();
 
     @Nullable
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE)
     private List<Tweet> children = new ArrayList<>();
 
     @Nullable
