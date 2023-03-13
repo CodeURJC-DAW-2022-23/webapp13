@@ -45,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/logout").permitAll();
         http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
 
-        http.authorizeRequests().antMatchers("/moderate").hasAnyRole("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers("/moderate").hasAnyRole("ADMIN");
 
         // Login form
         http.formLogin().loginPage("/login");
@@ -59,10 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout().logoutUrl("/logout");
         http.logout().logoutSuccessUrl("/login");
 
-        // Disable CSRF, for now
         http.csrf().disable();
         http.headers().frameOptions().disable();
-
-        
     }
 }

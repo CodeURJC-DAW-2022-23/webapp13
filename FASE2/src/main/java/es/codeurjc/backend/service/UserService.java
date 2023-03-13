@@ -1,14 +1,13 @@
 package es.codeurjc.backend.service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
+import es.codeurjc.backend.utilities.OptTwo;
+import io.vavr.control.Try;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -27,30 +26,21 @@ public final class UserService {
             .findByUsername(username)
             .orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found"));
     }
-    
-    public Optional<User> getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-    public Optional<User> getUserFromRequest(HttpServletRequest request) {
-        return getUserByUsername(request.getUserPrincipal().getName());
-    }
-    
-    public User getUserByUsernameOrNull(String username) {
-        Optional<User> userOpt = getUserByUsername(username);
-        if (userOpt.isPresent()) return userOpt.get();
-        else return null;
-    }
-    public User getUserFromRequestOrNull(HttpServletRequest request) {
 
-        if (request.getUserPrincipal() == null) return null;
-        else
-            return getUserByUsernameOrNull(request.getUserPrincipal().getName());
+    public OptTwo<User> getUserFrom(
+        String username, HttpServletRequest request
+    ) {
+        return OptTwo.of(getUserFrom(username), getUserFrom(request));
     }
-    public User[] getUsersFromUsernameAndRequest(String username, HttpServletRequest request) {
-        User[] pair = new User[2];
-        pair[0] = getUserByUsernameOrNull(username);
-        pair[1] = getUserFromRequestOrNull(request);
-        return pair;
+
+    public Optional<User> getUserFrom(HttpServletRequest request) {
+        return getUserFrom(
+            Try.of(() -> request.getUserPrincipal().getName()).getOrElse("")
+        );
+    }
+
+    public Optional<User> getUserFrom(String username) {
+        return userRepository.findByUsername(username);
     }
 
     public Optional<User> getUserByEmail(String email) {

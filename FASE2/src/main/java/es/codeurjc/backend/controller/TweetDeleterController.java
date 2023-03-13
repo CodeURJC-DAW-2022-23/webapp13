@@ -10,11 +10,13 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 
-
+// TODO merge with the reporter controller, maybe adding this to Tweet Service
 @Controller
 public class TweetDeleterController {
     @Autowired
     private TweetRepository tweetRepository;
+
+    private final String modEndpoint = "https://mod-microservice.vercel.app/postShouldGetDeleted/";
 
     @GetMapping(value = "/tweet/delete/{id}")
     public String deleteTweet(@PathVariable Long id, HttpServletRequest req) {
@@ -22,7 +24,6 @@ public class TweetDeleterController {
         return "redirect:" + req.getHeader("referer");
     }
 
-    private String modEndpoint = "https://mod-microservice.vercel.app/postShouldGetDeleted/";
     private Boolean postShouldGetDeleted(Long id) {
         RestTemplate api = new RestTemplate();
         String jsonStr = api.getForEntity(modEndpoint + id.toString(), String.class).getBody();

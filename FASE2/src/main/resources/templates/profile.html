@@ -44,12 +44,16 @@
       <!-- <link href="/profileuser/profileuser.css" rel="stylesheet" /> -->
       <link href="/nav.css" rel="stylesheet" />
       <link href="/profileuser/components.css" rel="stylesheet" />
+      <link href="/profileuser/profileuser.css" rel="stylesheet" />
 
       <div class="profileanon-container">
         <div class="profileanon-profileanon">
           <div class="profileanon-twits">
             <div class="profileanon-container1">
               <div class="profileanon-twitslayout">
+                
+                {{> tweetwritecomponent}}
+                
                 {{#profileUser.tweets}}
                   {{> tweetcomponent}}
                 {{/profileUser.tweets}}
@@ -112,7 +116,8 @@
           <div class="nav">
             {{> nexuschi}}
             {{> feedbutton}}
-			      {{> loginoutbutton}}
+            {{> loginoutbutton}}
+            {{> modbutton}}
           </div>
           
           <div class="profileanon-leftcomponents">
@@ -158,8 +163,7 @@
                   {{profileUser.description}}
                 </span>
               </span>
-              
-              
+              {{> writebutton}}
               {{> followprofilebutton}}
              
               <span class="profileanon-text086">

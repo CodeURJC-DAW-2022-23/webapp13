@@ -1,6 +1,9 @@
 package es.codeurjc.backend.controller;
 
+import java.awt.font.NumericShaper;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.IntStream;
 
 import javax.annotation.PostConstruct;
 
@@ -14,6 +17,7 @@ import es.codeurjc.backend.model.User;
 
 import es.codeurjc.backend.repository.TweetRepository;
 import es.codeurjc.backend.repository.UserRepository;
+import org.w3c.dom.ranges.Range;
 
 @RestController
 public class DataBaseController {
@@ -35,16 +39,19 @@ public class DataBaseController {
         builder
             .setUsername("a")
             .setEmail("a@a.com")
-            .setEncodedPassword(passwordEncoder.encode("a"));
+            .setEncodedPassword(passwordEncoder.encode("a"))
+            .setAdmin();
         
 
         User userA = builder.build();
         User userB = builder.setUsername("b").setEmail("b@b.com").build();
+        User userC = builder.setUsername("c").setEmail("c@c.com").build();
         
         
         userRepository.save(userB);
         userRepository.save(userA);
- 
+        userRepository.save(userC);
+
         userA.switchFollow(userB);
         userRepository.save(userA);
         userRepository.save(userB);
@@ -68,14 +75,14 @@ public class DataBaseController {
         //DON'T CHANGE ORDER
         tweetRepository.save(tweet2);
         tweetRepository.save(tweet1);
-        tweetRepository.save(
-            tweetBuilder.setAuthor(userA).setText("Random post").build()
-        );
-        tweetRepository.save(
-            tweetBuilder.setText("post severo, boilerplate").build()
-        );
 
-        //TODO hacer esto cada vez que se agregue un like en el code
+        tweetBuilder.setAuthor(userB);
+
+        IntStream.rangeClosed(1,20).forEach(
+            i -> tweetRepository.save(
+                tweetBuilder.setText("rand" + i).build()
+            )
+        );
     }
 
 }

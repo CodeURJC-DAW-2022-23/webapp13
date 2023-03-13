@@ -38,6 +38,10 @@
       data-tag="font"
     />
     <link rel="stylesheet" href="/feeduser/style.css" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/mustache@latest"></script>
+
   </head>
   <body>
     <div>
@@ -48,12 +52,17 @@
       <div class="feedanon-container">
         <div class="feedanon-feedanon">
           <div class="feedanon-twits">
-            <div class="feedanon-container1">
+            <div class="feedanon-container1" id="posts-container">
               {{#tweets}}
                 {{> tweetcomponent}}
               {{/tweets}}
             </div>
-            <span class="feedanon-text048"><span>load more...</span></span>
+            <span
+                class="feedanon-text048"
+                onclick="showMoreTweets()"
+            >
+              <span>load more...</span>
+            </span>
           </div>
           <div class="feedanon-trending">
             <span class="feedanon-text050"><span>Trending</span></span>
@@ -196,10 +205,31 @@
           <div class="nav">
             {{> nexuschi}}
             {{> profilebutton}}
-			      {{> loginoutbutton}}
+            {{> loginoutbutton}}
+            {{> modbutton}}
           </div>
         </div>
       </div>
     </div>
   </body>
+  <script>
+    var page = 2;
+    const showMoreTweets = () => {
+      var tweetComponentTemplate;
+
+      $.get("/tweetcomponent.html", data => {
+        tweetComponentTemplate = data;
+      })
+
+      const url = `/api/tweets?page=${page}&size=${5}`
+      $.get(url, (tweets, status) => {
+        for (var i = 0; i < tweets.content.length; i++) {
+          var post = Mustache.render(tweetComponentTemplate, tweets.content[i])
+          $("#posts-container").append(post);
+        }
+      })
+
+      page++
+    }
+  </script>
 </html>
