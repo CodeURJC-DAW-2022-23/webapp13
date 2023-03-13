@@ -165,13 +165,16 @@ Se han pasado 3 tipos diferentes de imágenes (no registrado, registrado y moder
 
 #### Stefano: 
 
+I created the majority of the controllers, did a lot of refactors, implemented a lot of methods and classes, worked on the DB model and persistence.
 
+Click on "(Browse History)" to see pre-rename history of files.
 
-* 
-* 
-* 
-* 
-* 
+* [ProfileController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/controller/ProfileController.java) 
+* [User.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/model/User.java) 
+* [UserService.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/service/UserService.java) 
+* [Tweet.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/model/Tweet.java) 
+* [SignupController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/controller/SignUpController.java) 
+* [LoginController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/controller/LoginController.java) 
 
 #### Alberto: 
 
