@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.lang.Nullable;
 
 @Entity(name = "Tweet")
@@ -21,6 +22,7 @@ public class Tweet {
     @ManyToOne
     private User author;
 
+    //@Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime date;
 
     @Column(name="reports")
@@ -37,7 +39,7 @@ public class Tweet {
     private Blob media;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<String> tags = new HashSet<String>();;    
+    private Set<String> tags = new HashSet<String>();
 
     @Nullable
     @ManyToMany

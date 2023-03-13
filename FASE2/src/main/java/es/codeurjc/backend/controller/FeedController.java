@@ -7,12 +7,18 @@ import es.codeurjc.backend.repository.TweetRepository;
 
 import es.codeurjc.backend.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.service.UserService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,5 +82,22 @@ public class FeedController {
     private void updateFeedModelForMods(Model model, User admin) {
         model.addAttribute("loggedUser", admin);
         model.addAttribute("tweets", tweetService.queryTweetsToModerate());
+    }
+
+    // NOTE if a tweet has N likes it will query all the N likes, in this sense
+    // the model for Tweet should store the likes count. Same applies to replies.
+    @GetMapping("/api/tweets")
+    public ResponseEntity<Page<Tweet>> getTweets(
+        @RequestParam("page") int page, @RequestParam("size") int size
+    ) {
+        if (size > 10) return ResponseEntity.badRequest().build();
+
+        Page<Tweet> tweetsPage = tweetRepository
+            .findAllByOrderByDateDesc(PageRequest.of(page, size));
+
+        return ResponseEntity
+            .ok()
+            .header("X-Total-Count", String.valueOf(tweetsPage.getTotalElements()))
+            .body(tweetsPage);
     }
 }

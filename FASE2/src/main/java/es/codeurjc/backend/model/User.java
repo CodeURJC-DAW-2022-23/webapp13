@@ -10,29 +10,29 @@ import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import es.codeurjc.backend.service.UserService;
 import org.springframework.lang.Nullable;
 
 
-import javax.persistence.GenerationType;
 
 @Entity(name = "UserTable")
 public class User {
     
-    /*
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;*/
     @Id
     private String username;
 
-    private String name, email, encodedPassword, description = "";
+    private String name, email, description = "";
 
+    @JsonIgnore
+    private String encodedPassword;
+
+    @JsonIgnore
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> roles = new HashSet<>();
 
@@ -40,18 +40,23 @@ public class User {
 
     @Nullable
     @Lob
+    @JsonIgnore
     private Blob profilePicture;
-    
+
+    @JsonIgnore
     @OneToMany(mappedBy = "author")
     private List<Tweet> tweets = new ArrayList<Tweet>();
 
+    @JsonIgnore
     @OneToMany
     private Set<Tweet> reportedTweets = new HashSet<Tweet>();
 
+    @JsonIgnore
     @Nullable
     @ManyToMany(fetch = FetchType.EAGER, cascade={CascadeType.ALL})
     private Set<User> following = new HashSet<User>();
 
+    @JsonIgnore
     @Nullable
     @OneToMany
     private Set<User> blockedUsers = new HashSet<>();  
@@ -100,21 +105,22 @@ public class User {
     }
     
     private User(User.Builder builder){
-        this(builder.username, builder.email, builder.encodedPassword, builder.name, 
-        builder.description, builder.admin, builder.banned, null);
+        this(
+            builder.username, builder.email, builder.encodedPassword, builder.name,
+            builder.description, builder.admin, builder.banned, null
+        );
     }
-    private User(String username, String email, String encodedPassword, String name, 
-    String description, boolean admin, boolean banned, Blob profilePicture) {
-
+    private User(
+        String username, String email, String encodedPassword, String name,
+        String description, boolean admin, boolean banned, Blob profilePicture
+    ) {
         this.username = username;
         this.email = email;
         this.encodedPassword = encodedPassword;
         this.name = name;
         this.description = description;
         this.roles.add("USER");
-        if (admin){
-            this.roles.add("ADMIN");
-        }
+        if (admin) this.roles.add("ADMIN");
         this.profilePicture = profilePicture;
     }
 
@@ -164,12 +170,6 @@ public class User {
             following.add(user);
         else following.remove(user);
     }
-
-    /* TODO
-    public Set<UserActionChronologicalWrapper> getFollowers(UserService userService) {        
-        return .getFollowers(this);
-    }
-    */
 
     public Set<User> getBlockedUsers() {return blockedUsers;}
     public void block(User user){blockedUsers.add(user);};
