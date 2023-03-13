@@ -93,6 +93,9 @@ Se han pasado 3 tipos diferentes de imágenes (no registrado, registrado y moder
 
 ## Trabajo en fase 2
 Stefano: Mayoría del código escrito
+
 Oskar: Una gran cantidad de código escrito pero (muy levemente) menos
+
 Alberto: Algo de código, diagramas de clase y de la BD
+
 Álvaro: Un poco menos de código
