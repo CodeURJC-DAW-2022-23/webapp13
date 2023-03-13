@@ -90,3 +90,9 @@ Se han pasado 3 tipos diferentes de imágenes (no registrado, registrado y moder
 ## Diagrama de navegación
 ![diagrama_navegacion](https://user-images.githubusercontent.com/80198176/218341414-53fe26b0-4dee-4f52-aae6-27d9028d141c.png)
 
+
+## Trabajo en fase 2
+Stefano: Mayoría del código escrito
+Oskar: Una gran cantidad de código escrito pero (muy levemente) menos
+Alberto: Algo de código, diagramas de clase y de la BD
+Álvaro: Un poco menos de código
