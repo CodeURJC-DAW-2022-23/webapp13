@@ -125,21 +125,24 @@ Se han pasado 3 tipos diferentes de imágenes (no registrado, registrado y moder
 
 |  Description | Link | 
 | ------ | ------ | 
-| Commit 1... | enlace al commit | 
-| Commit 2... | enlace al commit | 
-| Commit 3... | enlace al commit | 
-| Commit 4... | enlace al commit | 
-| Commit 5... | enlace al commit | 
+| Started making an internal Builder class for User | [Commit 1](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/bbdbbfcc0ee74d675843035dc9272bd6dace0262) | 
+| Post tweets functionality | [Commit 2](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/3e0b526bef8502f05473b704009d373a3791d8b0) | 
+| Profile pic upload | [Commit 3](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/41cb81cb7738a169a7c75e46331ddbf597709fdb) | 
+| Tweet.Builder and User.Builder improvements | [Commit 4](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/25e540053a7b6103975055fa9cc88f351ab990d6) | 
+| Login and logout logic added and minor fixes | [Commit 5](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/926183d8c9039c101fee2ec00507092031a049a0) | 
+| Improved my User.Builder class| [Commit 6](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/bbdbbfcc0ee74d675843035dc9272bd6dace0262) |
+                                                            
 
 #### Alberto: 
 
 |  Description | Link | 
 | ------ | ------ | 
 | Created program structure dependencies. | [Commit 1](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/195d5750abea4ec5cecfc1e86f195c5ec97ce4d4) | 
-| Created database, models and inicializated the project | [Commit 2](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/8ff467e32452a6188cb83b8066a5101ad028f76e) | 
+| Created database, models and inicializated the project | [Commit 2](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/8ff467e32452a6188cb83b8066a5101ad028f76e) 
 | Modified repository and created a HandlerNotFound | [Commit 3](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/c4db0f4a67e3df3d96fb963fdf621262b32a3acf) | 
-| Login and logout logic added and minor fixes | [Commit 4](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/926183d8c9039c101fee2ec00507092031a049a0) | 
-| Added sample data to the database and other fixes. | [Commit 5](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/aa86a848ff7134807ce57c668ad8d0187ea47994) | 
+| Added sample data to the database and other fixes. | [Commit 4](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/aa86a848ff7134807ce57c668ad8d0187ea47994) | 
+| Login and logout logic added and minor fixes | [Commit 5](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/926183d8c9039c101fee2ec00507092031a049a0) | 
+
 
 #### Álvaro: 
 
