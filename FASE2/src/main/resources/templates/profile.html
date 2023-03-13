@@ -51,6 +51,9 @@
           <div class="profileanon-twits">
             <div class="profileanon-container1">
               <div class="profileanon-twitslayout">
+                
+                {{> tweetwritecomponent}}
+                
                 {{#profileUser.tweets}}
                   {{> tweetcomponent}}
                 {{/profileUser.tweets}}
@@ -160,8 +163,7 @@
                   {{profileUser.description}}
                 </span>
               </span>
-              
-              
+              {{> writebutton}}
               {{> followprofilebutton}}
              
               <span class="profileanon-text086">

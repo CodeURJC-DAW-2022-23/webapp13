@@ -2,6 +2,7 @@ package es.codeurjc.backend.controller;
 
 
 import java.sql.Blob;
+import java.util.Collections;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import es.codeurjc.backend.model.Tweet;
 import es.codeurjc.backend.model.User;
+import es.codeurjc.backend.repository.TweetRepository;
 import es.codeurjc.backend.repository.UserRepository;
 import es.codeurjc.backend.service.UserService;
 
@@ -37,6 +40,9 @@ public class ProfileController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private TweetRepository tweetRepository;
 
     private Optional<User> loggedUser;
     private User profileUser;
@@ -85,6 +91,32 @@ public class ProfileController {
         return ResourcesBuilder.buildImgResponseOrNotFound(img);
     }
 
+    @GetMapping("/u/{username}/write")
+    public String startWritingTweet(@PathVariable String username, Model model) {
+        if (!visitingOwnProfile(username)) return "error";
+
+         model.addAttribute("posting", true);
+         modelProfile(model, visitingOwnProfile(username));
+
+        return "profile";
+    }
+
+    @PostMapping("/u/{username}/posttweet")
+    public String startWritingTweet(Model model, @PathVariable String username, @RequestParam String text) {
+        if (!visitingOwnProfile(username)) return "error";
+
+        Tweet.Builder builder = new Tweet.Builder();
+
+        builder.setAuthor(loggedUser.get());
+        builder.setText(text);
+        tweetRepository.save(builder.build());
+        userService.saveUser(profileUser);
+
+        
+
+        return "redirect:/u/" + username;
+    }
+
     @PostMapping("/{username}/update/pfp")
     public String uploadProfilePicture(
         @RequestParam MultipartFile image, @PathVariable String username
@@ -108,6 +140,8 @@ public class ProfileController {
     }
 
     private void modelProfile (Model model, boolean ownProfile){
+        Collections.sort(profileUser.getTweets(), Collections.reverseOrder());
+
         model.addAttribute("profileUser", profileUser);
         model.addAttribute("followerCount", profileUser.getFollowers(userService).size());
         model.addAttribute("ownProfile", ownProfile);

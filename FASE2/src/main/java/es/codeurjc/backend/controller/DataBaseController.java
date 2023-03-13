@@ -75,12 +75,9 @@ public class DataBaseController {
         //DON'T CHANGE ORDER
         tweetRepository.save(tweet2);
         tweetRepository.save(tweet1);
-        tweetRepository.save(
-            tweetBuilder.setAuthor(userA).setText("Random post").build()
-        );
-        tweetRepository.save(
-            tweetBuilder.setText("post severo, boilerplate").build()
-        );
+
+        tweetBuilder.setAuthor(userB);
+
         IntStream.rangeClosed(1,20).forEach(
             i -> tweetRepository.save(
                 tweetBuilder.setText("rand" + i).build()

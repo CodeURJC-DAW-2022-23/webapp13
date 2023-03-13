@@ -80,6 +80,7 @@ public class FeedController {
     }
 
     private void updateFeedModelForMods(Model model, User admin) {
+        model.addAttribute("authenticated", true);
         model.addAttribute("loggedUser", admin);
         model.addAttribute("tweets", tweetService.queryTweetsToModerate());
     }
