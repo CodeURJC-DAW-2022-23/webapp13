@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import es.codeurjc.backend.utilities.OptTwo;
 import io.vavr.control.Try;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,12 +43,14 @@ public class ProfileController {
     private boolean visitorAuthenticated, following;
 
     @RequestMapping("/u/{username}")
-    public String showProfile(Model model, @PathVariable String username, HttpServletRequest request){
+    public String showProfile(
+        Model model, @PathVariable String username, HttpServletRequest req
+    ){
 
-        User[] users = userService.getUsersFromUsernameAndRequest(username, request);
+        OptTwo<User> users = userService.getUserFrom(username, req);
 
-        profileUser = users[0];
-        loggedUser = users[1];
+        if (users.isLeft()) profileUser = users.getLeft();
+        if (users.isRight()) loggedUser = users.getRight();
 
         visitorAuthenticated = loggedUser != null;
 
@@ -71,7 +74,7 @@ public class ProfileController {
     @GetMapping("/u/{username}/profilepicture")
 	public ResponseEntity<Resource> downloadImage(@PathVariable String username) {
 
-		Optional<User> user = userService.getUserByUsername(username);
+		Optional<User> user = userService.getUserFrom(username);
         if (user.isEmpty()) return getAnonImage();
 
         Optional<Blob> profilePicture = Optional.ofNullable(user.get().getProfilePicture());
