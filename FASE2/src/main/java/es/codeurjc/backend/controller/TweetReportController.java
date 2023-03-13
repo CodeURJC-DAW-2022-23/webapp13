@@ -26,5 +26,4 @@ public class TweetReportController {
         tweetService.addReportToTweet(reporter.get(), id);
         return "redirect:/u/" + reporter.get().getUsername();
     }
-
 }

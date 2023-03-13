@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 
-
+// TODO merge with the reporter controller, maybe adding this to Tweet Service
 @Controller
 public class TweetDeleterController {
     @Autowired

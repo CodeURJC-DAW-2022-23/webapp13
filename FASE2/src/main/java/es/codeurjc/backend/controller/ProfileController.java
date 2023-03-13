@@ -112,6 +112,8 @@ public class ProfileController {
         model.addAttribute("followerCount", profileUser.getFollowers(userService).size());
         model.addAttribute("ownProfile", ownProfile);
         model.addAttribute("following", following);
+        if (loggedUser.isEmpty()) return;
+        model.addAttribute("loggedUser", loggedUser.get());
     }
 
     private boolean visitingOwnProfile(String username) {

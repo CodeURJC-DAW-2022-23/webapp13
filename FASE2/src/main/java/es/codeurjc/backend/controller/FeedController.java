@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import es.codeurjc.backend.model.Tweet;
 import es.codeurjc.backend.repository.TweetRepository;
 
+import es.codeurjc.backend.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,9 @@ public class FeedController {
     private TweetRepository tweetRepository;
 
     @Autowired
+    private TweetService tweetService;
+
+    @Autowired
     private UserService userService;
 
     private Optional<User> loggedUser;
@@ -33,14 +37,20 @@ public class FeedController {
 
         loggedUser = userService.getUserFrom(request);
 
-        boolean visitorAuthenticated = loggedUser.isPresent();
-
-        if (visitorAuthenticated)
+        if (loggedUser.isPresent())
             updateFeedModelForUsers(model);
         else updateFeedModelForAnons(model);
 
         model.addAttribute("authenticated", loggedUser.isPresent());
         model.addAttribute("inLogin", false);
+        return "feed";
+    }
+
+    @RequestMapping("/feed/moderator")
+    public String showModFeed(Model model, HttpServletRequest req) {
+        Optional<User> user = userService.getUserFrom(req);
+        if (user.isEmpty() || !user.get().isAdmin()) return "error";
+        updateFeedModelForMods(model, user.get());
         return "feed";
     }
 
@@ -54,15 +64,17 @@ public class FeedController {
         ArrayList<User> followings = new ArrayList<>();
         followings.addAll(loggedUser.get().getFollowing());
         
-        model.addAttribute("username", loggedUser.get().getUsername());
-        model.addAttribute(
-            "tweets",
-            FeedQuerier.queryTweetsForUsers(followings, tweetRepository)
-        );
+        model.addAttribute("loggedUser", loggedUser);
+        model.addAttribute("tweets", tweetService.queryTweetsForUsers(followings));
     }
 
     private void updateFeedModelForAnons(Model model) {
         List<Tweet> tweets = tweetRepository.findTop10ByOrderByDateDesc();
         model.addAttribute("tweets", tweets);
+    }
+
+    private void updateFeedModelForMods(Model model, User admin) {
+        model.addAttribute("loggedUser", admin);
+        model.addAttribute("tweets", tweetService.queryTweetsToModerate());
     }
 }
