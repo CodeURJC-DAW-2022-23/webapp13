@@ -125,34 +125,31 @@ Se han pasado 3 tipos diferentes de imágenes (no registrado, registrado y moder
 
 |  Description | Link | 
 | ------ | ------ | 
-| Replaced HttpSession("user") att by DB query due to outdated-state bugs | [Commit 1](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/5a225131d9172d07e898527818e381dc699be28e) | 
-| Post tweets functionality | [Commit 2](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/3e0b526bef8502f05473b704009d373a3791d8b0) | 
-| Profile pic upload | [Commit 3](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/41cb81cb7738a169a7c75e46331ddbf597709fdb) | 
-| Tweet.Builder and User.Builder improvements | [Commit 4](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/25e540053a7b6103975055fa9cc88f351ab990d6) | 
-| Login and logout logic added and minor fixes | [Commit 5](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/926183d8c9039c101fee2ec00507092031a049a0) | 
-| Improved my User.Builder class| [Commit 6](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/bbdbbfcc0ee74d675843035dc9272bd6dace0262) |
-                                                            
+| Commit 1... | enlace al commit | 
+| Commit 2... | enlace al commit | 
+| Commit 3... | enlace al commit | 
+| Commit 4... | enlace al commit | 
+| Commit 5... | enlace al commit | 
 
 #### Alberto: 
 
 |  Description | Link | 
 | ------ | ------ | 
 | Created program structure dependencies. | [Commit 1](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/195d5750abea4ec5cecfc1e86f195c5ec97ce4d4) | 
-| Created database, models and inicializated the project | [Commit 2](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/8ff467e32452a6188cb83b8066a5101ad028f76e) 
+| Created database, models and inicializated the project | [Commit 2](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/8ff467e32452a6188cb83b8066a5101ad028f76e) | 
 | Modified repository and created a HandlerNotFound | [Commit 3](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/c4db0f4a67e3df3d96fb963fdf621262b32a3acf) | 
-| Added sample data to the database and other fixes. | [Commit 4](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/aa86a848ff7134807ce57c668ad8d0187ea47994) | 
-| Login and logout logic added and minor fixes | [Commit 5](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/926183d8c9039c101fee2ec00507092031a049a0) | 
-
+| Login and logout logic added and minor fixes | [Commit 4](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/926183d8c9039c101fee2ec00507092031a049a0) | 
+| Added sample data to the database and other fixes. | [Commit 5](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/aa86a848ff7134807ce57c668ad8d0187ea47994) | 
 
 #### Álvaro: 
 
 |  Description | Link | 
 | ------ | ------ | 
-| Commit 1... | enlace al commit | 
-| Commit 2... | enlace al commit | 
-| Commit 3... | enlace al commit | 
-| Commit 4... | enlace al commit | 
-| Commit 5... | enlace al commit | 
+| Creation of TweetService bean and fixed ProfileController params | [Commit 1](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/9c40ff853b7c2a63e17f5ee91e2bd9333e0ae119) | 
+| Simplified LoginController | [Commit 2](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/9b4c8f84d9ffac5837aacdb61479456cebeb2a1f) | 
+| First implementation of LoginController and UserService. | [Commit 3](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/e69251427d3fda7d6cb69469513962ae4c34ae2b) | 
+| User update | [Commit 4](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/a8fb0f8105e2381df302729e72ad28aefba6e66e) | 
+| Create feed controller and adjusted userfeed HTML | [Commit 5](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/e60581fe702673cdcd52af9679475efd64d50d16) | 
 
 ### 5 files with more participation: 
 
@@ -191,11 +188,11 @@ I've been working mainly on the program structure at the start of the split, and
 
 #### Álvaro: 
 
+I've editted and helped with the implementations of most controllers, connected the HTML posts and requests properly and fixed the login and signup issues that we had to deal with.
 
-
-* 
-* 
-* 
-* 
-* 
+* [LoginController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/controller/LoginController.java) 
+* [ProfileController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/controller/ProfileController.java) 
+* [TweetService.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/service/TweetService.java)
+* [SignupController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/controller/SignUpController.java) 
+* [FeedController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/commits/dev/FASE2/src/main/java/es/codeurjc/backend/controller/FeedController.java)
 
