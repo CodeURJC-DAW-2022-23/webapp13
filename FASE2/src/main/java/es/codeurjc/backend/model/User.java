@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
@@ -17,11 +16,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-
-import org.springframework.lang.Nullable;
-
-import es.codeurjc.backend.repository.UserRepository;
 import es.codeurjc.backend.service.UserService;
+import org.springframework.lang.Nullable;
 
 
 import javax.persistence.GenerationType;
@@ -48,6 +44,9 @@ public class User {
     
     @OneToMany(mappedBy = "author")
     private List<Tweet> tweets = new ArrayList<Tweet>();
+
+    @OneToMany
+    private Set<Tweet> reportedTweets = new HashSet<Tweet>();
 
     @Nullable
     @ManyToMany(fetch = FetchType.EAGER, cascade={CascadeType.ALL})
@@ -155,7 +154,7 @@ public class User {
     public void setAdmin() {assert(!isAdmin()); this.roles.add("ADMIN");}
     public void removeAdmin(){this.roles.remove("ADMIN");}
 
-    public Set<User> getFollowers(UserService userService) { 
+    public Set<User> getFollowers(UserService userService) {
         return userService.getFollowers(this);
     }
     public Set<User> getFollowing() {return following;}

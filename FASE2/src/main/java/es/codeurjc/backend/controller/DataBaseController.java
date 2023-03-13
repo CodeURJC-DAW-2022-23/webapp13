@@ -35,16 +35,19 @@ public class DataBaseController {
         builder
             .setUsername("a")
             .setEmail("a@a.com")
-            .setEncodedPassword(passwordEncoder.encode("a"));
+            .setEncodedPassword(passwordEncoder.encode("a"))
+            .setAdmin();
         
 
         User userA = builder.build();
         User userB = builder.setUsername("b").setEmail("b@b.com").build();
+        User userC = builder.setUsername("c").setEmail("c@c.com").build();
         
         
         userRepository.save(userB);
         userRepository.save(userA);
- 
+        userRepository.save(userC);
+
         userA.switchFollow(userB);
         userRepository.save(userA);
         userRepository.save(userB);
