@@ -101,6 +101,19 @@ Se han pasado 3 tipos diferentes de imágenes (no registrado, registrado y moder
 
 # Fase 2 
 
+## CONFIGURATION
+
+You must complete these steps in order to be able to test our application.
+
+1. First download the project code, from https://github.com/CodeURJC-DAW-2022-23/webapp13 and then extract the zip and open some java ide.
+2. Donwload the MySQL Workbench Community from https://dev.mysql.com/downloads/workbench/ and open the installation file.
+3. Install version 8.0.32 version MySQL Workbench Community. Follow the instructions to install it correctly and set everything as default.
+4. Launch MySQL Workbench from your program menu.
+5. To connect to the default local MySQLL server click on the box that may appear under MySQL Connections.
+6. If asked enter your MySQL server credentials.
+7. Make sure to change the aplication.properties to create-drop instead of update.
+
+
 ## Database diagram: 
 ![Imagen de WhatsApp 2023-03-13 a las 02 17 51](https://user-images.githubusercontent.com/38651496/224676556-298982de-9e4a-442c-87a4-f234f6fa6334.jpg)
 
