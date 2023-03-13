@@ -84,7 +84,7 @@ public class FeedController {
         model.addAttribute("tweets", tweetService.queryTweetsToModerate());
     }
 
-    // NOTE if a tweet has N likes it will query all the N likes, in this sense
+    // FIXME if a tweet has N likes it will query all the N likes, in this sense
     // the model for Tweet should store the likes count. Same applies to replies.
     @GetMapping("/api/tweets")
     public ResponseEntity<Page<Tweet>> getTweets(
