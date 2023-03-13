@@ -4,13 +4,12 @@ package es.codeurjc.backend.controller;
 import java.sql.Blob;
 import java.util.Optional;
 
-
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import io.vavr.control.Try;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,23 +41,19 @@ public class ProfileController {
 
     private boolean visitorAuthenticated, following;
 
+    @RequestMapping("/u/{username}")
+    public String showProfile(Model model, @PathVariable String username, HttpServletRequest request){
 
-    @ModelAttribute
-	public void addAttributes(Model model, HttpSession session) {
+        User[] users = userService.getUsersFromUsernameAndRequest(username, request);
 
-        visitorAuthenticated = UserService.isAuthenticated(session);
+        profileUser = users[0];
+        loggedUser = users[1];
+
+        visitorAuthenticated = loggedUser != null;
 
         model.addAttribute("authenticated", visitorAuthenticated);
 
-		loggedUser = (User)session.getAttribute("user");
-	}
-    
-    @RequestMapping("/u/{username}")
-    public String showProfile(Model model, @PathVariable String username){
-
-        Optional<User> profileUserOpt = userService.getUserByUsername(username);
-        if (profileUserOpt.isEmpty()) return "error";
-        else profileUser = profileUserOpt.get();
+        if (profileUser == null) return "error";
 
         following = Try
             .of(() -> loggedUser.getFollowing().contains(profileUser))
