@@ -15,6 +15,7 @@ import es.codeurjc.backend.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class FeedController {
@@ -25,14 +26,14 @@ public class FeedController {
     @Autowired
     private UserService userService;
 
-    private User loggedUser;
+    private Optional<User> loggedUser;
 
     @RequestMapping("/feed")
     public String showFeed(Model model, HttpServletRequest request){
 
-        loggedUser = userService.getUserFromRequestOrNull(request);
+        loggedUser = userService.getUserFrom(request);
 
-        boolean visitorAuthenticated = loggedUser != null;
+        boolean visitorAuthenticated = loggedUser.isPresent();
 
         if (visitorAuthenticated)
             updateFeedModelForUsers(model);
@@ -46,16 +47,16 @@ public class FeedController {
 
     @RequestMapping("/tomyprofile")
     public String redirectToProfile(final Model model) {
-        return "redirect:/u/" + loggedUser.getUsername();
+        return "redirect:/u/" + loggedUser.get().getUsername();
     }
 
     
     private void updateFeedModelForUsers(Model model) {
         
         ArrayList<User> followings = new ArrayList<>();  
-        followings.addAll(loggedUser.getFollowing());
+        followings.addAll(loggedUser.get().getFollowing());
         
-        model.addAttribute("username", loggedUser.getUsername());
+        model.addAttribute("username", loggedUser.get().getUsername());
         model.addAttribute(
             "tweets",
             FeedQuerier.queryTweetsForUsers(followings, tweetRepository)
