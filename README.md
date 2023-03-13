@@ -138,11 +138,12 @@ You must complete these steps in order to be able to test our application.
 
 |  Description | Link | 
 | ------ | ------ | 
-| Commit 1... | enlace al commit | 
-| Commit 2... | enlace al commit | 
-| Commit 3... | enlace al commit | 
-| Commit 4... | enlace al commit | 
-| Commit 5... | enlace al commit | 
+| Replaced HttpSession("user") att by DB query due to outdated-state bugs | [Commit 1](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/5a225131d9172d07e898527818e381dc699be28e) | 
+| Post tweets functionality | [Commit 2](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/3e0b526bef8502f05473b704009d373a3791d8b0) | 
+| Profile pic upload | [Commit 3](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/41cb81cb7738a169a7c75e46331ddbf597709fdb) | 
+| Tweet.Builder and User.Builder improvements | [Commit 4](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/25e540053a7b6103975055fa9cc88f351ab990d6) | 
+| Login and logout logic added and minor fixes | [Commit 5](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/926183d8c9039c101fee2ec00507092031a049a0) | 
+| Improved my User.Builder class| [Commit 6](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/bbdbbfcc0ee74d675843035dc9272bd6dace0262) |
 
 #### Alberto: 
 
@@ -168,13 +169,13 @@ You must complete these steps in order to be able to test our application.
 
 #### Oskar: 
 
+Did a lot of radical refactors, a lot of implementations for feed controllers, and took care of the moderating section and web3 things.
 
-
-* 
-* 
-* 
-* 
-* 
+* [FeedController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/controller/FeedController.java) 
+* [OptTwo.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/utilities/OptTwo.java)
+* [OptPair.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/utilities/OptPair.java)
+* [ResourcesBuilder.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/controller/ResourcesBuilder.java)
+* [ProfileController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/controller/ProfileController.java) 
 
 #### Stefano: 
 
