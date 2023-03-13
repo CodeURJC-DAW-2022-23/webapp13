@@ -1,6 +1,9 @@
 package es.codeurjc.backend.controller;
 
+import java.awt.font.NumericShaper;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.IntStream;
 
 import javax.annotation.PostConstruct;
 
@@ -14,6 +17,7 @@ import es.codeurjc.backend.model.User;
 
 import es.codeurjc.backend.repository.TweetRepository;
 import es.codeurjc.backend.repository.UserRepository;
+import org.w3c.dom.ranges.Range;
 
 @RestController
 public class DataBaseController {
@@ -77,8 +81,11 @@ public class DataBaseController {
         tweetRepository.save(
             tweetBuilder.setText("post severo, boilerplate").build()
         );
-
-        //TODO hacer esto cada vez que se agregue un like en el code
+        IntStream.rangeClosed(1,20).forEach(
+            i -> tweetRepository.save(
+                tweetBuilder.setText("rand" + i).build()
+            )
+        );
     }
 
 }
