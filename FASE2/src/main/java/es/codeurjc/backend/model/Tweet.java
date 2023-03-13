@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.lang.Nullable;
 
 @Entity(name = "Tweet")
-public class Tweet {
+public class Tweet implements Comparable<Tweet>{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -153,5 +153,10 @@ public class Tweet {
 
     //DON'T USE, ONLY FOR DATABASE
     public Tweet() {}
+    @Override
+    public int compareTo(Tweet o) {
+        
+       return this.date.compareTo(o.date);
+    }
 	
 }
