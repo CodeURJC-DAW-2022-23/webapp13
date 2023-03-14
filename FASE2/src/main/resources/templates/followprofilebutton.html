@@ -1,0 +1,14 @@
+<a href="/follow/{{profileUser.username}}">
+{{#authenticated}}
+{{^ownProfile}}
+        <div class="profileanon-btn1">
+            {{#following}}
+            <span class="profileanon-text084">Unfollow</span>
+            {{/following}}
+            {{^following}}
+            <span class="profileanon-text084">Follow</span>
+            {{/following}}
+        </div> 
+{{/ownProfile}}   
+{{/authenticated}}
+</a>

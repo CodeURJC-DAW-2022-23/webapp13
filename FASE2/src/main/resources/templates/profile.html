@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="english">
+  <head>
+    <title>exported project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Inter;
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-gray-black);
+        background-color: var(--dl-color-gray-white);
+
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&amp;display=swap"
+      data-tag="font"
+    />
+    <link rel="stylesheet" href="/profileuser/style.css" />
+  </head>
+  <body>
+    <div>
+      <!-- <link href="/profileuser/profileuser.css" rel="stylesheet" /> -->
+      <link href="/nav.css" rel="stylesheet" />
+      <link href="/profileuser/components.css" rel="stylesheet" />
+      <link href="/profileuser/profileuser.css" rel="stylesheet" />
+
+      <div class="profileanon-container">
+        <div class="profileanon-profileanon">
+          <div class="profileanon-twits">
+            <div class="profileanon-container1">
+              <div class="profileanon-twitslayout">
+                
+                {{> tweetwritecomponent}}
+                
+                {{#profileUser.tweets}}
+                  {{> tweetcomponent}}
+                {{/profileUser.tweets}}
+              </div>
+            </div>
+            <div class="profileanon-bannercontainer">
+              <img
+                src="/profileuser/assets/banner1353-bdcm-600h.png"
+                alt="banner1353"
+                class="profileanon-banner"
+              />
+            </div>
+          </div>
+          <div class="profileanon-trending">
+            <span class="profileanon-text036"><span>Trending</span></span>
+            <div class="profileanon-content3">
+              <div class="profileanon-singletrending">
+                <span class="profileanon-text038"><span>#Lorem</span></span>
+                <span class="profileanon-text040"><span class="tag">31 posts</span></span>
+              </div>
+              <div class="profileanon-singletrending1">
+                <span class="profileanon-text042"><span>ipsum</span></span>
+                <span class="profileanon-text044"><span class="tag">16 posts</span></span>
+              </div>
+              <div class="profileanon-singletrending2">
+                <span class="profileanon-text046"><span>#consectetur</span></span>
+                <span class="profileanon-text048"><span class="tag">31 posts</span></span>
+              </div>
+              <div class="profileanon-singletrending3">
+                <span class="profileanon-text050"><span>#Lorem</span></span>
+                <span class="profileanon-text052"><span class="tag">31 posts</span></span>
+              </div>
+              <div class="profileanon-singletrending4">
+                <span class="profileanon-text054"><span>ipsum</span></span>
+                <span class="profileanon-text056"><span class="tag">16 posts</span></span>
+              </div>
+              <div class="profileanon-singletrending5">
+                <span class="profileanon-text058">
+                  <span>#consectetur</span>
+                </span>
+                <span class="profileanon-text060"><span class="tag">31 posts</span></span>
+              </div>
+              <div class="profileanon-singletrending6">
+                <span class="profileanon-text062"><span>#Lorem</span></span>
+                <span class="profileanon-text064"><span class="tag">31 posts</span></span>
+              </div>
+              <div class="profileanon-singletrending7">
+                <span class="profileanon-text066"><span>ipsum</span></span>
+                <span class="profileanon-text068"><span class="tag">16 posts</span></span>
+              </div>
+              <div class="profileanon-singletrending8">
+                <span class="profileanon-text070">
+                  <span>#consectetur</span>
+                </span>
+                <span class="profileanon-text072"><span class="tag">31 posts</span></span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="nav">
+            {{> nexuschi}}
+            {{> feedbutton}}
+            {{> loginoutbutton}}
+            {{> modbutton}}
+          </div>
+          
+          <div class="profileanon-leftcomponents">
+            <div class="profileanon-searchbar">
+              <img
+                src="/profileuser/assets/iconsaxlinearboxsearchi135-6ep.svg"
+                alt="IconsaxLinearboxsearchI135"
+                class="profileanon-iconsax-linearboxsearch"
+              />
+              <span class="profileanon-text076">
+                <span>search over nexus</span>
+                {{> uploadprofilepicturebutton}}
+              </span>
+            </div>
+            <div class="profileanon-profile-variant3">
+              <img
+                src="/profileuser/assets/vector3i135-3i6f.svg"
+                alt="Vector3I135"
+                class="profileanon-vector3"
+              />
+                <div class="profileanon-pfp3">
+                  {{#profileUser}}
+                    {{> userimage}}
+                  {{/profileUser}}
+                </div>
+              <span class="profileanon-text078"><span>{{profileUser.username}}</span></span>
+              <div class="profileanon-frameiconcheck">
+                <img
+                  src="/profileuser/assets/polygon2i135-lapn.svg"
+                  alt="Polygon2I135"
+                  class="profileanon-polygon2"
+                />
+                <img
+                  src="/profileuser/assets/vectori135-u93o.svg"
+                  alt="VectorI135"
+                  class="profileanon-vector1"
+                />
+              </div>
+              <span class="profileanon-text080"><span>12/11/22</span></span>
+              
+              <span class="profileanon-text082">
+                <span>
+                  {{profileUser.description}}
+                </span>
+              </span>
+              {{> writebutton}}
+              {{> followprofilebutton}}
+             
+              <span class="profileanon-text086">
+                <span>following {{profileUser.following.size}}/ {{followerCount}} followers</span>
+              </span>
+            </div>
+            <div class="profileanon-related">
+              <div class="profileanon-stack">
+                <span class="profileanon-text088">
+                  <span>Related people</span>
+                </span>
+                <div class="profileanon-user">
+                  <div class="profileanon-img5">
+                    <img
+                      src="/profileuser/assets/pfp2i135-y6z-200h.png"
+                      alt="pfp2I135"
+                      class="profileanon-pfp2"
+                    />
+                  </div>
+                  <span class="profileanon-text090"><span>Lorem_2</span></span>
+                  <div class="profileanon-btn2">
+                    <span class="profileanon-text092"><span>follow</span></span>
+                  </div>
+                </div>
+                <div class="profileanon-user1">
+                  <div class="profileanon-img6">
+                    <img
+                      src="/profileuser/assets/pfp2i135-iyi1-200h.png"
+                      alt="pfp2I135"
+                      class="profileanon-pfp21"
+                    />
+                  </div>
+                  <span class="profileanon-text094"><span>Lorem_3</span></span>
+                  <div class="profileanon-btn3">
+                    <span class="profileanon-text096"><span>follow</span></span>
+                  </div>
+                </div>
+                <div class="profileanon-user2">
+                  <div class="profileanon-img7">
+                    <img
+                      src="/profileuser/assets/pfp2i135-enwl-200h.png"
+                      alt="pfp2I135"
+                      class="profileanon-pfp22"
+                    />
+                  </div>
+                  <span class="profileanon-text098"><span>Lorem_4</span></span>
+                  <div class="profileanon-btn4">
+                    <span class="profileanon-text100"><span>follow</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
