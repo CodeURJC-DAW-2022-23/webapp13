@@ -1,5 +1,6 @@
 .profileanon-container {
   min-height: 100vh;
+  background-image: linear-gradient(150deg, rgba(30, 26, 59, 1) 0%, rgba(51, 28, 75, 1) 100%);
 }
 .profileanon-profileanon {
   width: 100%;
@@ -9,8 +10,7 @@
   position: relative;
   align-items: flex-start;
   flex-shrink: 0;
-  border-color: transparent;
-  background-image: linear-gradient(150deg, rgba(30, 26, 59, 1) 0%, rgba(51, 28, 75, 1) 100%);
+  border-color: transparent; 
 }
 .profileanon-container1 {
   top: 266px;
@@ -783,7 +783,7 @@
   align-items: center;
   border-color: rgba(83, 76, 134, 1);
   border-style: solid;
-  border-width: Symbol(figma.mixed)px;
+  border-width: 1px;
   flex-direction: column;
 }
 .profileanon-singletrending {
@@ -1616,7 +1616,7 @@
   flex-shrink: 0;
   border-color: rgba(83, 76, 134, 1);
   border-style: solid;
-  border-width: Symbol(figma.mixed)px;
+  border-width: 1px;
   border-radius: 100px;
   justify-content: center;
   background-color: rgba(51, 46, 89, 1);
@@ -1693,7 +1693,7 @@
   flex-shrink: 0;
   border-color: rgba(83, 76, 134, 1);
   border-style: solid;
-  border-width: Symbol(figma.mixed)px;
+  border-width: 1px;
   border-radius: 100px;
   justify-content: center;
   background-color: rgba(51, 46, 89, 1);
@@ -1769,7 +1769,7 @@
   flex-shrink: 0;
   border-color: rgba(83, 76, 134, 1);
   border-style: solid;
-  border-width: Symbol(figma.mixed)px;
+  border-width: 1px;
   border-radius: 100px;
   justify-content: center;
   background-color: rgba(51, 46, 89, 1);

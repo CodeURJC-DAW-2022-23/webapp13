@@ -1,0 +1,15 @@
+<link href="/feeduser/nav.css" rel="stylesheet" />
+{{#authenticated}}
+    <a href="/logout">
+      <div class="feedanon-button6">
+        <span class="profileanon-text074">Log out</span>
+      </div>
+    </a>
+{{/authenticated}}
+{{^authenticated}}
+<a href="/login">
+  <div class="feedanon-button6">
+    <span class="profileanon-text074">Log in</span>
+  </div>
+</a>
+{{/authenticated}}

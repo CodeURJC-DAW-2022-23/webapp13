@@ -1,0 +1,77 @@
+<link href="/profileuser/profileuser.css" rel="stylesheet" />
+<div class="profileanon-twit">
+  <div class="profileanon-op1">
+	<div class="extraimg">
+	  <img
+		src="/u/{{author.username}}/profilepicture"
+		alt="imgI135"
+		class="profileanon-img1"
+	  />
+	</div>
+	<div class="profileanon-nameanddate1">
+	  <span class="profileanon-text012">
+		<span>{{date}}</span>
+	  </span>
+	  <span class="profileanon-text014">
+		<span>{{author.username}}</span>
+	  </span>
+	</div>
+	<div class="profileanon-interactions1">
+
+	  <span class="profileanon-text016"><span>{{likes.size}}</span></span>
+	  <a href="/like/{{id}}">
+		  <img
+			src="/profileuser/assets/iconsaxlinearhearti135-0d8.svg"
+			alt="IconsaxLinearheartI135"
+			class="profileanon-iconsax-linearheart1"
+		  />
+	  </a>
+
+	  <span class="profileanon-text018"><span>{{shares.size}}</span></span>
+	  <img
+		src="/profileuser/assets/iconsaxlinearrepeati135-eqaa.svg"
+		alt="IconsaxLinearrepeatI135"
+		class="profileanon-iconsax-linearrepeat1"
+	  />
+
+	  <span class="profileanon-text020"><span>{{children.size}}</span></span>
+	  <img
+		src="/profileuser/assets/iconsaxlinearmessagei135-n7p.svg"
+		alt="IconsaxLinearmessageI135"
+		class="profileanon-iconsax-linearmessage1"
+	  />
+		
+		<a href="/report/{{id}}">
+			<img
+				style="margin-left: 15px"
+				src="/profileuser/assets/iconsaxlinearmessagei135-n7p.svg"
+				alt="IconsaxLinearmessageI135"
+				class="profileanon-iconsax-linearmessage1"
+			/>
+		</a>
+
+	</div>
+  </div>
+  <div class="profileanon-post1">
+	<div class="profileanon-content1">
+	  <span class="profileanon-text022">
+		<span>
+		  {{text}}
+		</span>
+	  </span>
+	</div>
+	<div class="profileanon-thread1"></div>
+  </div>
+  {{#hasMedia?}}
+  <div class="profileanon-img2">
+	<div class="profileanon-img3">
+	  <img
+		src="/profileuser/assets/image95537386p11i135-hi92j-400h.png"
+		alt="IMAGE95537386p11I135"
+		class="profileanon-i-m-a-g-e95537386p11"
+	  />
+	</div>                        
+	<div class="profileanon-thread2"></div>
+  </div>
+  {{/hasMedia?}}
+</div>
