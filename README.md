@@ -105,13 +105,13 @@ Three different types of images have been passed (unregistered, registered and m
 
 You must complete these steps in order to be able to test our application.
 
-1. First download the project code, from https://github.com/CodeURJC-DAW-2022-23/webapp13 and then extract the zip and open some java ide.
-2. Donwload the MySQL Workbench Community from https://dev.mysql.com/downloads/workbench/ and open the installation file.
-3. Install version 8.0.32 version MySQL Workbench Community. Follow the instructions to install it correctly and set everything as default.
-4. Launch MySQL Workbench from your program menu.
-5. To connect to the default local MySQLL server click on the box that may appear under MySQL Connections.
-6. If asked enter your MySQL server credentials.
-7. Make sure to change the aplication.properties to create-drop instead of update.
+1. Download the [source code](https://github.com/CodeURJC-DAW-2022-23/webapp13/releases/tag/fase2-MySQL), extract it and open the project with an IDE adequate for Maven.
+2. Download MySQL Community Server, and MySQL Community from https://dev.mysql.com/downloads/, specifically install version 8.0.32 for both products.
+3. Don't alter the default configuration settings during the installation process of the products. When setting up the server configuration, leave the DB port to the default (3306), and set credentials to: "root"; "password" (no quotes).
+4. Launch MySQL Workbench and launch your local DB server by clicking on the named box under MySQL Connections.
+5. If asked to, enter again the previously mentioned credentials.
+6. If not done already, create a new schema for the DB named "nexus" (no quotes).
+7. In the web app project folder, in the resources folder, in the application.properties file, set spring.jpa.hibernate.ddl-auto=create on the first run. After successfully running the server, change the previously mentioned line to spring.jpa.hibernate.ddl-auto=update to keep your DB persistent.
 
 
 ## Database diagram: 
@@ -122,7 +122,7 @@ You must complete these steps in order to be able to test our application.
 
 ## Members participation: 
 
-### 5 most representative commits: 
+### Team members' five most representative commits: 
 
 #### Oskar: 
 
@@ -165,16 +165,23 @@ You must complete these steps in order to be able to test our application.
 | User update | [Commit 4](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/a8fb0f8105e2381df302729e72ad28aefba6e66e) | 
 | Create feed controller and adjusted userfeed HTML | [Commit 5](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/e60581fe702673cdcd52af9679475efd64d50d16) | 
 
-### 5 files with more participation: 
+### Team members' top five most involved-in files: 
 
 #### Oskar: 
 
-Did a lot of radical refactors, a lot of implementations for feed controllers, and took care of the moderating section and all things web3.
+I have worked on the [underlying decentralized moderation protocol](https://files.catbox.moe/ziu756.pdf)
+along with a [microservice as middlewere](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/controller/TweetDeleterController.java)
+for its integration. In addition, I have worked on several
+changes to the system, such as the feed querying system for moderators, users and anons, the
+reporting and post deletion system, the pagination prototype and extensive refactorings and fixes
+to the overall system. I have archived this by decoupling states using functional programming techniques
+to ensure greater security, such as better general null safety.
 
 * [FeedController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/controller/FeedController.java) 
 * [OptTwo.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/utilities/OptTwo.java)
-* [OptPair.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/utilities/OptPair.java)
-* [ResourcesBuilder.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/controller/ResourcesBuilder.java)
+* [TweetService.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/service/TweetService.java)
+* [TweetDeleterController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/controller/TweetDeleterController.java)
+* [TweetReportController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/controller/TweetReportController.java)
 * [ProfileController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/FASE2/src/main/java/es/codeurjc/backend/controller/ProfileController.java) 
 
 #### Stefano: 
