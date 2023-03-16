@@ -64,9 +64,9 @@ public final class UserService {
         return input.matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
     }
 
-    public static boolean isOwnResource(String urlUsername, Optional<User> loggedUser){
+    public static boolean isOwnResource(String resourceUsername, Optional<User> loggedUser){
 
-        return loggedUser.isPresent() && loggedUser.get().getUsername().equals(urlUsername);
+        return loggedUser.isPresent() && loggedUser.get().getUsername().equals(resourceUsername);
     }
 
     public static String getCurrentPage(HttpServletRequest req) {

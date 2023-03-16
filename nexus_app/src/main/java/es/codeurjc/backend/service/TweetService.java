@@ -5,8 +5,11 @@ import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.repository.TweetRepository;
 import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -45,11 +48,6 @@ public class TweetService {
     }
 
     public List<Tweet> queryTweetsToModerate() {
-        return tweetRepository
-            .findTop10ByOrderByReportsDesc()
-            .stream()
-            .filter(p -> p.getReporters().size() > 0)
-            .collect(Collectors.toList());
+        return tweetRepository.findTopReportedTweets();
     }
-
 }

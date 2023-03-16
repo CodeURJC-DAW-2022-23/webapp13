@@ -18,7 +18,7 @@ public class TweetDeleterController {
 
     private final String modEndpoint = "https://mod-microservice.vercel.app/postShouldGetDeleted/";
 
-    // FIXME puede meterse cualquier usuario aki equis de, maneja el req
+    // FIXME puede meterse cualquier usuario aki equis de, maneja el HttpServletRequest para q no
     @GetMapping(value = "/tweet/delete/{id}")
     public String deleteTweet(@PathVariable Long id, HttpServletRequest req) {
         if (postShouldGetDeleted(id)) tweetRepository.deleteById(id);
