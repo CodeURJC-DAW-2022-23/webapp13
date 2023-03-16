@@ -36,14 +36,16 @@ public class UserInteractionController {
         Optional<User> userOpt = userService.getUserFrom(req);
         Optional<Tweet> tweetOpt = tweetService.getTweetFromId(id);
 
-        if (userOpt.isEmpty()) return "redirect:/login";
-        if (tweetOpt.isEmpty()) return getCurrentPage(req);
+        if (!userOpt.isEmpty()) {
+            if (!tweetOpt.isEmpty()) {
 
-        Tweet tweet = tweetOpt.get();
-        tweet.switchLike(userOpt.get());
-        tweetRepository.save(tweet);
-
-        return getCurrentPage(req);
+                Tweet tweet = tweetOpt.get();
+                tweet.switchLike(userOpt.get());
+                tweetRepository.save(tweet);
+            }
+            return getCurrentPage(req);
+        }
+        else return "redirect:/login";
     }
 
     @RequestMapping("/follow/{username}")
@@ -51,18 +53,21 @@ public class UserInteractionController {
         @PathVariable String username, HttpServletRequest req
     ) {
         OptTwo<User> users = userService.getUserFrom(username, req);
+        
+        // If visitor is authenticated
+        if (users.isRight()){
+            
+            // If URL user exists and visitor isn't attempting to follow himself
+            if (users.isLeft() || !users.getRight().equals(users.getLeft())){
+            
+                users.getRight().switchFollow(users.getLeft());
 
-
-        if (!users.isLeft()) return getCurrentPage(req);
-        if (!users.isRight()) return "redirect:/login";
-
-        if (users.getLeft().equals(users.getRight()))
-            return "redirect:/error";
-
-        users.getRight().switchFollow(users.getLeft());
-
-        users.forEach(user -> userService.saveUser(user));
-        return getCurrentPage(req);
+                users.forEach(user -> userService.saveUser(user));
+                return getCurrentPage(req);
+            } else 
+                return "redirect:/error";
+        }   
+        else return "redirect:/login";
     }
 
     private String getCurrentPage(HttpServletRequest req) {
