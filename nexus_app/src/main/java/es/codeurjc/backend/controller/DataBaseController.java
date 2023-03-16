@@ -1,8 +1,5 @@
 package es.codeurjc.backend.controller;
 
-import java.awt.font.NumericShaper;
-import java.util.List;
-import java.util.Random;
 import java.util.stream.IntStream;
 
 import javax.annotation.PostConstruct;
@@ -17,7 +14,6 @@ import es.codeurjc.backend.model.User;
 
 import es.codeurjc.backend.repository.TweetRepository;
 import es.codeurjc.backend.repository.UserRepository;
-import org.w3c.dom.ranges.Range;
 
 @RestController
 public class DataBaseController {

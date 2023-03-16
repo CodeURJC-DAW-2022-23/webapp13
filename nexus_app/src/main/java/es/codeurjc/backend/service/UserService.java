@@ -1,5 +1,6 @@
 package es.codeurjc.backend.service;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.Optional;
 import java.util.Set;
 
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import ch.qos.logback.core.joran.conditional.ElseAction;
 import es.codeurjc.backend.model.User;
 
 import es.codeurjc.backend.repository.UserRepository;
@@ -61,6 +63,13 @@ public final class UserService {
     public static boolean isEmail(String input){
         return input.matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
     }
+
+    public static boolean isOwnResource(String urlUsername, Optional<User> loggedUser){
+
+        return loggedUser.isPresent() && loggedUser.get().getUsername().equals(urlUsername);
+    }
+
+
     /* TODO
     public Set<UserActionChronologicalWrapper> getFollowers(User user) {
         return userRepository.findByFollowing(user);

@@ -52,8 +52,12 @@ public class UserInteractionController {
     ) {
         OptTwo<User> users = userService.getUserFrom(username, req);
 
+
         if (!users.isLeft()) return getCurrentPage(req);
         if (!users.isRight()) return "redirect:/login";
+
+        if (users.getLeft().equals(users.getRight()))
+            return "redirect:/error";
 
         users.getRight().switchFollow(users.getLeft());
 
