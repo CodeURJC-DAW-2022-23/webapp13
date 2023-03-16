@@ -38,7 +38,4 @@ public class UserInteractionController {
         }   
         else return "redirect:/login";
     }
-
-    
-
 }

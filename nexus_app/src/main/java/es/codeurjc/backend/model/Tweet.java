@@ -9,7 +9,6 @@ import java.util.Set;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.lang.Nullable;
 
 @Entity(name = "Tweet")
@@ -24,9 +23,6 @@ public class Tweet implements Comparable<Tweet>{
 
     //@Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime date;
-
-    @Column(name="reports")
-    private int reports = 0;
 
     @ManyToMany
     private Set<User> reporters = new HashSet<>();
