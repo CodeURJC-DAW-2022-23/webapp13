@@ -61,8 +61,8 @@ public class UserInteractionController {
             if (users.isLeft() || !users.getRight().equals(users.getLeft())){
             
                 users.getRight().switchFollow(users.getLeft());
-
                 users.forEach(user -> userService.saveUser(user));
+                
                 return getCurrentPage(req);
             } else 
                 return "redirect:/error";
