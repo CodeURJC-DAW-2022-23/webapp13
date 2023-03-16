@@ -29,7 +29,7 @@ public class Tweet implements Comparable<Tweet>{
     private int reports = 0;
 
     @ManyToMany
-    private Set<User> usersThatReportedThisTweet = new HashSet<>();
+    private Set<User> reporters = new HashSet<>();
 
     @Column(columnDefinition = "TEXT")
     private String text;
@@ -85,10 +85,10 @@ public class Tweet implements Comparable<Tweet>{
             return this;
         }
         public void reset(){
-            author = null; text = null; media = null; tags.clear();
+            author = null; text = ""; media = null; tags.clear();
         }
         public Tweet build(){
-            assert(author != null && text != null);
+            assert(author != null && text != null && !text.equals(""));
             return new Tweet(this);
         }
     }
@@ -112,18 +112,8 @@ public class Tweet implements Comparable<Tweet>{
 
     public LocalDateTime getDate() {return date;}
 
-    public int getReports() {return reports;}
-    public void addReport() {reports++;}
-    public void subReport() {reports--;}
-
-    public Set<User> getUsersThatReported() {
-        return usersThatReportedThisTweet;
-    }
-    public void addUserThatReported(User u) {
-        usersThatReportedThisTweet.add(u);
-    }
-    public void subUserThatReported(User u) {
-        usersThatReportedThisTweet.remove(u);
+    public Set<User> getReporters() {
+        return reporters;
     }
 
     public String getText() {return text;}

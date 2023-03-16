@@ -69,6 +69,10 @@ public final class UserService {
         return loggedUser.isPresent() && loggedUser.get().getUsername().equals(urlUsername);
     }
 
+    public static String getCurrentPage(HttpServletRequest req) {
+        return "redirect:" + req.getHeader("Referer");
+    }
+
 
     /* TODO
     public Set<UserActionChronologicalWrapper> getFollowers(User user) {
