@@ -30,7 +30,7 @@ public class UserInteractionController {
             if (users.isLeft() || !users.getRight().equals(users.getLeft())){
             
                 users.getRight().switchFollow(users.getLeft());
-                users.forEach(user -> userService.saveUser(user));
+                users.forEach(user -> userService.save(user));
 
                 return UserService.getCurrentPage(req);
             } else 

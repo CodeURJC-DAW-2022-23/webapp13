@@ -11,6 +11,8 @@ import javax.persistence.*;
 
 import org.springframework.lang.Nullable;
 
+import es.codeurjc.backend.service.TweetService;
+
 @Entity(name = "Tweet")
 public class Tweet implements Comparable<Tweet>{
     
@@ -42,7 +44,7 @@ public class Tweet implements Comparable<Tweet>{
     private Set<User> likes  = new HashSet<>();
 
     @Nullable
-    @OneToMany(cascade = CascadeType.REMOVE)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Tweet> children = new ArrayList<>();
 
     @Nullable
@@ -111,16 +113,23 @@ public class Tweet implements Comparable<Tweet>{
     public Set<User> getReporters() {
         return reporters;
     }
+    public void report(User reporter, TweetService tweetService) {
+        reporters.add(reporter);
+        tweetService.save(this);
+    }
+
 
     public String getText() {return text;}
     public void setText(String text) {this.text = text;}
     
     public Set<User> getLikes() {return likes;}
-    public void switchLike(User user) {
+    public void switchLike(User user, TweetService tweetService) {
         assert(user != null);
         if (!likes.contains(user))
             likes.add(user);
         else likes.remove(user);
+
+        tweetService.save(this);
     }
 
     public Set<Tweet> getShares() {return shares;}
@@ -132,7 +141,10 @@ public class Tweet implements Comparable<Tweet>{
     }
 
     public List<Tweet> getChildren() {return children;}
-    public void addChild(Tweet tweet) {children.add(tweet);}
+    public void reply(Tweet tweet, TweetService tweetService) {
+        children.add(tweet);
+        tweetService.save(this);
+    }
 
     public Blob getMedia() {return media;}
     public boolean hasMedia() {return media != null;}

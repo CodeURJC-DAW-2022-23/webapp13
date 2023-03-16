@@ -14,6 +14,7 @@ import es.codeurjc.backend.model.User;
 
 import es.codeurjc.backend.repository.TweetRepository;
 import es.codeurjc.backend.repository.UserRepository;
+import es.codeurjc.backend.service.TweetService;
 
 @RestController
 public class DataBaseController {
@@ -21,7 +22,7 @@ public class DataBaseController {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private TweetRepository tweetRepository;
+    private TweetService tweetService;
     @Autowired
 	private PasswordEncoder passwordEncoder;
    
@@ -49,8 +50,6 @@ public class DataBaseController {
         userRepository.save(userC);
 
         userA.switchFollow(userB);
-        userRepository.save(userA);
-        userRepository.save(userB);
         
         // Building tweets
         tweetBuilder
@@ -60,25 +59,24 @@ public class DataBaseController {
         
         Tweet tweet1 = tweetBuilder.build();
 
-        tweet1.switchLike(userB);
+        tweet1.switchLike(userB, tweetService);
         //-------------------------------------
         tweetBuilder.setAuthor(userB).setText("I replied to userA's tweet!");
         
         Tweet tweet2 = tweetBuilder.build();
 
-        tweet1.addChild(tweet2);
-
-        //DON'T CHANGE ORDER
-        tweetRepository.save(tweet2);
-        tweetRepository.save(tweet1);
+        tweet1.reply(tweet2, tweetService);
+        
 
         tweetBuilder.setAuthor(userB);
 
         IntStream.rangeClosed(1,20).forEach(
-            i -> tweetRepository.save(
+            i -> tweetService.save(
                 tweetBuilder.setText("rand" + i).build()
             )
         );
+
+
     }
 
 }

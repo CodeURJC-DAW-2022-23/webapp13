@@ -53,7 +53,7 @@ public class SignUpController {
 
             User newUser = builder.build();
 
-            userService.saveUser(newUser);
+            userService.save(newUser);
 
             return "redirect:/login";
         }

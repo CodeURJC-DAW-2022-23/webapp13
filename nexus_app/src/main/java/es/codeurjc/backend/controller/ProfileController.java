@@ -112,7 +112,7 @@ public class ProfileController {
                 .setText(text);
 
             tweetRepository.save(builder.build());
-            userService.saveUser(profileUser);
+            userService.save(profileUser);
             return "redirect:/u/" + username;
         } else 
             return "redirect:/error";
@@ -128,7 +128,7 @@ public class ProfileController {
                 BlobProxy.generateProxy(image.getInputStream(), image.getSize())
             ));
 
-            userService.saveUser(profileUser);
+            userService.save(profileUser);
             return "redirect:/u/" + loggedUser.get().getUsername();
         } else
             return "redirect:/error";

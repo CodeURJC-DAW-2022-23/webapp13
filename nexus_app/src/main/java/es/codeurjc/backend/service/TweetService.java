@@ -30,10 +30,13 @@ public class TweetService {
         return tweetRepository.findById(id);
     }
 
-    // TODO
-    public void deleteTweet(Long tweetId) {
-
+    public void save(Tweet tweet) {
+        tweetRepository.save(tweet);
     }
+    public void delete(Tweet tweet) {
+        tweetRepository.delete(tweet);
+    }
+    
 
     // NOTE this strategy is inefficient. If len(users) == 10
     // and each users has at least 10 posts, then len(@return) == 100.

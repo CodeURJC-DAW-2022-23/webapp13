@@ -57,7 +57,7 @@ public final class UserService {
     public boolean isUsernameTaken(String username){
         return userRepository.existsByUsername(username);
     }
-    public void saveUser(User user){
+    public void save(User user){
         userRepository.save(user);
     }
     public static boolean isEmail(String input){

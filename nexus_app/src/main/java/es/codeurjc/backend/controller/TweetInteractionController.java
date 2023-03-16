@@ -39,8 +39,7 @@ public class TweetInteractionController {
             if (!tweetOpt.isEmpty()) {
 
                 Tweet tweet = tweetOpt.get();
-                tweet.switchLike(userOpt.get());
-                tweetRepository.save(tweet);
+                tweet.switchLike(userOpt.get(), tweetService);
             }
             return UserService.getCurrentPage(req);
         }
@@ -62,10 +61,10 @@ public class TweetInteractionController {
                 tweet.getReporters().add(reportingUserOpt.get());
 
                 if (reportingUserOpt.get().isAdmin()) 
-                    tweetRepository.delete(tweet);
+                    tweetService.delete(tweet);
                     //return "redirect:/tweet/delete/" + id;   
                 else
-                    tweetRepository.save(tweet);
+                    tweetService.save(tweet);
                         
             }
             return UserService.getCurrentPage(req);
