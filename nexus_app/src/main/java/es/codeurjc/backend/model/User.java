@@ -165,7 +165,7 @@ public class User {
     }
     public Set<User> getFollowing() {return following;}
     public void switchFollow(User user) {
-        assert(user != null);
+        assert user != null && !user.equals(this);
         if (!following.contains(user))
             following.add(user);
         else following.remove(user);

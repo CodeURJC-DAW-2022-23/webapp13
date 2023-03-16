@@ -39,9 +39,6 @@ public class ProfileController {
     private UserService userService;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private TweetRepository tweetRepository;
 
     private Optional<User> loggedUser;
@@ -53,23 +50,23 @@ public class ProfileController {
     public String showProfile(
         Model model, @PathVariable String username, HttpServletRequest req
     ){
-
         OptTwo<User> users = userService.getUserFrom(username, req);
 
-        if (users.isLeft()) profileUser = users.getLeft();
-        loggedUser = users.getOptRight();
+        if (users.isLeft()) {
+            profileUser = users.getLeft();
+            loggedUser = users.getOptRight();
 
-        model.addAttribute("authenticated", loggedUser.isPresent());
+            model.addAttribute("authenticated", loggedUser.isPresent());
 
-        if (profileUser == null) return "error";
+            following = Try
+                .of(() -> loggedUser.get().getFollowing().contains(profileUser))
+                .getOrElse(false);
 
-        following = Try
-            .of(() -> loggedUser.get().getFollowing().contains(profileUser))
-            .getOrElse(false);
+            modelProfile(model, UserService.isOwnResource(username, loggedUser));
 
-        modelProfile(model, visitingOwnProfile(username));
-
-        return "profile";
+            return "profile";
+        } else 
+            return "redirect:/error";
     }
 
     @GetMapping("/u/{username}/profilepicture")
@@ -93,50 +90,55 @@ public class ProfileController {
 
     @GetMapping("/u/{username}/write")
     public String startWritingTweet(@PathVariable String username, Model model) {
-        if (!visitingOwnProfile(username)) return "error";
+        
+        if (UserService.isOwnResource(username, loggedUser)) {
 
-         model.addAttribute("posting", true);
-         modelProfile(model, visitingOwnProfile(username));
-
-        return "profile";
+            model.addAttribute("posting", true);
+            modelProfile(model, true);
+            return "profile";
+        } else 
+            return "redirect:/error";
     }
 
     @PostMapping("/u/{username}/posttweet")
     public String startWritingTweet(Model model, @PathVariable String username, @RequestParam String text) {
-        if (!visitingOwnProfile(username)) return "error";
+        if (UserService.isOwnResource(username, loggedUser)) {
 
-        Tweet.Builder builder = new Tweet.Builder();
+            Tweet.Builder builder = new Tweet.Builder();
 
-        builder.setAuthor(loggedUser.get());
-        builder.setText(text);
-        tweetRepository.save(builder.build());
-        userService.saveUser(profileUser);
-
-        
-
-        return "redirect:/u/" + username;
+            builder.setAuthor(loggedUser.get());
+            builder.setText(text);
+            tweetRepository.save(builder.build());
+            userService.saveUser(profileUser);
+            return "redirect:/u/" + username;
+        } else 
+            return "redirect:/error";
     }
 
-    @PostMapping("/{username}/update/profilepicture")
+    @PostMapping("/u/{username}/update/profilepicture")
     public String uploadProfilePicture(
         @RequestParam MultipartFile image, @PathVariable String username
-    ) {
-        if (!usernameIsLoggedUser(username)) return "redirect:/u/" + username;
+    ) {     
+        if(UserService.isOwnResource(username, loggedUser)) {
 
-        Try.run(() -> profileUser.setProfilePicture(
-            BlobProxy.generateProxy(image.getInputStream(), image.getSize())
-        ));
+            Try.run(() -> profileUser.setProfilePicture(
+                BlobProxy.generateProxy(image.getInputStream(), image.getSize())
+            ));
 
-        userService.saveUser(profileUser);
-        return "redirect:/u/" + loggedUser.get().getUsername();
+            userService.saveUser(profileUser);
+            return "redirect:/u/" + loggedUser.get().getUsername();
+        } else
+            return "redirect:/error";
     }
 
-    @RequestMapping("{username}/remove/profilepicture")
+    @RequestMapping("/u/{username}/remove/profilepicture")
     public String removeProfilePicture(@PathVariable String username) {
-        if (!usernameIsLoggedUser(username)) return "redirect:/u/" + username;
+        if (!UserService.isOwnResource(username, loggedUser)) {
 
-        profileUser.setProfilePicture(null);
-        return "profile";
+            profileUser.setProfilePicture(null);
+            return "profile";
+        } else
+            return "redirect:/error";
     }
 
     private void modelProfile (Model model, boolean ownProfile){
@@ -148,13 +150,5 @@ public class ProfileController {
         model.addAttribute("following", following);
         if (loggedUser.isEmpty()) return;
         model.addAttribute("loggedUser", loggedUser.get());
-    }
-
-    private boolean visitingOwnProfile(String username) {
-        return usernameIsLoggedUser(username);
-    }
-
-    private boolean usernameIsLoggedUser(String username) {
-        return loggedUser.isPresent() && username.equals(loggedUser.get().getUsername());
     }
 }

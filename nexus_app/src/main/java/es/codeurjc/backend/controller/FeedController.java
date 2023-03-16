@@ -62,7 +62,10 @@ public class FeedController {
 
     @RequestMapping("/tomyprofile")
     public String redirectToProfile(final Model model) {
-        return "redirect:/u/" + loggedUser.get().getUsername();
+        if (loggedUser.isPresent())
+            return "redirect:/u/" + loggedUser.get().getUsername();
+        else
+            return "redirect:/error";
     }
 
     
