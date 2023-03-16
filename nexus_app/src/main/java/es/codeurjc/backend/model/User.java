@@ -62,7 +62,7 @@ public class User {
     private Set<User> blockedUsers = new HashSet<>();  
 
     public static class Builder {
-        private String username, email, encodedPassword, name, description = "";
+        private String username, email, encodedPassword, name = "", description = "";
         private boolean admin = false;
         private boolean banned = false;
 
@@ -83,7 +83,7 @@ public class User {
             return this;
         }
         public Builder setDescription(String description){
-            assert(description != null);
+            assert description != null;
             this.description = description;
             return this;
         }
@@ -97,9 +97,17 @@ public class User {
         }
         public void reset(){
             username = null; email = null; encodedPassword = null; 
-            name = null; description = ""; admin = false; banned = false;
+            name = ""; description = ""; admin = false; banned = false;
         }
         public User build(){
+            assert username != null && !username.equals("") && username.length() <= 25
+
+            && name != null && name.length() <= 25
+
+            && email != null && UserService.isEmail(email)
+            
+            && encodedPassword != null && encodedPassword.length() >= 10;
+
             return new User(this);
         }
     }
@@ -113,7 +121,7 @@ public class User {
     private User(
         String username, String email, String encodedPassword, String name,
         String description, boolean admin, boolean banned, Blob profilePicture
-    ) {
+    ) {   
         this.username = username;
         this.email = email;
         this.encodedPassword = encodedPassword;
