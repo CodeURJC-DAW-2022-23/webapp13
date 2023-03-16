@@ -52,6 +52,7 @@ public class ProfileController {
     ){
         OptTwo<User> users = userService.getUserFrom(username, req);
 
+        // If URL-user exists
         if (users.isLeft()) {
             profileUser = users.getLeft();
             loggedUser = users.getOptRight();
@@ -102,12 +103,14 @@ public class ProfileController {
 
     @PostMapping("/u/{username}/posttweet")
     public String startWritingTweet(Model model, @PathVariable String username, @RequestParam String text) {
+        
         if (UserService.isOwnResource(username, loggedUser)) {
 
-            Tweet.Builder builder = new Tweet.Builder();
+            Tweet.Builder builder = 
+            new Tweet.Builder()
+                .setAuthor(loggedUser.get())
+                .setText(text);
 
-            builder.setAuthor(loggedUser.get());
-            builder.setText(text);
             tweetRepository.save(builder.build());
             userService.saveUser(profileUser);
             return "redirect:/u/" + username;
@@ -119,7 +122,7 @@ public class ProfileController {
     public String uploadProfilePicture(
         @RequestParam MultipartFile image, @PathVariable String username
     ) {     
-        if(UserService.isOwnResource(username, loggedUser)) {
+        if (UserService.isOwnResource(username, loggedUser)) {
 
             Try.run(() -> profileUser.setProfilePicture(
                 BlobProxy.generateProxy(image.getInputStream(), image.getSize())
@@ -133,7 +136,7 @@ public class ProfileController {
 
     @RequestMapping("/u/{username}/remove/profilepicture")
     public String removeProfilePicture(@PathVariable String username) {
-        if (!UserService.isOwnResource(username, loggedUser)) {
+        if (UserService.isOwnResource(username, loggedUser)) {
 
             profileUser.setProfilePicture(null);
             return "profile";

@@ -57,7 +57,7 @@ public class UserInteractionController {
         // If visitor is authenticated
         if (users.isRight()){
             
-            // If URL user exists and visitor isn't attempting to follow himself
+            // If URL-user exists and visitor isn't attempting to follow himself
             if (users.isLeft() || !users.getRight().equals(users.getLeft())){
             
                 users.getRight().switchFollow(users.getLeft());
