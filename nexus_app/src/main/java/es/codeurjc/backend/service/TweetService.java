@@ -27,23 +27,6 @@ public class TweetService {
         return tweetRepository.findById(id);
     }
 
-    public void addReportToTweet(User reporting, Long tweetId) {
-        addReportToTweet(reporting, getTweetFromId(tweetId));
-    }
-
-    public void addReportToTweet(User reporting, Tweet tweet) {
-        addReportToTweet(reporting, Optional.of(tweet));
-    }
-
-    public void addReportToTweet(User reporting, Optional<Tweet> reported) {
-        assert !reported.isEmpty();
-        
-        Tweet tweet = reported.get();
-
-        tweet.getReporters().add(reporting);
-        tweetRepository.save(tweet);
-    }
-
     // TODO
     public void deleteTweet(Long tweetId) {
 

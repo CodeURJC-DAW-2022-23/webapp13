@@ -59,12 +59,12 @@ public class TweetInteractionController {
 
                 Tweet tweet = tweetOpt.get();
 
-                tweetService.addReportToTweet(reportingUserOpt.get(), id);
-
-                if (reportingUserOpt.get().isAdmin()) 
-                    return "redirect:/tweet/delete/" + id;
+                tweet.getReporters().add(reportingUserOpt.get());
 
                 tweetRepository.save(tweet);
+
+                if (reportingUserOpt.get().isAdmin()) 
+                    return "redirect:/tweet/delete/" + id;            
             }
             return UserService.getCurrentPage(req);
         }
