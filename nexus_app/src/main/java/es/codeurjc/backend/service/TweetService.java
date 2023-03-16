@@ -27,23 +27,7 @@ public class TweetService {
         return tweetRepository.findById(id);
     }
 
-    public void addReportToTweet(User reporting, Long tweetId) {
-        addReportToTweet(reporting, getTweetFromId(tweetId));
-    }
-
-    public void addReportToTweet(User reporting, Tweet tweet) {
-        addReportToTweet(reporting, Optional.of(tweet));
-    }
-
-    public void addReportToTweet(User reporting, Optional<Tweet> reported) {
-        if (reported.isEmpty()) return;
-        Tweet tweet = reported.get();
-        if (tweet.getUsersThatReported().contains(reporting)) return;
-        tweet.addReport();
-        tweet.addUserThatReported(reporting);
-        tweetRepository.save(tweet);
-    }
-
+    // TODO
     public void deleteTweet(Long tweetId) {
 
     }
@@ -64,7 +48,7 @@ public class TweetService {
         return tweetRepository
             .findTop10ByOrderByReportsDesc()
             .stream()
-            .filter(p -> p.getReports() > 0)
+            .filter(p -> p.getReporters().size() > 0)
             .collect(Collectors.toList());
     }
 

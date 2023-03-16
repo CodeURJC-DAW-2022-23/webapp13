@@ -45,7 +45,6 @@ public class SignUpController {
             model.addAttribute("fail", "Password is too short (min 8 characters).");
         
         else {
-
             User.Builder builder = new User.Builder();
 
             builder.setUsername(username);
