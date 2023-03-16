@@ -117,7 +117,7 @@ public class ProfileController {
         return "redirect:/u/" + username;
     }
 
-    @PostMapping("/{username}/update/pfp")
+    @PostMapping("/{username}/update/profilepicture")
     public String uploadProfilePicture(
         @RequestParam MultipartFile image, @PathVariable String username
     ) {
@@ -131,7 +131,7 @@ public class ProfileController {
         return "redirect:/u/" + loggedUser.get().getUsername();
     }
 
-    @RequestMapping("{username}/remove/pfp")
+    @RequestMapping("{username}/remove/profilepicture")
     public String removeProfilePicture(@PathVariable String username) {
         if (!usernameIsLoggedUser(username)) return "redirect:/u/" + username;
 
