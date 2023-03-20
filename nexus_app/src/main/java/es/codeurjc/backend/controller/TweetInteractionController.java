@@ -28,11 +28,11 @@ public class TweetInteractionController {
     @Autowired
     UserService userService;
     
-    @RequestMapping("/tweet/like/{id}")
+    @RequestMapping("/tweet/{id}/like")
     public String handleLike(
         HttpServletRequest req, @PathVariable String id
     ) {
-        Optional<User> userOpt = userService.getUserFrom(req);
+        Optional<User> userOpt = userService.getUserBy(req);
         Optional<Tweet> tweetOpt = tweetService.getTweetFromId(id);
 
         if (!userOpt.isEmpty()) {
@@ -46,11 +46,11 @@ public class TweetInteractionController {
         else return "redirect:/login";
     }
 
-    @RequestMapping("/tweet/report/{id}")
+    @RequestMapping("/tweet/{id}/report")
     public String reportTweet(
         Model model, HttpServletRequest req, @PathVariable Long id
     ) {
-        Optional<User> reportingUserOpt = userService.getUserFrom(req);
+        Optional<User> reportingUserOpt = userService.getUserBy(req);
         Optional<Tweet> tweetOpt = tweetService.getTweetFromId(id);
 
         if (!reportingUserOpt.isEmpty()) {

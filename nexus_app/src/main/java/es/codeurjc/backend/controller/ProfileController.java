@@ -21,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import es.codeurjc.backend.model.Tweet;
 import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.repository.TweetRepository;
-import es.codeurjc.backend.repository.UserRepository;
 import es.codeurjc.backend.service.UserService;
 
 import org.hibernate.engine.jdbc.BlobProxy;
@@ -50,7 +49,7 @@ public class ProfileController {
     public String showProfile(
         Model model, @PathVariable String username, HttpServletRequest req
     ){
-        OptTwo<User> users = userService.getUserFrom(username, req);
+        OptTwo<User> users = userService.getUserBy(username, req);
 
         // If URL-user exists
         if (users.isLeft()) {
@@ -73,7 +72,7 @@ public class ProfileController {
     @GetMapping("/u/{username}/profilepicture")
 	public ResponseEntity<Resource> downloadImage(@PathVariable String username) {
 
-		Optional<User> user = userService.getUserFrom(username);
+		Optional<User> user = userService.getUserBy(username);
         if (user.isEmpty()) return getAnonImage();
 
         Optional<Blob> profilePicture = Optional.ofNullable(user.get().getProfilePicture());
@@ -123,11 +122,9 @@ public class ProfileController {
         @RequestParam MultipartFile image, @PathVariable String username
     ) {     
         if (UserService.isOwnResource(username, loggedUser)) {
-
             Try.run(() -> profileUser.setProfilePicture(
                 BlobProxy.generateProxy(image.getInputStream(), image.getSize())
             ));
-
             userService.save(profileUser);
             return "redirect:/u/" + loggedUser.get().getUsername();
         } else
@@ -136,8 +133,8 @@ public class ProfileController {
 
     @RequestMapping("/u/{username}/remove/profilepicture")
     public String removeProfilePicture(@PathVariable String username) {
+        
         if (UserService.isOwnResource(username, loggedUser)) {
-
             profileUser.setProfilePicture(null);
             return "profile";
         } else

@@ -29,19 +29,19 @@ public final class UserService {
             .orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found"));
     }
 
-    public OptTwo<User> getUserFrom(
+    public OptTwo<User> getUserBy(
         String username, HttpServletRequest request
     ) {
-        return OptTwo.of(getUserFrom(username), getUserFrom(request));
+        return OptTwo.of(getUserBy(username), getUserBy(request));
     }
 
-    public Optional<User> getUserFrom(HttpServletRequest request) {
-        return getUserFrom(
+    public Optional<User> getUserBy(HttpServletRequest request) {
+        return getUserBy(
             Try.of(() -> request.getUserPrincipal().getName()).getOrElse("")
         );
     }
 
-    public Optional<User> getUserFrom(String username) {
+    public Optional<User> getUserBy(String username) {
         return userRepository.findByUsername(username);
     }
 
@@ -61,15 +61,30 @@ public final class UserService {
         userRepository.save(user);
         return this;
     }
+    public UserService delete(User user){
+        userRepository.delete(user);
+        return this;
+    }
+    public static boolean visitorAuthenticated(OptTwo<User> users){
+        return users.isRight();
+    }
+    public static boolean urlUserExists(OptTwo<User> users){
+        return users.isLeft();
+    }
+    public static boolean isSelfAction(OptTwo<User> users){
+        return users.getRight().equals(users.getLeft());
+    }
+    public static boolean urlUserExistsAndNotSelfAction(OptTwo<User> users){
+        return urlUserExists(users) || !isSelfAction(users);
+    }
+
     public static boolean isEmail(String input){
         return input.matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
     }
-
     public static boolean isOwnResource(String resourceUsername, Optional<User> loggedUser){
 
         return loggedUser.isPresent() && loggedUser.get().getUsername().equals(resourceUsername);
     }
-
     public static String getCurrentPage(HttpServletRequest req) {
         return "redirect:" + req.getHeader("Referer");
     }

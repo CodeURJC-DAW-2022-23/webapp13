@@ -37,7 +37,7 @@ public class LoginController {
 
     @RequestMapping("/loginsuccess")
     public String login(HttpServletRequest req, HttpSession session){
-        Optional<User> loggedUser = userService.getUserFrom(req);
+        Optional<User> loggedUser = userService.getUserBy(req);
         if (loggedUser.isEmpty()) return "redirect:/loginfail";
         return "redirect:/feed";
     }

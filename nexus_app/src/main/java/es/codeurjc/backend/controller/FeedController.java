@@ -40,7 +40,7 @@ public class FeedController {
     @RequestMapping("/feed")
     public String showFeed(Model model, HttpServletRequest request){
 
-        loggedUser = userService.getUserFrom(request);
+        loggedUser = userService.getUserBy(request);
 
         if (loggedUser.isPresent())
             updateFeedModelForUsers(model);
@@ -53,7 +53,7 @@ public class FeedController {
 
     @RequestMapping("/feed/moderator")
     public String showModFeed(Model model, HttpServletRequest req) {
-        Optional<User> user = userService.getUserFrom(req);
+        Optional<User> user = userService.getUserBy(req);
         if (user.isEmpty() || !user.get().isAdmin()) return "error";
         updateFeedModelForMods(model, user.get());
         return "feed";
