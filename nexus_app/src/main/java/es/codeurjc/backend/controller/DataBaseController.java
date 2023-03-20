@@ -12,15 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 import es.codeurjc.backend.model.Tweet;
 import es.codeurjc.backend.model.User;
 
-import es.codeurjc.backend.repository.TweetRepository;
-import es.codeurjc.backend.repository.UserRepository;
+import es.codeurjc.backend.service.UserService;
 import es.codeurjc.backend.service.TweetService;
 
 @RestController
 public class DataBaseController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
     @Autowired
     private TweetService tweetService;
     @Autowired
@@ -44,10 +43,7 @@ public class DataBaseController {
         User userB = builder.setUsername("b").setEmail("b@b.com").build();
         User userC = builder.setUsername("c").setEmail("c@c.com").build();
         
-        
-        userRepository.save(userB);
-        userRepository.save(userA);
-        userRepository.save(userC);
+        userService.save(userA).save(userB).save(userC);
 
         userA.switchFollow(userB);
         
@@ -72,7 +68,7 @@ public class DataBaseController {
 
         IntStream.rangeClosed(1,20).forEach(
             i -> tweetService.save(
-                tweetBuilder.setText("rand" + i).build()
+                tweetBuilder.setText("tweet " + i).build()
             )
         );
 

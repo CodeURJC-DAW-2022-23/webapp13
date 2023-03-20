@@ -57,8 +57,9 @@ public final class UserService {
     public boolean isUsernameTaken(String username){
         return userRepository.existsByUsername(username);
     }
-    public void save(User user){
+    public UserService save(User user){
         userRepository.save(user);
+        return this;
     }
     public static boolean isEmail(String input){
         return input.matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");

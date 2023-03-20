@@ -198,7 +198,7 @@ public class User {
 
     public int hashCode() {
         int hash = 7;
-        hash = 31 * hash;
+        hash *= 31;
         hash = 31 * hash + (null == username ? 0 : username.hashCode());
         return hash;
     }
