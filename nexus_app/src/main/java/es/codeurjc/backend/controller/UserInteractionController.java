@@ -30,7 +30,7 @@ public class UserInteractionController {
                 users.getRight().switchFollow(users.getLeft());
                 users.forEach(user -> userService.save(user));
 
-                return UserService.getCurrentPage(req);
+                return UserService.redirectToReferer(req);
             } else 
                 return "error";
         }   
@@ -52,7 +52,7 @@ public class UserInteractionController {
 
             userService.save(bannedUser);
 
-            return UserService.getCurrentPage(req);
+            return UserService.redirectToReferer(req);
     
         }   
         return "error";
@@ -65,11 +65,13 @@ public class UserInteractionController {
         OptTwo<User> users = userService.getUserBy(username, req);
         
         if (UserService.visitorAuthenticated(users) &&
-            UserService.urlUserExistsAndNotSelfAction(users)) {
+            UserService.urlUserExists(users) &&
+            (users.getRight().isAdmin() || UserService.isSelfAction(users))) {
 
+            //TODO add prompt asking whether you want to delete your account
             userService.delete(users.getLeft());
 
-            return UserService.getCurrentPage(req);
+            return UserService.redirectToReferer(req);
         }   
         return "error";
     }

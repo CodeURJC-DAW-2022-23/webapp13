@@ -85,7 +85,7 @@ public final class UserService {
 
         return loggedUser.isPresent() && loggedUser.get().getUsername().equals(resourceUsername);
     }
-    public static String getCurrentPage(HttpServletRequest req) {
+    public static String redirectToReferer(HttpServletRequest req) {
         return "redirect:" + req.getHeader("Referer");
     }
 

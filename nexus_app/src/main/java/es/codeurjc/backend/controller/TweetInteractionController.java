@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import es.codeurjc.backend.model.Tweet;
 import es.codeurjc.backend.model.User;
-import es.codeurjc.backend.repository.TweetRepository;
 import es.codeurjc.backend.service.UserService;
 
 @Controller
@@ -23,9 +22,6 @@ public class TweetInteractionController {
     TweetService tweetService;
 
     @Autowired
-    TweetRepository tweetRepository;
-
-    @Autowired
     UserService userService;
     
     @RequestMapping("/tweet/{id}/like")
@@ -33,7 +29,7 @@ public class TweetInteractionController {
         HttpServletRequest req, @PathVariable String id
     ) {
         Optional<User> userOpt = userService.getUserBy(req);
-        Optional<Tweet> tweetOpt = tweetService.getTweetFromId(id);
+        Optional<Tweet> tweetOpt = tweetService.getTweetById(id);
 
         if (!userOpt.isEmpty()) {
             if (!tweetOpt.isEmpty()) {
@@ -41,7 +37,7 @@ public class TweetInteractionController {
                 Tweet tweet = tweetOpt.get();
                 tweet.switchLike(userOpt.get(), tweetService);
             }
-            return UserService.getCurrentPage(req);
+            return UserService.redirectToReferer(req);
         }
         else return "redirect:/login";
     }
@@ -51,7 +47,7 @@ public class TweetInteractionController {
         Model model, HttpServletRequest req, @PathVariable Long id
     ) {
         Optional<User> reportingUserOpt = userService.getUserBy(req);
-        Optional<Tweet> tweetOpt = tweetService.getTweetFromId(id);
+        Optional<Tweet> tweetOpt = tweetService.getTweetById(id);
 
         if (!reportingUserOpt.isEmpty()) {
             if (!tweetOpt.isEmpty()) {
@@ -62,9 +58,25 @@ public class TweetInteractionController {
 
                 tweetService.save(tweet);                       
             }
-            return UserService.getCurrentPage(req);
+            return UserService.redirectToReferer(req);
         }
         else 
             return "redirect:/login";
+    }
+
+    @RequestMapping(value = "/tweet/{id}/delete")
+    public String deleteTweet(@PathVariable Long id, HttpServletRequest req) {
+
+        Optional<Tweet> tweetOpt = tweetService.getTweetById(id);
+
+        if (tweetOpt.isPresent() && 
+        (TweetService.isOwnTweet(tweetOpt.get(), req) || TweetService.readIfPostShouldGetdeleted(id))
+        ){//FIXME add OR isAdmin()
+
+            tweetService.delete(tweetOpt.get());
+          
+            return "redirect:" + req.getHeader("referer");
+        } else
+            return "error";
     }
 }

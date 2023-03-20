@@ -3,18 +3,20 @@ package es.codeurjc.backend.service;
 import es.codeurjc.backend.model.Tweet;
 import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.repository.TweetRepository;
-import org.apache.juli.logging.Log;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import io.vavr.control.Try;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Service
 public class TweetService {
@@ -22,12 +24,15 @@ public class TweetService {
     @Autowired
     private TweetRepository tweetRepository;
 
-    public Optional<Tweet> getTweetFromId(String id) {
-        return getTweetFromId(Long.parseLong(id));
+    public Optional<Tweet> getTweetById(String id) {
+        return getTweetById(Long.parseLong(id));
+    }
+    public Optional<Tweet> getTweetById(Long id) {
+        return tweetRepository.findById(id);
     }
 
-    public Optional<Tweet> getTweetFromId(Long id) {
-        return tweetRepository.findById(id);
+    public static boolean isOwnTweet(Tweet tweet, HttpServletRequest req) {
+        return tweet.getAuthor().getUsername().equals(req.getUserPrincipal().getName());
     }
 
     public void save(Tweet tweet) {
@@ -37,6 +42,16 @@ public class TweetService {
         tweetRepository.delete(tweet);
     }
     
+    public static boolean readIfPostShouldGetdeleted(Long id) {
+        final String modEndpoint = "https://mod-microservice.vercel.app/postShouldGetDeleted/";
+
+        RestTemplate api = new RestTemplate();
+        String jsonStr = api.getForEntity(modEndpoint + id.toString(), String.class).getBody();
+        return Try
+        .of(() -> new ObjectMapper().readTree(jsonStr))
+        .map(json -> json.get("response").asBoolean())
+        .getOrElse(false);
+    }
 
     // NOTE this strategy is inefficient. If len(users) == 10
     // and each users has at least 10 posts, then len(@return) == 100.

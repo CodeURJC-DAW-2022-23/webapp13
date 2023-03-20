@@ -40,15 +40,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/loginsuccess").hasAnyRole("USER");
 
         http.authorizeRequests().antMatchers("/like").hasAnyRole("USER");
-        http.authorizeRequests().antMatchers("/tweet/report").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/tweet/*/report").hasAnyRole("USER");
 
         http.authorizeRequests().antMatchers("/logout").permitAll();
         http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
 
         http.authorizeRequests().antMatchers("/moderate").hasAnyRole("ADMIN");
         http.authorizeRequests().antMatchers("/moderate").hasAnyRole("ADMIN");
-        http.authorizeRequests().antMatchers("/tweet/delete").hasAnyRole("ADMIN");
-        
+        http.authorizeRequests().antMatchers("/tweet/*/delete").hasAnyRole("ADMIN");
+        http.authorizeRequests().antMatchers("/u/*/delete").hasAnyRole("ADMIN");
 
         // Login form
         http.formLogin().loginPage("/login");
