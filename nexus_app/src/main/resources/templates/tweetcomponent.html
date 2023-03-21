@@ -12,14 +12,22 @@
 	  <span class="profileanon-text012">
 		<span>{{date}}</span>
 	  </span>
+	  {{^author.isBanned}}
 	  <a href="/u/{{author.username}}">
 		<span class="profileanon-text014">
-			{{author.username}}
+			{{author.username}}		
 		</span>
 	  </a>
+	  {{/author.isBanned}}
+	  {{#author.isBanned}}
+	    <span class="profileanon-text014">
+		  [banned]
+	    </span>
+	  {{/author.isBanned}}
 	</div>
+	{{^author.isBanned}}
 	<div class="profileanon-interactions1">
-
+	
 	  <span class="profileanon-text016"><span>{{likes.size}}</span></span>
 	  <a href="/tweet/{{id}}/like">
 		  <img
@@ -28,21 +36,18 @@
 			class="profileanon-iconsax-linearheart1"
 		  />
 	  </a>
-
 	  <span class="profileanon-text018"><span>{{shares.size}}</span></span>
 	  <img
 		src="/profileuser/assets/iconsaxlinearrepeati135-eqaa.svg"
 		alt="IconsaxLinearrepeatI135"
 		class="profileanon-iconsax-linearrepeat1"
 	  />
-
 	  <span class="profileanon-text020"><span>{{children.size}}</span></span>
 	  <img
 		src="/profileuser/assets/iconsaxlinearmessagei135-n7p.svg"
 		alt="IconsaxLinearmessageI135"
 		class="profileanon-iconsax-linearmessage1"
-	  />
-		
+	  />	
 	  <a href="/tweet/{{id}}/report">
 		  <img
 			style="margin-left: 15px"
@@ -51,15 +56,18 @@
 			class="profileanon-iconsax-linearmessage1"
 		  />
 	  </a>
-
 	</div>
+	{{/author.isBanned}}
   </div>
   <div class="profileanon-post1">
 	<div class="profileanon-content1">
 	  <span class="profileanon-text022">
-		<span>
+		{{^author.isBanned}}
 		  {{text}}
-		</span>
+		{{/author.isBanned}}
+		{{#author.isBanned}}
+		  This user has been banned.
+		{{/author.isBanned}}
 	  </span>
 	</div>
   </div>

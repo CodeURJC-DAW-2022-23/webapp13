@@ -71,8 +71,5 @@ public class DataBaseController {
                 tweetBuilder.setText("tweet " + i).build()
             )
         );
-
-
     }
-
 }

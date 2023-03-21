@@ -49,12 +49,13 @@
           <div class="profileanon-twits">
             <div class="profileanon-container1">
               <div class="profileanon-twitslayout">
+                {{^profileUser.isBanned}} 
+                  {{> tweetwritecomponent}}
                 
-                {{> tweetwritecomponent}}
-                
-                {{#profileUser.tweets}}
-                  {{> tweetcomponent}}
-                {{/profileUser.tweets}}
+                  {{#profileUser.tweets}}
+                    {{> tweetcomponent}}
+                  {{/profileUser.tweets}}
+                {{/profileUser.isBanned}} 
               </div>
             </div>
             <div class="profileanon-bannercontainer">
@@ -128,6 +129,7 @@
               <span class="profileanon-text076">
                 <span>search over nexus</span>
                 {{> uploadprofilepicturebutton}}
+                {{> banbutton}} 
               </span>
             </div>
             <div class="profileanon-profile-variant3">
@@ -170,8 +172,7 @@
                 {{> writebutton}}
                 {{> followprofilebutton}}
               {{/profileUser.isBanned}}   
-             
-              {{> banbutton}}
+                  
              
               <span class="profileanon-text086">
                 {{^profileUser.isBanned}}

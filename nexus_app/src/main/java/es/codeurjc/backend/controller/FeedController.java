@@ -67,7 +67,6 @@ public class FeedController {
             return "redirect:/error";
     }
 
-    
     private void updateFeedModelForUsers(Model model) {
         ArrayList<User> followings = new ArrayList<>();
         followings.addAll(loggedUser.get().getFollowing());

@@ -53,18 +53,14 @@ public class TweetInteractionController {
             if (!tweetOpt.isEmpty()) {
 
                 Tweet tweet = tweetOpt.get();
-
-                tweet.getReporters().add(reportingUserOpt.get());
-
-                tweetService.save(tweet);                       
+                tweet.report(reportingUserOpt.get(), tweetService);           
             }
             return UserService.redirectToReferer(req);
         }
-        else 
-            return "redirect:/login";
+        else return "redirect:/login";
     }
 
-    @RequestMapping(value = "/tweet/{id}/delete")
+    @RequestMapping("/tweet/{id}/delete")
     public String deleteTweet(@PathVariable Long id, HttpServletRequest req) {
 
         Optional<User> deletingUserOpt = userService.getUserBy(req);
