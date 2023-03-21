@@ -47,8 +47,11 @@ public class UserInteractionController {
             UserService.urlUserExistsAndNotSelfAction(users)) {
             
             User bannedUser = users.getLeft();
-        
-            bannedUser.ban();
+            
+            if (!bannedUser.isBanned())
+                bannedUser.ban();
+            else
+                bannedUser.unban();
 
             userService.save(bannedUser);
 

@@ -1,6 +1,7 @@
 package es.codeurjc.backend.model;
 
 import java.sql.Blob;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
@@ -17,8 +18,8 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import es.codeurjc.backend.service.UserService;
-import org.springframework.lang.Nullable;
 
+import org.springframework.lang.Nullable;
 
 
 @Entity(name = "UserTable")
@@ -28,6 +29,8 @@ public class User {
     private String username;
 
     private String name, email, description = "";
+
+    private LocalDateTime signUpDate = LocalDateTime.now();
 
     @JsonIgnore
     private String encodedPassword;
@@ -182,6 +185,9 @@ public class User {
     public Set<User> getBlockedUsers() {return blockedUsers;}
     public void block(User user){blockedUsers.add(user);};
     public void unblock(User user){blockedUsers.remove(user);};
+
+    public LocalDateTime getSignUpDate() {return signUpDate;}
+    public Set<Tweet> getReportedTweets() {return reportedTweets;}
 
     @Override
     public boolean equals(Object o) {

@@ -1,0 +1,16 @@
+<a href="/u/{{profileUser.username}}/ban">
+    {{#authenticated}}
+    {{^ownProfile}}
+    {{#loggedUser.isAdmin}}
+            <div class="profileanon-btn1">
+                {{#profileUser.isBanned}}
+                <span class="profileanon-text084">Unban</span>
+                {{/profileUser.isBanned}}
+                {{^profileUser.isBanned}}
+                <span class="profileanon-text084">Ban</span>
+                {{/profileUser.isBanned}}
+            </div> 
+    {{/loggedUser.isAdmin}}   
+    {{/ownProfile}}
+    {{/authenticated}}
+</a>

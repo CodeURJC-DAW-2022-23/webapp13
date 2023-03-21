@@ -67,12 +67,14 @@ public class TweetInteractionController {
     @RequestMapping(value = "/tweet/{id}/delete")
     public String deleteTweet(@PathVariable Long id, HttpServletRequest req) {
 
+        Optional<User> deletingUserOpt = userService.getUserBy(req);
         Optional<Tweet> tweetOpt = tweetService.getTweetById(id);
 
         if (tweetOpt.isPresent() && 
-        (TweetService.isOwnTweet(tweetOpt.get(), req) || TweetService.readIfPostShouldGetdeleted(id))
-        ){//FIXME add OR isAdmin()
-
+        (TweetService.isOwnTweet(tweetOpt.get(), req) ||
+        UserService.isAdmin(deletingUserOpt) || 
+        TweetService.readIfPostShouldGetdeleted(id))) 
+        {
             tweetService.delete(tweetOpt.get());
           
             return "redirect:" + req.getHeader("referer");

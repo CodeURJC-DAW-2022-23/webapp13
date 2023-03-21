@@ -36,19 +36,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/").permitAll();
         http.authorizeRequests().antMatchers("/signup").permitAll();
         http.authorizeRequests().antMatchers("/login").permitAll();
+        http.authorizeRequests().antMatchers("/loginfail").permitAll();
         http.authorizeRequests().antMatchers("/feed").permitAll();
         http.authorizeRequests().antMatchers("/loginsuccess").hasAnyRole("USER");
 
         http.authorizeRequests().antMatchers("/like").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/tweet/*/report").hasAnyRole("USER");
-
+        http.authorizeRequests().antMatchers("/u/*/profilepicture/*").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/u/*/write").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/u/*/posttweet").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/logout").permitAll();
         http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
 
         http.authorizeRequests().antMatchers("/moderate").hasAnyRole("ADMIN");
-        http.authorizeRequests().antMatchers("/moderate").hasAnyRole("ADMIN");
-        http.authorizeRequests().antMatchers("/tweet/*/delete").hasAnyRole("ADMIN");
+        http.authorizeRequests().antMatchers("/tweet/*/delete").hasAnyRole("USER", "ADMIN");
         http.authorizeRequests().antMatchers("/u/*/delete").hasAnyRole("ADMIN");
+        http.authorizeRequests().antMatchers("/u/*/ban").hasAnyRole("ADMIN");
+        
 
         // Login form
         http.formLogin().loginPage("/login");

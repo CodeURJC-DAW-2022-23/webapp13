@@ -77,6 +77,9 @@ public final class UserService {
     public static boolean urlUserExistsAndNotSelfAction(OptTwo<User> users){
         return urlUserExists(users) || !isSelfAction(users);
     }
+    public static boolean isAdmin(Optional<User> user){
+        return user.isPresent() && user.get().isAdmin();
+    }
 
     public static boolean isEmail(String input){
         return input.matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");

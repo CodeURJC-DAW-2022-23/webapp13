@@ -66,7 +66,7 @@ public class ProfileController {
 
             return "profile";
         } else 
-            return "redirect:/error";
+            return "error";
     }
 
     @GetMapping("/u/{username}/profilepicture")
@@ -97,7 +97,7 @@ public class ProfileController {
             modelProfile(model, true);
             return "profile";
         } else 
-            return "redirect:/error";
+            return "error";
     }
 
     @PostMapping("/u/{username}/posttweet")
@@ -114,10 +114,10 @@ public class ProfileController {
             userService.save(profileUser);
             return "redirect:/u/" + username;
         } else 
-            return "redirect:/error";
+            return "error";
     }
 
-    @PostMapping("/u/{username}/update/profilepicture")
+    @PostMapping("/u/{username}/profilepicture/update")
     public String uploadProfilePicture(
         @RequestParam MultipartFile image, @PathVariable String username
     ) {     
@@ -128,20 +128,20 @@ public class ProfileController {
             userService.save(profileUser);
             return "redirect:/u/" + loggedUser.get().getUsername();
         } else
-            return "redirect:/error";
+            return "error";
     }
 
-    @RequestMapping("/u/{username}/remove/profilepicture")
+    @RequestMapping("/u/{username}/profilepicture/remove")
     public String removeProfilePicture(@PathVariable String username) {
         
         if (UserService.isOwnResource(username, loggedUser)) {
             profileUser.setProfilePicture(null);
             return "profile";
         } else
-            return "redirect:/error";
+            return "error";
     }
 
-    private void modelProfile (Model model, boolean ownProfile){
+    private void modelProfile (Model model, boolean ownProfile) {
         Collections.sort(profileUser.getTweets(), Collections.reverseOrder());
 
         model.addAttribute("profileUser", profileUser);

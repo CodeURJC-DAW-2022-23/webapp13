@@ -14,7 +14,6 @@
         font-family: Inter;
         font-size: 16px;
       }
-
       body {
         font-weight: 400;
         font-style:normal;
@@ -24,7 +23,6 @@
         line-height: 1.15;
         color: var(--dl-color-gray-black);
         background-color: var(--dl-color-gray-white);
-
       }
     </style>
     <link
@@ -139,11 +137,13 @@
                 class="profileanon-vector3"
               />
                 <div class="profileanon-pfp3">
-                  {{#profileUser}}
-                    {{> userimage}}
-                  {{/profileUser}}
+                  {{^profileUser.isBanned}} 
+                    {{#profileUser}}
+                      {{> userimage}}
+                    {{/profileUser}}
+                  {{/profileUser.isBanned}} 
                 </div>
-              <span class="profileanon-text078"><span>{{profileUser.username}}</span></span>
+              <span class="profileanon-text078">{{profileUser.username}}</span>
               <div class="profileanon-frameiconcheck">
                 <img
                   src="/profileuser/assets/polygon2i135-lapn.svg"
@@ -156,18 +156,27 @@
                   class="profileanon-vector1"
                 />
               </div>
-              <span class="profileanon-text080"><span>12/11/22</span></span>
+              <span class="profileanon-text080">{{profileUser.getSignUpDate}}</span>
               
-              <span class="profileanon-text082">
-                <span>
+              <span class="profileanon-text082">                  
+                {{^profileUser.isBanned}}     
                   {{profileUser.description}}
-                </span>
+                {{/profileUser.isBanned}}   
+                {{#profileUser.isBanned}}    
+                  This user has been banned.
+                {{/profileUser.isBanned}}  
               </span>
-              {{> writebutton}}
-              {{> followprofilebutton}}
+              {{^profileUser.isBanned}}     
+                {{> writebutton}}
+                {{> followprofilebutton}}
+              {{/profileUser.isBanned}}   
+             
+              {{> banbutton}}
              
               <span class="profileanon-text086">
-                <span>following {{profileUser.following.size}}/ {{followerCount}} followers</span>
+                {{^profileUser.isBanned}}
+                following {{profileUser.following.size}}/ {{followerCount}} followers
+                {{/profileUser.isBanned}}
               </span>
             </div>
             <div class="profileanon-related">
