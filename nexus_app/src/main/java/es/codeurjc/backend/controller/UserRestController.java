@@ -11,7 +11,6 @@ import es.codeurjc.backend.service.UserService;
 @RequestMapping("/api/users")
 public class UserRestController {
     
-
     @Autowired
     private UserService userService;
 
