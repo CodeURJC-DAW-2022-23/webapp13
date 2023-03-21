@@ -10,9 +10,9 @@
 	</parent>
 
 	<groupId>es.codeurjc</groupId>
-	<artifactId>FASE2</artifactId>
+	<artifactId>Nexus-phase3</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>FASE3</name>
+	<name>NexusApp</name>
 	<description>Nexus social network project</description>
 	<properties>
 		<java.version>17</java.version>
