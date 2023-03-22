@@ -10,10 +10,11 @@
 	</parent>
 
 	<groupId>es.codeurjc</groupId>
-	<artifactId>Nexus-phase3</artifactId>
+	<artifactId>nexus</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>NexusApp</name>
+	<name>nexus</name>
 	<description>Nexus social network project</description>
+	<packaging>jar</packaging>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -79,6 +80,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${parent.version}</version>
 				<executions>
 					<execution>
 						<id>pre-integration-test</id>
@@ -118,7 +120,7 @@
 					<outputDir>${project.basedir}/api-docs</outputDir>
 				</configuration>
 			</plugin>
-			<plugin>
+			<!--<plugin>
 				<groupId>org.openapitools</groupId>
 				<artifactId>openapi-generator-maven-plugin</artifactId>
 				<version>5.3.0</version>
@@ -135,7 +137,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>-->
 			<plugin>
 				<groupId>com.coderplus.maven.plugins</groupId>
 				<artifactId>copy-rename-maven-plugin</artifactId>
