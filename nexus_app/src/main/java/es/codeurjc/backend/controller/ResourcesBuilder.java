@@ -30,4 +30,6 @@ public class ResourcesBuilder {
             .body(new InputStreamResource(img.get().getBinaryStream()))
         );
     }
+
+    
 }

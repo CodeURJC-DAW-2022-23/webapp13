@@ -1,6 +1,7 @@
 package es.codeurjc.backend.controller;
 
 
+import java.io.IOException;
 import java.sql.Blob;
 import java.util.Collections;
 import java.util.Optional;
@@ -101,7 +102,8 @@ public class ProfileController {
     }
 
     @PostMapping("/u/{username}/posttweet")
-    public String startWritingTweet(Model model, @PathVariable String username, @RequestParam String text) {
+    public String startWritingTweet(Model model, @PathVariable String username, 
+    @RequestParam String text, @RequestParam MultipartFile image) {
         
         if (UserService.isOwnResource(username, loggedUser)) {
 
@@ -110,6 +112,17 @@ public class ProfileController {
                 .setAuthor(loggedUser.get())
                 .setText(text);
 
+            //FIXME refactor
+            if (image.isEmpty())
+                builder.setMedia(null);   
+            else{
+                try {
+                    builder.setMedia(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+                } catch (IOException e) {
+                    builder.setMedia(null);
+                }
+            }
+            
             tweetRepository.save(builder.build());
             userService.save(profileUser);
             return "redirect:/u/" + username;
@@ -122,10 +135,13 @@ public class ProfileController {
         @RequestParam MultipartFile image, @PathVariable String username
     ) {     
         if (UserService.isOwnResource(username, loggedUser)) {
-            Try.run(() -> profileUser.setProfilePicture(
-                BlobProxy.generateProxy(image.getInputStream(), image.getSize())
-            ));
-            userService.save(profileUser);
+
+            if (!image.isEmpty()) {
+                Try.run(() -> profileUser.setProfilePicture(
+                    BlobProxy.generateProxy(image.getInputStream(), image.getSize())
+                ));
+                userService.save(profileUser);
+            }
             return "redirect:/u/" + loggedUser.get().getUsername();
         } else
             return "error";

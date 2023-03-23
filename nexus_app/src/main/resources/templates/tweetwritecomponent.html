@@ -2,8 +2,9 @@
 {{#posting}}
 <link href="/profileuser/profileuser.css" rel="stylesheet" />
     <div class="profileanon-post1">
-        <form class="profileanon-content1" action="/u/{{profileUser.username}}/posttweet" method="post">
+        <form class="profileanon-content1" action="/u/{{profileUser.username}}/posttweet" method="post" enctype="multipart/form-data">
             <input type="text" name="text">
+            <input type="file" name="image" accept=".jpg, .jpeg, .png"/>
             <input type="submit" value="Post!">
         </form>
     </div>

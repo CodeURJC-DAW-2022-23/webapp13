@@ -1,15 +1,21 @@
 package es.codeurjc.backend.controller;
 
+import java.sql.Blob;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
 import es.codeurjc.backend.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.core.io.Resource;
+
 
 import es.codeurjc.backend.model.Tweet;
 import es.codeurjc.backend.model.User;
@@ -77,4 +83,16 @@ public class TweetInteractionController {
         } else
             return "error";
     }
+
+    @GetMapping("/tweet/{id}/media")
+	public ResponseEntity<Resource> downloadImage(@PathVariable Long id) {
+
+		Optional<Tweet> tweetOpt = tweetService.getTweetById(id);
+
+        Optional<Blob> mediaOpt = Optional.ofNullable(tweetOpt.get().getMedia());
+  
+        return ResourcesBuilder
+            .tryBuildImgResponse(mediaOpt)
+            .getOrElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
 }
