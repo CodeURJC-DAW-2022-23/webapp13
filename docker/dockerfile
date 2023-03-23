@@ -17,7 +17,6 @@ COPY nexus_app/src /project/src
 RUN mvn package
 
 # Application container
-
 FROM openjdk:17
 
 WORKDIR /usr/src/app/
