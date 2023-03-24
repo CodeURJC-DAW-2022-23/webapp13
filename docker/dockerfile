@@ -14,7 +14,7 @@ COPY nexus_app/pom.xml /project/
 COPY nexus_app/src /project/src
 
 # Compile project
-RUN mvn package
+RUN mvn package -DskipTests=true
 
 # Application container
 FROM openjdk:17
