@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import es.codeurjc.backend.model.User;
@@ -51,6 +52,20 @@ public class FeedController {
         return "feed";
     }
 
+    @RequestMapping("/feed/{tag}")
+    public String showFeedTag(Model model, HttpServletRequest request, @PathVariable String Tag){
+
+        loggedUser = userService.getUserBy(request);
+
+        if (loggedUser.isPresent())
+                updateFeedModelForUsersByTags(model, Tag);
+        else updateFeedModelForAnons(model);
+
+        model.addAttribute("authenticated", loggedUser.isPresent());
+        model.addAttribute("inLogin", false);
+        return "feed";
+    }
+
     @RequestMapping("/feed/moderator")
     public String showModFeed(Model model, HttpServletRequest req) {
         Optional<User> user = userService.getUserBy(req);
@@ -73,6 +88,14 @@ public class FeedController {
         
         model.addAttribute("loggedUser", loggedUser);
         model.addAttribute("tweets", tweetService.queryTweetsForUsers(followings));
+    }
+
+    private void updateFeedModelForUsersByTags(Model model, String Tag) {
+        ArrayList<User> followings = new ArrayList<>();
+        followings.addAll(loggedUser.get().getFollowing());
+        
+        model.addAttribute("loggedUser", loggedUser);
+        model.addAttribute("tweets", tweetRepository.findTweetsByTags(Tag));
     }
 
     private void updateFeedModelForAnons(Model model) {

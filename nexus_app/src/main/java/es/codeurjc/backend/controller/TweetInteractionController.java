@@ -50,8 +50,7 @@ public class TweetInteractionController {
 
     @RequestMapping("/tweet/{id}/report")
     public String reportTweet(
-        Model model, HttpServletRequest req, @PathVariable Long id
-    ) {
+        Model model, HttpServletRequest req, @PathVariable Long id) {
         Optional<User> reportingUserOpt = userService.getUserBy(req);
         Optional<Tweet> tweetOpt = tweetService.getTweetById(id);
 
