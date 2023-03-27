@@ -12,66 +12,78 @@
 	  <span class="profileanon-text012">
 		<span>{{date}}</span>
 	  </span>
-	  <span class="profileanon-text014">
-		<span>{{author.username}}</span>
-	  </span>
+	  {{^author.isBanned}}
+	  <a href="/u/{{author.username}}">
+		<span class="profileanon-text014">
+			{{author.username}}		
+		</span>
+	  </a>
+	  {{/author.isBanned}}
+	  {{#author.isBanned}}
+	    <span class="profileanon-text014">
+		  [banned]
+	    </span>
+	  {{/author.isBanned}}
 	</div>
+	{{^author.isBanned}}
 	<div class="profileanon-interactions1">
-
+	
 	  <span class="profileanon-text016"><span>{{likes.size}}</span></span>
-	  <a href="/like/{{id}}">
+	  <a href="/tweet/{{id}}/like">
 		  <img
 			src="/profileuser/assets/iconsaxlinearhearti135-0d8.svg"
 			alt="IconsaxLinearheartI135"
 			class="profileanon-iconsax-linearheart1"
 		  />
 	  </a>
-
 	  <span class="profileanon-text018"><span>{{shares.size}}</span></span>
 	  <img
 		src="/profileuser/assets/iconsaxlinearrepeati135-eqaa.svg"
 		alt="IconsaxLinearrepeatI135"
 		class="profileanon-iconsax-linearrepeat1"
 	  />
-
 	  <span class="profileanon-text020"><span>{{children.size}}</span></span>
 	  <img
 		src="/profileuser/assets/iconsaxlinearmessagei135-n7p.svg"
 		alt="IconsaxLinearmessageI135"
 		class="profileanon-iconsax-linearmessage1"
-	  />
-		
-		<a href="/report/{{id}}">
-			<img
-				style="margin-left: 15px"
-				src="/profileuser/assets/iconsaxlinearmessagei135-n7p.svg"
-				alt="IconsaxLinearmessageI135"
-				class="profileanon-iconsax-linearmessage1"
-			/>
-		</a>
-
+	  />	
+	  <a href="/tweet/{{id}}/report">
+		  <img
+			style="margin-left: 15px"
+			src="/profileuser/assets/iconsaxlinearmessagei135-n7p.svg"
+			alt="IconsaxLinearmessageI135"
+			class="profileanon-iconsax-linearmessage1"
+		  />
+	  </a>
 	</div>
+	{{/author.isBanned}}
   </div>
   <div class="profileanon-post1">
 	<div class="profileanon-content1">
 	  <span class="profileanon-text022">
-		<span>
+		{{^author.isBanned}}
 		  {{text}}
-		</span>
+		{{/author.isBanned}}
+		{{#author.isBanned}}
+		  This user has been banned.
+		{{/author.isBanned}}
 	  </span>
 	</div>
-	<div class="profileanon-thread1"></div>
   </div>
-  {{#hasMedia?}}
+  {{^author.isBanned}}
+  {{#hasMedia}}
   <div class="profileanon-img2">
 	<div class="profileanon-img3">
-	  <img
-		src="/profileuser/assets/image95537386p11i135-hi92j-400h.png"
-		alt="IMAGE95537386p11I135"
-		class="profileanon-i-m-a-g-e95537386p11"
-	  />
+	  <a href="/tweet/{{id}}/media">
+	    <img
+		  src="/tweet/{{id}}/media"
+		  class="profileanon-i-m-a-g-e95537386p11"
+	    />
+	  </a>
 	</div>                        
 	<div class="profileanon-thread2"></div>
   </div>
-  {{/hasMedia?}}
+  {{/hasMedia}}
+  {{/author.isBanned}}
 </div>

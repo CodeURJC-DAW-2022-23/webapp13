@@ -86,6 +86,7 @@ public class FeedController {
         model.addAttribute("tweets", tweetService.queryTweetsToModerate());
     }
 
+    /*
     // FIXME if a tweet has N likes it will query all the N likes, in this sense
     // the model for Tweet should store the likes count. Same applies to replies.
     @GetMapping("/api/tweets")
@@ -101,5 +102,5 @@ public class FeedController {
             .ok()
             .header("X-Total-Count", String.valueOf(tweetsPage.getTotalElements()))
             .body(tweetsPage);
-    }
+    }*/
 }

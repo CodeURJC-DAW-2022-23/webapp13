@@ -76,7 +76,6 @@ public class TweetRestController {
             content = @Content
         )
     })
-    @JsonView(User.class)
     @GetMapping("/{id}/tweets")
     public ResponseEntity<List<Tweet>> getTweetsByUserId(@PathVariable String id) {
         Optional<User> optional = userService.getUserById(id);
@@ -114,7 +113,7 @@ public class TweetRestController {
             content = @Content
         )
     })
-    @JsonView(User.class)
+    @JsonView(User.Alt.class)
     @GetMapping("/me")
     public ResponseEntity<List<Tweet>> getTweetsOfCurrentUser(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
