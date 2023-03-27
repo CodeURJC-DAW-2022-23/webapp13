@@ -115,13 +115,12 @@ public class ProfileController {
             //FIXME refactor
             if (image.isEmpty())
                 builder.setMedia(null);   
-            else{
+            else
                 try {
                     builder.setMedia(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
                 } catch (IOException e) {
                     builder.setMedia(null);
                 }
-            }
             
             tweetRepository.save(builder.build());
             userService.save(profileUser);
@@ -138,7 +137,8 @@ public class ProfileController {
 
             if (!image.isEmpty()) {
                 Try.run(() -> profileUser.setProfilePicture(
-                    BlobProxy.generateProxy(image.getInputStream(), image.getSize())
+                    BlobProxy.generateProxy(image.getInputStream(), image.getSize()),
+                    userService
                 ));
                 userService.save(profileUser);
             }
@@ -151,7 +151,7 @@ public class ProfileController {
     public String removeProfilePicture(@PathVariable String username) {
         
         if (UserService.isOwnResource(username, loggedUser)) {
-            profileUser.setProfilePicture(null);
+            profileUser.setProfilePicture(null, userService);
             return "profile";
         } else
             return "error";

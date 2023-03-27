@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpHeaders;
+
 import org.springframework.http.ResponseEntity;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,16 +21,10 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.hibernate.engine.jdbc.BlobProxy;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
+
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.web.JsonPath;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -42,7 +36,7 @@ import es.codeurjc.backend.service.UserService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
-import static org.springframework.web.util.UriComponentsBuilder.newInstance;
+
 
 @RestController
 @RequestMapping("/api/tweets")
@@ -53,7 +47,6 @@ public class TweetRestController {
 
     @Autowired
     private TweetService tweetService;
-    
     
     @Operation(summary = "Get tweets by user id")
     @ApiResponses(value = {
@@ -76,20 +69,14 @@ public class TweetRestController {
             content = @Content
         )
     })
-    @GetMapping("/{id}/tweets")
-    public ResponseEntity<List<Tweet>> getTweetsByUserId(@PathVariable String id) {
-        Optional<User> optional = userService.getUserById(id);
-        if (optional.isPresent()) {
-            User user = optional.get();
-            List<Tweet> tweets = new ArrayList<>();
-            tweets = tweetService.getTweetsByUser(user);
-            //tweets = user.getTweets();
-            if(tweets==null)
-                return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+    @GetMapping("/{username}/tweets")
+    public ResponseEntity<List<Tweet>> getTweetsByUsername(@PathVariable String username) {
+        Optional<User> userOpt = userService.getUserBy(username);
+        if (userOpt.isPresent()) {
+            List<Tweet> tweets = userOpt.get().getTweets();
             return new ResponseEntity<>(tweets, HttpStatus.OK);
-        } else {
+        } else 
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
     }
 
     @Operation(summary = "Get tweets of the current user")
@@ -116,12 +103,9 @@ public class TweetRestController {
     @JsonView(User.Alt.class)
     @GetMapping("/me")
     public ResponseEntity<List<Tweet>> getTweetsOfCurrentUser(HttpServletRequest request) {
-        Principal principal = request.getUserPrincipal();
-        User user = userService.getUserBy(principal.getName()).orElseThrow();
-        List<Tweet> tweets = new ArrayList<>();
-        tweetService.getTweetsByUser(user);
-        if(tweets==null)
-            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        
+        Optional<User> userOpt = userService.getUserBy(request);
+        List<Tweet> tweets = userOpt.get().getTweets();
         return new ResponseEntity<>(tweets, HttpStatus.OK);
     }
 
@@ -144,9 +128,9 @@ public class TweetRestController {
     })
     @GetMapping("")
     public ResponseEntity<List<Tweet>> getTweets(@RequestParam int page) {
-        Page<Tweet> tweets= tweetService.getPageOfTweets(page);
-        List<Tweet> aux= tweets.toList();
-       return new ResponseEntity<>(aux, HttpStatus.OK);
+        Page<Tweet> pagedTweets= tweetService.getPageOfTweets(page);
+        List<Tweet> listedTweets = pagedTweets.toList();
+       return new ResponseEntity<>(listedTweets, HttpStatus.OK);
     }
 
     //Find specific tweet
@@ -173,13 +157,11 @@ public class TweetRestController {
     })
     @GetMapping("/{id}")
     public ResponseEntity<Tweet> getTweetById(@PathVariable String id) {
-        Optional<Tweet> optional = tweetService.getTweetById(id);
-        if (optional.isPresent()) {
-            Tweet tweet = optional.get();
-            return new ResponseEntity<>(tweet, HttpStatus.OK);
-        } else {
+        Optional<Tweet> tweetOpt = tweetService.getTweetById(id);
+        if (tweetOpt.isPresent()) 
+            return new ResponseEntity<>(tweetOpt.get(), HttpStatus.OK);
+        else 
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
     }
 
     //Find specific tweet
@@ -205,16 +187,15 @@ public class TweetRestController {
         )
     })
     @GetMapping("/{id}/likes")
-    public ResponseEntity<List<User>> getLikesByTweetId(@PathVariable String id) {
-        Optional<Tweet> optional = tweetService.getTweetById(id);
-        if (optional.isPresent()) {
-            Tweet tweet = optional.get();
-            //this is not goin to work with current configuration of JsoIgnores
-            List<User> users = (List<User>) tweet.getLikes();
+    public ResponseEntity<Set<User>> getLikesByTweetId(@PathVariable String id) {
+        Optional<Tweet> tweetOpt = tweetService.getTweetById(id);
+        if (tweetOpt.isPresent()) {
+            Tweet tweet = tweetOpt.get();
+            //this is not going to work with current configuration of JsonIgnores
+            Set<User> users = tweet.getLikes();
             return new ResponseEntity<>(users, HttpStatus.OK);
-        } else {
+        } else 
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
     }
 
     //POST new tweet
@@ -269,16 +250,15 @@ public class TweetRestController {
             )
     })
     @DeleteMapping("")
-    public ResponseEntity<Tweet> deleteTweet(@RequestParam Long id) {
-        if(id != null) {
-            if(tweetService.getTweetById(id).isPresent()) {
-                Optional<Tweet> optional = tweetService.getTweetById(id);
-                Tweet tweet = optional.get();
-                tweetService.delete(tweet);
-            }
+    public ResponseEntity<Tweet> deleteTweet(@RequestParam long id) {
+
+        Optional <Tweet> tweetOpt = tweetService.getTweetById(id);
+        if(tweetOpt.isPresent()) {
+            tweetService.delete(tweetOpt.get());
             return new ResponseEntity<>(null,HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else
+            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+
     }
 
 }

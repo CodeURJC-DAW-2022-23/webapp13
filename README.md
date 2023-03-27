@@ -230,7 +230,7 @@ I've edited and helped with the implementations of most controllers, connected t
 3. Create an account in DockerHub and execute: $ docker login
 4. Then start the Docker using: $ docker run --network=host tomy014/nexus
 
-## UPDATED DIAGRAM CLASS
+## UPDATED UML CLASS DIAGRAM
 
 ![Captura de pantalla 2023-03-27 052257](https://user-images.githubusercontent.com/38651496/227835123-500b30e0-8b34-49c3-94c7-4087b6649945.png)
 
