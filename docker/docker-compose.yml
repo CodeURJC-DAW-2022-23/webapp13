@@ -12,12 +12,13 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/nexus
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=password
-      - SPRING_DATASOURCE_PORT=5432
+      #- SPRING_DATASOURCE_PORT=5432
       - SPRING_JPA_HIBERNATE_DDL-AUTO=create-drop
     depends_on:
       - db
   db:
    image: mysql:8.0.32
+   container_name: db
    environment:
      - MYSQL_ROOT_PASSWORD=password
      - MYSQL_DATABASE=nexus
