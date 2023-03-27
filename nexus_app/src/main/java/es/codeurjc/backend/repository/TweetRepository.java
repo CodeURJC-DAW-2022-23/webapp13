@@ -18,7 +18,7 @@ public interface TweetRepository extends JpaRepository<Tweet, Long>{
     List<Tweet> findFirst10ByAuthor(User author);
     List<Tweet> findTop10ByOrderByDateDesc();
     Page<Tweet> findAllByOrderByDateDesc(Pageable pageable);
-
+    List<Tweet> findAllByAuthor(User author);
     @Query(value = "SELECT t FROM Tweet t JOIN t.reporters r GROUP BY t ORDER BY COUNT(r) DESC")
     List<Tweet> findTopReportedTweets();
 

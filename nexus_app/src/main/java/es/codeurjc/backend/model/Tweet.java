@@ -11,6 +11,8 @@ import javax.persistence.*;
 
 import org.springframework.lang.Nullable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import es.codeurjc.backend.service.TweetService;
 
 @Entity(name = "Tweet")
@@ -26,6 +28,7 @@ public class Tweet implements Comparable<Tweet>{
     //@Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime date;
 
+    @JsonIgnore
     @ManyToMany
     private Set<User> reporters = new HashSet<>();
 
@@ -34,21 +37,26 @@ public class Tweet implements Comparable<Tweet>{
 
     @Nullable
     @Lob
+    @JsonIgnore
     private Blob media;
 
+    @JsonIgnore
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> tags = new HashSet<String>();
 
+    @JsonIgnore
     @Nullable
     @ManyToMany
     private Set<User> likes  = new HashSet<>();
 
+    @JsonIgnore
     @Nullable
     @OneToMany(cascade = CascadeType.ALL)
     private List<Tweet> children = new ArrayList<>();
 
     @Nullable
     @OneToMany
+    @JsonIgnore
     private Set<Tweet> shares = new HashSet<>();
 
     public static class Builder {

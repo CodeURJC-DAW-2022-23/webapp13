@@ -1,6 +1,7 @@
 package es.codeurjc.backend.service;
 
 import java.lang.ProcessBuilder.Redirect;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -43,6 +44,9 @@ public final class UserService {
 
     public Optional<User> getUserBy(String username) {
         return userRepository.findByUsername(username);
+    }
+    public Optional<User> getUserById(String id){
+        return userRepository.findById(id);
     }
 
     public Optional<User> getUserByEmail(String email) {
@@ -87,6 +91,10 @@ public final class UserService {
     }
     public static String redirectToReferer(HttpServletRequest req) {
         return "redirect:" + req.getHeader("Referer");
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 
 
