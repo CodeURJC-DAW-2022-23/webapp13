@@ -122,7 +122,7 @@ You must complete these steps in order to be able to test our application.
 ## Class diagram:
 ![image](https://user-images.githubusercontent.com/38651496/224727082-53f56eda-680a-497c-ac5f-d45678b3a308.png)
 
-## Members participation: 
+## Members' participation: 
 
 ### Team members' five most representative commits: 
 
@@ -234,23 +234,13 @@ I've edited and helped with the implementations of most controllers, connected t
 
 ![Captura de pantalla 2023-03-27 052257](https://user-images.githubusercontent.com/38651496/227835123-500b30e0-8b34-49c3-94c7-4087b6649945.png)
 
-## Members participation:
+## Team members participation
+
+### Team members' five most representative commits:
 
 #### Alberto: 
 
-I've been working on the entire project to get it done, from start to finish. I've mainly worked on the creation of the docker image, its operation and on the creation and operation of the ApiRest.
-
-##### 5 Files participated
-
-* [TweetRestController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/nexus_app/src/main/java/es/codeurjc/backend/controller/TweetRestController.java) 
-* [UserRestController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/nexus_app/src/main/java/es/codeurjc/backend/controller/UserRestController.java)
-* [TweetRepository.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/nexus_app/src/main/java/es/codeurjc/backend/repository/TweetRepository.java)
-* [UserRepository.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/nexus_app/src/main/java/es/codeurjc/backend/repository/UserRepository.java)
-* [dockerfile](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/docker/dockerfile)
-
-##### 5 Most important commits 
-
-There are some commits missing due to numerous refactorings by my peers.
+I've mainly worked on the creation of the docker image, its operation and on the creation and operation of the ApiRest.
 
 |  Description | Link | 
 | ------ | ------ | 
@@ -259,3 +249,35 @@ There are some commits missing due to numerous refactorings by my peers.
 | Merge pull request #38 from CodeURJC-DAW-2022-23/apiRest | [Commit 3](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/655c727b28e32cda335a654db8fde2ffaecbae03) | 
 | Created docker-compse.yml | [Commit 4](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/b7121c15a840e53c1691199c589136167a074dc6) | 
 | Added plugins and dependencies | [Commit 5](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/9ee494325670d1c2fc518ee61c6d27af64d5c051) | 
+
+#### Stefano: 
+
+Added banning functionality for moderators, refactored the normal Tweet and User controllers, heavily refactored the REST controller, and fixed some of its methods. 
+
+|  Description | Link | 
+| ------ | ------ | 
+| Working upload image to tweet | [Commit 1](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/eafa357657176ab9eda5bef323fc6b29aada4090) | 
+| REST controllers refactor and fixes | [Commit 2](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/1131e03d64f79f94a90ccc32bec729d74ad54a9e) | 
+| Added ban functionality| [Commit 3](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/bfe2ee41301e020230bf658fbe5102667e1522ab) | 
+| Display ban in HTML | [Commit 4](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/626763a0ca0a657f2a6bcb68eb66ccb092e9af5e) | 
+| Refecatored interaction controllers | [Commit 5](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/ef835c237dcca1cd0cc3759d6304ca8665c0e5e0) | 
+| Fixed advanced JPA query | [Commit 6](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/e9a57e0780aea229e2959d5e63984d16bfe51265) | 
+
+### Team members' top five most involved-in files: 
+
+#### Alberto: 
+
+* [TweetRestController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/nexus_app/src/main/java/es/codeurjc/backend/controller/TweetRestController.java) 
+* [UserRestController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/nexus_app/src/main/java/es/codeurjc/backend/controller/UserRestController.java)
+* [TweetRepository.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/nexus_app/src/main/java/es/codeurjc/backend/repository/TweetRepository.java)
+* [UserRepository.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/nexus_app/src/main/java/es/codeurjc/backend/repository/UserRepository.java)
+* [dockerfile](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/docker/dockerfile)
+
+#### Stefano: 
+
+* [ProfileController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/nexus_app/src/main/java/es/codeurjc/backend/controller/ProfileController.java) 
+* [TweetInteractionController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/nexus_app/src/main/java/es/codeurjc/backend/controller/TweetInteractionController.java) 
+* [UserInteractionController.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/nexus_app/src/main/java/es/codeurjc/backend/controller/UserInteractionController.java) 
+* [TweetRestController.java (refactor & fixes)](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/nexus_app/src/main/java/es/codeurjc/backend/controller/TweetRestController.java) 
+* [UserRestController.java (refactor & fixes)](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/nexus_app/src/main/java/es/codeurjc/backend/controller/UserRestController.java)
+
