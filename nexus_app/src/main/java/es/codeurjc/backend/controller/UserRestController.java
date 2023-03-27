@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,7 +31,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import es.codeurjc.backend.model.Tweet;
 import es.codeurjc.backend.model.User;
-import es.codeurjc.backend.service.TweetService;
 import es.codeurjc.backend.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -38,6 +38,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
@@ -47,9 +48,6 @@ public class UserRestController {
     
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private TweetService tweetService;
 
     //Find specific user
     @Operation(summary = "Get user by id")
@@ -74,11 +72,10 @@ public class UserRestController {
         )
     })
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable String id) {
-        Optional<User> optional = userService.getUserById(id);
-        if (optional.isPresent()) {
-            User user = optional.get();
-            return new ResponseEntity<>(user, HttpStatus.OK);
+    public ResponseEntity<User> getUserById(@PathVariable long id) {
+        Optional<User> userOpt = userService.getUserById(id);
+        if (userOpt.isPresent()) {
+            return new ResponseEntity<>(userOpt.get(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -124,13 +121,12 @@ public class UserRestController {
         )
     })
     @GetMapping("/me")
-    public ResponseEntity<User> userLoged(HttpServletRequest request) {
-        Principal principal = request.getUserPrincipal();
-        if (principal != null) {
-            return ResponseEntity.ok(userService.getUserByEmail(principal.getName()).orElseThrow());
-        } else {
+    public ResponseEntity<User> getLoggedUser(HttpServletRequest request) {
+        Optional<User> userOpt = userService.getUserBy(request);
+        if (userOpt.isPresent()) 
+            return ResponseEntity.ok(userOpt.get());
+        else 
             return ResponseEntity.notFound().build();
-        }
     }
 
     @Operation(summary = "Get User Tweets")
@@ -156,18 +152,17 @@ public class UserRestController {
     })
     @GetMapping("/me/tweets")
     public ResponseEntity<List<Tweet>> getUserTweets(HttpServletRequest request) {
-        Principal principal = request.getUserPrincipal();
-        if (principal != null) {
-            User user = userService.getUserBy(principal.getName()).orElseThrow();
-            List<Tweet> tweets = new ArrayList<>();
-            tweets = user.getTweets();//should be userService.getTweetsByUsername
-            if(tweets==null)
+
+        Optional<User> userOpt = userService.getUserBy(request);
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            List<Tweet> tweets = user.getTweets();
+            if(tweets != null)
+                return new ResponseEntity<>(tweets, HttpStatus.OK);
+            else
                 return new ResponseEntity<>(tweets, HttpStatus.NO_CONTENT);
-            return new ResponseEntity<>(tweets, HttpStatus.OK);
-        }
-        else{
+        } else
             return ResponseEntity.notFound().build();
-        }
     }
 
     //Followers of current user
@@ -193,19 +188,14 @@ public class UserRestController {
         )
     })
     @GetMapping("/me/followers")
-    public ResponseEntity<List<User>> getUserFollowers(HttpServletRequest request) {
-        Principal principal = request.getUserPrincipal();
-        if (principal != null) {//not logged or something
-            User user = userService.getUserBy(principal.getName()).orElseThrow();
-            List<User> users = new ArrayList<>();
-            users = (List<User>) userService.getFollowers(user);
-            if(users==null)
-                return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
-            return new ResponseEntity<>(users, HttpStatus.OK);
-        }
-        else{
+    public ResponseEntity<Set<User>> getUserFollowers(HttpServletRequest request) {
+          
+        Optional<User> userOpt = userService.getUserBy(request);
+
+        if (userOpt.isPresent()) 
+            return new ResponseEntity<>(userOpt.get().getFollowers(userService), HttpStatus.OK);
+        else
             return ResponseEntity.notFound().build();
-        }
     }
 
     //list of following of the current user
@@ -231,19 +221,19 @@ public class UserRestController {
         )
     })
     @GetMapping("/me/following")
-    public ResponseEntity<List<User>> getUserFollowing(HttpServletRequest request) {
-        Principal principal = request.getUserPrincipal();
-        if (principal != null) {//not logged or something
-            User user = userService.getUserBy(principal.getName()).orElseThrow();
-            List<User> users = new ArrayList<>();
-            users = (List<User>) user.getFollowing();
-            if(users==null)
-                return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+    public ResponseEntity<Set<User>> getUserFollowing(HttpServletRequest request) {
+        
+        Optional<User> userOpt = userService.getUserBy(request);
+
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            
+            Set<User> users = user.getFollowing();
+
             return new ResponseEntity<>(users, HttpStatus.OK);
         }
-        else{
+        else
             return ResponseEntity.notFound().build();
-        }
     }
 
     @Operation(summary = "Get user profile picture")
@@ -264,20 +254,19 @@ public class UserRestController {
     })
     @GetMapping("/me/image")
     public ResponseEntity<Object> downloadImage(HttpServletRequest request) throws SQLException {
-        Principal principal = request.getUserPrincipal();
-        User user = userService.getUserBy(principal.getName()).orElseThrow();
+        
+        Optional<User> userOpt = userService.getUserBy(request);
 
-        if (user.hasProfilePicture()) {
+        if (userOpt.isPresent() && userOpt.get().hasProfilePicture()) {
 
-            Resource file = new InputStreamResource(user.getProfilePicture().getBinaryStream());
+            Resource file = new InputStreamResource(userOpt.get().getProfilePicture().getBinaryStream());
 
             return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-                    .contentLength(user.getProfilePicture().length()).body(file);
+                    .contentLength(userOpt.get().getProfilePicture().length()).body(file);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
-
 
     //POST new user
     @Operation(summary = "Post new user")
@@ -299,7 +288,9 @@ public class UserRestController {
     @PostMapping("/users/")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        if (!user.isAdmin()) {//not allowed to create admins
+
+        //Only for creating non-admins
+        if (!user.isAdmin()) {
             userService.save(user);
             URI location = fromCurrentRequest().path("/{id}")
                 .buildAndExpand(user.getUsername()).toUri();
@@ -332,17 +323,18 @@ public class UserRestController {
         )
     })
     @PostMapping("/me/image")
-    public ResponseEntity<Object> uploadMyImage(HttpServletRequest request, @RequestParam MultipartFile imageFile) throws IOException {
-        Principal principal = request.getUserPrincipal();
-        if (principal != null) {
-            User user = userService.getUserBy(principal.getName()).orElseThrow();
-            URI location = fromCurrentRequest().build().toUri();
-            user.setProfilePicture(BlobProxy.generateProxy(imageFile.getInputStream(), imageFile.getSize()));
-            userService.save(user);
-            return ResponseEntity.created(location).build();
-        }else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+    public ResponseEntity<Object> uploadImage(HttpServletRequest request, @RequestParam MultipartFile imageFile) throws IOException {
+        Optional<User> userOpt = userService.getUserBy(request);
 
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            URI location = fromCurrentRequest().build().toUri();
+            user.setProfilePicture(
+                BlobProxy.generateProxy(imageFile.getInputStream(), imageFile.getSize()),
+                userService
+                );
+            return ResponseEntity.created(location).build();
+        } else 
+            return ResponseEntity.notFound().build();
+    }
 }

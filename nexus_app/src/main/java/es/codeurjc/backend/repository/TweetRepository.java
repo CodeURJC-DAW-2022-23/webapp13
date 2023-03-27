@@ -14,7 +14,7 @@ import es.codeurjc.backend.model.User;
 
 @Component
 public interface TweetRepository extends JpaRepository<Tweet, Long>{
-    Optional<Tweet> findById(Long id);
+    Optional<Tweet> findById(long id);
     List<Tweet> findFirst10ByAuthor(User author);
     List<Tweet> findTop10ByOrderByDateDesc();
     Page<Tweet> findAllByOrderByDateDesc(Pageable pageable);

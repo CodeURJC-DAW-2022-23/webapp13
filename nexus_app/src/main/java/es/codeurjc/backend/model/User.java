@@ -165,7 +165,10 @@ public class User {
 
     public Blob getProfilePicture() {return profilePicture;}
     public boolean hasProfilePicture() {return profilePicture != null;}
-    public void setProfilePicture(Blob profilePicture) {this.profilePicture = profilePicture;}
+    public void setProfilePicture(Blob profilePicture, UserService userService) {
+        this.profilePicture = profilePicture;
+        userService.save(this);
+    }
 
     public List<Tweet> getTweets() {return tweets;}
     public void setTweets(List<Tweet> tweets) {this.tweets = tweets;}
