@@ -51,7 +51,7 @@ public class DataBaseController {
         tweetBuilder
             .setAuthor(userA)
             .setText("This is my first tweet!")
-            .addTag("amogus").addTag("asd").addTag("sus");
+            .addTag("cars").addTag("sports").addTag("pets");
         
         Tweet tweet1 = tweetBuilder.build();
 
