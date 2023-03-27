@@ -10,10 +10,11 @@
 	</parent>
 
 	<groupId>es.codeurjc</groupId>
-	<artifactId>FASE2</artifactId>
+	<artifactId>nexus</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>FASE3</name>
+	<name>nexus</name>
 	<description>Nexus social network project</description>
+	<packaging>jar</packaging>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -79,6 +80,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${parent.version}</version>
 				<executions>
 					<execution>
 						<id>pre-integration-test</id>

@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import es.codeurjc.backend.service.UserService;
 
 import org.springframework.lang.Nullable;
@@ -24,6 +26,8 @@ import org.springframework.lang.Nullable;
 
 @Entity(name = "UserTable")
 public class User {
+
+    public interface Alt {}
     
     @Id
     private String username;
@@ -38,7 +42,8 @@ public class User {
     @JsonIgnore
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> roles = new HashSet<>();
-
+    
+    @JsonIgnore
     private boolean banned = false;
 
     @Nullable
@@ -46,7 +51,7 @@ public class User {
     @JsonIgnore
     private Blob profilePicture;
 
-    @JsonIgnore
+    @JsonView(Alt.class)
     @OneToMany(mappedBy = "author")
     private List<Tweet> tweets = new ArrayList<Tweet>();
 

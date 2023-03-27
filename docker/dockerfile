@@ -1,0 +1,30 @@
+# Compilation
+
+FROM maven:3.8.5-openjdk-17 as builder
+
+WORKDIR /project
+
+# Copy of project dependencies
+COPY nexus_app/pom.xml /project/
+
+# Error
+#RUN mvn clean verify -e -X
+
+# Source code copy to /src
+COPY nexus_app/src /project/src
+
+# Compile project
+RUN mvn package -DskipTests=true
+
+# Application container
+FROM openjdk:17
+
+WORKDIR /usr/src/app/
+
+# Copy JAR from /project/target/ to /usr/src/app/
+COPY --from=builder /project/target/*.jar /usr/src/app/
+
+# Port 8443
+EXPOSE 8443
+# Parameter
+CMD [ "java", "-jar", "nexus-0.0.1-SNAPSHOT.jar" ]

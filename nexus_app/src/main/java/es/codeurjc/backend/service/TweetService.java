@@ -9,6 +9,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -42,6 +45,18 @@ public class TweetService {
         tweetRepository.delete(tweet);
     }
     
+    public Page<Tweet> findPage(Pageable page){
+        return tweetRepository.findAll(page);
+    }
+
+    public Page<Tweet> getPageOfTweets(int page){
+        return tweetRepository.findAll(PageRequest.of(page,5));
+    }
+
+    public List<Tweet> findAll(){
+        return tweetRepository.findAll();
+    }
+
     public static boolean readIfPostShouldGetdeleted(Long id) {
         final String modEndpoint = "https://mod-microservice.vercel.app/postShouldGetDeleted/";
 
@@ -68,4 +83,9 @@ public class TweetService {
     public List<Tweet> queryTweetsToModerate() {
         return tweetRepository.findTopReportedTweets();
     }
+
+    public List<Tweet> getTweetsByUser(User user){
+        return tweetRepository.findAllByAuthor(user);
+    }
+    
 }
