@@ -45,9 +45,6 @@ public final class UserService {
     public Optional<User> getUserBy(String username) {
         return userRepository.findByUsername(username);
     }
-    public Optional<User> getUserById(Long id){
-        return userRepository.findById(id);
-    }
 
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);

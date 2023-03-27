@@ -71,9 +71,9 @@ public class UserRestController {
             content = @Content
         )
     })
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable long id) {
-        Optional<User> userOpt = userService.getUserById(id);
+    @GetMapping("/{username}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
+        Optional<User> userOpt = userService.getUserBy(username);
         if (userOpt.isPresent()) {
             return new ResponseEntity<>(userOpt.get(), HttpStatus.OK);
         } else {
