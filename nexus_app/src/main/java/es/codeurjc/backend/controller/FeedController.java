@@ -53,12 +53,12 @@ public class FeedController {
     }
 
     @RequestMapping("/feed/{tag}")
-    public String showFeedTag(Model model, HttpServletRequest request, @PathVariable String Tag){
+    public String showFeedTag(Model model, HttpServletRequest request, @PathVariable String tag){
 
         loggedUser = userService.getUserBy(request);
 
         if (loggedUser.isPresent())
-                updateFeedModelForUsersByTags(model, Tag);
+            updateFeedModelForUsersByTags(model, tag);
         else updateFeedModelForAnons(model);
 
         model.addAttribute("authenticated", loggedUser.isPresent());
@@ -90,12 +90,12 @@ public class FeedController {
         model.addAttribute("tweets", tweetService.queryTweetsForUsers(followings));
     }
 
-    private void updateFeedModelForUsersByTags(Model model, String Tag) {
+    private void updateFeedModelForUsersByTags(Model model, String tag) {
         ArrayList<User> followings = new ArrayList<>();
         followings.addAll(loggedUser.get().getFollowing());
         
         model.addAttribute("loggedUser", loggedUser);
-        model.addAttribute("tweets", tweetRepository.findTweetsByTags(Tag));
+        model.addAttribute("tweets", tweetRepository.findTweetsByTags(tag));
     }
 
     private void updateFeedModelForAnons(Model model) {

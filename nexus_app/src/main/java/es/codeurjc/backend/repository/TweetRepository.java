@@ -21,7 +21,8 @@ public interface TweetRepository extends JpaRepository<Tweet, Long>{
     List<Tweet> findAllByAuthor(User author);
     @Query(value = "SELECT t FROM Tweet t JOIN t.reporters r GROUP BY t ORDER BY COUNT(r) DESC")
     List<Tweet> findTopReportedTweets();
-    @Query("select t FROM Tweet t where :tagName IN (t.tags)")
+    //@Query("SELECT t FROM Tweet t WHERE ?1 IN (SELECT tag FROM t.tags tag)")
+    @Query("SELECT t FROM Tweet t WHERE LOWER(:tagName) MEMBER OF t.tags")
     List<Tweet> findTweetsByTags(String tagName);
 
 }
