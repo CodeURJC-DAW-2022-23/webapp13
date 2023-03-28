@@ -17,8 +17,10 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 
 @Service
@@ -79,10 +81,12 @@ public class TweetService {
             .sorted(Comparator.comparing(Tweet::getDate))
             .collect(Collectors.toList());
     }
+   
 
     public List<Tweet> queryTweetsToModerate() {
-        return tweetRepository.findTopReportedTweets();
+        return tweetRepository.findFollowingsTweets();
     }
+
 
     public List<Tweet> getTweetsByUser(User user){
         return tweetRepository.findAllByAuthor(user);
