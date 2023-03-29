@@ -71,7 +71,7 @@ public class TweetService {
     }
 
     public List<Tweet> queryTweetsToModerate() {
-        return tweetRepository.findMostReportedTweeets();
+        return tweetRepository.findMostReportedTweets();
     }
 
 

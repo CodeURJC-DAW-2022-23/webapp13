@@ -28,7 +28,7 @@
 	{{^author.isBanned}}
 	<div class="profileanon-interactions1">
 	
-	  <span class="profileanon-text016"><span>{{likes.size}}</span></span>
+	  <span class="profileanon-text016">{{likes.size}}</span>
 	  <a href="/tweet/{{id}}/like">
 		  <img
 			src="/profileuser/assets/iconsaxlinearhearti135-0d8.svg"
@@ -36,26 +36,56 @@
 			class="profileanon-iconsax-linearheart1"
 		  />
 	  </a>
-	  <span class="profileanon-text018"><span>{{shares.size}}</span></span>
+	  <span class="profileanon-text018">{{shares.size}}</span>
 	  <img
 		src="/profileuser/assets/iconsaxlinearrepeati135-eqaa.svg"
 		alt="IconsaxLinearrepeatI135"
 		class="profileanon-iconsax-linearrepeat1"
 	  />
-	  <span class="profileanon-text020"><span>{{children.size}}</span></span>
+	  <span class="profileanon-text020">{{children.size}}</span>
 	  <img
 		src="/profileuser/assets/iconsaxlinearmessagei135-n7p.svg"
 		alt="IconsaxLinearmessageI135"
 		class="profileanon-iconsax-linearmessage1"
 	  />	
-	  <a href="/tweet/{{id}}/report">
-		  <img
-			style="margin-left: 15px"
-			src="/profileuser/assets/iconsaxlinearmessagei135-n7p.svg"
-			alt="IconsaxLinearmessageI135"
-			class="profileanon-iconsax-linearmessage1"
-		  />
+	  {{#loggedUser.isAdmin}}
+
+	  {{#reporters.isEmpty}}
+	  <a style="margin-left: 15px" href="/tweet/{{id}}/report">
+	    <span  class="profileanon-text020">report</span>  
 	  </a>
+	  <a href="/tweet/{{id}}/report">
+		<img
+		src="/tweets/report.png"
+		alt="IconsaxLinearmessageI135"
+		class="profileanon-iconsax-linearmessage1"
+		/>
+	  </a>
+	  {{/reporters.isEmpty}}
+	  {{^reporters.isEmpty}}
+	  <span  style="margin-left: 15px"class="profileanon-text020">{{reporters.size}} reports</span>  
+	  <a href="/tweet/{{id}}/delete">
+		<img
+		  src="/tweets/delete.png"
+		  alt="IconsaxLinearmessageI135"
+		  class="profileanon-iconsax-linearmessage1"
+		/>
+	  </a>
+	  {{/reporters.isEmpty}}
+	  
+	  {{/loggedUser.isAdmin}}
+	  {{^loggedUser.isAdmin}}
+	  <a style="margin-left: 15px" href="/tweet/{{id}}/report">
+	    <span  class="profileanon-text020">report</span>  
+	  </a>
+	  <a href="/tweet/{{id}}/report">
+		<img
+		src="/tweets/report.png"
+		alt="IconsaxLinearmessageI135"
+		class="profileanon-iconsax-linearmessage1"
+		/>
+	  </a>
+	  {{/loggedUser.isAdmin}}
 	</div>
 	{{/author.isBanned}}
   </div>

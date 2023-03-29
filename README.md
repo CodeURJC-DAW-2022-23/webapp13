@@ -154,7 +154,7 @@ You must complete these steps in order to be able to test our application.
 | Created program structure dependencies. | [Commit 1](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/195d5750abea4ec5cecfc1e86f195c5ec97ce4d4) | 
 | Created database, models and inicializated the project | [Commit 2](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/8ff467e32452a6188cb83b8066a5101ad028f76e) | 
 | Modified repository and created a HandlerNotFound | [Commit 3](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/c4db0f4a67e3df3d96fb963fdf621262b32a3acf) | 
-| Login and logout logic added and minor fixes | [Commit 4](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/926183d8c9039c101fee2ec00507092031a049a0) | 
+| Fixed date problems and roles | [Commit 4](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/72a2c39cab8096c40b2a1dc6ed9e6976326646d8) | 
 | Added sample data to the database and other fixes. | [Commit 5](https://github.com/CodeURJC-DAW-2022-23/webapp13/commit/aa86a848ff7134807ce57c668ad8d0187ea47994) | 
 
 #### Álvaro: 
@@ -188,7 +188,7 @@ to ensure greater security, such as better general null safety.
 
 #### Stefano: 
 
-I created the majority of the controllers, did a lot of refactors, implemented a lot of methods and classes, worked on the DB model and persistence.
+I created the majority of the controllers, did a lot of refactors, implemented the great majority of methods and classes, worked on the DB model and persistence. Took care of the majority of the interactive functionality.
 
 Click on "(Browse History)" to see pre-rename history of files.
 
@@ -203,7 +203,7 @@ Click on "(Browse History)" to see pre-rename history of files.
 
 #### Alberto: 
 
-I've been working mainly on the program structure at the start of the split, and creating the database along with some sample data. Also I've worked creating the models and the controllers for the database and the tweet logic.
+I've been working mainly on the program structure at the start of the split, and creating the database along with some sample data. Also I've worked creating the models and the controllers for the database and defined some classes.
 
 * [Tweet.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/nexus_app/src/main/java/es/codeurjc/backend/model/Tweet.java) 
 * [User.java](https://github.com/CodeURJC-DAW-2022-23/webapp13/blob/dev/nexus_app/src/main/java/es/codeurjc/backend/model/User.java)

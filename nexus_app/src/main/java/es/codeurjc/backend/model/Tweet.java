@@ -51,12 +51,12 @@ public class Tweet implements Comparable<Tweet>{
 
     @JsonIgnore
     @Nullable
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<Tweet> children = new ArrayList<>();
 
-    @Nullable
-    @OneToMany
     @JsonIgnore
+    @Nullable
+    @OneToMany(cascade = CascadeType.ALL)  
     private Set<Tweet> shares = new HashSet<>();
 
     public static class Builder {
@@ -152,6 +152,7 @@ public class Tweet implements Comparable<Tweet>{
     public void reply(Tweet tweet, TweetService tweetService) {
         children.add(tweet);
         tweetService.save(this);
+        tweetService.save(tweet);
     }
 
     public Blob getMedia() {return media;}

@@ -96,10 +96,4 @@ public final class UserService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
-
-
-    /* TODO
-    public Set<UserActionChronologicalWrapper> getFollowers(User user) {
-        return userRepository.findByFollowing(user);
-    }*/
 }

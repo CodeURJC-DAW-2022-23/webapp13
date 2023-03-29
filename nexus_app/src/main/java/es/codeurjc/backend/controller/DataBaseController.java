@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.codeurjc.backend.model.Tweet;
 import es.codeurjc.backend.model.User;
-
+import es.codeurjc.backend.repository.TweetRepository;
+import es.codeurjc.backend.repository.UserRepository;
 import es.codeurjc.backend.service.UserService;
 import es.codeurjc.backend.service.TweetService;
 
@@ -19,9 +20,13 @@ import es.codeurjc.backend.service.TweetService;
 public class DataBaseController {
 
     @Autowired
+    private UserRepository userRepository;
+    @Autowired
     private UserService userService;
     @Autowired
     private TweetService tweetService;
+    @Autowired
+    private TweetRepository tweetRepository;
     @Autowired
 	private PasswordEncoder passwordEncoder;
    
@@ -40,36 +45,45 @@ public class DataBaseController {
         
 
         User userA = builder.build();
-        User userB = builder.setUsername("b").setEmail("b@b.com").build();
+        User userB = builder.setUsername("b").setEmail("b@b.com").setBasicUser().build();
         User userC = builder.setUsername("c").setEmail("c@c.com").build();
         
-        userService.save(userA).save(userB).save(userC);
+        userService.save(userA)
+        .save(userB)
+        .save(userC);
 
-        userA.switchFollow(userB);
+
+        userA.switchFollow(userB, userService);
         
         // Building tweets
         tweetBuilder
             .setAuthor(userA)
-            .setText("This is my first tweet!")
+            .setText("less mean comment")
             .addTag("cars").addTag("sports").addTag("pets");
         
         Tweet tweet1 = tweetBuilder.build();
 
         tweet1.switchLike(userB, tweetService);
         //-------------------------------------
-        tweetBuilder.setAuthor(userB).setText("I replied to userA's tweet!");
+        tweetBuilder.setAuthor(userB).setText("mean comment");
         
         Tweet tweet2 = tweetBuilder.build();
 
-        tweet1.reply(tweet2, tweetService);
+        tweet2.report(userA, tweetService);
+        tweetRepository.flush();
+        tweet2.report(userC, tweetService);
+        tweetRepository.flush();
+      
         
+        tweet1.report(userB, tweetService);
 
         tweetBuilder.setAuthor(userB);
 
 
+
         for (int i = 0; i < 20; i++){
 
-            tweetService.save(tweetBuilder.setText("tweet " + i).build());
+            tweetRepository.save(tweetBuilder.setText("tweet " + i).build());
             if (i == 6)
                 tweetBuilder.clearTags().addTag("sports").setAuthor(userC);
             if (i == 10)
@@ -80,6 +94,9 @@ public class DataBaseController {
                 tweetBuilder.clearTags().addTag("cars").addTag("sports").setAuthor(userB);
         }
 
+        
+
+       
 
     }
 }

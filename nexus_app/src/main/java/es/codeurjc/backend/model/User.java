@@ -95,6 +95,10 @@ public class User {
             this.description = description;
             return this;
         }
+        public Builder setBasicUser(){
+            this.admin = false;
+            return this;
+        }
         public Builder setAdmin(){
             this.admin = true;
             return this;
@@ -183,11 +187,13 @@ public class User {
         return userService.getFollowers(this);
     }
     public Set<User> getFollowing() {return following;}
-    public void switchFollow(User user) {
+    public void switchFollow(User user, UserService userService) {
         assert user != null && !user.equals(this);
         if (!following.contains(user))
             following.add(user);
         else following.remove(user);
+
+        userService.save(this);
     }
 
     public Set<User> getBlockedUsers() {return blockedUsers;}

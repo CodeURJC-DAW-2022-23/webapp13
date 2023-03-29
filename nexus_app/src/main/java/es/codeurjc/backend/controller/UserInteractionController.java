@@ -27,8 +27,7 @@ public class UserInteractionController {
             
             if (UserService.urlUserExistsAndNotSelfAction(users)){
             
-                users.getRight().switchFollow(users.getLeft());
-                users.forEach(user -> userService.save(user));
+                users.getRight().switchFollow(users.getLeft(), userService);
 
                 return UserService.redirectToReferer(req);
             } else 
