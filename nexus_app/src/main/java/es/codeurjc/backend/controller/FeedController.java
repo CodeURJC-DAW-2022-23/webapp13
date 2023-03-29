@@ -7,22 +7,19 @@ import es.codeurjc.backend.repository.TweetRepository;
 
 import es.codeurjc.backend.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.service.UserService;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 public class FeedController {
@@ -36,77 +33,63 @@ public class FeedController {
     @Autowired
     private UserService userService;
 
-    private Optional<User> loggedUser;
-
     @RequestMapping("/feed")
     public String showFeed(Model model, HttpServletRequest request){
 
-        loggedUser = userService.getUserBy(request);
+        Optional<User> loggedUser = userService.getUserBy(request);
 
-        if (loggedUser.isPresent())
-            updateFeedModelForUsers(model);
-        else updateFeedModelForAnons(model);
+        List<Tweet> tweetsToDisplay;
 
-        model.addAttribute("authenticated", loggedUser.isPresent());
-        model.addAttribute("inLogin", false);
+        if (loggedUser.isPresent() && loggedUser.get().getFollowing().size() > 0){
+            tweetsToDisplay = tweetRepository.findFollowedUsersTweets(loggedUser.get(), PageRequest.of(0, 10));
+        } else
+            tweetsToDisplay = tweetRepository.findTop10ByOrderByDateDesc();
+        
+        updateFeedModel(model, loggedUser, tweetsToDisplay);
+
         return "feed";
     }
 
-    @RequestMapping("/feed/{tag}")
-    public String showFeedTag(Model model, HttpServletRequest request, @PathVariable String tag){
+    @GetMapping("/feed/search")
+    public String searchBytags(Model model, HttpServletRequest req, @RequestParam String tags) {
 
-        loggedUser = userService.getUserBy(request);
+        Optional<User> loggedUser = userService.getUserBy(req);
 
-        if (loggedUser.isPresent())
-            updateFeedModelForUsersByTags(model, tag);
-        else updateFeedModelForAnons(model);
+        Set<String> inputTags = Set.of(tags.split("\\s+"));
 
-        model.addAttribute("authenticated", loggedUser.isPresent());
-        model.addAttribute("inLogin", false);
+        List<Tweet> foundTweets = tweetRepository.findTweetsByTags(inputTags, PageRequest.of(0, 10));
+            
+        updateFeedModel(model, loggedUser, foundTweets);
+    
         return "feed";
     }
 
     @RequestMapping("/feed/moderator")
     public String showModFeed(Model model, HttpServletRequest req) {
-        Optional<User> user = userService.getUserBy(req);
-        if (user.isEmpty() || !user.get().isAdmin()) return "error";
-        updateFeedModelForMods(model, user.get());
-        return "feed";
+        Optional<User> loggedUser = userService.getUserBy(req);
+        if (loggedUser.isPresent() && loggedUser.get().isAdmin()){
+            updateFeedModel(model, loggedUser, tweetService.queryTweetsToModerate());
+            return "feed";
+        } else
+            return "error";
     }
 
     @RequestMapping("/tomyprofile")
-    public String redirectToProfile(final Model model) {
+    public String redirectToProfile(final Model model, HttpServletRequest req) {
+
+        Optional<User> loggedUser = userService.getUserBy(req);
+
         if (loggedUser.isPresent())
             return "redirect:/u/" + loggedUser.get().getUsername();
         else
-            return "redirect:/error";
+            return "error";
     }
 
-    private void updateFeedModelForUsers(Model model) {
-        ArrayList<User> followings = new ArrayList<>();
-        followings.addAll(loggedUser.get().getFollowing());
-        
-        model.addAttribute("loggedUser", loggedUser);
-        model.addAttribute("tweets", tweetService.queryTweetsForUsers(followings));
-    }
-
-    private void updateFeedModelForUsersByTags(Model model, String tag) {
-        ArrayList<User> followings = new ArrayList<>();
-        followings.addAll(loggedUser.get().getFollowing());
-        
-        model.addAttribute("loggedUser", loggedUser);
-        model.addAttribute("tweets", tweetRepository.findTweetsByTags(tag));
-    }
-
-    private void updateFeedModelForAnons(Model model) {
-        List<Tweet> tweets = tweetRepository.findTop10ByOrderByDateDesc();
-        model.addAttribute("tweets", tweets);
-    }
-
-    private void updateFeedModelForMods(Model model, User admin) {
-        model.addAttribute("authenticated", true);
-        model.addAttribute("loggedUser", admin);
-        model.addAttribute("tweets", tweetService.queryTweetsToModerate());
+    private void updateFeedModel(Model model, Optional<User> loggedUser, List<Tweet> displayedTweets) {
+        model.addAttribute("loggedUser", loggedUser.get());
+        model.addAttribute("authenticated", loggedUser.isPresent());
+        model.addAttribute("inLogin", false);
+        model.addAttribute("tweets", displayedTweets); 
     }
 
     /*

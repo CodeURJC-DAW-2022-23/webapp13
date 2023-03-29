@@ -66,10 +66,20 @@ public class DataBaseController {
 
         tweetBuilder.setAuthor(userB);
 
-        IntStream.rangeClosed(1,20).forEach(
-            i -> tweetService.save(
-                tweetBuilder.setText("tweet " + i).build()
-            )
-        );
+
+        for (int i = 0; i < 20; i++){
+
+            tweetService.save(tweetBuilder.setText("tweet " + i).build());
+            if (i == 6)
+                tweetBuilder.clearTags().addTag("sports").setAuthor(userC);
+            if (i == 10)
+                tweetBuilder.clearTags().addTag("pets").setAuthor(userA);
+            if (i == 12)
+                tweetBuilder.clearTags().addTag("cars").addTag("pets").setAuthor(userB);
+            if (i == 16)
+                tweetBuilder.clearTags().addTag("cars").addTag("sports").setAuthor(userB);
+        }
+
+
     }
 }

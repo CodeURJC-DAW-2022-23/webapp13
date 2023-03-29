@@ -37,8 +37,8 @@ public class TweetInteractionController {
         Optional<User> userOpt = userService.getUserBy(req);
         Optional<Tweet> tweetOpt = tweetService.getTweetById(id);
 
-        if (!userOpt.isEmpty()) {
-            if (!tweetOpt.isEmpty()) {
+        if (userOpt.isPresent()) {
+            if (tweetOpt.isPresent()) {
 
                 Tweet tweet = tweetOpt.get();
                 tweet.switchLike(userOpt.get(), tweetService);
@@ -54,8 +54,8 @@ public class TweetInteractionController {
         Optional<User> reportingUserOpt = userService.getUserBy(req);
         Optional<Tweet> tweetOpt = tweetService.getTweetById(id);
 
-        if (!reportingUserOpt.isEmpty()) {
-            if (!tweetOpt.isEmpty()) {
+        if (reportingUserOpt.isPresent()) {
+            if (tweetOpt.isPresent()) {
 
                 Tweet tweet = tweetOpt.get();
                 tweet.report(reportingUserOpt.get(), tweetService);           

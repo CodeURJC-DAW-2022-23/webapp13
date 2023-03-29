@@ -47,9 +47,8 @@ public class SignUpController {
         else {
             User.Builder builder = new User.Builder();
 
-            builder.setUsername(username);
-            builder.setEmail(email);
-            builder.setEncodedPassword(passwordEncoder.encode(password));
+            builder.setUsername(username).setEmail(email)
+            .setEncodedPassword(passwordEncoder.encode(password));
 
             User newUser = builder.build();
 

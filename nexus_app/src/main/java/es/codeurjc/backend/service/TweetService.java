@@ -17,8 +17,10 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 
 @Service
@@ -68,21 +70,10 @@ public class TweetService {
         .getOrElse(false);
     }
 
-    // NOTE this strategy is inefficient. If len(users) == 10
-    // and each users has at least 10 posts, then len(@return) == 100.
-    public List<Tweet> queryTweetsForUsers(List<User> users) {
-        if (users == null) return List.of();
-        return users
-            .stream()
-            .map(tweetRepository::findFirst10ByAuthor)
-            .flatMap(Collection::stream)
-            .sorted(Comparator.comparing(Tweet::getDate))
-            .collect(Collectors.toList());
+    public List<Tweet> queryTweetsToModerate() {
+        return tweetRepository.findMostReportedTweeets();
     }
 
-    public List<Tweet> queryTweetsToModerate() {
-        return tweetRepository.findTopReportedTweets();
-    }
 
     public List<Tweet> getTweetsByUser(User user){
         return tweetRepository.findAllByAuthor(user);
