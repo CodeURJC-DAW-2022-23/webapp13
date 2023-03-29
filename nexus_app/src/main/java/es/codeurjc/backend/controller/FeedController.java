@@ -17,8 +17,6 @@ import es.codeurjc.backend.model.User;
 import es.codeurjc.backend.service.UserService;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -40,14 +38,14 @@ public class FeedController {
 
         Optional<User> loggedUser = userService.getUserBy(request);
 
-        List<Tweet> displayList;
+        List<Tweet> tweetsToDisplay;
 
         if (loggedUser.isPresent() && loggedUser.get().getFollowing().size() > 0){
-            displayList = tweetRepository.findFollowedUsersTweets(loggedUser.get(), PageRequest.of(0, 10));
+            tweetsToDisplay = tweetRepository.findFollowedUsersTweets(loggedUser.get(), PageRequest.of(0, 10));
         } else
-            displayList = tweetRepository.findTop10ByOrderByDateDesc();
+            tweetsToDisplay = tweetRepository.findTop10ByOrderByDateDesc();
         
-        updateFeedModel(model, loggedUser, displayList);
+        updateFeedModel(model, loggedUser, tweetsToDisplay);
 
         return "feed";
     }
@@ -91,7 +89,7 @@ public class FeedController {
         model.addAttribute("loggedUser", loggedUser.get());
         model.addAttribute("authenticated", loggedUser.isPresent());
         model.addAttribute("inLogin", false);
-        model.addAttribute("tweets", displayedTweets);  //tweetService.queryTweetsForUsers(followings)
+        model.addAttribute("tweets", displayedTweets); 
     }
 
     /*

@@ -70,21 +70,8 @@ public class TweetService {
         .getOrElse(false);
     }
 
-    // NOTE this strategy is inefficient. If len(users) == 10
-    // and each users has at least 10 posts, then len(@return) == 100.
-    public List<Tweet> queryTweetsForUsers(List<User> users) {
-        if (users == null) return List.of();
-        return users
-            .stream()
-            .map(tweetRepository::findFirst10ByAuthor)
-            .flatMap(Collection::stream)
-            .sorted(Comparator.comparing(Tweet::getDate))
-            .collect(Collectors.toList());
-    }
-   
-
     public List<Tweet> queryTweetsToModerate() {
-        return tweetRepository.findFollowingsTweets();
+        return tweetRepository.findMostReportedTweeets();
     }
 
 
