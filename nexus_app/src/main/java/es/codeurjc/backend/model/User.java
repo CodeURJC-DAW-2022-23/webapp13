@@ -201,27 +201,7 @@ public class User {
     public void unblock(User user){blockedUsers.remove(user);};
 
     public LocalDateTime getSignUpDate() {return signUpDate;}
-    public Set<Tweet> getReportedTweets() {return reportedTweets;}
-
-    @Override
-    public boolean equals(Object o) {
- 
-        if (o == this) 
-            return true;
-        else if (o == null || o.getClass() != this.getClass()) 
-            return false;
-        
-        User other = (User) o;
-         
-        return this.username == other.username;
-    }
-
-    public int hashCode() {
-        int hash = 7;
-        hash *= 31;
-        hash = 31 * hash + (null == username ? 0 : username.hashCode());
-        return hash;
-    }
+    public Set<Tweet> getReportedTweets() {return reportedTweets;} 
 
 
     //DON'T USE, ONLY FOR DATABASE 

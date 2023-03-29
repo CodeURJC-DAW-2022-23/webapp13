@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import es.codeurjc.backend.model.Tweet;
 import es.codeurjc.backend.model.User;
+import es.codeurjc.backend.service.TweetService;
 import es.codeurjc.backend.service.UserService;
 
 @Controller
@@ -16,6 +18,8 @@ public class UserInteractionController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    TweetService tweetService;
 
     @RequestMapping("/u/{username}/follow")
     public String handleFollow(
@@ -70,8 +74,15 @@ public class UserInteractionController {
             UserService.urlUserExists(users) &&
             (users.getRight().isAdmin() || UserService.isSelfAction(users))) {
 
+            User deletedUser = users.getLeft();
+
+            for (Tweet tweet: deletedUser.getTweets()){
+                tweet.setNullAuthor();
+                tweetService.save(tweet);
+            }
+
             //TODO add prompt asking whether you want to delete your account
-            userService.delete(users.getLeft());
+            userService.delete(deletedUser);
 
             return UserService.redirectToReferer(req);
         }   

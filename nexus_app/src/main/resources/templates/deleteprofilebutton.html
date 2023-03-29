@@ -1,0 +1,11 @@
+<a href="/u/{{profileUser.username}}/delete">
+    {{#authenticated}}
+    {{^ownProfile}}
+    {{#loggedUser.isAdmin}}
+           
+    <span class="profileanon-text084">Delete user</span>
+            
+    {{/loggedUser.isAdmin}}   
+    {{/ownProfile}}
+    {{/authenticated}}
+</a>

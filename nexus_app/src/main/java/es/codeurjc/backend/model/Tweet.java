@@ -115,6 +115,10 @@ public class Tweet implements Comparable<Tweet>{
 
     public User getAuthor() {return author;}
     public String getUserName() {return author.getUsername();}
+    public void setNullAuthor() {
+        this.author = null;
+    }
+    public boolean authorIsNull() {return this.author == null;}
 
     public LocalDateTime getDate() {return date;}
 

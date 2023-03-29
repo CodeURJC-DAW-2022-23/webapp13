@@ -93,10 +93,5 @@ public class DataBaseController {
             if (i == 16)
                 tweetBuilder.clearTags().addTag("cars").addTag("sports").setAuthor(userB);
         }
-
-        
-
-       
-
     }
 }
